@@ -1,10 +1,12 @@
 [build]
   publish = "public"
   functions = "functions"
+  command = "hugo"
 
 [build.environment]
   NODE_VERSION = "16.16.0"
   NPM_VERSION = "8.11.0"
+  HUGO_VERSION = "0.101.0"
 
 [context.production]
   command = "npm run build"
@@ -40,3 +42,8 @@
   port = 8888
   publish = "public"
   autoLaunch = false
+
+[[redirects]]
+  from = "/install.sh"
+  to = "https://raw.githubusercontent.com/neilotoole/sq/master/install.sh"
+  status = 301
