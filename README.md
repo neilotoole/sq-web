@@ -38,7 +38,8 @@ npm run start
 
 ### 4. Submit a Pull Request
 
-Submit a [Pull Request](https://github.com/neilotoole/sq-web/pulls).
+Create a [Pull Request](https://github.com/neilotoole/sq-web/pulls), providing context
+for your changes.
 
 
 ## Other commands
