@@ -1,0 +1,13 @@
+List data sources.
+
+Usage:
+  sq ls [flags]
+
+Flags:
+  -h, --header   Print header row in output (default true)
+  -j, --json     Output JSON
+      --help     help for ls
+
+Global Flags:
+  -M, --monochrome   Don't colorize output
+  -v, --verbose      Print verbose output, if applicable
