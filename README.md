@@ -35,7 +35,7 @@
 
 ## Demo
 
-- [doks-child-theme.netlify.app](https://doks-child-theme.netlify.app/)
+- [sq-web.netlify.app](https://sq-web.netlify.app/)
 
 ## Why Doks?
 
