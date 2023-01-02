@@ -32,6 +32,9 @@ rm -f ./*.help.txt
 sq --help > query.help.txt
 
 for cmd in "${cmds[@]}"; do
-  dest="${cmd// /_}.help.txt" # space to underscore
+  # space -> underscore, e.g. "driver ls" -> "driver_ls"
+  dest="${cmd// /_}.help.txt"
+
+  # shellcheck disable=SC2086
   sq $cmd --help > "$dest"
 done
