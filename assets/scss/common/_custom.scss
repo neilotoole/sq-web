@@ -1,5 +1,9 @@
 
 // This is the "Commands" section of the sidebar.
-nav.docs-links #section-c441ee50c88f6e5e3a7c69fc69dad8b8 {
-  font-family: $font-family-monospace;
+nav.docs-links {
+  #section-c441ee50c88f6e5e3a7c69fc69dad8b8 {
+    a.docs-link {
+      font-family: $font-family-monospace;
+    }
+  }
 }
