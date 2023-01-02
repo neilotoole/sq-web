@@ -8,4 +8,5 @@
   {{ block "head/seo" . }}{{ partial "head/seo.html" . }}{{ end }}
   {{ block "head/favicons" . }}{{ partial "head/favicons.html" . }}{{ end }}
   {{ block "head/custom-head" . }}{{ partial "head/custom-head.html" . }}{{ end }}
+  {{ template "_internal/google_analytics.html" . }}
 </head>
