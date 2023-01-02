@@ -1,6 +1,7 @@
 // Color system
 
-$white:    #fff;
+
+$white:    #f8f8fa;
 $gray-100: #f8f9fa;
 $gray-200: #e9ecef;
 $gray-300: #dee2e6;
@@ -82,7 +83,7 @@ $container-max-widths: (
   md: 720px,
   lg: 960px,
   xl: 1240px,
-  xxl: 1320px
+  xxl: 2000px
 );
 
 @include _assert-ascending($container-max-widths, "$container-max-widths");
