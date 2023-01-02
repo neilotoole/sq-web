@@ -5,6 +5,12 @@
   url = "/docs/prologue/"
 
 [[docs]]
+  name = "Install"
+  weight = 10
+  identifier = "install"
+  url = "/docs/install.md"
+
+[[docs]]
   name = "Help"
   weight = 60
   identifier = "help"
