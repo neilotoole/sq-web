@@ -6,6 +6,9 @@
 
 set -e
 
+# Always execute in this dir
+cd $(dirname "$0")
+
 cmds=(
   "sql"
   "src"
@@ -25,7 +28,7 @@ cmds=(
 
 rm -f ./*.help.txt
 
-# Special handling for the root command
+# Special handling for the root command, which we call "query"
 sq --help > query.help.txt
 
 for cmd in "${cmds[@]}"; do
