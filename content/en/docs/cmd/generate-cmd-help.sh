@@ -25,7 +25,10 @@ cmds=(
 
 rm -f ./*.help.txt
 
+# Special handling for the root command
+sq --help > query.help.txt
+
 for cmd in "${cmds[@]}"; do
   dest="${cmd// /_}.help.txt" # space to underscore
-  sq "$cmd" --help > "$dest"
+  sq $cmd --help > "$dest"
 done

@@ -1,113 +1,23 @@
-sq is a swiss army knife for data.
-
-Use sq to query Postgres, SQLite, SQLServer, MySQL, CSV, TSV
-and Excel, and output in text, JSON, CSV, Excel, HTML, etc., or
-output to a database table.
-
-You can query using sq's own jq-like syntax, or in native SQL.
-
-Execute "sq completion --help" for instructions to install shell completion.
-
-More at https://sq.io
+Drop one or more tables. Note that this command
+only applies to SQL sources.
 
 Usage:
-  sq [command]
+  sq tbl drop @HANDLE.TABLE [flags]
 
 Examples:
-  # pipe an Excel file and output the first 10 rows from sheet1
-  $ cat data.xlsx | sq '.sheet1 | .[0:10]'
+# drop table "actor" in src @sakila_sl3
+  $ sq tbl drop @sakila_sl3.actor
 
-  # add Postgres source identified by handle @sakila_pg
-  $ sq add --handle=@sakila_pg 'postgres://user:pass@localhost:5432/sakila'
+  # drop table "payment"" in the active src
+  $ sq tbl drop .payment
 
-  # add SQL Server source; will have generated handle @sakila_mssql
-  $ sq add 'sqlserver://user:pass@localhost?database=sakila'
+  # drop multiple tables
+  $ sq drop .payment @sakila_sl3.actor
 
-  # list available data sources
-  $ sq ls
-
-  # ping all data sources
-  $ sq ping all
-
-  # set active data source
-  $ sq src @sakila_pg
-
-  # get specified cols from table address in active data source
-  $ sq '.address |  .address_id, .city, .country'
-
-  # get metadata (schema, stats etc) for data source
-  $ sq inspect @sakila_pg
-
-  # get metadata for a table
-  $ sq inspect @pg1.person
-
-  # output in JSON
-  $ sq -j '.person | .uid, .username, .email'
-
-  # output in table format (with header)
-  $ sq -th '.person | .uid, .username, .email'
-
-  # output in table format (no header)
-  $ sq -t '.person | .uid, .username, .email'
-
-  # output to a HTML file
-  $ sq --html '@sakila_sl3.actor' -o actor.html
-
-  # join across data sources
-  $ sq '@my1.person, @pg1.address | join(.uid) | .username, .email, .city'
-
-  # insert query results into a table in another data source
-  $ sq --insert=@pg1.person '@my1.person | .username, .email'
-
-  # execute a database-native SQL query, specifying the source
-  $ sq sql --src=@pg1 'SELECT uid, username, email FROM person LIMIT 2'
-
-  # copy a table (in the same source)
-  $ sq tbl copy @sakila_sl3.actor .actor2
-
-  # truncate tables
-  $ sq tbl truncate @sakila_sl3.actor2
-
-  # drop table
-  $ sq tbl drop @sakila_sl3.actor2
-
-
-Available Commands:
-  sql         Execute DB-native SQL query or statement
-  src         Get or set active data source
-  add         Add data source
-  ls          List data sources
-  rm          Remove data source
-  inspect     Inspect data source schema and stats
-  ping        Ping data sources
-  version     Print sq version
-  driver      List or manage drivers
-  tbl         Useful table actions (copy, truncate, drop)
-  completion  Generate completion script
-  help        Show sq help
 
 Flags:
-  -o, --output string   Write output to <file> instead of stdout
-  -j, --json            Output JSON
-  -A, --jsona           Output LF-delimited JSON arrays
-  -l, --jsonl           Output LF-delimited JSON objects
-  -t, --table           Output text table
-  -X, --xml             Output XML
-  -x, --xlsx            Output Excel XLSX
-  -c, --csv             Output CSV
-  -T, --tsv             Output TSV
-  -r, --raw             Output each record field in raw format without any encoding or delimiter
-      --html            Output HTML table
-      --markdown        Output Markdown
-  -h, --header          Print header row in output (default true)
-      --pretty          Pretty-print output (default true)
-      --insert string   Insert query results into @HANDLE.TABLE. If not existing, TABLE will be created.
-      --src string      Override the active source for this query
-      --driver string   Explicitly specify the data source driver to use when piping input
-      --opts string     Driver-dependent data source options when piping input
-      --version         Print sq version
-      --help            Show sq help
-  -M, --monochrome      Don't colorize output
-  -v, --verbose         Print verbose output, if applicable
+      --help   help for drop
 
-Use "sq [command] --help" for more information about a command.
+Global Flags:
+  -M, --monochrome   Don't colorize output
+  -v, --verbose      Print verbose output, if applicable

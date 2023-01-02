@@ -6,7 +6,7 @@ images: []
 menu:
   docs:
     parent: "cmd"
-weight: 630
+weight: 3000
 toc: false
 ---
 
