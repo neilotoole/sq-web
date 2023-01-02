@@ -4,6 +4,7 @@
 /** Import theme variables */
 @import "common/variables";
 
+
 /** Import Bootstrap */
 @import "bootstrap/scss/bootstrap";
 
@@ -33,4 +34,6 @@
 @import "layouts/pages";
 @import "layouts/posts";
 @import "layouts/sidebar";
+
 @import "common/custom";
+
