@@ -1,5 +1,7 @@
 # sq.io website
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/7caea069-2a8d-4f0b-bafe-b053bbc5eb08/deploy-status)](https://app.netlify.com/sites/sq-web/deploys)
+
 This is the repo for the [sq.io](https://sq.io) website, which
 hosts documentations for [sq](https://github.com/neilotoole/sq).
 
@@ -10,7 +12,7 @@ This site is built using:
 - [Node.js](https://nodejs.org/) tooling
 - [Netlify](https://www.netlify.com) hosting
 
-Changes to the `master` branch trigger a GitHub workflow that deploys to Netlify.
+Changes to the `master` branch kick off a redeploy on Netlify.
 
 
 ## Contributing
@@ -61,9 +63,10 @@ Doks comes with [commands](https://getdoks.org/docs/prologue/commands/) for comm
 
 ## Acknowledgements
 
-Special thanks to [Netlify](https://www.netlify.com), who provide
+- Special thanks to [Netlify](https://www.netlify.com), who provide
 free hosting for [sq.io](https://sq.io) via
 their [open source program](https://www.netlify.com/open-source/).
+- A bunch of stuff has been lifted from the [Docsy theme](https://www.docsy.dev).
 
 [![Deploys by Netlify](https://www.netlify.com/v3/img/components/netlify-dark.svg)](https://www.netlify.com)
 
