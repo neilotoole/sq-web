@@ -45,10 +45,10 @@
 #   url = "/tutorial/lorem/ipsum/"
 #   weight = 15
 
-#[[main]]
-#  name = "Blog"
-#  url = "/blog/"
-#  weight = 20
+[[main]]
+  name = "Blog"
+  url = "/blog/"
+  weight = 20
 
 [[main]]
   name = "Get Started"

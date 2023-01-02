@@ -3,5 +3,3 @@ public
 resources
 .netlify
 .hugo_build.lock
-/TODO_WEB.md
-.DS_Store

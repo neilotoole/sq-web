@@ -1,0 +1,2 @@
+- https://www.docsy.dev/docs/adding-content/shortcodes/#include-external-files
+- https://docs.github.com/en/actions/using-workflows/reusing-workflows
