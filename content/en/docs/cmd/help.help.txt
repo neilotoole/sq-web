@@ -1,0 +1,11 @@
+Show sq help
+
+Usage:
+  sq help [flags]
+
+Flags:
+  -h, --help   help for help
+
+Global Flags:
+  -M, --monochrome   Don't colorize output
+  -v, --verbose      Print verbose output, if applicable

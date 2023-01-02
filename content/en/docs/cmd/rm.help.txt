@@ -1,0 +1,19 @@
+Remove data source.
+
+Usage:
+  sq rm @HANDLE1 [@HANDLE2...] [flags]
+
+Examples:
+  # Remove @my1 data source
+  $ sq rm @my1
+
+  # Remove multiple data sources
+  $ sq rm @my1 @pg1 @sqlserver1
+
+Flags:
+  -j, --json   Output JSON
+      --help   help for rm
+
+Global Flags:
+  -M, --monochrome   Don't colorize output
+  -v, --verbose      Print verbose output, if applicable

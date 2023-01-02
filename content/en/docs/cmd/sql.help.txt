@@ -1,0 +1,51 @@
+Execute a SQL query or statement against the active source using the
+source's SQL dialect. Use flag --src=@HANDLE to specify an alternative
+source.
+
+If flag --query is set, sq will run the input as a query
+(SELECT) and return the query rows. If flag --Exec is set,
+sq will execute the input and return the result. If neither
+flag is set, sq attempts to determine the appropriate mode.
+
+Usage:
+  sq sql QUERY|STMT [flags]
+
+Examples:
+  # Select from active source
+  $ sq sql 'SELECT * FROM actor'
+
+  # Select from a specified source
+  $ sq sql --src=@sakila_pg12 'SELECT * FROM actor'
+
+  # Drop table @sakila_pg12.actor
+  $ sq sql --Exec --src=@sakila_pg12 'DROP TABLE actor'
+
+  # Select from active source and write results to @sakila_ms17.actor
+  $ sq sql 'SELECT * FROM actor' --insert=@sakila_ms17.actor
+
+Flags:
+  -o, --output string   Write output to <file> instead of stdout
+  -j, --json            Output JSON
+  -A, --jsona           Output LF-delimited JSON arrays
+  -l, --jsonl           Output LF-delimited JSON objects
+  -t, --table           Output text table
+  -X, --xml             Output XML
+  -x, --xlsx            Output Excel XLSX
+  -c, --csv             Output CSV
+  -T, --tsv             Output TSV
+  -r, --raw             Output each record field in raw format without any encoding or delimiter
+      --html            Output HTML table
+      --markdown        Output Markdown
+  -h, --header          Print header row in output (default true)
+      --pretty          Pretty-print output (default true)
+      --insert string   Insert query results into @HANDLE.TABLE. If not existing, TABLE will be created.
+      --src string      Override the active source for this query
+      --driver string   Explicitly specify the data source driver to use when piping input
+      --opts string     Driver-dependent data source options when piping input
+      --query           Execute the SQL as a query (as opposed to statement)
+      --Exec            Execute the SQL as a statement (as opposed to query)
+      --help            help for sql
+
+Global Flags:
+  -M, --monochrome   Don't colorize output
+  -v, --verbose      Print verbose output, if applicable

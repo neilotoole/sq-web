@@ -1,0 +1,12 @@
+Print sq version
+
+Usage:
+  sq version [flags]
+
+Flags:
+  -j, --json   Output JSON
+      --help   help for version
+
+Global Flags:
+  -M, --monochrome   Don't colorize output
+  -v, --verbose      Print verbose output, if applicable

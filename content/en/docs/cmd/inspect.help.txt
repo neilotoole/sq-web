@@ -1,0 +1,35 @@
+Inspect a data source, or a particular table in a source,
+listing table details such as column names and row counts, etc. Use
+the --verbose flag to see more detail.
+If @HANDLE is not provided, the active data source is assumed.
+
+Usage:
+  sq inspect [@HANDLE|@HANDLE.TABLE|.TABLE] [flags]
+
+Examples:
+  # inspect active data source
+  $ sq inspect
+  
+  # inspect @pg1 data source
+  $ sq inspect @pg1
+  
+  # inspect @pg1 data source, showing verbose output
+  $ sq inspect -v @pg1
+
+  # inspect 'actor' in @pg1 data source
+  $ sq inspect @pg1.actor
+  
+  # inspect 'actor' in active data source
+  $ sq inspect .actor
+  
+  # inspect piped data
+  $ cat data.xlsx | sq inspect
+
+Flags:
+  -j, --json    Output JSON
+  -t, --table   Output text table
+      --help    help for inspect
+
+Global Flags:
+  -M, --monochrome   Don't colorize output
+  -v, --verbose      Print verbose output, if applicable

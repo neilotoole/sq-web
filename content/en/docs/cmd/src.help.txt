@@ -1,0 +1,20 @@
+Get or set active data source. If no argument provided, get the active data
+source. Otherwise, set @HANDLE as the active data source.
+
+Usage:
+  sq src [@HANDLE] [flags]
+
+Examples:
+  # Get active data source
+  $ sq src
+
+  # Set @my1 as active data source
+  $ sq src @my1
+
+Flags:
+  -j, --json   Output JSON
+      --help   help for src
+
+Global Flags:
+  -M, --monochrome   Don't colorize output
+  -v, --verbose      Print verbose output, if applicable

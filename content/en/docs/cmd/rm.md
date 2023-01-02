@@ -1,0 +1,13 @@
+---
+title: "rm"
+description: "Remove data source"
+draft: false
+images: []
+menu:
+  docs:
+    parent: "cmd"
+weight: 630
+toc: false
+---
+
+{{< readfile file="rm.help.txt" code="true" lang="text" >}}
