@@ -73,6 +73,8 @@
 
 {{ $js := $slice | resources.Concat "main.js" -}}
 
+
+
 {{ if eq (hugo.Environment) "development" -}}
   {{ if .Site.Params.options.bootStrapJs -}}
     <script src="{{ $bs.RelPermalink }}" defer></script>
@@ -117,3 +119,10 @@
     <script src="{{ $index.Permalink }}" integrity="{{ $index.Data.Integrity }}" crossorigin="anonymous" defer></script>
   {{ end -}}
 {{ end -}}
+
+{{ $scribbler := resources.Get "js/scribbler.js" | js.Build -}}
+
+{{ if .IsHome }}
+<script src="{{ $scribbler.RelPermalink }}" integrity="{{ $scribbler.Data.Integrity }}" crossorigin="anonymous" defer></script>
+{{ end }}
+
