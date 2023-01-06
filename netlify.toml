@@ -51,6 +51,6 @@
   for = "/*"
   [headers.values]
     Content-Security-Policy = '''
-      default-src 'self';
-      script-src 'self' asciinema.org www.googletagmanager.com;
+      default-src 'self' sq.io web.sq.io sq-web.netlify.app;
+      script-src 'self' sq.io web.sq.io sq-web.netlify.app asciinema.org www.googletagmanager.com;
       '''
