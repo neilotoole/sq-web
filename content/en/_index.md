@@ -14,24 +14,15 @@ relational data, whether that data is in a document or database.
 The query language is limited in scope, but for complex queries, you can fall back to database-native
 SQL queries.
 
-{{< alert icon="👉" text="Make sure to always self-close the alert shortcode." />}}
 
 
 ### Install
 
-{{< tabpane text=true right=true >}}
-{{% tab header="**Install**" disabled=true /%}}
-{{% tab header="macOS"  %}}
-mac!
-{{% /tab %}}
-
-{{< tab header="Linux"  >}}
-<b>Herzlich willkommen!</b>
-Linux!
-{{< /tab >}}
-
-{{% tab header="Windows"  %}}
-WindowS!
-{{% /tab %}}
-
-{{< /tabpane >}}
+<div class="wubble">
+{{< tabs name="install_sh" >}}
+{{{< tab name="macOS" codelang="shell" >}}brew install neilotoole/sq/sq{{< /tab >}}
+{{< tab name="Linux" codelang="shell" >}}/bin/sh -c "$(curl -fsSL https://sq.io/install.sh)"{{< /tab >}}}
+{{< tab name="Windows"  codelang="shell" >}}scoop bucket add sq https://github.com/neilotoole/sq
+scoop install sq{{< /tab >}}}
+{{< /tabs >}}
+</div>
