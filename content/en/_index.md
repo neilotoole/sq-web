@@ -18,3 +18,20 @@ SQL queries.
 
 
 ### Install
+
+{{< tabpane text=true right=true >}}
+{{% tab header="**Install**" disabled=true /%}}
+{{% tab header="macOS"  %}}
+mac!
+{{% /tab %}}
+
+{{< tab header="Linux"  >}}
+<b>Herzlich willkommen!</b>
+Linux!
+{{< /tab >}}
+
+{{% tab header="Windows"  %}}
+WindowS!
+{{% /tab %}}
+
+{{< /tabpane >}}
