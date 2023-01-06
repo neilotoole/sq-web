@@ -18,11 +18,9 @@ SQL queries.
 
 ### Install
 
-<div class="wubble">
-{{< tabs name="install_sh" >}}
-{{{< tab name="macOS" codelang="shell" >}}brew install neilotoole/sq/sq{{< /tab >}}
-{{< tab name="Linux" codelang="shell" >}}/bin/sh -c "$(curl -fsSL https://sq.io/install.sh)"{{< /tab >}}}
-{{< tab name="Windows"  codelang="shell" >}}scoop bucket add sq https://github.com/neilotoole/sq
+{{< tabs name="sq-install" >}}
+{{{< tab name="mac" codelang="shell" >}}brew install neilotoole/sq/sq{{< /tab >}}
+{{< tab name="linux" codelang="shell" >}}/bin/sh -c "$(curl -fsSL https://sq.io/install.sh)"{{< /tab >}}}
+{{< tab name="win"  codelang="shell" >}}scoop bucket add sq https://github.com/neilotoole/sq
 scoop install sq{{< /tab >}}}
 {{< /tabs >}}
-</div>

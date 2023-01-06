@@ -1,5 +1,5 @@
 $code-color: #8E7474;
-$code-bg-color: #F8F8FA;
+$code-bg-color: #f4f4f4;
 $code-border-color: #F0E8E8;
 $code-color-dark: #dfb9b5;
 $code-bg-color-dark: #383838;
@@ -57,7 +57,61 @@ div.docs-sidebar {
 }
 
 
-ul.nav-tabs {
-  //border
+div.tabs {
+  //border: 1px solid red;
+
+  ul.nav-tabs {
+    border: 0px;
+    text-align: right;
+
+    li {
+      display:inline-block;
+      float:none;
+    }
+
+    li.nav-item {
+
+
+
+
+      button.nav-link {
+        text-align: right;
+        border: none;
+      }
+
+      button.active {
+        font-weight: bolder;
+        border-bottom: 2px solid $gray-800;
+      }
+    }
+  }
+
+  pre.chroma {
+    background-color: $code-bg-color;
+    margin: 0;
+    //border: 1px solid blue;
+    code {
+      background-color: $code-bg-color;
+      color: $code-color;
+      //border-left: 1px solid $code-border-color;
+      border: 1px solid $code-border-color;
+      //border-right: 1px solid $code-border-color;
+      //border-bottom: 1px solid $code-border-color;
+    }
+  }
 }
 
+
+.btn.btn-copy {
+  font-size: 0.6rem;
+  font-family: $font-family-monospace;
+  text-transform: uppercase;
+  color: #f8f8fa;
+  background-color: #2f5086;
+  border-color: #2f5086;
+}
+.btn.btn-copy:hover {
+  color: #f8f8fa;
+  background-color: darken(#2f5086, 10%);
+  border-color: #26406b;
+}
