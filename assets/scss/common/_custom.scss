@@ -3,7 +3,8 @@ $code-bg-color: #f4f4f4;
 $code-border-color: #F0E8E8;
 $code-color-dark: #dfb9b5;
 $code-bg-color-dark: #383838;
-$code-border-color-dark: #7b7a7a;
+$code-border-color-dark: #383838;
+//$code-border-color-dark: #7b7a7a;
 
 
 p  {
@@ -58,48 +59,66 @@ div.docs-sidebar {
 
 
 div.tabs {
-  //border: 1px solid red;
-
   ul.nav-tabs {
+    padding-left: 10px;
+    padding-right: 10px;
+    justify-content: flex-end !important;
     border: 0px;
-    text-align: right;
 
-    li {
-      display:inline-block;
-      float:none;
-    }
 
     li.nav-item {
-
-
-
-
       button.nav-link {
-        text-align: right;
         border: none;
       }
 
       button.active {
         font-weight: bolder;
-        border-bottom: 2px solid $gray-800;
+        border-bottom: 1px solid $gray-800;
       }
     }
   }
 
   pre.chroma {
     background-color: $code-bg-color;
-    margin: 0;
-    //border: 1px solid blue;
+    margin: 1px 0 0;
+
     code {
       background-color: $code-bg-color;
       color: $code-color;
-      //border-left: 1px solid $code-border-color;
       border: 1px solid $code-border-color;
-      //border-right: 1px solid $code-border-color;
-      //border-bottom: 1px solid $code-border-color;
     }
   }
 }
+
+
+
+[data-dark-mode] div.tabs {
+  ul.nav-tabs {
+    li.nav-item {
+      background-color: transparent;
+
+      button {
+        color: $gray-600;
+      }
+
+      button.active {
+        background-color: transparent;
+        color: $white;
+        border-bottom: 1px solid white;
+      }
+    }
+  }
+
+  pre.chroma {
+    background-color: $code-bg-color-dark;
+    code {
+      background-color: $code-bg-color-dark;
+      color: $code-color-dark;
+      border: 1px solid $code-border-color-dark;
+    }
+  }
+}
+
 
 
 .btn.btn-copy {
@@ -110,6 +129,7 @@ div.tabs {
   background-color: #2f5086;
   border-color: #2f5086;
 }
+
 .btn.btn-copy:hover {
   color: #f8f8fa;
   background-color: darken(#2f5086, 10%);
