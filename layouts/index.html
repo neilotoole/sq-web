@@ -6,35 +6,27 @@
     </div>
     <div class="col-lg-9 col-xl-8 text-center">
       <p class="lead">{{ .Params.lead | safeHTML }}</p>
-      <a class="btn btn-primary btn-lg px-4 mb-2" href="/docs/{{ if .Site.Params.options.docsVersioning }}{{ .Site.Params.docsVersion }}/{{ end }}prologue/introduction/" role="button">{{ i18n "get-started" }}</a>
-      <p class="meta">Open-source MIT Licensed. <a href="https://github.com/h-enk/doks">GitHub v{{ $data := getJSON "/package.json" }}{{ $data.version }}</a></p>
+      <a class="btn btn-primary btn-lg px-4 mb-2"
+         href="/docs/{{ if .Site.Params.options.docsVersioning }}{{ .Site.Params.docsVersion }}/{{ end }}prologue/introduction/"
+         role="button">{{ i18n "get-started" }}</a>
+      <p class="meta">Open-source MIT Licensed. <a href="https://github.com/h-enk/doks">GitHub v{{ $data := getJSON
+        "/package.json" }}{{ $data.version }}</a></p>
     </div>
   </div>
   <div class="row justify-content-center">
-
     <div class="col-lg-12">
-      <div class="mybox">
-        <pre class="innerbox">
-                          <code class="shell-session demo"></code>
-        </pre>
-
-           </div>
-<!--      <div class="hero__terminal">-->
-<!--      <pre class="terminal">-->
-<!--        &lt;!&ndash; Place your demo code here &ndash;&gt;-->
-<!--        <code class="shell-session demo"></code>-->
-<!--      </pre>-->
-<!--      </div>-->
+      <div class="asciinema">
+        <script id="asciicast-SfVqdDSmIGx5uxzN0MZpv1Lp1"
+                src="https://asciinema.org/a/SfVqdDSmIGx5uxzN0MZpv1Lp1.js"
+                preload="true"
+                data-autoplay="true"
+                data-rows="10"
+                data-speed="2"
+                idle-time-limit="3"
+                data-theme="solarized-dark"
+                async></script>
+      </div>
     </div>
-<!--&lt;!&ndash;      <div class="hero__terminal">&ndash;&gt;-->
-<!--&lt;!&ndash;        <pre class="terminal">&ndash;&gt;-->
-<!--          &lt;!&ndash; Place your demo code here &ndash;&gt;-->
-
-
-<!--&lt;!&ndash;        </pre>&ndash;&gt;-->
-<!--&lt;!&ndash;      </div>&ndash;&gt;-->
-<!--    </div>-->
-
   </div>
 </section>
 {{ end }}
