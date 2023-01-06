@@ -50,5 +50,7 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = "default-src 'self';"
-    Content-Security-Policy = "script-src 'self' asciinema.org www.googletagmanager.com;"
+    Content-Security-Policy = '''
+      default-src 'self';
+      script-src 'self' asciinema.org www.googletagmanager.com;
+      '''
