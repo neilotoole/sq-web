@@ -57,6 +57,7 @@ pre.innerbox {
 pre.innerbox code.shell-session {
   max-width: 100%;
   overflow-x: hidden;
+  overflow-y: scroll;
   //background-color: none;
 }
 
