@@ -46,3 +46,9 @@
   from = "/install.sh"
   to = "https://raw.githubusercontent.com/neilotoole/sq/master/install.sh"
   status = 301
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self';"
+    Content-Security-Policy = "script-src 'self' asciinema.org www.googletagmanager.com;"
