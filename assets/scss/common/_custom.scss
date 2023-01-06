@@ -13,3 +13,8 @@ div.docs-sidebar {
   background-color: $sidebar-bgcolor;
 }
 
+[data-dark-mode] div.docs-sidebar {
+  background-color: $gray-900;
+}
+
+
