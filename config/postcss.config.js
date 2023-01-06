@@ -41,7 +41,6 @@ module.exports = {
           './node_modules/bootstrap/scss/_dropdown.scss',
           './node_modules/katex/dist/katex.css',
           './assets/scss/common/_custom.scss',
-          './assets/scss/common/_custom_dark.scss',
         ]),
       ],
     }),

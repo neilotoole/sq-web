@@ -1,3 +1,20 @@
+$code-color: #8E7474;
+$code-bg-color: #F8F8FA;
+$code-border-color: #F0E8E8;
+$code-color-dark: #dfb9b5;
+$code-bg-color-dark: #383838;
+$code-border-color-dark: #7b7a7a;
+
+
+p  {
+  font-weight: 300;
+  font-color: #4A4A4A;
+}
+
+body {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 1em;
+}
 
 // This is the "Commands" section of the sidebar.
 nav.docs-links {
@@ -8,6 +25,24 @@ nav.docs-links {
   }
 }
 
+
+
+div.content section.section p code {
+  border: 1px solid $code-border-color;
+  border-radius: 3px;
+  color: $code-color;
+  background-color: $code-bg-color;
+  padding: 3px 6px;
+  font-size: 0.75em;
+  margin: 2px;
+}
+
+[data-dark-mode] div.content section.section p code {
+  //border-color: $code-border-color-dark;
+  border-color: $code-bg-color-dark;
+  color: $code-color-dark;
+  background-color: $code-bg-color-dark;
+}
 
 div.docs-sidebar {
   background-color: $sidebar-bgcolor;
