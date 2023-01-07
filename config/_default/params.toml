@@ -86,6 +86,11 @@ docsRepoSubPath = ""
 editPage = true
 lastMod = true
 
+pygmentsCodeFences = true
+pygmentsUseClasses = true
+#highLight = false
+
+
 [sections]
   sectionNav = ["docs", "guides"]
 
@@ -99,7 +104,7 @@ lastMod = true
   darkMode = true
   bootStrapJs = true
   breadCrumb = false
-  highLight = true
+#  highLight = false
   kaTex = false
   multilingualMode = false
   docsVersioning = false
@@ -112,3 +117,20 @@ lastMod = true
   [menu.section]
     auto = true
     collapsibleSidebar = true
+
+
+#[markup]
+#  [markup.highlight]
+#    anchorLineNos = false
+#    codeFences = true
+#    guessSyntax = false
+#    hl_Lines = ''
+#    hl_inline = false
+#    lineAnchors = ''
+#    lineNoStart = 1
+#    lineNos = false
+#    lineNumbersInTable = true
+#    noClasses = true
+#    noHl = false
+#    style = 'monokai'
+#    tabWidth = 4

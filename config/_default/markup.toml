@@ -12,6 +12,8 @@ defaultMarkdownHandler = "goldmark"
   [goldmark.renderer]
     unsafe = true
 
+
+
 #[highlight]
 #  codeFences = false
 #  guessSyntax = false
@@ -35,10 +37,10 @@ defaultMarkdownHandler = "goldmark"
     lineAnchors = ''
     lineNoStart = 1
     lineNos = false
-    lineNumbersInTable = true
+    lineNumbersInTable = false
     noClasses = false
     noHl = false
-    style = 'solarized-dark'
+    style = 'rose-pine'
     tabWidth = 4
 
 [tableOfContents]

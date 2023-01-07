@@ -9,9 +9,6 @@ menu:
 weight: 3000
 toc: false
 ---
-
-{{< readfile file="add.help.txt" code="true" lang="text" >}}
-
 ```go
 
 // ProjectDelete deletes the project having uuid.
@@ -76,9 +73,14 @@ hljs.registerLanguage('yaml', yaml);
 hljs.registerLanguage('md', markdown);
 
 document.addEventListener('DOMContentLoaded', () => {
-document.querySelectorAll('pre code').forEach((block) => {
-hljs.highlightBlock(block);
-});
+    document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+    });
 });
 ```
+
+
+{{< readfile file="add.help.txt" code="true" lang="text" >}}
+
+
 

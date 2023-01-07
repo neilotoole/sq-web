@@ -4,8 +4,8 @@
 {{ $bs := resources.Get "js/bootstrap.js" -}}
 {{ $bs := $bs | js.Build -}}
 
-{{ $highlight := resources.Get "js/highlight.js" -}}
-{{ $highlight := $highlight | js.Build -}}
+<!--{{ $highlight := resources.Get "js/highlight.js" -}}-->
+<!--{{ $highlight := $highlight | js.Build -}}-->
 
 {{ $katex := resources.Get "js/vendor/katex/dist/katex.js" -}}
 {{ $katexAutoRender := resources.Get "js/vendor/katex/dist/contrib/auto-render.js" -}}
@@ -80,6 +80,7 @@
     <script src="{{ $bs.RelPermalink }}" defer></script>
   {{ end -}}
   {{ if .Site.Params.options.highLight -}}
+    <h1>huzzah</h1>
     <script src="{{ $highlight.RelPermalink }}" defer></script>
   {{ end -}}
   {{ if .Site.Params.options.kaTex -}}
@@ -105,6 +106,7 @@
     <script src="{{ $bs.RelPermalink }}" integrity="{{ $bs.Data.Integrity }}" crossorigin="anonymous" defer></script>
   {{ end -}}
   {{ if .Site.Params.options.highLight -}}
+<h1>Huzzah2</h1>
     <script src="{{ $highlight.RelPermalink }}" integrity="{{ $highlight.Data.Integrity }}" crossorigin="anonymous" defer></script>
   {{ end -}}
   {{ if .Site.Params.options.kaTex -}}
@@ -120,9 +122,4 @@
   {{ end -}}
 {{ end -}}
 
-{{ $scribbler := resources.Get "js/scribbler.js" | js.Build -}}
-
-{{ if .IsHome }}
-<script src="{{ $scribbler.RelPermalink }}" integrity="{{ $scribbler.Data.Integrity }}" crossorigin="anonymous" defer></script>
-{{ end }}
 
