@@ -1,137 +1,157 @@
-$code-color: #8E7474;
-$code-bg-color: #f4f4f4;
-$code-border-color: #F0E8E8;
-$code-color-dark: #dfb9b5;
-$code-bg-color-dark: #383838;
-$code-border-color-dark: #383838;
-//$code-border-color-dark: #7b7a7a;
-
-
-p  {
-  font-weight: 300;
-  font-color: #4A4A4A;
-}
-
-div.asciinema {
-  min-height: 320px;
-}
-
-body {
-  font-family: "Nunito Sans", sans-serif;
-  font-size: 1em;
-}
-
-// This is the "Commands" section of the sidebar.
-nav.docs-links {
-  #section-c441ee50c88f6e5e3a7c69fc69dad8b8 {
-    a.docs-link {
-      font-family: $font-family-monospace;
-    }
-  }
-}
-
-
-
-div.content section.section p code {
-  border: 1px solid $code-border-color;
-  border-radius: 3px;
-  color: $code-color;
-  background-color: $code-bg-color;
-  padding: 3px 6px;
-  font-size: 0.75em;
-  margin: 2px;
-}
-
-[data-dark-mode] div.content section.section p code {
-  //border-color: $code-border-color-dark;
-  border-color: $code-bg-color-dark;
-  color: $code-color-dark;
-  background-color: $code-bg-color-dark;
-}
-
-div.docs-sidebar {
-  background-color: $sidebar-bgcolor;
-}
-
-[data-dark-mode] div.docs-sidebar {
-  background-color: $gray-900;
-}
-
-
-div.tabs {
-  ul.nav-tabs {
-    padding-left: 10px;
-    padding-right: 10px;
-    justify-content: flex-end !important;
-    border: 0px;
-
-
-    li.nav-item {
-      button.nav-link {
-        border: none;
-      }
-
-      button.active {
-        font-weight: bolder;
-        border-bottom: 1px solid $gray-800;
-      }
-    }
-  }
-
-  pre.chroma {
-    background-color: $code-bg-color;
-    margin: 1px 0 0;
-
-    code {
-      background-color: $code-bg-color;
-      color: $code-color;
-      border: 1px solid $code-border-color;
-    }
-  }
-}
-
-
-
-[data-dark-mode] div.tabs {
-  ul.nav-tabs {
-    li.nav-item {
-      background-color: transparent;
-
-      button {
-        color: $gray-600;
-      }
-
-      button.active {
-        background-color: transparent;
-        color: $white;
-        border-bottom: 1px solid white;
-      }
-    }
-  }
-
-  pre.chroma {
-    background-color: $code-bg-color-dark;
-    code {
-      background-color: $code-bg-color-dark;
-      color: $code-color-dark;
-      border: 1px solid $code-border-color-dark;
-    }
-  }
-}
-
-
-
-.btn.btn-copy {
-  font-size: 0.6rem;
-  font-family: $font-family-monospace;
-  text-transform: uppercase;
-  color: #f8f8fa;
-  background-color: #2f5086;
-  border-color: #2f5086;
-}
-
-.btn.btn-copy:hover {
-  color: #f8f8fa;
-  background-color: darken(#2f5086, 10%);
-  border-color: #26406b;
-}
+//$code-color: #8E7474;
+//$code-bg-color: #f4f4f4;
+//$code-border-color: #F0E8E8;
+//$code-color-dark: #dfb9b5;
+//$code-bg-color-dark: #383838;
+//$code-border-color-dark: #383838;
+////$code-border-color-dark: #7b7a7a;
+//
+//
+//p  {
+//  font-weight: 300;
+//  font-color: #4A4A4A;
+//}
+//
+//div.asciinema {
+//  min-height: 320px;
+//}
+//
+//body {
+//  font-family: "Nunito Sans", sans-serif;
+//  font-size: 1em;
+//}
+//
+//// This is the "Commands" section of the sidebar.
+//nav.docs-links {
+//  #section-c441ee50c88f6e5e3a7c69fc69dad8b8 {
+//    a.docs-link {
+//      font-family: $font-family-monospace;
+//
+//    }
+//  }
+//}
+//
+//
+//
+//div.content section.section p code {
+//  border: 1px solid $code-border-color;
+//  border-radius: 3px;
+//  color: $code-color;
+//  background-color: $code-bg-color;
+//  padding: 3px 6px;
+//  font-size: 0.75em;
+//  margin: 2px;
+//}
+//
+//[data-dark-mode] div.content section.section p code {
+//  //border-color: $code-border-color-dark;
+//  border-color: $code-bg-color-dark;
+//  color: $code-color-dark;
+//  background-color: $code-bg-color-dark;
+//}
+//
+//div.docs-sidebar {
+//  background-color: $sidebar-bgcolor;
+//}
+//
+//[data-dark-mode] div.docs-sidebar {
+//  background-color: $gray-900;
+//}
+//
+//
+//div.tabs {
+//  ul.nav-tabs {
+//    padding-left: 10px;
+//    padding-right: 10px;
+//    justify-content: flex-end !important;
+//    border: 0px;
+//
+//
+//    li.nav-item {
+//      button.nav-link {
+//        border: none;
+//      }
+//
+//      button.active {
+//        font-weight: bolder;
+//        border-bottom: 1px solid $gray-800;
+//      }
+//    }
+//  }
+//
+//  pre.chroma {
+//    background-color: $code-bg-color;
+//    margin: 1px 0 0;
+//
+//    code {
+//      background-color: $code-bg-color;
+//      color: $code-color;
+//      border: 1px solid $code-border-color;
+//    }
+//  }
+//}
+//
+//
+//
+//[data-dark-mode] div.tabs {
+//  ul.nav-tabs {
+//    li.nav-item {
+//      background-color: transparent;
+//
+//      button {
+//        color: $gray-600;
+//      }
+//
+//      button.active {
+//        background-color: transparent;
+//        color: $white;
+//        border-bottom: 1px solid white;
+//      }
+//    }
+//  }
+//
+//  pre.chroma {
+//    background-color: $code-bg-color-dark;
+//    code {
+//      background-color: $code-bg-color-dark;
+//      color: $code-color-dark;
+//      border: 1px solid $code-border-color-dark;
+//    }
+//  }
+//}
+//
+//
+//
+//.btn.btn-copy {
+//  font-size: 0.6rem;
+//  font-family: $font-family-monospace;
+//  text-transform: uppercase;
+//  color: #f8f8fa;
+//  background-color: #2f5086;
+//  border-color: #2f5086;
+//}
+//
+//.btn.btn-copy:hover {
+//  color: #f8f8fa;
+//  background-color: darken(#2f5086, 10%);
+//  border-color: #26406b;
+//}
+//
+//
+//[data-dark-mode] div.sticky-top {
+//  background-color: white;
+//}
+//
+//footer  {
+//  text-align: center;
+//  justify-content: center !important;
+//
+//  .row {
+//    justify-content: center;
+//  }
+//}
+//
+//
+//[data-dark-mode] footer {
+//  background-color: darken($gray-800, 5%);
+//}

@@ -1,7 +1,21 @@
 <!-- Auto collapsible section menu -->
 <ul class="list-unstyled collapsible-sidebar">
+
   {{ $currentPage := . -}}
   {{ $section := $currentPage.Section -}}
+  {{ $active := in $currentPage.RelPermalink .RelPermalink }}
+  <li class="mb-1">
+    {{ $hackURL := "/docs/overview" }}
+    {{ $active := in $currentPage.RelPermalink $hackURL }}
+    <a class="docs-link rounded {{ if $active }} active{{ end }}" href="{{- $hackURL -}}">Overview</a>
+  </li>
+  <li class="mb-1">
+    {{ $hackURL := "/docs/install" }}
+    {{ $active := in $currentPage.RelPermalink $hackURL }}
+    <a class="docs-link rounded {{ if $active }} active{{ end }}" href="{{- $hackURL -}}">Install</a>
+  </li>
+
+
   {{ range (where .Site.Sections "Section" "in" $section) }}
     {{ range .Sections }}
       {{ $active := in $currentPage.RelPermalink .RelPermalink }}
