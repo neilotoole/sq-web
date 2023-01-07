@@ -24,7 +24,7 @@ defaultMarkdownHandler = "goldmark"
   tabWidth = 4
 
 # See https://gohugo.io/getting-started/configuration-markup/#highlight
-#  https://gohugo.io/content-management/syntax-highlighting/#generate-syntax-highlighter-css
+# https://gohugo.io/content-management/syntax-highlighting/#generate-syntax-highlighter-css
 #[markup]
 #  [markup.highlight]
 #    anchorLineNos = false
