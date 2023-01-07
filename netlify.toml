@@ -56,6 +56,6 @@
       frame-src asciinema.org;
       connect-src www.google-analytics.com;
       img-src 'self' sq.io web.sq.io sq-web.netlify.app www.netlify.com;
-      style-src 'self' sq.io web.sq.io sq-web.netlify.app www.netlify.com fonts.goolgeapis.com;
+      style-src 'self' sq.io web.sq.io sq-web.netlify.app www.netlify.com fonts.googleapis.com;
       font-src 'self' sq.io web.sq.io sq-web.netlify.app fonts.googleapis.com cdnjs.cloudflare.com fonts.gstatic.com  fonts.googleapis.com github.com maxcdn.bootstrapcdn.com themes.googleusercontent.com use.fontawesome.com
       '''
