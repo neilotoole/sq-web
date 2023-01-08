@@ -8,6 +8,8 @@ $code-border-color-dark: #7b7a7a;
 
 body {
   font-weight: 300;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 1em;
 }
 
 p  {
@@ -15,17 +17,8 @@ p  {
   font-color: #4A4A4A;
 }
 
-div.asciinema {
-  //min-height: 320px;
-}
-
-body {
-  font-family: "Nunito Sans", sans-serif;
-  font-size: 1em;
-}
-
 h2 {
-  font-size: 1.17em;
+  font-size: 1.4em;
 }
 
 h2.h4 {
@@ -55,15 +48,17 @@ div.tab-content > div:not(:has(>div.highlight)) {
 section p code,
 section li code,
 section .tab-pane > code {
-  border: 1px solid $code-border-color;
   border-radius: 3px;
-  color: $code-color;
-  background-color: $code-bg-color;
   padding: 3px 6px;
   font-size: 0.75em;
   margin: 2px;
+  border: 1px solid $code-border-color;
+  background-color: $code-bg-color;
+  color: $code-color;
 }
 
+[data-dark-mode] code,
+[data-dark-mode] body code:not(.hljs),
 [data-dark-mode] section p code,
 [data-dark-mode] section li code,
 [data-dark-mode] section .tab-pane > code {
@@ -71,6 +66,12 @@ section .tab-pane > code {
   color: $code-color-dark;
   background-color: $code-bg-color-dark;
 }
+
+[data-dark-mode] body pre.chroma code {
+  background: $body-overlay-dark;
+  color: $body-color-dark;
+}
+
 
 div.docs-sidebar {
   background-color: $sidebar-bgcolor;
@@ -111,7 +112,7 @@ div.tabs {
       button {
         background-color: transparent;
         border: none;
-        color: $gray-500;
+        color: $gray-600;
 
       }
 
@@ -131,13 +132,13 @@ div.tabs {
   }
 
   pre.chroma {
-    background-color: $code-bg-color;
+    //background-color: $code-bg-color;
     margin: 1px 0 0;
 
     code {
-      background-color: $code-bg-color;
-      color: $code-color;
-      border: 1px solid $code-border-color;
+      //background-color: $code-bg-color;
+      //color: $code-color;
+      //border: 1px solid $code-border-color;
     }
   }
 }
@@ -168,17 +169,7 @@ div.tabs {
       }
     }
   }
-
-  pre.chroma {
-    background-color: $code-bg-color-dark;
-    code {
-      background-color: $code-bg-color-dark;
-      color: $code-color-dark;
-      border: 1px solid $code-border-color-dark;
-    }
-  }
 }
-
 
 
 .btn.btn-copy {
@@ -218,18 +209,11 @@ footer  {
 }
 
 
-// This is the "Install" header on the home page.
+// This is the "Installation" H2 on the home page.
 // We want it to sit right above the tabs.
 body.home h2#installation {
-  //border: 1px solid red;
-  //font-size: 1.4em;
   margin-bottom: 0;
 }
-
-body.home div.tabs {
-  //border: 1px solid green;
-}
-
 
 body.home div.bottom-panels > div {
   text-align: start;
@@ -237,10 +221,7 @@ body.home div.bottom-panels > div {
 }
 
 body.home div.bottom-panels ul {
-  padding-left: 1.2em;
-  //border: 1px solid green;
+  padding-left: 1.4em;
   font-size: 0.9rem;
-  line-height: 1.2rem;
-
-
+  line-height: 1.3rem;
 }
