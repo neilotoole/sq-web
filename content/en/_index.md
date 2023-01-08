@@ -7,7 +7,7 @@ images: []
 ---
 `sq` is a free/libre [open-source](https://github.com/neilotoole/sq) data wrangling swiss-army knife
 to inspect, query, join, import, and export data. You could think of it
-as [jq](https://stedolan.github.io/jq/) for structured data, facilitating one-liners
+as [jq](https://stedolan.github.io/jq/) for databases and documents, facilitating one-liners
 like: `sq '@postgres_db | .actor | .first_name, .last_name | .[0:5]'`.
 
 
