@@ -4,15 +4,16 @@
 {{ $bs := resources.Get "js/bootstrap.js" -}}
 {{ $bs := $bs | js.Build -}}
 
-<!--{{ $highlight := resources.Get "js/highlight.js" -}}-->
-<!--{{ $highlight := $highlight | js.Build -}}-->
+
 
 {{ $katex := resources.Get "js/vendor/katex/dist/katex.js" -}}
 {{ $katexAutoRender := resources.Get "js/vendor/katex/dist/contrib/auto-render.js" -}}
 
 {{ $mermaid := resources.Get "js/mermaid.js" | js.Build -}}
 
+
 {{ $app := resources.Get "js/app.js" -}}
+
 
 {{ $slice := slice $app -}}
 
@@ -74,10 +75,7 @@
   {{ if .Site.Params.options.bootStrapJs -}}
     <script src="{{ $bs.RelPermalink }}" defer></script>
   {{ end -}}
-  {{ if .Site.Params.options.highLight -}}
-    <h1>huzzah</h1>
-    <script src="{{ $highlight.RelPermalink }}" defer></script>
-  {{ end -}}
+
   {{ if .Site.Params.options.kaTex -}}
     <script src="{{ $katex.RelPermalink }}" defer></script>
     <script src="{{ $katexAutoRender.RelPermalink }}" onload="renderMathInElement(document.body);" defer></script>
@@ -101,7 +99,6 @@
     <script src="{{ $bs.RelPermalink }}" integrity="{{ $bs.Data.Integrity }}" crossorigin="anonymous" defer></script>
   {{ end -}}
   {{ if .Site.Params.options.highLight -}}
-<h1>Huzzah2</h1>
     <script src="{{ $highlight.RelPermalink }}" integrity="{{ $highlight.Data.Integrity }}" crossorigin="anonymous" defer></script>
   {{ end -}}
   {{ if .Site.Params.options.kaTex -}}
@@ -120,6 +117,6 @@
 
 {{ if (findRE "<pre" .Content 1) }}
 <!-- FIXME: add | minify -->
-{{ $jsCopy := resources.Get "js/copy-code-button.js"  }}
+{{ $jsCopy := resources.Get "js/copy-code-button.js" | minify }}
 <script src="{{ $jsCopy.RelPermalink }}"></script>
 {{ end }}
