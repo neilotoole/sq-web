@@ -34,41 +34,58 @@
 {{ end }}
 
 {{ define "sidebar-prefooter" }}
-  {{ if eq $.Site.Language.LanguageName "English" }}
-  <section class="section section-sm">
-    <div class="container">
-      <div class="row justify-content-center text-center">
-
-
-        <div class="col-lg-5">
-          <h2 class="h4">Security aware, oh yes we are</h2>
-          <p>Get A+ scores on <a href="https://observatory.mozilla.org/analyze/web.sq.io">Mozilla Observatory</a> out of the box. Easily change the default Security Headers to suit your needs.</p>
-        </div>
-        <div class="col-lg-5">
-          <h2 class="h4">Fast by default ⚡️</h2>
-          <p>Get 100 scores on <a href="https://googlechrome.github.io/lighthouse/viewer/?gist=59aafe464a68f8bc30b8e9a636d5b053">Google Lighthouse</a> by default. Doks removes unused css, prefetches links, and lazy loads images.</p>
-        </div>
-        <div class="col-lg-5">
-          <h2 class="h4">SEO-ready</h2>
-          <p>Use sensible defaults for structured data, open graph, and Twitter cards. Or easily change the SEO settings to your liking.</p>
-        </div>
+{{ if eq $.Site.Language.LanguageName "English" }}
+<section class="section section-sm">
+  <div class="container">
+    <div class="row justify-content-center text-center bottom-panels">
+      <div class="col-lg-5">
+        <h2 class="h4">SQL Sources</h2>
+        <p>
+          <code>sq</code> supports input from and output to common databases.
+        </p>
+        <ul>
+          <li>Postgres</li>
+          <li>SQLite</li>
+          <li>SQL Server / Azure SQL Edge</li>
+          <li>MySQL</li>
+        </ul>
       </div>
-      <div class="row justify-content-center text-center">
-        <div class="col-lg-5">
-          <h2 class="h4">Full text search</h2>
-          <p>Search your Doks site with FlexSearch. Easily customize index settings and search options to your liking.</p>
-        </div>
-        <div class="col-lg-5">
-          <h2 class="h4">Page layouts</h2>
-          <p>Build pages with a landing page, blog, or documentation layout. Add custom sections and components to suit your needs.</p>
-        </div>
-        <div class="col-lg-5">
-          <h2 class="h4">Dark mode</h2>
-          <p>Switch to a low-light UI with the click of a button. Change colors with variables to match your branding.</p>
-        </div>
+      <div class="col-lg-5">
+        <h2 class="h4">Other Sources</h2>
+        <p>In addition to SQL sources, <code>sq</code> can import data from these formats:</p>
+        <ul>
+          <li>Excel XLSX</li>
+          <li>CSV</li>
+          <li>TSV</li>
+          <li>JSON <span class="mute">(beta)</span></li>
+          <li>JSONL <span class="mute">(JSON Lines)</span></li>
+          <li>JSONA <span class="mute">(JSON Array)</span></li>
+          <li>XML</li>
+        </ul>
+      </div>
+      <div class="col-lg-5">
+        <h2 class="h4">Output Formats</h2>
+        <p>
+          <code>sq</code> can output to a plethora of file formats, or insert results directly
+          to a database table.
+        </p>
+        <ul>
+          <li>SQL <code>INSERT</code> to Postgres, SQLite, SQL Server / Azure SQL Edge, MySQL</li>
+          <li>Excel XLSX</li>
+          <li>CSV</li>
+          <li>TSV</li>
+          <li>JSON</li>
+          <li>JSONL (JSON Lines)</li>
+          <li>JSONA (JSON Array)</li>
+          <li>XML</li>
+          <li>HTML</li>
+          <li>Markdown</li>
+          <li>Raw (bytes)</li>
+        </ul>
       </div>
     </div>
-  </section>
-  {{ end }}
+  </div>
+</section>
+{{ end }}
 {{ end }}
 

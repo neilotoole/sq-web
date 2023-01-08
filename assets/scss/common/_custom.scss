@@ -6,6 +6,9 @@ $code-bg-color-dark: #383838;
 $code-border-color-dark: #383838;
 $code-border-color-dark: #7b7a7a;
 
+body {
+  font-weight: 300;
+}
 
 p  {
   font-weight: 300;
@@ -25,25 +28,33 @@ h2 {
   font-size: 1.17em;
 }
 
+h2.h4 {
+  font-size: 1.17em;
+}
+
+.mute {
+  opacity: 50%;
+}
+
 
 // This is the "Commands" section of the sidebar.
+// Render the command name in monospace.
 nav.docs-links {
   #section-c441ee50c88f6e5e3a7c69fc69dad8b8 {
     a.docs-link {
       font-family: $font-family-monospace;
-
     }
   }
 }
 
 div.tab-content > div:not(:has(>div.highlight)) {
-  //border: 1px solid orange;
   padding-top: 20px;
   padding-bottom: 20px;
 }
 
-div.content section.section p code,
-div.content section.section .tab-pane > code {
+section p code,
+section li code,
+section .tab-pane > code {
   border: 1px solid $code-border-color;
   border-radius: 3px;
   color: $code-color;
@@ -53,8 +64,9 @@ div.content section.section .tab-pane > code {
   margin: 2px;
 }
 
-[data-dark-mode] div.content section.section p code,
-div.content section.section .tab-pane > code {
+[data-dark-mode] section p code,
+[data-dark-mode] section li code,
+[data-dark-mode] section .tab-pane > code {
   border-color: $code-bg-color-dark;
   color: $code-color-dark;
   background-color: $code-bg-color-dark;
@@ -66,6 +78,12 @@ div.docs-sidebar {
 
 [data-dark-mode] div.docs-sidebar {
   background-color: $gray-900;
+}
+
+
+pre.chroma {
+  background-color: $code-bg-color;
+  border: 1px solid $code-border-color;
 }
 
 
@@ -209,3 +227,16 @@ body.home div.tabs {
 }
 
 
+body.home div.bottom-panels > div {
+  text-align: start;
+  text-align: left;
+}
+
+body.home div.bottom-panels ul {
+  padding-left: 1.2em;
+  //border: 1px solid green;
+  font-size: 0.9rem;
+  line-height: 1.2rem;
+
+
+}
