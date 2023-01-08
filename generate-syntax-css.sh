@@ -11,8 +11,9 @@ theme_light=rose-pine-dawn
 
 
 
-theme_dark=rose-pine
-#theme_dark=nord
+#theme_dark=rose-pine
+#theme_dark=monokai
+theme_dark=nord
 
 # Generate light mode
 ./node_modules/.bin/hugo/hugo gen chromastyles --style=$theme_light > ./assets/scss/components/_syntax.scss
