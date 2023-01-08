@@ -13,33 +13,12 @@ relational data, whether that data is in a document or database.
 The query language is limited in scope, but for complex queries, you can fall back to database-native
 SQL queries.
 
-## Code Test
-
-{{< highlight go  >}}
-fmt.Println("huzzah")
-var x = "huz"
-{{< / highlight >}}
-
-
-```go
-fmt.Println("huzzah")
-var x = "huz"
-```
-
----
-
-```toml
-[sitemap]
-  changefreq = "weekly"
-  filename = "sitemap.xml"
-  priority = 0.5
-```
 
 ### Install
 
 {{< tabs name="sq-install" >}}
-{{{< tab name="mac"  >}}brew install neilotoole/sq/sq{{< /tab >}}
-{{< tab name="linux" >}}/bin/sh -c "$(curl -fsSL https://sq.io/install.sh)"{{< /tab >}}}
-{{< tab name="win">}}scoop bucket add sq https://github.com/neilotoole/sq
+{{{< tab name="mac" codelang="shell" >}}brew install neilotoole/sq/sq{{< /tab >}}
+{{< tab name="linux" codelang="shell" >}}/bin/sh -c "$(curl -fsSL https://sq.io/install.sh)"{{< /tab >}}}
+{{< tab name="win" codelang="shell">}}scoop bucket add sq https://github.com/neilotoole/sq
 scoop install sq{{< /tab >}}}
 {{< /tabs >}}

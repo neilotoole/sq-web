@@ -7,12 +7,6 @@ $code-border-color-dark: #383838;
 $code-border-color-dark: #7b7a7a;
 
 
-// We explicitly set the background color for code blocks.
-body pre code:not(.hljs) {
-  //background: #2e3440;
-  //color: $body-color-dark;
-}
-
 p  {
   font-weight: 300;
   font-color: #4A4A4A;
@@ -67,18 +61,31 @@ div.docs-sidebar {
 
 div.tabs {
   ul.nav-tabs {
+    background-color: transparent;
     padding-left: 10px;
-    padding-right: 10px;
+    padding-right: 30px;
     justify-content: flex-end !important;
     border: 0px;
 
 
     li.nav-item {
-      button.nav-link {
+      background-color: transparent;
+
+      button {
+        background-color: transparent;
         border: none;
+        color: $gray-500;
+      }
+
+      button:hover {
+        background-color: transparent;
+        color: $gray-600;
+        border-bottom: 2px solid $gray-500;
       }
 
       button.active {
+        background-color: transparent;
+        color: #495057;
         font-weight: bolder;
         border-bottom: 1px solid $gray-800;
       }
@@ -101,17 +108,25 @@ div.tabs {
 
 [data-dark-mode] div.tabs {
   ul.nav-tabs {
+    background-color: transparent;
     li.nav-item {
       background-color: transparent;
 
       button {
+        background-color: transparent;
         color: $gray-600;
+      }
+
+      button:hover {
+        background-color: transparent;
+        color: $gray-500;
+        border-bottom: 2px solid $gray-500;
       }
 
       button.active {
         background-color: transparent;
         color: $white;
-        border-bottom: 1px solid white;
+        border-bottom: 2px solid white;
       }
     }
   }
@@ -135,6 +150,8 @@ div.tabs {
   color: #f8f8fa;
   background-color: #2f5086;
   border-color: #2f5086;
+  margin-top: 4px;
+  margin-right: 4px;
 }
 
 .btn.btn-copy:hover {
