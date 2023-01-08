@@ -14,7 +14,6 @@ like:
 sq '@postgres_db | .actor | .first_name, .last_name | .[0:5]'
 ```
 
-
 ## Installation
 
 {{< tabs name="sq-install" >}}

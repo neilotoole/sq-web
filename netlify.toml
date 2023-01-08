@@ -47,6 +47,12 @@
   to = "https://raw.githubusercontent.com/neilotoole/sq/master/install.sh"
   status = 301
 
+
+[[redirects]]
+  from = "/a/*"
+  to = "https://asciinema.org/a/:splat"
+  status = 200
+
 [[headers]]
   for = "/*"
   [headers.values]

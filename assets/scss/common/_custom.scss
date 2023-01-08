@@ -86,6 +86,10 @@ pre.chroma {
   border: 1px solid $code-border-color;
 }
 
+[data-dark-mode] pre.chroma{
+  border: none;
+}
+
 
 div.tabs {
   ul.nav-tabs {
