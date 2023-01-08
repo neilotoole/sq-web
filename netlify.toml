@@ -56,6 +56,7 @@
 [[headers]]
   for = "/*"
   [headers.values]
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
     Content-Security-Policy = '''
       default-src 'self' 'unsafe-inline' sq.io web.sq.io sq-web.netlify.app;
       script-src 'self' 'unsafe-inline' sq.io web.sq.io sq-web.netlify.app asciinema.org www.googletagmanager.com;
