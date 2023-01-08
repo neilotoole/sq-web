@@ -21,7 +21,7 @@
   {{ $lazySizes := $lazySizes | js.Build -}}
   {{ $slice = $slice | append $lazySizes -}}
 {{ end -}}
-m
+
 
 {{ if .Site.Params.options.instantPage -}}
   {{ $instantPage := resources.Get "js/instant.page.js" -}}
