@@ -1,23 +1,33 @@
+// This script adds a "Copy" button to syntax highlight blocks.
+// It was necessary to implement this because the base Doks
+// theme uses highlight.js and clipboard.js. This site is
+// instead using Chroma for syntax highlighting. This
+// code below implements the Copy button.
+//
+// This impl is mostly lifted from:
+//   https://digitaldrummerj.me/hugo-add-copy-code-snippet-button/
+//
+// However, this impl uses "btn btn-copy" classes to take advantage
+// of the styling already available in the theme.
+//
+// See also: /assets/scss/_copy-button.scss
 function createCopyButton(highlightDiv) {
   const button = document.createElement("button");
-  button.className = "copy-code-button";
+  button.className = "btn btn-copy";
   button.type = "button";
-  button.innerText = "Copy";
   button.addEventListener("click", () => copyCodeToClipboard(button, highlightDiv));
-  highlightDiv.insertBefore(button, highlightDiv.firstChild);
 
-  const wrapper = document.createElement("div");
-  wrapper.className = "highlight-wrapper";
-  highlightDiv.parentNode.insertBefore(wrapper, highlightDiv);
-  wrapper.appendChild(highlightDiv);
+  const chromaDiv = highlightDiv.querySelector("pre.chroma")
+  chromaDiv.insertBefore(button, chromaDiv.firstChild);
 }
 
 document.querySelectorAll(".highlight").forEach((highlightDiv) => createCopyButton(highlightDiv));
 
 async function copyCodeToClipboard(button, highlightDiv) {
-  const codeToCopy = highlightDiv.querySelector(":last-child > .chroma > code").innerText;
+  const codeToCopy = highlightDiv.querySelector(".chroma > code").innerText;
+  console.log(codeToCopy)
   try {
-    var result = await navigator.permissions.query({ name: "clipboard-write" });
+    const result = await navigator.permissions.query({name: "clipboard-write"});
     if (result.state == "granted" || result.state == "prompt") {
       await navigator.clipboard.writeText(codeToCopy);
     } else {
@@ -27,10 +37,7 @@ async function copyCodeToClipboard(button, highlightDiv) {
     copyCodeBlockExecCommand(codeToCopy, highlightDiv);
   } finally {
     button.blur();
-    button.innerText = "Copied!";
-    setTimeout(function () {
-      button.innerText = "Copy";
-    }, 2000);  }
+  }
 }
 
 function copyCodeBlockExecCommand(codeToCopy, highlightDiv) {

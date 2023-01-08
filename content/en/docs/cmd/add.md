@@ -10,7 +10,6 @@ weight: 3000
 toc: false
 ---
 ```go
-
 // ProjectDelete deletes the project having uuid.
 func ProjectDelete(ctx context.Context, rb *resource.Bucket, uuid string) error {
 	rb.Log.Debugf("Delete project {%s}", uuid)
