@@ -45,9 +45,11 @@ div.tab-content > div:not(:has(>div.highlight)) {
   padding-bottom: 20px;
 }
 
-section p code,
-section li code,
-section .tab-pane > code {
+//code,
+table code,
+p code,
+li code,
+.tab-pane > code {
   border-radius: 3px;
   padding: 3px 6px;
   font-size: 0.75em;
@@ -59,9 +61,9 @@ section .tab-pane > code {
 
 [data-dark-mode] code,
 [data-dark-mode] body code:not(.hljs),
-[data-dark-mode] section p code,
-[data-dark-mode] section li code,
-[data-dark-mode] section .tab-pane > code {
+[data-dark-mode] p code,
+[data-dark-mode] li code,
+[data-dark-mode] .tab-pane > code {
   border-color: $code-bg-color-dark;
   color: $code-color-dark;
   background-color: $code-bg-color-dark;
@@ -73,9 +75,31 @@ section .tab-pane > code {
 }
 
 
-div.docs-sidebar {
+.docs-sidebar {
   background-color: $sidebar-bgcolor;
 }
+
+.docs-links::-webkit-scrollbar-track,
+.docs-toc::-webkit-scrollbar-track {
+  background: $sidebar-bgcolor;
+}
+
+.docs-links:hover::-webkit-scrollbar-track,
+.docs-toc:hover::-webkit-scrollbar-track {
+  background: $white;
+}
+
+.docs-links::-webkit-scrollbar-thumb,
+.docs-toc::-webkit-scrollbar-thumb {
+  background: $sidebar-bgcolor;
+}
+
+.docs-links:hover::-webkit-scrollbar-thumb,
+.docs-toc:hover::-webkit-scrollbar-thumb {
+  background: darken($white, 5%);
+}
+
+
 
 [data-dark-mode] div.docs-sidebar {
   background-color: $gray-900;
@@ -224,4 +248,8 @@ body.home div.bottom-panels ul {
   padding-left: 1.4em;
   font-size: 0.9rem;
   line-height: 1.3rem;
+}
+
+footer li.netlify-logo img {
+  opacity: 50%;
 }
