@@ -7,6 +7,12 @@ $code-border-color-dark: #383838;
 $code-border-color-dark: #7b7a7a;
 
 
+// We explicitly set the background color for code blocks.
+body pre code:not(.hljs) {
+  //background: #2e3440;
+  //color: $body-color-dark;
+}
+
 p  {
   font-weight: 300;
   font-color: #4A4A4A;

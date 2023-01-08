@@ -36,8 +36,8 @@
     "copy:katex-fonts": "shx cp ./node_modules/katex/dist/fonts/* ./static/fonts/",
     "postinstall": "hugo-installer --version otherDependencies.hugo --extended --destination node_modules/.bin/hugo",
     "version": "auto-changelog -p && git add CHANGELOG.md",
-    "gen:cmd-help": "shx ./content/en/docs/cmd/generate-cmd-help.sh",
-    "gen:syntax-css": "exec-bin node_modules/.bin/hugo/hugo gen chromastyles --style=rose-pine > ./assets/scss/components/_syntax.scss"
+    "gen:cmd-help": "./content/en/docs/cmd/generate-cmd-help.sh",
+    "gen:syntax-css": "./generate-syntax-css.sh"
   },
   "devDependencies": {
     "@babel/cli": "^7.18",
@@ -65,7 +65,8 @@
     "purgecss-whitelister": "^2.4",
     "shx": "^0.3.4",
     "stylelint": "^14.9",
-    "stylelint-config-standard-scss": "^4.0"
+    "stylelint-config-standard-scss": "^4.0",
+    "watch": "^1.0.2"
   },
   "otherDependencies": {
     "hugo": "0.109.0"

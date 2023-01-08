@@ -44,9 +44,13 @@ Create a [Pull Request](https://github.com/neilotoole/sq-web/pulls), providing c
 for your changes.
 
 
-## Other commands
+## Misc
 
-Doks comes with [commands](https://getdoks.org/docs/prologue/commands/) for common tasks.
+- Doks comes with [commands](https://getdoks.org/docs/prologue/commands/) for common tasks.
+- Use `npm run gen:syntax-css` to regenerate the syntax highlight theme. The themes (light and dark)
+  are specified in [generate-syntax-css.sh](./generate-syntax-css.sh).
+
+
 
 ## Documentation
 
