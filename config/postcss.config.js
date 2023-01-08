@@ -31,6 +31,7 @@ module.exports = {
           './assets/scss/components/_alerts.scss',
           './assets/scss/components/_buttons.scss',
           './assets/scss/components/_code.scss',
+          './assets/scss/components/_copy-button.scss',
           './assets/scss/components/_diagrams.scss',
           './assets/scss/components/_syntax.scss',
           './assets/scss/components/_syntax-dark.scss',
