@@ -21,6 +21,11 @@ body {
   font-size: 1em;
 }
 
+h2 {
+  font-size: 1.17em;
+}
+
+
 // This is the "Commands" section of the sidebar.
 nav.docs-links {
   #section-c441ee50c88f6e5e3a7c69fc69dad8b8 {
@@ -31,9 +36,14 @@ nav.docs-links {
   }
 }
 
+div.tab-content > div:not(:has(>div.highlight)) {
+  //border: 1px solid orange;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
 
-
-div.content section.section p code {
+div.content section.section p code,
+div.content section.section .tab-pane > code {
   border: 1px solid $code-border-color;
   border-radius: 3px;
   color: $code-color;
@@ -43,8 +53,8 @@ div.content section.section p code {
   margin: 2px;
 }
 
-[data-dark-mode] div.content section.section p code {
-  //border-color: $code-border-color-dark;
+[data-dark-mode] div.content section.section p code,
+div.content section.section .tab-pane > code {
   border-color: $code-bg-color-dark;
   color: $code-color-dark;
   background-color: $code-bg-color-dark;
@@ -63,7 +73,7 @@ div.tabs {
   ul.nav-tabs {
     background-color: transparent;
     padding-left: 10px;
-    padding-right: 30px;
+    padding-right: 10px;
     justify-content: flex-end !important;
     border: 0px;
 
@@ -71,10 +81,16 @@ div.tabs {
     li.nav-item {
       background-color: transparent;
 
+      button.nav-link {
+        padding-bottom: 2px;
+        padding-top: 2px;
+      }
+
       button {
         background-color: transparent;
         border: none;
         color: $gray-500;
+
       }
 
       button:hover {
@@ -178,3 +194,18 @@ footer  {
 [data-dark-mode] footer {
   background-color: darken($gray-800, 5%);
 }
+
+
+// This is the "Install" header on the home page.
+// We want it to sit right above the tabs.
+body.home h2#installation {
+  //border: 1px solid red;
+  //font-size: 1.4em;
+  margin-bottom: 0;
+}
+
+body.home div.tabs {
+  //border: 1px solid green;
+}
+
+
