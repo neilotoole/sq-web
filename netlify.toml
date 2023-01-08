@@ -59,7 +59,7 @@
     Content-Security-Policy = '''
       default-src 'self' 'unsafe-inline' sq.io web.sq.io sq-web.netlify.app;
       script-src 'self' 'unsafe-inline' sq.io web.sq.io sq-web.netlify.app asciinema.org www.googletagmanager.com;
-      frame-src asciinema.org;
+      frame-src 'self' sq.io web.sq.io sq-web.netlify.app asciinema.org;
       connect-src www.google-analytics.com;
       img-src 'self' sq.io web.sq.io sq-web.netlify.app www.netlify.com;
       style-src 'self' sq.io web.sq.io sq-web.netlify.app www.netlify.com fonts.googleapis.com;
