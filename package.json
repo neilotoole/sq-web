@@ -37,7 +37,7 @@
     "postinstall": "hugo-installer --version otherDependencies.hugo --extended --destination node_modules/.bin/hugo",
     "version": "auto-changelog -p && git add CHANGELOG.md",
     "gen:cmd-help": "./content/en/docs/cmd/generate-cmd-help.sh",
-    "gen:syntax-css": "./generate-syntax-css.sh",
+    "gen:syntax-css": "./generate-syntax-css.sh"
   },
   "devDependencies": {
     "@babel/cli": "^7.18",
