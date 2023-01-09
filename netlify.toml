@@ -63,7 +63,7 @@
       script-src 'self' 'unsafe-inline' sq.io web.sq.io sq-web.netlify.app asciinema.org www.googletagmanager.com;
       frame-src 'self' sq.io web.sq.io sq-web.netlify.app asciinema.org;
       connect-src www.google-analytics.com;
-      img-src 'self' sq.io web.sq.io sq-web.netlify.app www.netlify.com;
+      img-src 'self' sq.io web.sq.io sq-web.netlify.app www.netlify.com www.w3.org;
       style-src 'self' sq.io web.sq.io sq-web.netlify.app www.netlify.com fonts.googleapis.com;
       font-src 'self' sq.io web.sq.io sq-web.netlify.app fonts.googleapis.com cdnjs.cloudflare.com fonts.gstatic.com  fonts.googleapis.com github.com maxcdn.bootstrapcdn.com themes.googleusercontent.com use.fontawesome.com
       '''
