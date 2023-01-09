@@ -90,10 +90,6 @@ pygmentsCodeFences = true
 pygmentsUseClasses = true
 
 
-
-
-
-
 [sections]
   sectionNav = ["docs", "guides"]
 

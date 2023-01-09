@@ -26,6 +26,14 @@ h2.h4 {
   font-size: 1.17em;
 }
 
+h3 {
+  font-size: 1.2em;
+}
+
+h4 {
+  font-size: 1.1em;
+}
+
 .mute {
   opacity: 50%;
 }
@@ -254,4 +262,9 @@ body.home div.bottom-panels ul {
 footer li.netlify-logo img {
   scale: 75%;
   opacity: 50%;
+}
+
+div.asciinema-player-wrapper {
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
