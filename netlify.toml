@@ -57,13 +57,20 @@
   for = "/*"
   [headers.values]
     X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin"
+    Feature-Policy = "geolocation 'self'"
+    Cache-Control = "public, max-age=31536000"
+    Access-Control-Allow-Origin = "*"
+
     Content-Security-Policy = '''
       default-src 'self' 'unsafe-inline' sq.io web.sq.io sq-web.netlify.app;
       script-src 'self' 'unsafe-inline' sq.io web.sq.io sq-web.netlify.app asciinema.org www.googletagmanager.com;
       frame-src 'self' 'unsafe-inline' sq.io web.sq.io sq-web.netlify.app asciinema.org;
       connect-src www.google-analytics.com;
-      img-src 'self' 'unsafe-inline'  sq.io web.sq.io sq-web.netlify.app www.netlify.com;
+      img-src 'self' 'unsafe-inline' data: https: sq.io web.sq.io sq-web.netlify.app www.netlify.com;
       style-src 'self' 'unsafe-inline'  sq.io web.sq.io sq-web.netlify.app www.netlify.com fonts.googleapis.com;
       font-src 'self' 'unsafe-inline' sq.io web.sq.io sq-web.netlify.app fonts.googleapis.com cdnjs.cloudflare.com fonts.gstatic.com  fonts.googleapis.com github.com maxcdn.bootstrapcdn.com themes.googleusercontent.com use.fontawesome.com
       '''
