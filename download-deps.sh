@@ -10,3 +10,6 @@ BASE_URL=https://github.com/asciinema/asciinema-player/releases/download
 curl -fsSL $BASE_URL/v2.6.1/asciinema-player.css -o ./static/css/asciinema-player.css
 curl -fsSL  $BASE_URL/v2.6.1/asciinema-player.js -o ./static/js/asciinema-player.js
 
+
+#curl -fsSL $BASE_URL/v3.0.1/asciinema-player.css -o ./static/css/asciinema-player.css
+#curl -fsSL  $BASE_URL/v3.0.1/asciinema-player.min.js -o ./static/js/asciinema-player.js
