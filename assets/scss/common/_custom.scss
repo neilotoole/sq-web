@@ -1,5 +1,5 @@
 $code-color: #8E7474;
-$code-bg-color: #f4f4f4;
+$code-bg-color: #eeecec;
 $code-border-color: #F0E8E8;
 $code-color-dark: #dfb9b5;
 $code-bg-color-dark: #383838;
@@ -10,6 +10,7 @@ body {
   font-weight: 300;
   font-family: "Nunito Sans", sans-serif;
   font-size: 1em;
+  background-color: #eeeceb;
 }
 
 p  {
@@ -106,10 +107,10 @@ li code,
 }
 
 
-pre.chroma {
-  background-color: $code-bg-color;
-  border: 1px solid $code-border-color;
-}
+//pre.chroma {
+//  background-color: $code-bg-color;
+//  border: 1px solid $code-border-color;
+//}
 
 [data-dark-mode] pre.chroma{
   border: none;
@@ -251,5 +252,6 @@ body.home div.bottom-panels ul {
 }
 
 footer li.netlify-logo img {
+  scale: 75%;
   opacity: 50%;
 }

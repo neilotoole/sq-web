@@ -25,3 +25,18 @@ scoop install sq{{< /tab >}}}
 Install options for `apt`, `yum`, `apk`, `pacman`, `yay` over [here](/docs/install).
 {{% /tab %}}}
 {{< /tabs >}}
+
+## Feature Highlights
+
+Some feature highlights are shown below. For more, see the [docs](/docs),
+including the [tutorial](/docs/tutorial) and [cookbook](/docs/cookbook).
+
+### Import Excel worksheet into Postgres table
+
+Insert the contents of an Excel XLSX worksheet (from a sheet named `actor`) into
+a new Postgres table named `xl_actor`. Note that the import mechanism
+is reasonably sophisticated in that it tries to preserve data types
+
+```shell
+cat ./sakila.xlsx | sq .actor --opts header=true --insert @sakila_pg9.xl_actor
+```

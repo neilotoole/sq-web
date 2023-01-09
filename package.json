@@ -37,7 +37,7 @@
     "postinstall": "hugo-installer --version otherDependencies.hugo --extended --destination node_modules/.bin/hugo",
     "version": "auto-changelog -p && git add CHANGELOG.md",
     "gen:cmd-help": "./content/en/docs/cmd/generate-cmd-help.sh",
-    "gen:syntax-css": "./generate-syntax-css.sh"
+    "gen:syntax-css": "./generate-syntax-css.sh",
   },
   "devDependencies": {
     "@babel/cli": "^7.18",
@@ -45,6 +45,7 @@
     "@babel/preset-env": "^7.18",
     "@fullhuman/postcss-purgecss": "^4.1",
     "@hyas/images": "^0.2.2",
+    "asciinema-player": "^3.0.1",
     "auto-changelog": "^2.4",
     "autoprefixer": "^10.4",
     "bootstrap": "^5.2.0-beta1",

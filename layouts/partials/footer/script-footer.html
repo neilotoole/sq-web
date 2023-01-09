@@ -33,6 +33,7 @@
 {{ $showFlexSearch := .Site.Params.options.flexSearch }}
 
 {{ if $showFlexSearch -}}
+    <h1>huzzah flex</h1>
   {{ $flexSearch := resources.Get "js/vendor/flexsearch/dist/flexsearch.bundle.js" -}}
   {{ $slice = $slice | append $flexSearch -}}
   {{ if and (isset .Site.Params.options "searchsectionsshow") (not (eq .Site.Params.options.searchSectionsShow "ALL")) -}}
@@ -109,6 +110,7 @@
     <script src="{{ $index.Permalink }}" integrity="{{ $index.Data.Integrity }}" crossorigin="anonymous" defer></script>
   {{ end -}}
 {{ end -}}
+
 
 
 {{ if (findRE "<pre" .Content 1) }}
