@@ -108,7 +108,8 @@ rel  = "sitemap"
   [[module.mounts]]
     source = "node_modules/@hyas/images/layouts"
     target = "layouts"
-
+  [[module.imports]]
+    path = "cj.rs/gohugo-asciinema"
 
 [markup]
   [markup.highlight]

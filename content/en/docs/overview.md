@@ -13,8 +13,8 @@ Huzzah!
 
 help
 
-{{< asciinema key="home-quick" rows="10" preload="1" >}}
 
+{{< asciicast src="/casts/home-quick.cast" theme="monokai" poster="npt:0:25" rows=10 >}}
 
 
 Ah go on

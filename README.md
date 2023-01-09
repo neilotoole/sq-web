@@ -51,6 +51,20 @@ for your changes.
   are specified in [generate-syntax-css.sh](./generate-syntax-css.sh).
 
 
+#### Asciinema
+
+The site makes use of [asciinema](https://asciinema.org) via
+the [gohugo-asciinema](https://github.com/cljoly/gohugo-asciinema) Hugo module.
+
+Typically, casts are stored in `./static/casts`. To include a cast, use this shortcode:
+
+```gotemplate
+{{< asciicast src="/casts/home-quick.cast" theme="monokai" poster="npt:0:20" rows="10" speed="1.5" idleTimeLimit="3" >}}
+```
+
+- `poster="npt:0:20"` specifies that the "poster" or cover image should be taken from 0m20s into the cast.
+- Add `autoPlay="true"` if the cast should start immediately. This is usually not the case.
+
 
 ## Documentation
 

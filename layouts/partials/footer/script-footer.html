@@ -112,9 +112,7 @@
 {{ end -}}
 
 
-{{ if (findRE "<asciinema" .Content 1) }}
-<script src="{{ .Site.BaseURL }}js/asciinema-player.js"></script>
-{{ end }}
+
 
 {{ if (findRE "<pre" .Content 1) }}
 {{ $jsCopy := resources.Get "js/copy-code-button.js" | minify }}
