@@ -9,12 +9,16 @@ toc: true
 asciinema: true
 ---
 
-Huzzah!
+Nope!
 
 help
 
 
-{{< asciicast src="/casts/home-quick.cast" theme="monokai" poster="npt:0:25" rows=10 >}}
+
+
+{{< asciicast src="/casts/home-quick.cast" poster="npt:0:25" rows=10  >}}
 
 
 Ah go on
+
+stop

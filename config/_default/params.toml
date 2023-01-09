@@ -90,6 +90,10 @@ pygmentsCodeFences = true
 pygmentsUseClasses = true
 
 
+
+
+
+
 [sections]
   sectionNav = ["docs", "guides"]
 
@@ -116,3 +120,11 @@ pygmentsUseClasses = true
   [menu.section]
     auto = true
     collapsibleSidebar = true
+
+
+[asciinema]
+  [asciinema.defaults]
+    theme = "solarized-dark"
+    loop = true
+    autoPlay = true
+    speed = "5.0"

@@ -5,6 +5,9 @@ lead: "wrangle data"
 draft: false
 images: []
 ---
+
+{{< asciicast src="/casts/home-quick.cast" theme="monokai" poster="npt:0:25" rows=10 autoPlay="true" speed="1.5" >}}
+
 `sq` is a free/libre [open-source](https://github.com/neilotoole/sq) data wrangling swiss-army knife
 to inspect, query, join, import, and export data. You could think of `sq`
 as [jq](https://stedolan.github.io/jq/) for databases and documents, facilitating one-liners
