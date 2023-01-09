@@ -10,6 +10,7 @@
 {{ $katexAutoRender := resources.Get "js/vendor/katex/dist/contrib/auto-render.js" -}}
 
 {{ $mermaid := resources.Get "js/mermaid.js" | js.Build -}}
+{{ $asciinema := resources.Get "js/mermaid.js" | js.Build -}}
 
 
 {{ $app := resources.Get "js/app.js" -}}
@@ -33,7 +34,6 @@
 {{ $showFlexSearch := .Site.Params.options.flexSearch }}
 
 {{ if $showFlexSearch -}}
-    <h1>huzzah flex</h1>
   {{ $flexSearch := resources.Get "js/vendor/flexsearch/dist/flexsearch.bundle.js" -}}
   {{ $slice = $slice | append $flexSearch -}}
   {{ if and (isset .Site.Params.options "searchsectionsshow") (not (eq .Site.Params.options.searchSectionsShow "ALL")) -}}
@@ -112,9 +112,11 @@
 {{ end -}}
 
 
+{{ if (findRE "<asciinema" .Content 1) }}
+<script src="{{ .Site.BaseURL }}js/asciinema-player.js"></script>
+{{ end }}
 
 {{ if (findRE "<pre" .Content 1) }}
-<!-- FIXME: add | minify -->
 {{ $jsCopy := resources.Get "js/copy-code-button.js" | minify }}
 <script src="{{ $jsCopy.RelPermalink }}"></script>
 {{ end }}
