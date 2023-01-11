@@ -42,8 +42,6 @@ module.exports = {
           './assets/scss/common/_variables.scss',
           './node_modules/bootstrap/scss/_dropdown.scss',
           './node_modules/katex/dist/katex.css',
-          // './node_modules/asciinema-player/dist/bundle/asciinema-player.css',
-          './assets/scss/common/_custom.scss',
         ]),
       ],
     }),

@@ -2,6 +2,7 @@ $code-color: #8E7474;
 $code-bg-color: #eeecec;
 $code-border-color: #F0E8E8;
 $code-color-dark: #dfb9b5;
+//$code-color-dark: #a3be8c;
 $code-bg-color-dark: #383838;
 $code-border-color-dark: #383838;
 $code-border-color-dark: #7b7a7a;
@@ -267,4 +268,16 @@ footer li.netlify-logo img {
 div.asciinema-player-wrapper {
   margin-bottom: 20px;
   margin-top: 20px;
+}
+
+body.home p.lead {
+  //border: 1px solid green;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  code {
+    //border: 1px solid green;
+    padding: 10px 14px 10px 14px;
+    font-size: 1.3em;
+    font-weight: bold;
+  }
 }

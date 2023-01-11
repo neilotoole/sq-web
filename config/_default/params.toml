@@ -118,9 +118,11 @@ pygmentsUseClasses = true
     collapsibleSidebar = true
 
 
-[asciinema]
-  [asciinema.defaults]
-    theme = "solarized-dark"
-    loop = true
-    autoPlay = true
-    speed = "5.0"
+
+
+#[asciinema]
+#[asciinema.defaults]
+#theme = "solarized-light"
+#loop = true
+#autoPlay = true
+#speed = 5.0
