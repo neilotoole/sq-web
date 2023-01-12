@@ -1,4 +1,4 @@
-baseurl = "http://sq-web.netlify.app/"
+baseurl = "https://sq-web.netlify.app/"
 canonifyURLs = false
 disableAliases = true
 disableHugoGeneratorInject = true
