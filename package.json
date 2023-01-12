@@ -1,14 +1,13 @@
 {
-  "name": "@hyas/doks",
-  "description": "Doks theme",
-  "version": "0.5.0",
+  "name": "sq.io",
+  "description": "Website for sq",
   "engines": {
     "node": ">=16.16.0"
   },
   "browserslist": [
     "defaults"
   ],
-  "repository": "https://github.com/h-enk/doks",
+  "repository": "https://github.com/neilotoole/sq-web",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
@@ -21,7 +20,7 @@
     "prebuild": "npm run clean",
     "build": "exec-bin node_modules/.bin/hugo/hugo --gc --minify",
     "build:preview": "npm run build -D -F",
-    "preview": "npm run build && npx serve -l 1313 public/",
+    "preview": "npm run clean && exec-bin node_modules/.bin/hugo/hugo --gc --minify -b 'http://localhost:1313' && npx serve -l 1313 public/",
     "clean": "shx rm -rf public resources",
     "clean:install": "shx rm -rf package-lock.json node_modules ",
     "lint": "npm run -s lint:scripts && npm run -s lint:styles && npm run -s lint:markdown",
@@ -68,12 +67,10 @@
     "shx": "^0.3.4",
     "stylelint": "^14.9",
     "stylelint-config-standard-scss": "^4.0",
-    "watch": "^1.0.2"
+    "watch": "^1.0.2",
+    "nord": "^0.2.1"
   },
   "otherDependencies": {
     "hugo": "0.109.0"
-  },
-  "dependencies": {
-    "nord": "^0.2.1"
   }
 }
