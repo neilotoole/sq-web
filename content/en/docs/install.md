@@ -13,7 +13,6 @@ toc: true
 For most platforms,
 handy `install.sh` script that works on most platforms.
 
-
 ## Quick install
 
 Use `install.sh` in most cases other than [Windows](#windows).
@@ -36,8 +35,6 @@ The following have been tested:
 | `brew`          | Linux                                | `arm64`         |
 
 You can view the source for `install.sh` on [GitHub](https://raw.githubusercontent.com/neilotoole/sq/master/install.sh).
-
-
 
 ## Shell completion
 

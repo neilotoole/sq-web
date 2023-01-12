@@ -1,22 +1,23 @@
-$code-color: #8E7474;
+$code-color: #8e7474;
 $code-bg-color: #eeecec;
-$code-border-color: #F0E8E8;
+$code-border-color: #f0e8e8;
 $code-color-dark: #dfb9b5;
-//$code-color-dark: #a3be8c;
+
 $code-bg-color-dark: #383838;
 $code-border-color-dark: #383838;
 $code-border-color-dark: #7b7a7a;
+
+$bg-main: #eeeceb;
 
 body {
   font-weight: 300;
   font-family: "Nunito Sans", sans-serif;
   font-size: 1em;
-  background-color: #eeeceb;
+  background-color: $bg-main;
 }
 
-p  {
+p {
   font-weight: 300;
-  font-color: #4A4A4A;
 }
 
 h2 {
@@ -39,7 +40,6 @@ h4 {
   opacity: 50%;
 }
 
-
 // This is the "Commands" section of the sidebar.
 // Render the command name in monospace.
 nav.docs-links {
@@ -55,11 +55,10 @@ div.tab-content > div:not(:has(>div.highlight)) {
   padding-bottom: 20px;
 }
 
-//code,
 table code,
 p code,
 li code,
-.tab-pane > code {
+.tab-pane > code, {
   border-radius: 3px;
   padding: 3px 6px;
   font-size: 0.75em;
@@ -70,20 +69,19 @@ li code,
 }
 
 [data-dark-mode] code,
-[data-dark-mode] body code:not(.hljs),
 [data-dark-mode] p code,
 [data-dark-mode] li code,
-[data-dark-mode] .tab-pane > code {
+[data-dark-mode] .tab-pane > code,
+[data-dark-mode] body code:not(.hljs) {
   border-color: $code-bg-color-dark;
   color: $code-color-dark;
   background-color: $code-bg-color-dark;
 }
 
-[data-dark-mode] body pre.chroma code {
-  background: $body-overlay-dark;
-  color: $body-color-dark;
+[data-dark-mode] pre.chroma code {
+  background-color: $nord0;
+  color: $nord6;
 }
-
 
 .docs-sidebar {
   background-color: $sidebar-bgcolor;
@@ -109,175 +107,161 @@ li code,
   background: darken($white, 5%);
 }
 
-
-
 [data-dark-mode] div.docs-sidebar {
   background-color: $gray-900;
 }
 
+// Home page specifics
+body.home {
+  p.lead {
+    margin-top: 20px;
+    margin-bottom: 40px;
 
-//pre.chroma {
-//  background-color: $code-bg-color;
-//  border: 1px solid $code-border-color;
-//}
+    code {
+      padding: 10px 14px;
+      font-size: 1.3em;
+      font-weight: bold;
+    }
+  }
 
-[data-dark-mode] pre.chroma{
+  // This is the "Installation" H2 on the home page.
+  // We want it to sit right above the tabs.
+  h2#installation {
+    margin-bottom: 0;
+  }
+
+  div.bottom-panels > div {
+    text-align: start;
+    text-align: left;
+  }
+
+  div.bottom-panels ul {
+    padding-left: 1.4em;
+    font-size: 0.9rem;
+    line-height: 1.3rem;
+  }
+}
+
+// Tabs can have raw markdown inside them, with <code>. We need
+// to match this edge case specifically.
+.tabs-wrapper .tab-content .tab-pane > code {
+  padding: 3px 6px;
+}
+
+pre.chroma {
+  .btn.btn-copy {
+    font-size: 0.6rem;
+    font-family: $font-family-monospace;
+    text-transform: uppercase;
+    color: #f8f8fa;
+    background-color: #2f5086;
+    border-color: #2f5086;
+    margin-top: 4px;
+    margin-right: 4px;
+  }
+
+  .btn.btn-copy:hover {
+    color: #f8f8fa;
+    background-color: darken(#2f5086, 10%);
+    border-color: #26406b;
+  }
+}
+
+[data-dark-mode] pre.chroma {
   border: none;
 }
 
+div.tabs-wrapper {
+  background-color: transparent;
 
-div.tabs {
-  ul.nav-tabs {
+  nav.nav-tabs {
     background-color: transparent;
     padding-left: 10px;
     padding-right: 10px;
     justify-content: flex-end !important;
-    border: 0px;
+    border: 0;
 
-
-    li.nav-item {
+    button {
       background-color: transparent;
+      border-radius: 0;
+      border-top: none;
+      border-right: none;
+      border-left: none;
+      border-bottom: 2px solid transparent;
+      color: $gray-600;
+      padding-bottom: 2px;
+      padding-top: 2px;
+    }
 
-      button.nav-link {
-        padding-bottom: 2px;
-        padding-top: 2px;
-      }
+    button.active {
+      background-color: transparent;
+      color: $nord2;
+      font-weight: bolder;
+      border-bottom: 2px solid $gray-600;
+    }
 
-      button {
-        background-color: transparent;
-        border: none;
-        color: $gray-600;
-
-      }
-
-      button:hover {
-        background-color: transparent;
-        color: $gray-600;
-        border-bottom: 2px solid $gray-500;
-      }
-
-      button.active {
-        background-color: transparent;
-        color: #495057;
-        font-weight: bolder;
-        border-bottom: 1px solid $gray-800;
-      }
+    button:hover {
+      background-color: transparent;
+      color: $nord9;
+      border-bottom: 2px solid $nord9;
     }
   }
 
-  pre.chroma {
-    //background-color: $code-bg-color;
-    margin: 1px 0 0;
+  div.tab-content {
+    padding: 0;
 
-    code {
-      //background-color: $code-bg-color;
-      //color: $code-color;
-      //border: 1px solid $code-border-color;
+    pre.chroma {
+      margin: 1px 0 0;
     }
   }
 }
 
-
-
-[data-dark-mode] div.tabs {
-  ul.nav-tabs {
+[data-dark-mode] div.tabs-wrapper {
+  nav.nav-tabs {
     background-color: transparent;
-    li.nav-item {
+
+    button {
       background-color: transparent;
+      color: $gray-600;
+    }
 
-      button {
-        background-color: transparent;
-        color: $gray-600;
-      }
+    button:hover {
+      background-color: transparent;
+      color: $gray-500;
+      border-bottom: 2px solid $gray-500;
+    }
 
-      button:hover {
-        background-color: transparent;
-        color: $gray-500;
-        border-bottom: 2px solid $gray-500;
-      }
-
-      button.active {
-        background-color: transparent;
-        color: $white;
-        border-bottom: 2px solid white;
-      }
+    button.active {
+      background-color: transparent;
+      color: $white;
+      border-bottom: 2px solid white;
     }
   }
 }
-
-
-.btn.btn-copy {
-  font-size: 0.6rem;
-  font-family: $font-family-monospace;
-  text-transform: uppercase;
-  color: #f8f8fa;
-  background-color: #2f5086;
-  border-color: #2f5086;
-  margin-top: 4px;
-  margin-right: 4px;
-}
-
-.btn.btn-copy:hover {
-  color: #f8f8fa;
-  background-color: darken(#2f5086, 10%);
-  border-color: #26406b;
-}
-
 
 [data-dark-mode] div.sticky-top {
   background-color: white;
 }
 
-footer  {
+footer {
   text-align: center;
   justify-content: center !important;
 
   .row {
     justify-content: center;
   }
-}
 
+  li.netlify-logo img {
+    scale: 75%;
+    opacity: 50%;
+  }
+}
 
 [data-dark-mode] footer {
   background-color: darken($gray-800, 5%);
 }
 
-
-// This is the "Installation" H2 on the home page.
-// We want it to sit right above the tabs.
-body.home h2#installation {
-  margin-bottom: 0;
-}
-
-body.home div.bottom-panels > div {
-  text-align: start;
-  text-align: left;
-}
-
-body.home div.bottom-panels ul {
-  padding-left: 1.4em;
-  font-size: 0.9rem;
-  line-height: 1.3rem;
-}
-
-footer li.netlify-logo img {
-  scale: 75%;
-  opacity: 50%;
-}
-
 div.asciinema-player-wrapper {
   margin-bottom: 20px;
   margin-top: 20px;
-}
-
-body.home p.lead {
-  //border: 1px solid green;
-  margin-top: 20px;
-  margin-bottom: 40px;
-  code {
-    //border: 1px solid green;
-    padding: 10px 14px 10px 14px;
-    font-size: 1.3em;
-    font-weight: bold;
-  }
 }

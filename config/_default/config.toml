@@ -109,7 +109,7 @@ rel  = "sitemap"
     source = "node_modules/@hyas/images/layouts"
     target = "layouts"
   [[module.imports]]
-    path = "github.com/neilotoole/gohugo-asciinema"
+    path = "cj.rs/gohugo-asciinema"
 
 
 

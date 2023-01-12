@@ -4,6 +4,8 @@ resources
 .netlify
 .hugo_build.lock
 .DS_Store
-.DS_Store
-TODO_WEB.md
+/TODO_WEB.md
+/TODO.md
 /scratch
+/*.iml
+/.idea

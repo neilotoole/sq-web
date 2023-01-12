@@ -4,12 +4,8 @@
 /** Import theme variables */
 @import "common/variables";
 
-
 /** Import Bootstrap */
 @import "bootstrap/scss/bootstrap";
-
-/** Import highlight.js */
- @import "highlight.js/scss/github-dark-dimmed";
 
 /** Import KaTeX */
 @import "katex/dist/katex";
@@ -30,11 +26,10 @@
 @import "components/mermaid";
 @import "components/search";
 @import "components/tables";
+@import "components/asciinema-theme-nord";
 @import "layouts/footer";
 @import "layouts/header";
 @import "layouts/pages";
 @import "layouts/posts";
 @import "layouts/sidebar";
-
 @import "common/custom";
-

@@ -13,11 +13,7 @@ Nope!
 
 help
 
-
-
-
 {{< asciicast src="/casts/home-quick.cast" poster="npt:0:25" rows=10  >}}
-
 
 Ah go on
 

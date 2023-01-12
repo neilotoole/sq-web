@@ -12,23 +12,23 @@
 //
 // See also: /assets/scss/_copy-button.scss
 function createCopyButton(highlightDiv) {
-  const button = document.createElement("button");
-  button.className = "btn btn-copy";
-  button.type = "button";
-  button.addEventListener("click", () => copyCodeToClipboard(button, highlightDiv));
+  const button = document.createElement('button');
+  button.className = 'btn btn-copy';
+  button.type = 'button';
+  button.addEventListener('click', () => copyCodeToClipboard(button, highlightDiv));
 
-  const chromaDiv = highlightDiv.querySelector("pre.chroma")
+  const chromaDiv = highlightDiv.querySelector('pre.chroma')
   chromaDiv.insertBefore(button, chromaDiv.firstChild);
 }
 
-document.querySelectorAll(".highlight").forEach((highlightDiv) => createCopyButton(highlightDiv));
+document.querySelectorAll('.highlight').forEach((highlightDiv) => createCopyButton(highlightDiv));
 
 async function copyCodeToClipboard(button, highlightDiv) {
-  const codeToCopy = highlightDiv.querySelector(".chroma > code").innerText;
+  const codeToCopy = highlightDiv.querySelector('.chroma > code').innerText;
   console.log(codeToCopy)
   try {
-    const result = await navigator.permissions.query({name: "clipboard-write"});
-    if (result.state == "granted" || result.state == "prompt") {
+    const result = await navigator.permissions.query({name: 'clipboard-write'});
+    if (result.state == 'granted' || result.state == 'prompt') {
       await navigator.clipboard.writeText(codeToCopy);
     } else {
       copyCodeBlockExecCommand(codeToCopy, highlightDiv);
@@ -41,10 +41,10 @@ async function copyCodeToClipboard(button, highlightDiv) {
 }
 
 function copyCodeBlockExecCommand(codeToCopy, highlightDiv) {
-  const textArea = document.createElement("textArea");
-  textArea.contentEditable = "true";
-  textArea.readOnly = "false";
-  textArea.className = "copyable-text-area";
+  const textArea = document.createElement('textArea');
+  textArea.contentEditable = 'true';
+  textArea.readOnly = 'false';
+  textArea.className = 'copyable-text-area';
   textArea.value = codeToCopy;
   highlightDiv.insertBefore(textArea, highlightDiv.firstChild);
   const range = document.createRange();
@@ -53,6 +53,6 @@ function copyCodeBlockExecCommand(codeToCopy, highlightDiv) {
   sel.removeAllRanges();
   sel.addRange(range);
   textArea.setSelectionRange(0, 999999);
-  document.execCommand("copy");
+  document.execCommand('copy');
   highlightDiv.removeChild(textArea);
 }

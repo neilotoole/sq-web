@@ -50,6 +50,7 @@
   //--bs-body-font-family: var(--bs-font-sans-serif);
   //--bs-body-font-size: 1rem;
   --bs-body-font-weight: 300;
+
   //--bs-body-line-height: 1.5;
   //--bs-body-color: #212529;
   //--bs-body-bg: #fff;
@@ -65,13 +66,13 @@
   //--bs-border-radius-pill: 50rem;
   --bs-link-color: #0dfd1d;
   --bs-link-hover-color: #0dfd1d;
+
   //--bs-code-color: #d63384;
   //--bs-highlight-bg: #fff3cd;
 }
 
 $bs-link-color: #0dfd1d;
 $bs-link-hover-color: #0dfd1d;
-
 
 $white:    #f8f8fa;
 $gray-100: #f8f9fa;
@@ -262,5 +263,3 @@ $dropdown-config: (
 );
 
 $input-btn-focus-width:       0;
-
-

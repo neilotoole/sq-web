@@ -1,4 +1,6 @@
 cj.rs/gohugo-asciinema v0.0.0-20221119181407-796a023c2e71 h1:f8h3phDN5T9Q/+9yiHQqFU2St1DWWoVXUIK3cJS1St0=
 cj.rs/gohugo-asciinema v0.0.0-20221119181407-796a023c2e71/go.mod h1:LOi9TNDxS4FX8P9N0PzCrqwvnksxP++9dsYbyNL0Fus=
+cj.rs/gohugo-asciinema v0.0.0-20230110190338-83bbc86388be h1:2UiMMzLT8SEI3wCHwtgAiL5yAVE9UdrYmKklrZoUNjs=
+cj.rs/gohugo-asciinema v0.0.0-20230110190338-83bbc86388be/go.mod h1:LOi9TNDxS4FX8P9N0PzCrqwvnksxP++9dsYbyNL0Fus=
 github.com/neilotoole/gohugo-asciinema v0.0.0-20230109191617-4a486bb0b37b h1:pjmB8XYCrGfVlR9AaJ664FgvmiCl13C+tiaI2rG+i1E=
 github.com/neilotoole/gohugo-asciinema v0.0.0-20230109191617-4a486bb0b37b/go.mod h1:NV/4QrgMkOqsYgiBoM3mOftj/cOHduF0r0Y6zCq90Fc=

@@ -95,7 +95,7 @@ pygmentsUseClasses = true
 
 [options]
   lazySizes = true
-  clipBoard = true
+#  clipBoard = true
   instantPage = true
   flexSearch = true
   searchSectionsShow = []
@@ -120,9 +120,9 @@ pygmentsUseClasses = true
 
 
 
-#[asciinema]
-#[asciinema.defaults]
-#theme = "solarized-light"
-#loop = true
-#autoPlay = true
-#speed = 5.0
+[asciinema.defaults]
+  theme = "nord"
+  loop = false
+  autoPlay = false
+  speed = 1.0
+  idleTimeLimit = 1

@@ -14,11 +14,9 @@ This site is built using:
 
 Changes to the `master` branch kick off a redeploy on Netlify.
 
-
 ## Contributing
 
 You could [open an issue](https://github.com/neilotoole/sq-web/issues), but ideally you'd submit a pull request.
-
 
 ### 1. Clone this repo
 
@@ -43,15 +41,13 @@ npm run start
 Create a [Pull Request](https://github.com/neilotoole/sq-web/pulls), providing context
 for your changes.
 
-
 ## Misc
 
 - Doks comes with [commands](https://getdoks.org/docs/prologue/commands/) for common tasks.
 - Use `npm run gen:syntax-css` to regenerate the syntax highlight theme. The themes (light and dark)
   are specified in [generate-syntax-css.sh](./generate-syntax-css.sh).
 
-
-#### Asciinema
+### Asciinema
 
 The site makes use of [asciinema](https://asciinema.org) via
 the [gohugo-asciinema](https://github.com/cljoly/gohugo-asciinema) Hugo module.
@@ -64,7 +60,6 @@ Typically, casts are stored in `./static/casts`. To include a cast, use this sho
 
 - `poster="npt:0:20"` specifies that the "poster" or cover image should be taken from 0m20s into the cast.
 - Add `autoPlay="true"` if the cast should start immediately. This is usually not the case.
-
 
 ## Documentation
 
@@ -87,4 +82,3 @@ their [open source program](https://www.netlify.com/open-source/).
 - A bunch of stuff has been lifted from the [Docsy theme](https://www.docsy.dev).
 
 [![Deploys by Netlify](https://www.netlify.com/v3/img/components/netlify-dark.svg)](https://www.netlify.com)
-

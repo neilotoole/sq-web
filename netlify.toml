@@ -48,11 +48,6 @@
   status = 301
 
 
-[[redirects]]
-  from = "/a/*"
-  to = "https://asciinema.org/a/:splat"
-  status = 200
-
 [[headers]]
   for = "/*"
   [headers.values]
