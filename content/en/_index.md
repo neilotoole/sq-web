@@ -6,7 +6,7 @@ draft: false
 images: []
 ---
 
-{{< asciicast src="/casts/home-quick.cast"  poster="npt:0:25" rows=10 autoPlay=true >}}
+{{< asciicast src="/casts/home-quick.cast"  poster="npt:0:25" rows=10 autoPlay=true speed=3 idleTimeLimit=3 >}}
 
 `sq` is a free/libre [open-source](https://github.com/neilotoole/sq) data wrangling swiss-army knife
 to inspect, query, join, import, and export data. You could think of `sq`

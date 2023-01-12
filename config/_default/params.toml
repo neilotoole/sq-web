@@ -125,4 +125,4 @@ pygmentsUseClasses = true
   loop = false
   autoPlay = false
   speed = 1.0
-  idleTimeLimit = 1
+  idleTimeLimit = 3
