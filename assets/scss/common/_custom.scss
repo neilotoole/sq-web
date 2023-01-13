@@ -41,6 +41,10 @@ p {
 }
 
 
+blockquote {
+  font-size: 1em;
+}
+
 div.docs-sidebar {
   background-color: $bg-main;
 }
@@ -50,8 +54,11 @@ div.docs-sidebar {
 }
 
 
+
+
 h2 {
   font-size: 1.3em;
+  //border-bottom: 1px solid $nord4;
 }
 
 h3 {
@@ -71,15 +78,18 @@ h4 {
 }
 
 header.navbar {
-  //font-weight: bold;
-
-  a.nav-link {
-    text-transform: uppercase;
+  a.navbar-brand {
+    margin-right: 50px !important;
   }
 
-  a.nav-link.changelog-link {
-    //font-weight: bold;
+  ul.nav-main {
+    a.nav-link {
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 0.8em;
+    }
   }
+
 }
 
 // This is the "Commands" section of the sidebar.
