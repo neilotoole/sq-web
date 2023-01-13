@@ -40,6 +40,16 @@ p {
   font-weight: 300;
 }
 
+
+div.docs-sidebar {
+  background-color: $bg-main;
+}
+
+[data-dark-mode] div.docs-sidebar {
+  background-color: transparent;
+}
+
+
 h2 {
   font-size: 1.3em;
 }
@@ -58,6 +68,18 @@ h4 {
 
 .mute {
   opacity: 50%;
+}
+
+header.navbar {
+  //font-weight: bold;
+
+  a.nav-link {
+    text-transform: uppercase;
+  }
+
+  a.nav-link.changelog-link {
+    //font-weight: bold;
+  }
 }
 
 // This is the "Commands" section of the sidebar.

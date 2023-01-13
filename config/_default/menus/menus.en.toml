@@ -37,8 +37,21 @@
 [[main]]
   name = "Docs"
   url = "/docs/overview/"
-# url = "/docs/1.0/prologue/introduction/"
   weight = 10
+
+[[main]]
+  name = "Install"
+  url = "/docs/install"
+  weight = 11
+
+#[[main]]
+#name = "CHANGELOG234"
+#url = "https://github.com/neilotoole/sq/blob/master/CHANGELOG.md"
+#identifier = "changelog"
+#post = "<span class='alert'>New!</span>"
+## url = "/docs/1.0/prologue/introduction/"
+#weight = 50
+
 
 # [[main]]
 #   name = "Tutorial"

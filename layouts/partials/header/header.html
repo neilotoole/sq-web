@@ -75,7 +75,13 @@
               </li>
             {{ end }}
           {{ end -}}
+          <li class="nav-item">
+            <a class="nav-link ps-0 py-1 changelog-link" href="{{ $.Site.Params.changelogURL }}">CHANGELOG</a>
+          </li>
         </ul>
+
+
+
 
         {{- $showFlexSearch := .Site.Params.options.flexSearch }}
         {{- if $showFlexSearch }}
@@ -91,6 +97,8 @@
           <div id="suggestions" class="shadow bg-white rounded d-none"></div>
         </form>
         {{ end -}}
+
+
 
         <hr class="text-black-50 my-4 d-lg-none">
         <ul class="nav flex-column flex-lg-row">

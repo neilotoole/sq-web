@@ -8,10 +8,7 @@ weight: 99
 toc: true
 ---
 
-`sq` can be installed from source, or via package managers for various platforms.
-
-For most platforms,
-handy `install.sh` script that works on most platforms.
+`sq` can be installed from source, via an install script, or via package managers for various platforms.
 
 ## Quick install
 
