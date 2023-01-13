@@ -1,13 +1,33 @@
 $code-color: #8e7474;
-$code-bg-color: #eeecec;
-$code-border-color: #f0e8e8;
-$code-color-dark: #dfb9b5;
+$code-bg-color: #eeeceb;
+$code-bg-color: #f8f8fa;
+$code-bg-color: #f5f5f7;
+//$code-bg-color: #eeecec;
+//$code-border-color: #f0e8e8;
+$code-border-color-distinct: #f0e8e8;
+//$code-border-color-distinct: blue;
+$code-border-color: #eeeceb;
 
+$pink-pale:#dfb9b5;
+
+$code-color-dark: #dfb9b5;
+$code-color-dark: $nord12;
+$code-color-dark: $nord13;
+$code-color-dark: $pink-pale;
 $code-bg-color-dark: #383838;
 $code-border-color-dark: #383838;
 $code-border-color-dark: #7b7a7a;
 
 $bg-main: #eeeceb;
+//$bg-main: #f4f2f1;
+//$bg-main: #faf8f6;
+//$bg-main: #faf8f6;
+$bg-main: #fefefe;
+
+$sq-logo-font-family: "Courier New", monospace;
+$sq-logo-color: $nord2;
+$sq-logo-color-dark: $nord13;
+//$sq-logo-color-dark: $pink-pale;
 
 body {
   font-weight: 300;
@@ -21,19 +41,19 @@ p {
 }
 
 h2 {
-  font-size: 1.4em;
-}
-
-h2.h4 {
-  font-size: 1.17em;
+  font-size: 1.3em;
 }
 
 h3 {
-  font-size: 1.2em;
+  font-size: 1.1em;
+}
+
+h2.h4 {
+  font-size: 1.0em;
 }
 
 h4 {
-  font-size: 1.1em;
+  font-size: 1.0em;
 }
 
 .mute {
@@ -173,6 +193,7 @@ pre.chroma {
 
 div.tabs-wrapper {
   background-color: transparent;
+  margin-bottom: 1em;
 
   nav.nav-tabs {
     background-color: transparent;
@@ -264,4 +285,38 @@ footer {
 div.asciinema-player-wrapper {
   margin-bottom: 20px;
   margin-top: 20px;
+}
+
+body.home div.highlight > pre.chroma {
+  background-color: $code-bg-color;
+  color: $code-color;
+  border: 1px solid $code-border-color-distinct;
+  //border-color: blue;
+  //border: 1px solid green;
+}
+[data-dark-mode] body.home div.highlight > pre.chroma {
+  background-color: $code-bg-color-dark;
+  color: $code-color-dark;
+  border: 1px solid $nord0;
+  //border-color: blue;
+  //border: 1px solid green;
+}
+
+body.home h1.mt-0 {
+  font-family: $sq-logo-font-family;
+  color: $sq-logo-color;
+  font-size: 6em;
+}
+
+[data-dark-mode] body.home h1.mt-0 {
+  color: $sq-logo-color-dark;
+}
+
+div.sticky-top header.navbar a.navbar-brand {
+  font-family: $sq-logo-font-family;
+  color: $sq-logo-color;
+}
+
+[data-dark-mode] div.sticky-top header.navbar a.navbar-brand {
+  color: $sq-logo-color-dark !important;
 }
