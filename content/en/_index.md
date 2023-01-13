@@ -80,7 +80,56 @@ SQL Server, and the results are inserted into SQLite.
 
 Get the (JSON) metadata for the active source; pipe that JSON to `jq` and
 extract the table names; pipe the table names
-to `xargs`, invoking `sq` once for each table, outputting a CSV file per table.
+to `xargs`, invoking `sq` once for each table, outputting a CSV file per table. This snippet
+was tested on macOS.
 
 {{< asciicast src="/casts/export-all-tables-to-csv.cast" poster="npt:0:22" idleTimeLimit=0.5 rows=6 speed=2.5 >}}
 
+If you instead wanted to use `sql` mode:
+
+```shell
+sq inspect -j | jq -r '.tables[] | .name' | xargs -I % sq sql 'SELECT * FROM %' --csv --output %.csv
+```
+
+### Source commands
+
+Commands to add, set active, list, ping, or remove sources.
+
+```shell
+$ sq src                # show active source
+$ sq add ./actor.tsv    # add a source
+$ sq src @actor_tsv     # set active source
+$ sq ls                 # list sources
+$ sq ls -v              # list sources (verbose)
+$ sq ping --all         # ping all sources
+$ sq rm @actor_tsv      # remove a source
+```
+
+{{< asciicast src="/casts/source-cmds.cast" poster="npt:0:20" idleTimeLimit=0.5 rows=10 speed=2 >}}
+
+### Database table commands
+
+Convenient commands that act on database tables.
+
+Note that `sq tbl copy` only applies within a single database. That is, to copy a table from one database to another,
+use a query with `--insert @target.tbl`.
+
+```shell
+$ sq tbl copy .actor .actor2  # copy table "actor" to "actor2", creating if necessary
+$ sq tbl truncate .actor2     # truncate table "actor2"
+$ sq tbl drop .actor2         # drop table "actor2"
+```
+
+{{< asciicast src="/casts/table-cmds.cast" poster="npt:0:20" idleTimeLimit=0.5 rows=8 speed=2 >}}
+
+### Query JSONL (e.g. log files)
+
+JSONL output is a row of JSON per line (hence "JSON Lines"). Lots of log output is like this.
+We can use `sq`'s own log output (typically in `~/.config/sq/sq.log`) as an example:
+
+```json lines
+{"level":"debug","time":"00:07:48.799992","caller":"sqlserver/sqlserver.go:452:(*database).Close","msg":"Close database: @sakila_mssql | sqlserver | sqlserver://sakila:xxxxx@localhost?database=sakila"}
+{"level":"debug","time":"00:07:48.800016","caller":"source/files.go:323:(*Files).Close","msg":"Files.Close invoked: has 1 clean funcs"}
+{"level":"debug","time":"00:07:48.800031","caller":"source/files.go:61:NewFiles.func1","msg":"About to clean fscache from dir: /var/folders/68/qthwmfm93zl4mqdw_7wvsv7w0000gn/T/sq_files_fscache_2273841732"}
+```
+{{< asciicast src="/casts/query-jsonl-log-file.cast" poster="npt:0:17" idleTimeLimit=0.5 rows=5 speed=2 >}}

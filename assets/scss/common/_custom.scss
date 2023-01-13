@@ -287,20 +287,20 @@ div.asciinema-player-wrapper {
   margin-top: 20px;
 }
 
-body.home div.highlight > pre.chroma {
-  background-color: $code-bg-color;
-  color: $code-color;
-  border: 1px solid $code-border-color-distinct;
-  //border-color: blue;
-  //border: 1px solid green;
-}
-[data-dark-mode] body.home div.highlight > pre.chroma {
-  background-color: $code-bg-color-dark;
-  color: $code-color-dark;
-  border: 1px solid $nord0;
-  //border-color: blue;
-  //border: 1px solid green;
-}
+//body.home div.highlight > pre.chroma {
+//  background-color: $code-bg-color;
+//  color: $code-color;
+//  border: 1px solid $code-border-color-distinct;
+//  //border-color: blue;
+//  //border: 1px solid green;
+//}
+//[data-dark-mode] body.home div.highlight > pre.chroma {
+//  background-color: $code-bg-color-dark;
+//  color: $code-color-dark;
+//  border: 1px solid $nord0;
+//  //border-color: blue;
+//  //border: 1px solid green;
+//}
 
 body.home h1.mt-0 {
   font-family: $sq-logo-font-family;
