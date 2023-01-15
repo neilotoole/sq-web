@@ -62,11 +62,11 @@ to actual SQL for trickier work. In essence, `sq` treats every data source as if
     {"A": "1", "B": "neilotoole", "C": "neilotoole@apache.org", "D": "1"}
     {"A": "2", "B": "ksoze", "C": "kaiser@soze.org", "D": "2"}
     ```
-Next, read the [tutorial](./tutorial).
+Next, read the [tutorial](../tutorial).
 
 ## Commands
 
-Use `sq help` to list the available commands, or consult the [reference](./cmd)
+Use `sq help` to list the available commands, or consult the [reference](../cmd)
 for each command.
 
 ```text
