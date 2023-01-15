@@ -24,7 +24,7 @@
     "preview": "npm run build:local && npx serve -l 1313 public",
     "clean": "shx rm -rf public resources",
     "clean:install": "shx rm -rf package-lock.json node_modules ",
-    "lint": "npm run -s lint:scripts && npm run -s lint:styles && npm run -s lint:markdown",
+    "lint": "npm run -s lint:scripts && npm run -s lint:styles && npm run -s lint:markdown && npm run -s lint:links",
     "lint:links": "./linkinator.sh",
     "lint:scripts": "npx eslint assets/js config",
     "lint:scripts-fix": "npx eslint --fix assets/js config",
