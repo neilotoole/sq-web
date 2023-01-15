@@ -107,9 +107,9 @@ div.tab-content > div:not(:has(>div.highlight)) {
   padding-bottom: 20px;
 }
 
-table code,
-p code,
-li code,
+table > code,
+p > code,
+li > code,
 .tab-pane > code, {
   border-radius: 3px;
   padding: 3px 6px;
