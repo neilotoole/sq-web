@@ -7,11 +7,12 @@ images: []
 weight: 2002
 toc: true
 ---
-`sq` documentation typically uses the [Sakila](https://dev.mysql.com/doc/sakila/en/) example database. Sakila was originally created for MySQL, but the data is available for many database implementations.
+`sq` documentation typically uses the [Sakila](https://dev.mysql.com/doc/sakila/en/) example database. Sakila was
+originally created for MySQL, but the data is available for many database implementations.
 
 This page shows how to add a Sakila source to `sq` for various driver types.
 
-## SQLite3
+## SQLite
 
 To add a source with handle `@sakila_sl3`, download [`sakila.db`](https://sq.io/testdata/sakila.db) and `sq add`.
 
@@ -22,7 +23,8 @@ $ sq add ./sakila.db --handle=@sakila_sl3
 @sakila_sl3  sqlite3  sakila.db
 ```
 
-Note above the `--handle=@sakila_sl3` flag. This flag is optional: if no handle specified, a suitable handle is generated. You can also use the shorthand flag `-h @sakila_sl3`.
+Note above the `--handle=@sakila_sl3` flag. This flag is optional: if no handle specified, a suitable handle is
+generated. You can also use the shorthand flag `-h @sakila_sl3`.
 
 ## Postgres
 
@@ -30,7 +32,8 @@ The Sakila database has been bundled into a Postgres [docker image](https://hub.
 Run the image and then `sq add`.
 
 > It may take several minutes for docker to download and start the image. Eventually the docker logs will show:
-`sakiladb/postgres has successfully initialized.`. Shortly after this message is logged, the database should start accepting connections.
+`sakiladb/postgres has successfully initialized.`. Shortly after this message is logged, the database should start
+> accepting connections.
 
 ```shell
 $ docker run -d -p 5432:5432 sakiladb/postgres:latest
@@ -39,7 +42,6 @@ $ docker run -d -p 5432:5432 sakiladb/postgres:latest
 sq add 'postgres://sakila:p_ssW0rd@localhost/sakila?sslmode=disable' -h @sakila_pg
 @sakila_pg  postgres  sakila@localhost/sakila
 ```
-
 
 ## SQL Server
 
@@ -52,7 +54,8 @@ The Sakila database has been bundled into a SQL Server [docker image](https://hu
 Run the image and then `sq add`.
 
 > It may take several minutes for docker to download and start the image. Eventually the docker logs will show:
-`sakiladb/sqlserver has successfully initialized.`. Shortly after this message is logged, the database should start accepting connections.
+`sakiladb/sqlserver has successfully initialized.`. Shortly after this message is logged, the database should start
+> accepting connections.
 
 ```shell
 $ docker run -d -p 1433:1433 sakiladb/sqlserver:latest
@@ -64,7 +67,8 @@ $ sq add 'sqlserver://sakila:p_ssW0rd@localhost:1433?database=sakila' -h @sakila
 
 ## Azure SQL Edge
 
-The Sakila database has been bundled into an Azure SQL Edge [docker image](https://hub.docker.com/r/sakiladb/azure-sql-edge).
+The Sakila database has been bundled into an Azure SQL
+Edge [docker image](https://hub.docker.com/r/sakiladb/azure-sql-edge).
 Azure SQL Edge is effectively a slimmed-down SQL Server distro, but it runs
 both on `amd64` and `arm64`. Note that `sq` treats Azure SQL Edge as if it is SQL Server
 (they use the same driver etc.).
@@ -72,7 +76,8 @@ both on `amd64` and `arm64`. Note that `sq` treats Azure SQL Edge as if it is SQ
 Run the image and then `sq add`.
 
 > It may take several minutes for docker to download and start the image. Eventually the docker logs will show:
-`sakiladb/sqlserver has successfully initialized.`. Shortly after this message is logged, the database should start accepting connections.
+`sakiladb/sqlserver has successfully initialized.`. Shortly after this message is logged, the database should start
+> accepting connections.
 
 ```shell
 $ docker run -d -p 1433:1433 sakiladb/azure-sql-edge:latest
@@ -82,16 +87,14 @@ $ sq add 'sqlserver://sakila:p_ssW0rd@localhost:1433?database=sakila' -h @sakila
 @sakila_sqlserver  sqlserver  sakila@localhost:1433/sakila
 ```
 
-
-
-
 ## MySQL
 
 The Sakila database has been bundled into a MySQL [docker image](https://hub.docker.com/r/sakiladb/mysql).
 Run the image and then `sq add`.
 
 > It may take several minutes for docker to download and start the image. Eventually the docker logs will show:
-`sakiladb/mysql has successfully initialized.`. Shortly after this message is logged, the database should start accepting connections.
+`sakiladb/mysql has successfully initialized.`. Shortly after this message is logged, the database should start
+> accepting connections.
 
 ```shell
 $ docker run -d -p 3306:3306 sakiladb/mysql:latest
@@ -114,9 +117,13 @@ $ sq add ./sakila.xlsx -h @sakila_xlsx
 
 ## CSV
 
-Note that CSV is a "monotable" data type. There's effectively only a single table unlike, say, XLSX, which can have multiple sheets/tables. Thus, each Sakila table exists as a separate CSV file. When added to `sq`, each of these CSV files would become its own data source, e.g. `@sakila_csv_actor`, `@sakila_csv_film` etc, with the data accessible via `sq @sakila_csv_actor.data`, `sq @sakila_csv_film.data` etc.
+Note that CSV is a "monotable" data type. There's effectively only a single table unlike, say, XLSX, which can have
+multiple sheets/tables. Thus, each Sakila table exists as a separate CSV file. When added to `sq`, each of these CSV
+files would become its own data source, e.g. `@sakila_csv_actor`, `@sakila_csv_film` etc, with the data accessible
+via `sq @sakila_csv_actor.data`, `sq @sakila_csv_film.data` etc.
 
-Download and extract [sakila-csv.tar.gz](https://sq.io/testdata/sakila-csv.tar.gz) (or [sakila-tsv.tar.gz](https://sq.io/testdata/sakila-tsv.tar.gz)), and `sq add`.
+Download and extract [sakila-csv.tar.gz](https://sq.io/testdata/sakila-csv.tar.gz) (
+or [sakila-tsv.tar.gz](https://sq.io/testdata/sakila-tsv.tar.gz)), and `sq add`.
 
 ```shell
 $ wget -qO- https://sq.io/testdata/sakila-csv.tar.gz | tar xvz -

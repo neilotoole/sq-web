@@ -29,7 +29,7 @@ to actual SQL for trickier work. In essence, `sq` treats every data source as if
 - a `driver` is implemented by `sq` for each data source type. For example, `postgres`, or `csv`.
 - `sq inspect` returns _metadata_ about your source, such as table names or number of rows.
 
-## Quickest of starts
+## Quick start
 
 1. [Install](/docs/install) `sq`.
 2. Add a data source. We'll use an Excel file.
@@ -62,11 +62,11 @@ to actual SQL for trickier work. In essence, `sq` treats every data source as if
     {"A": "1", "B": "neilotoole", "C": "neilotoole@apache.org", "D": "1"}
     {"A": "2", "B": "ksoze", "C": "kaiser@soze.org", "D": "2"}
     ```
-Next, read the [tutorial](../tutorial).
+Next, read the [tutorial](/docs/tutorial).
 
 ## Commands
 
-Use `sq help` to list the available commands, or consult the [reference](../cmd)
+Use `sq help` to list the available commands, or consult the [reference](/docs/cmd/)
 for each command.
 
 ```text

@@ -9,7 +9,8 @@ toc: true
 ---
 This tutorial walks through sq's features.
 
-If you haven't installed `sq`, see [here](/docs/install). If you've already installed `sq`, check that you're on a recent version like so:
+If you haven't installed `sq`, see [here](/docs/install). If you've already installed `sq`, check that you're on a
+recent version like so:
 
 ```shell
 $ sq version
@@ -17,7 +18,6 @@ sq v0.24.0
 ```
 
 If your version is older than that, please [upgrade](/docs/install). Then start with `sq help`.
-
 
 ## Basics
 
@@ -52,8 +52,11 @@ Let's step through the above:
 
 * `sq ls`: list the current sources. There are none.
 * `wget`: download an Excel file to use for this demo.
-* `sq add`: add a source. The _type_ is inferred (or can be specified with `--driver=xlsx`) to be `xlsx`, and we give this _source_ the handle `@xl_demo`. This Excel file has a header row, so we also specify `--opts=header=true` to indicate that the actual data begins on row 1, not row 0 (which is the header row).
-* `sq ls`: lists the sources again; this time we see our new `@xl_demo` source. The asterisk beside the _handle_ (`@xl_demo*`) indicates that this is the _active source_.
+* `sq add`: add a source. The _type_ is inferred (or can be specified with `--driver=xlsx`) to be `xlsx`, and we give
+  this _source_ the handle `@xl_demo`. This Excel file has a header row, so we also specify `--opts=header=true` to
+  indicate that the actual data begins on row 1, not row 0 (which is the header row).
+* `sq ls`: lists the sources again; this time we see our new `@xl_demo` source. The asterisk beside the
+  _handle_ (`@xl_demo*`) indicates that this is the _active source_.
 * `sq ls -v`: lists the sources yet again, this time verbosely (`-v`).
 * `sq inspect`: inspects `@xl_demo`, showing the structure of the source.
 
@@ -73,7 +76,8 @@ uid  username    email                  address_id
 7    plato       plato@athens.gr        1
 ```
 
-That listed the contents of the `person` table (which for Excel, a _table_ means a _sheet_). Being that `@xl_demo` is the _active source_, `sq @xl_demo.person` can also be accomplished by `sq .person`.
+That listed the contents of the `person` table (which for Excel, a _table_ means a _sheet_). Being that `@xl_demo` is
+the _active source_, `sq @xl_demo.person` can also be accomplished by `sq .person`.
 
 The same query can be executed in the `scratch` db's native SQL dialect like this (SQLite by default):
 
@@ -199,7 +203,9 @@ TABLE  ROWS  SIZE  NUM COLS  COL NAMES   COL TYPES
 data   7     -     4         A, B, C, D  INTEGER, TEXT, TEXT, INTEGER
 ```
 
-> Note that because CSV is  "_monotable_" (only has one table of data), its data is represented as a single table named `data`. Also note that because this particular CSV file doesn't have a header row, its columns are given names `A`, `B`, `C`, etc., following what Excel would do.
+> Note that because CSV is  "_monotable_" (only has one table of data), its data is represented as a single table
+> named `data`. Also note that because this particular CSV file doesn't have a header row, its columns are given
+> names `A`, `B`, `C`, etc., following what Excel would do.
 
 
 We can pipe that CSV file to `sq` and performs the usual actions on it:
@@ -212,7 +218,8 @@ A  B         C                    D
 5  augustus  augustus@caesar.org  2
 ```
 
-We could continue to `cat` the CSV file to `sq`, but being that we'll use it later in this tutorial, we'll add it as a source:
+We could continue to `cat` the CSV file to `sq`, but being that we'll use it later in this tutorial, we'll add it as a
+source:
 
 ```shell
 $ sq add person.csv -h @csv_demo
@@ -270,7 +277,8 @@ $ sq src @csv_demo
 @csv_demo  csv  person.csv
 ```
 
-Now we can use the shorthand form (omit the `@csv_demo` handle) and `sq` will look for table `.data` in the active source (which is now `@csv_demo`):
+Now we can use the shorthand form (omit the `@csv_demo` handle) and `sq` will look for table `.data` in the active
+source (which is now `@csv_demo`):
 
 ```shell
 $ sq '.data | .[0:1]'
@@ -298,9 +306,11 @@ $ sq ping @xl_demo @csv_demo
 
 ## SQL Sources
 
-Having read this far, you can be forgiven for thinking that `sq` only deals with document-type formats such as Excel or CSV, but that is not the case. Let's add some SQL databases.
+Having read this far, you can be forgiven for thinking that `sq` only deals with document-type formats such as Excel or
+CSV, but that is not the case. Let's add some SQL databases.
 
-First we'll do postgres; we'll start a pre-built [Sakila](https://dev.mysql.com/doc/sakila/en/sakila-introduction.html) database via docker on port (note that it will take a moment for the Postgres container to start up):
+First we'll do postgres; we'll start a pre-built [Sakila](https://dev.mysql.com/doc/sakila/en/sakila-introduction.html)
+database via docker on port (note that it will take a moment for the Postgres container to start up):
 
 ```shell
 $ docker run -p 5432:5432 sakiladb/postgres:latest
@@ -374,18 +384,20 @@ actor_id  first_name  last_name  last_update
 > Note that as before `sq` can join across sources:
 >
 > ```
+
 > sq '@sakila_pg.city, @sakila_my.country | join(.country_id) | .city, .country | .[0:3]'
-> city                country
+> city country
 > A Corua (La Corua)  Spain
-> Abha                Saudi Arabia
-> Abu Dhabi           United Arab Emirates
+> Abha Saudi Arabia
+> Abu Dhabi United Arab Emirates
 > ```
 
 ## Insert & Modify
 
 In addition to JSON, CSV, etc., `sq` can write query results to database tables.
 
-We'll use the `film_category` table as an example: the table is in both `@sakila_pg` and `@sakila_my`. We're going to truncate the table in `@sakila_my` and then repopulate via a query against `@sakila_pg`.
+We'll use the `film_category` table as an example: the table is in both `@sakila_pg` and `@sakila_my`. We're going to
+truncate the table in `@sakila_my` and then repopulate via a query against `@sakila_pg`.
 
 ```shell
 $ sq '@sakila_pg.film_category | count()'
@@ -404,7 +416,8 @@ $ sq tbl copy .film_category .film_category_bak
 Copied table: @sakila_my.film_category --> @sakila_my.film_category_bak (1000 rows copied)
 ```
 
-> Note that the `sq tbl copy` makes use each database's own table copy functionality. Thus `sq tbl copy` can't be used to directly copy a table from one database to another. But `sq` provides a means of doing this, keep reading.
+> Note that the `sq tbl copy` makes use each database's own table copy functionality. Thus `sq tbl copy` can't be used
+> to directly copy a table from one database to another. But `sq` provides a means of doing this, keep reading.
 
 Truncate the `@sakila_my.film_category` table:
 
@@ -417,7 +430,8 @@ COUNT(*)
 0
 ```
 
-The `@sakila_my.film_category` table is now empty. But we can repopulate it via a query against `@sakila_pg`. For this example, we'll just do `500` rows.
+The `@sakila_my.film_category` table is now empty. But we can repopulate it via a query against `@sakila_pg`. For this
+example, we'll just do `500` rows.
 
 ```shell
 $ sq '@sakila_pg.film_category | .[0:500]' --insert @sakila_my.film_category

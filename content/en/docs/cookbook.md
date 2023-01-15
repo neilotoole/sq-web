@@ -9,10 +9,10 @@ toc: true
 ---
 This cookbook demonstrates how to perform various tasks using `sq`.
 
-- If not otherwise specified, assume the `@sakila_sl3` data source is present. See [here](https://github.com/neilotoole/sq-preview/wiki/Sakila#sqlite3) to add that source.
+- If not otherwise specified, assume the `@sakila_sl3` data source is present.
+  See [here](/docs/develop/sakila#sqlite) to add that source.
 - The snippets were created on macOS (using `zsh`).
 - Some of these examples require [jq](https://stedolan.github.io/jq/).
-
 
 ## List the tables of a source
 
@@ -28,7 +28,6 @@ category
 
 List the tables of a named source (`@sakila_sl3` in this example):
 
-
 ```shell
 $ sq inspect @sakila_sl3 -j | jq -r '.tables[] | .name'
 actor
@@ -36,7 +35,6 @@ address
 category
 [...]
 ```
-
 
 ## Export all tables to CSV
 
@@ -51,6 +49,7 @@ address.csv  city.csv      customer.csv  film_actor.csv  film_text.csv      lang
 ```
 
 The above snippet will:
+
 - invoke `sq inspect` on the active source (`@sakila_sl3`) and output in JSON
 - pipe that JSON to `jq`, and filter for just the table names
 - pipe those table names to `xargs`
@@ -71,7 +70,6 @@ country
 [...]
 ```
 
-
 ## Import JSON Array to Database
 
 ```shell
@@ -90,7 +88,6 @@ $ sq add actor.jsona
 $ sq '@actor_jsona.data | .[0:10]' --insert @sakila_sl3.actor_jsona
 Inserted 10 rows into @sakila_sl3.actor_jsona
 ```
-
 
 ## Import JSON Lines to Database
 

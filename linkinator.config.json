@@ -1,3 +1,8 @@
 {
-  "skip": "www.linkedin.com"
+  "timeout:": 10,
+  "retryErrors": true,
+  "skip": "https://dev.mysql.com",
+  "retryErrorsJitter": true,
+  "retryErrorsCount": 3,
+  "verbosity": "info"
 }

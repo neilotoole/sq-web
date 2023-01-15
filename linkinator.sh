@@ -22,4 +22,4 @@ npx serve -l $port public/ > /dev/null &
 sleep 2 # Give server time to start
 echo "Server started"
 
-npx linkinator -r --verbosity error  $base_url
+npx linkinator --config ./linkinator.config.json -r $base_url/docs/tutorial
