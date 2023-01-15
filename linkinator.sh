@@ -4,11 +4,14 @@
 # and point linkinator at it.
 #
 # Note also: linkinator.config.json
-set -e
 
+set -e
 # Kill the web server background process when the script exits
 # https://stackoverflow.com/a/2173421
-trap "trap - SIGTERM && kill -- -$$" SIGINT SIGTERM EXIT
+#trap "trap - SIGTERM && kill -- -$$" SIGINT SIGTERM EXIT
+
+trap "exit" INT TERM
+trap "kill 0" EXIT
 
 port=31313
 base_url="http://localhost:$port"
@@ -22,4 +25,4 @@ npx serve -l $port public/ > /dev/null &
 sleep 2 # Give server time to start
 echo "Server started"
 
-npx linkinator --config ./linkinator.config.json -r $base_url/docs/tutorial
+npx linkinator --config ./linkinator.config.json -r $base_url

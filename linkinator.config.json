@@ -4,5 +4,5 @@
   "skip": "https://dev.mysql.com",
   "retryErrorsJitter": true,
   "retryErrorsCount": 3,
-  "verbosity": "info"
+  "verbosity": "error"
 }
