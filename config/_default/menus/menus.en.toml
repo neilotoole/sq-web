@@ -1,41 +1,19 @@
-[[docs]]
+[[main]]
   name = "Install"
-  weight = 10
-  identifier = "install"
-  url = "/docs/install.md"
-
+  url = "/docs/install"
+  weight = 7
 
 
 [[main]]
   name = "Docs"
   url = "/docs/overview/"
-  weight = 10
+  weight = 8
 
 [[main]]
-  name = "Install"
-  url = "/docs/install"
-  weight = 11
+  name = "CHANGELOG"
+  url = "https://github.com/neilotoole/sq/blob/master/CHANGELOG.md"
+  weight = 9
 
-
-[[main]]
-  name = "Get Started"
-  weight = 30
-  identifier = "get-started"
-  url = "/docs/prologue/introduction/"
-
-[[main]]
-  name = "Quick Start"
-  weight = 40
-  identifier = "quick-start"
-  url = "/docs/prologue/quick-start/"
-  parent = "get-started"
-
-[[main]]
-  name = "Tutorial"
-  weight = 50
-  identifier = "tutorial"
-  url = "https://getdoks.org/tutorial/introduction/"
-  parent = "get-started"
 
 [[social]]
   name = "GitHub"

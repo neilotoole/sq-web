@@ -15,7 +15,6 @@ ogLocale = "en_US"
 domainTLD = "sq.io"
 titleHome = "Doks Theme"
 
-changelogURL = "https://github.com/neilotoole/sq/blob/master/CHANGELOG.md"
 ## Twitter Cards
 #twitterSite = "@getdoks"
 #twitterCreator = "@henkverlinde"
