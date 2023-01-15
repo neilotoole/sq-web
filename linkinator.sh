@@ -11,7 +11,8 @@ set -e
 #trap "trap - SIGTERM && kill -- -$$" SIGINT SIGTERM EXIT
 
 trap "exit" INT TERM
-trap "kill 0" EXIT
+#trap "kill 0" EXIT
+trap "kill -- -$$ &> /dev/null && exit 0" EXIT
 
 port=31313
 base_url="http://localhost:$port"
