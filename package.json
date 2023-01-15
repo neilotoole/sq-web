@@ -47,7 +47,7 @@
     "@babel/cli": "^7.20",
     "@babel/core": "^7.20",
     "@babel/preset-env": "^7.20",
-    "@fullhuman/postcss-purgecss": "^4.1",
+    "@fullhuman/postcss-purgecss": "^5.0",
     "@hyas/images": "^0.3.2",
     "@netlify/plugin-lighthouse": "^4.0.3",
     "asciinema-player": "^3.0.1",
