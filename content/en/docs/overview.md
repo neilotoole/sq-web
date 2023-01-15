@@ -4,7 +4,7 @@ description: "Introduction to sq"
 lead: ""
 draft: false
 images: []
-weight: 98
+weight: 1010
 toc: true
 ---
 `sq` is the missing tool for wrangling data. A swiss-army knife for data.

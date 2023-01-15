@@ -19,6 +19,11 @@
     {{ $active := in $currentPage.RelPermalink $hackURL }}
     <a class="docs-link rounded {{ if $active }} active{{ end }}" href="{{- $hackURL -}}">Tutorial</a>
   </li>
+  <li class="mb-1">
+    {{ $hackURL := "/docs/cookbook" }}
+    {{ $active := in $currentPage.RelPermalink $hackURL }}
+    <a class="docs-link rounded {{ if $active }} active{{ end }}" href="{{- $hackURL -}}">Cookbook</a>
+  </li>
 
 
   {{ range (where .Site.Sections "Section" "in" $section) }}

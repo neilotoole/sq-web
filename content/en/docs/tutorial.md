@@ -4,7 +4,7 @@ description: "sq tutorial"
 lead: ""
 draft: false
 images: []
-weight: 98
+weight: 1030
 toc: true
 ---
 This tutorial walks through sq's features.

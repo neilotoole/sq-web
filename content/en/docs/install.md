@@ -4,7 +4,7 @@ description: "Install sq on macOS, Windows, Linux"
 lead: ""
 draft: false
 images: []
-weight: 99
+weight: 1020
 toc: true
 ---
 
