@@ -43,6 +43,11 @@ sq add 'postgres://sakila:p_ssW0rd@localhost/sakila?sslmode=disable' -h @sakila_
 
 ## SQL Server
 
+{{< alert icon="⚠️" >}}
+SQL Server runs only on `amd64` . For `arm64` (e.g. Apple M1+),
+use [Azure SQL Edge](#azure-sql-edge).
+{{< /alert >}}
+
 The Sakila database has been bundled into a SQL Server [docker image](https://hub.docker.com/r/sakiladb/sqlserver).
 Run the image and then `sq add`.
 
@@ -56,6 +61,28 @@ $ docker run -d -p 1433:1433 sakiladb/sqlserver:latest
 $ sq add 'sqlserver://sakila:p_ssW0rd@localhost:1433?database=sakila' -h @sakila_sqlserver
 @sakila_sqlserver  sqlserver  sakila@localhost:1433/sakila
 ```
+
+## Azure SQL Edge
+
+The Sakila database has been bundled into an Azure SQL Edge [docker image](https://hub.docker.com/r/sakiladb/azure-sql-edge).
+Azure SQL Edge is effectively a slimmed-down SQL Server distro, but it runs
+both on `amd64` and `arm64`. Note that `sq` treats Azure SQL Edge as if it is SQL Server
+(they use the same driver etc.).
+
+Run the image and then `sq add`.
+
+> It may take several minutes for docker to download and start the image. Eventually the docker logs will show:
+`sakiladb/sqlserver has successfully initialized.`. Shortly after this message is logged, the database should start accepting connections.
+
+```shell
+$ docker run -d -p 1433:1433 sakiladb/azure-sql-edge:latest
+# Wait a while...
+
+$ sq add 'sqlserver://sakila:p_ssW0rd@localhost:1433?database=sakila' -h @sakila_sqlserver
+@sakila_sqlserver  sqlserver  sakila@localhost:1433/sakila
+```
+
+
 
 
 ## MySQL
