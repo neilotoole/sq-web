@@ -13,7 +13,6 @@
     "access": "public"
   },
   "scripts": {
-    "init": "shx rm -rf .git && git init -b main",
     "create": "exec-bin node_modules/.bin/hugo/hugo new",
     "prestart": "npm run clean",
     "start": "exec-bin node_modules/.bin/hugo/hugo server --bind=0.0.0.0 --disableFastRender",
@@ -45,9 +44,9 @@
     "gen:syntax-css": "./generate-syntax-css.sh"
   },
   "devDependencies": {
-    "@babel/cli": "^7.18",
+    "@babel/cli": "^7.20",
     "@babel/core": "^7.20",
-    "@babel/preset-env": "^7.18",
+    "@babel/preset-env": "^7.20",
     "@fullhuman/postcss-purgecss": "^4.1",
     "@hyas/images": "^0.2.2",
     "@netlify/plugin-lighthouse": "^4.0.3",
@@ -66,7 +65,7 @@
     "markdownlint-cli2": "^0.4.0",
     "netlify-cli": "^12.7.2",
     "netlify-plugin-submit-sitemap": "^0.4.0",
-    "node-fetch": "^3.2",
+    "node-fetch": "^3.3",
     "nord": "^0.2.1",
     "postcss": "^8.4",
     "postcss-cli": "^10.0",
