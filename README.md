@@ -16,7 +16,8 @@ Changes to the `master` branch kick off a redeploy on Netlify.
 
 ## Contributing
 
-You could [open an issue](https://github.com/neilotoole/sq-web/issues), but ideally you'd submit a pull request.
+You could [open an issue](https://github.com/neilotoole/sq-web/issues), but ideally you'd submit a
+pull request.
 
 ### 1. Clone this repo
 
@@ -41,6 +42,14 @@ npm run start
 Create a [Pull Request](https://github.com/neilotoole/sq-web/pulls), providing context
 for your changes.
 
+## Redirects
+
+- You can use the Hugo [alias](https://gohugo.io/content-management/urls/#aliases) mechanism to
+  maintain an old path that will redirect to the new path.
+- If you need a redirect that's not associated with Hugo content, add an entry to
+  the [`static/_redirects`](/static/_redirects) file. This is what the site uses to
+  serve the [sq.io/install.sh](https://sq.io/install.sh) script.
+
 ## Misc
 
 - Doks comes with [commands](https://getdoks.org/docs/prologue/commands/) for common tasks.
@@ -58,7 +67,8 @@ Typically, casts are stored in `./static/casts`. To include a cast, use this sho
 {{< asciicast src="/casts/home-quick.cast" theme="monokai" poster="npt:0:20" rows="10" speed="1.5" idleTimeLimit="3" >}}
 ```
 
-- `poster="npt:0:20"` specifies that the "poster" or cover image should be taken from 0m20s into the cast.
+- `poster="npt:0:20"` specifies that the "poster" or cover image should be taken from 0m20s into the
+  cast.
 - Add `autoPlay="true"` if the cast should start immediately. This is usually not the case.
 
 ## Documentation
@@ -77,8 +87,8 @@ Typically, casts are stored in `./static/casts`. To include a cast, use this sho
 ## Acknowledgements
 
 - Special thanks to [Netlify](https://www.netlify.com), who provide
-free hosting for [sq.io](https://sq.io) via
-their [open source program](https://www.netlify.com/open-source/).
+  free hosting for [sq.io](https://sq.io) via
+  their [open source program](https://www.netlify.com/open-source/).
 - A bunch of stuff has been lifted from the [Docsy theme](https://www.docsy.dev).
 
 [![Deploys by Netlify](https://www.netlify.com/v3/img/components/netlify-dark.svg)](https://www.netlify.com)
