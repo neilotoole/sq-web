@@ -64,6 +64,12 @@ output_path = "reports/lighthouse.html"
   status = 301
 
 
+[[redirects]]
+  from = "/huzzah"
+  to = "https://www.google.com"
+  status = 301
+
+
 [[headers]]
   for = "/*"
   [headers.values]
