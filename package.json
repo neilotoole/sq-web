@@ -18,6 +18,7 @@
     "start": "exec-bin node_modules/.bin/hugo/hugo server --bind=0.0.0.0 --disableFastRender",
     "prebuild": "npm run clean",
     "build": "exec-bin node_modules/.bin/hugo/hugo --gc --minify",
+    "postbuild": "shx cat static/_redirects >> public/_redirects",
     "build:preview": "npm run build -D -F",
     "build:local": "exec-bin node_modules/.bin/hugo/hugo --gc --minify -b 'http://localhost:1313'",
     "prepreview": "npm run clean",

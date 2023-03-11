@@ -1,0 +1,3 @@
+# Additional redirects from static/_redirects
+
+/install.sh https://raw.githubusercontent.com/neilotoole/sq/master/install.sh 301
