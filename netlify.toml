@@ -67,6 +67,7 @@ output_path = "reports/lighthouse.html"
 [[redirects]]
   from = "/huzzah"
   to = "https://www.google.com"
+  force = true
   status = 301
 
 
