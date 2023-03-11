@@ -8,10 +8,8 @@
 set -e
 # Kill the web server background process when the script exits
 # https://stackoverflow.com/a/2173421
-#trap "trap - SIGTERM && kill -- -$$" SIGINT SIGTERM EXIT
 
 trap "exit" INT TERM
-#trap "kill 0" EXIT
 trap "kill -- -$$ &> /dev/null && exit 0" EXIT
 
 port=31313
