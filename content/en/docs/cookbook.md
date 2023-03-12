@@ -14,7 +14,7 @@ This cookbook demonstrates how to perform various tasks using `sq`.
 - The snippets were created on macOS (using `zsh`).
 - Some of these examples require [jq](https://stedolan.github.io/jq/).
 
-## List the tables of a source
+## List table names
 
 List the tables of the active source:
 
@@ -36,7 +36,7 @@ category
 [...]
 ```
 
-## Export all tables to CSV
+## Export all table data to CSV
 
 With `@sakila_sl3` as the active source:
 
@@ -58,19 +58,8 @@ The above snippet will:
 
 [![asciicast](https://asciinema.org/a/6cUvURZo7xitJQMkHQNIjooM1.svg)](https://asciinema.org/a/6cUvURZo7xitJQMkHQNIjooM1)
 
-## List name of each table in a source
 
-```shell
-$ sq inspect @sakila_sl3 -j | jq -r '.tables[] | .name'
-actor
-address
-category
-city
-country
-[...]
-```
-
-## Import JSON Array to Database
+## Import JSON Array to database
 
 ```shell
 $ wget https://github.com/neilotoole/sq/raw/master/drivers/json/testdata/actor.jsona
@@ -89,7 +78,7 @@ $ sq '@actor_jsona.data | .[0:10]' --insert @sakila_sl3.actor_jsona
 Inserted 10 rows into @sakila_sl3.actor_jsona
 ```
 
-## Import JSON Lines to Database
+## Import JSON Lines to database
 
 ```shell
 $ wget https://github.com/neilotoole/sq/raw/master/drivers/json/testdata/actor.jsonl
