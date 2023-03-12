@@ -2,8 +2,8 @@
 
 ## Homepage
 title = "sq"
-titleSeparator = "-"
-#titleAddition = "Modern Documentation Theme"
+titleSeparator = "|"
+titleAddition = "wrangle data"
 description = "sq is for wrangling data."
 
 ## Documentation
