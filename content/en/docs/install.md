@@ -48,7 +48,7 @@ sq completion --help
 Requires [Go](https://go.dev/dl/).
 
 ```shell
-git clone https://github.com/neilotoole/sq.git && cd sq && go install
+go install github.com/neilotoole/sq
 ```
 
 ## Binaries
