@@ -10,7 +10,12 @@
 					{{ if in (.RelPermalink | string) $currentSection.RelPermalink }}
 						<div class="card my-3">
 							<div class="card-body">
-								<a class="stretched-link" href="{{ .RelPermalink }}">{{ .Params.title | title }} &rarr;</a>
+                {{ if in (.RelPermalink | string) "/docs/cmd" }}
+                  {{/* Special handling for the cmd list section. */}}
+                  <code><a class="stretched-link" href="{{ .RelPermalink }}">sq {{ .Params.title | title | lower }} &rarr;</a></code>
+                {{ else }}
+                  <a class="stretched-link" href="{{ .RelPermalink }}">{{ .Params.title | title }} &rarr;</a>
+                {{ end }}
 							</div>
 						</div>
 					{{ end }}
