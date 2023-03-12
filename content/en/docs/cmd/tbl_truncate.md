@@ -1,5 +1,5 @@
 ---
-title: "tbl truncate"
+title: "sq tbl truncate"
 description: "Truncate one or more tables"
 draft: false
 images: []

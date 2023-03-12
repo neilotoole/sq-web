@@ -1,5 +1,5 @@
 ---
-title: "ping"
+title: "sq ping"
 description: "Ping data sources"
 draft: false
 images: []

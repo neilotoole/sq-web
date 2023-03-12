@@ -1,5 +1,5 @@
 ---
-title: "query"
+title: "sq"
 description: "Execute SLQ query against data source"
 draft: false
 images: []
@@ -10,4 +10,4 @@ weight: 2001
 toc: false
 ---
 
-{{< readfile file="query.help.txt" code="true" lang="text" >}}
+{{< readfile file="sq.help.txt" code="true" lang="text" >}}

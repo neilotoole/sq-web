@@ -1,5 +1,5 @@
 ---
-title: "driver ls"
+title: "sq driver ls"
 description: "List available drivers"
 draft: false
 images: []

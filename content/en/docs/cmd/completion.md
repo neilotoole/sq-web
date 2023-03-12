@@ -1,5 +1,5 @@
 ---
-title: "completion"
+title: "sq completion"
 description: "Generate shell completion script"
 draft: false
 images: []

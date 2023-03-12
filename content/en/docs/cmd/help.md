@@ -1,5 +1,5 @@
 ---
-title: "help"
+title: "sq help"
 description: "Show sq help"
 draft: false
 images: []

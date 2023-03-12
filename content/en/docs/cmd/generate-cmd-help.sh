@@ -28,8 +28,8 @@ cmds=(
 
 rm -f ./*.help.txt
 
-# Special handling for the root command, which we call "query"
-sq --help > query.help.txt
+# Special handling for the root command.
+sq --help > root.help.txt
 
 for cmd in "${cmds[@]}"; do
   # space -> underscore, e.g. "driver ls" -> "driver_ls"

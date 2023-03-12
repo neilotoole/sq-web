@@ -1,5 +1,5 @@
 ---
-title: "src"
+title: "sq src"
 description: "Get or set active data source"
 draft: false
 images: []

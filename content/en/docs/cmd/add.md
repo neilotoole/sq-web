@@ -1,5 +1,5 @@
 ---
-title: "add"
+title: "sq add"
 description: "Add data source"
 draft: false
 images: []

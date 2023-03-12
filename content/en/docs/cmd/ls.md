@@ -1,5 +1,5 @@
 ---
-title: "ls"
+title: "sq ls"
 description: "List data sources"
 draft: false
 images: []

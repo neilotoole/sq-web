@@ -1,5 +1,5 @@
 ---
-title: "tbl copy"
+title: "sq tbl copy"
 description: "Make a copy of a table"
 draft: false
 images: []

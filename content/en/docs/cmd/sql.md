@@ -1,5 +1,5 @@
 ---
-title: "sql"
+title: "sq sql"
 description: "Execute DB-native SQL query or statement"
 draft: false
 images: []

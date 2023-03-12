@@ -1,5 +1,5 @@
 ---
-title: "rm"
+title: "sq rm"
 description: "Remove data source"
 draft: false
 images: []

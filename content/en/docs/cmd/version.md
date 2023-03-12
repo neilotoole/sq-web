@@ -1,5 +1,5 @@
 ---
-title: "version"
+title: "sq version"
 description: "Print sq version"
 draft: false
 images: []

@@ -1,7 +1,7 @@
 {
   "timeout:": 10,
   "retryErrors": true,
-  "skip": "https://dev.mysql.com",
+  "skip": "https://dev.mysql.com, https://github.com",
   "retryErrorsJitter": true,
   "retryErrorsCount": 3,
   "verbosity": "error"

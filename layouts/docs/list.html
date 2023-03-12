@@ -12,7 +12,7 @@
 							<div class="card-body">
                 {{ if in (.RelPermalink | string) "/docs/cmd" }}
                   {{/* Special handling for the cmd list section. */}}
-                  <code><a class="stretched-link" href="{{ .RelPermalink }}">sq {{ .Params.title | title | lower }} &rarr;</a></code>
+                  <code><a class="stretched-link" href="{{ .RelPermalink }}">{{ .Params.title | title | lower }} &rarr;</a></code>
                 {{ else }}
                   <a class="stretched-link" href="{{ .RelPermalink }}">{{ .Params.title | title }} &rarr;</a>
                 {{ end }}

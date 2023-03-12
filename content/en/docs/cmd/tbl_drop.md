@@ -1,5 +1,5 @@
 ---
-title: "tbl drop"
+title: "sq tbl drop"
 description: "Drop one or more tables"
 draft: false
 images: []
