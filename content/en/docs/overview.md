@@ -29,7 +29,7 @@ to actual SQL for trickier work. In essence, `sq` treats every data source as if
 ## Quick start
 
 1. [Install](/docs/install) `sq`.
-2. Add a data source. We'll use an Excel file.
+2. [Add](/docs/cmd/add/) a data source. We'll use an Excel file.
     ```shell
     $ sq add --handle "@demo" https://sq.io/testdata/xl_demo.xlsx
     @demo  xlsx  xl_demo.xlsx
