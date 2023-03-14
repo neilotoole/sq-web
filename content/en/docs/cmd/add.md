@@ -6,7 +6,7 @@ images: []
 menu:
   docs:
     parent: "cmd"
-weight: 3000
+weight: 2020
 toc: false
 ---
 Use `sq add` to add a data source. The source can be a SQL database, or a document

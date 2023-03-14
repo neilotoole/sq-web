@@ -3,7 +3,7 @@ title: "Testing"
 description: "testing"
 draft: false
 images: []
-weight: 2001
+weight: 6002
 toc: true
 ---
 `sq` is a much more difficult beast to test than a typical Go project. `sq` is all about integrating data sources, and

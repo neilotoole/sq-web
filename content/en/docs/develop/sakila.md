@@ -4,7 +4,7 @@ description: "Sakila DB"
 lead: "Sakila is an example dataset, ported to many databases."
 draft: false
 images: []
-weight: 2002
+weight: 6001
 toc: true
 ---
 `sq` documentation typically uses the [Sakila](https://dev.mysql.com/doc/sakila/en/) example database. Sakila was
