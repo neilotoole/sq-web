@@ -10,10 +10,8 @@ The `sq` XLSX driver implements connectivity
 for Microsoft [XLSX](https://www.microsoft.com/en-us/microsoft-365/excel)
 files.
 
-Note that the XLSX driver is a read-only data source. That is to say, while you can query the XLSX
+Note that XLSX sources are read-only. That is to say, while you can query the XLSX
 source as if it were a SQL database, you cannot use `sq` to insert values into the XLSX file.
-
-
 
 ## Add source
 

@@ -9,7 +9,7 @@ toc: true
 The `sq` CSV driver implements connectivity for [CSV](https://en.wikipedia.org/wiki/Comma-separated_values)
 and variants, such as [TSV](https://en.wikipedia.org/wiki/Tab-separated_values), pipe-delimited, etc..
 
-Note that the CSV driver is a read-only data source. That is to say, while you can query the CSV
+Note that the CSV data sources are read-only. That is to say, while you can query the CSV
 source as if it were a SQL table, you cannot insert values into the CSV source.
 
 ## Add source
