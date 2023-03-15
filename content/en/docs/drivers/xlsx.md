@@ -46,7 +46,7 @@ There is an open [issue](https://github.com/neilotoole/sq/issues/98) for this.
 
 ## Header row
 
-By default, `sq` treats each sheet as a raw data files, without a header row. The fields (columns)
+By default, `sq` treats each sheet as raw data, without a header row. The fields (columns)
 are then named `A`, `B`, `C`, etc.
 
 ```shell
