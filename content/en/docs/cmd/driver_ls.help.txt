@@ -1,4 +1,4 @@
-List available drivers
+List available drivers.
 
 Usage:
   sq driver ls [flags]

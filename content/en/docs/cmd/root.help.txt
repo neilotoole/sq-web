@@ -1,4 +1,4 @@
-sq is a swiss army knife for data.
+sq is a swiss-army knife for wrangling data.
 
 Use sq to query Postgres, SQLite, SQLServer, MySQL, CSV, TSV
 and Excel, and output in text, JSON, CSV, Excel, HTML, etc., or
@@ -83,7 +83,7 @@ Available Commands:
   version     Print sq version
   driver      List or manage drivers
   tbl         Useful table actions (copy, truncate, drop)
-  completion  Generate completion script
+  completion  Generate shell completion script
   help        Show sq help
 
 Flags:
