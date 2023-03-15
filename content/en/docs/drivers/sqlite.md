@@ -10,10 +10,10 @@ The `sq` Postgres driver implements connectivity for
 the [SQLite](https://www.sqlite.org) database.
 The driver implements all optional driver features.
 
-## sq add
+## Add source
 
-The location argument is simply the filepath to the SQLite data file.
-For example:
+Use [`sq add`](/docs/cmd/add) to add a source. The location argument is simply the
+filepath to the SQLite DB file. For example:
 
 ```shell
 sq add ./sakila.db
@@ -23,7 +23,8 @@ You can also supply the absolute filepath, or use a URI with the `sqlite3://` pr
 For example:
 
 ```shell
-sq add 'sqlite3:///Users/neilotoole/sakila.db'
+$ sq add /Users/neilotoole/sakila.db
+$ sq add 'sqlite3:///Users/neilotoole/sakila.db'
 ```
 
 ### Create new SQLite DB

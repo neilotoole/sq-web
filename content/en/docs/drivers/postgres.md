@@ -10,9 +10,10 @@ The `sq` Postgres driver implements connectivity for
 the [Postgres](https://www.postgresql.org) database.
 The driver implements all optional driver features.
 
-## sq add
+## Add source
 
-The location argument should start with `postgres://`. For example:
+Use [`sq add`](/docs/cmd/add) to add a source.  The location argument should start
+with `postgres://`. For example:
 
 ```shell
 sq add 'postgres://sakila:p_ssW0rd@localhost/sakila'

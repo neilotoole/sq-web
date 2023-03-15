@@ -1,7 +1,7 @@
 ---
 title: "Cookbook"
-description: "Cookbook"
-lead: "Various things you can do with sq"
+description: "Recipes for various tasks"
+lead: "Recipes for various tasks"
 draft: false
 images: []
 weight: 1040
