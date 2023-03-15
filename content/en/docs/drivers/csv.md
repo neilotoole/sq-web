@@ -18,8 +18,8 @@ When adding a CSV source via [`sq add`](/docs/cmd/add), the location string is s
 For example:
 
 ```shell
-$ sq add ./person.csv
-@person_csv  csv  person.csv
+$ sq add ./actor.csv
+@actor_csv  csv  actor.csv
 ```
 
 You can also pass an absolute filepath (and, in fact, any relative path is expanded to
@@ -29,20 +29,20 @@ Usually you can omit the `--driver=csv` flag, because `sq` will inspect the file
 and figure out that it's a CSV file. However, it's safer to explicitly specify the flag.
 
 ```shell
-sq add --driver=csv ./person.csv
+sq add --driver=csv ./actor.csv
 ```
 
 The same is true for TSV files. You can specify the driver explicitly:
 
 ```shell
-$ sq add ./person.tsv
-@person_tsv  tsv  person.tsv
+$ sq add ./actor.tsv
+@actor_tsv  tsv  actor.tsv
 ```
 
 But, if you omit the driver, `sq` can generally figure out that it's a TSV file.
 
 ```shell
-sq add ./person.tsv
+sq add ./actor.tsv
 ```
 
 ## Monotable
@@ -52,10 +52,10 @@ obviously can have many tables). Like all other `sq` monotable sources,
 the source's data is accessed via the synthetic `.data` table. For example:
 
 ```shell
-$ sq @person_csv.data
-uid  username    email                  address_id
-1    neilotoole  neilotoole@apache.org  1
-2    ksoze       kaiser@soze.org        2
+$ sq @actor_csv.data
+actor_id  first_name   last_name     last_update
+1         PENELOPE     GUINESS       2020-02-15T06:59:28Z
+2         NICK         WAHLBERG      2020-02-15T06:59:28Z
 ```
 
 ## Delimiters
@@ -66,7 +66,7 @@ the delimiter. Because the delimiter is often a shell token (e.g. `|`), the `del
 requires text aliases. For example:
 
 ```shell
-sq add ./person.csv --opts delim=pipe
+sq add ./actor.csv --opts delim=pipe
 ```
 
 The accepted values are:
@@ -89,9 +89,9 @@ Note:
   The following are equivalent:
 
   ```shell
-  $ sq add --driver=tsv ./person.tsv
-  $ sq add --driver=csv --opts delim=tab ./person.tsv
-  $ sq add ./person.tsv
+  $ sq add --driver=tsv ./actor.tsv
+  $ sq add --driver=csv --opts delim=tab ./actor.tsv
+  $ sq add ./actor.tsv
   ```
 
 ## Header row
@@ -100,33 +100,62 @@ By default, `sq` treats CSV files as raw data files, without a header row. The f
 are then named `A`, `B`, `C`, etc.
 
 ```shell
-$ sq @person_noheader_csv.data
-A  B           C                      D
-1  neilotoole  neilotoole@apache.org  1
-2  ksoze       kaiser@soze.org        2
+$ sq @actor_noheader_csv.data
+A    B            C             D
+1    PENELOPE     GUINESS       2020-02-15T06:59:28Z
+2    NICK         WAHLBERG      2020-02-15T06:59:28Z
 ```
 
 But often a CSV file will have a header row. For example:
 
 ```text
-uid,username,email,address_id
-1,neilotoole,neilotoole@apache.org,1
-2,ksoze,kaiser@soze.org,2
+actor_id,first_name,last_name,last_update
+1,PENELOPE,GUINESS,2020-02-15T06:59:28Z
+2,NICK,WAHLBERG,2020-02-15T06:59:28Z
 ```
 
-In this case, use the `--header=true` option:
+In that case, use the `--header=true` option:
 
 ```shell
-$ sq add --opts header=true ./person.csv
-@person_csv  csv  person.csv
+sq add --opts header=true ./actor.csv
 ```
 
 Then the CSV header field names will become the column names.
 
 ```shell
-sq @person_csv.data
-uid  username    email                  address_id
-1    neilotoole  neilotoole@apache.org  1
-2    ksoze       kaiser@soze.org        2
+$ sq @actor_csv.data
+actor_id  first_name   last_name     last_update
+1         PENELOPE     GUINESS       2020-02-15T06:59:28Z
+2         NICK         WAHLBERG      2020-02-15T06:59:28Z
 ```
 
+### Explicit column names
+
+If the CSV file doesn't have a header row, you can use the `cols` option to provide semantic
+column names instead of the default `A, B, C`. For example:
+
+```shell
+$ sq add --opts cols=id,first,last,date ./actor_noheader.csv
+@actor_noheader_csv  csv  actor_noheader.csv
+$ sq @actor_noheader_csv.data
+id   first        last          date
+1    PENELOPE     GUINESS       2020-02-15T06:59:28Z
+2    NICK         WAHLBERG      2020-02-15T06:59:28Z
+```
+
+You can also use the `cols` option to override the column names even if the CSV
+file does have a header row.
+
+```shell
+$ sq add --opts 'header=true&cols=id,first,last,date' ./actor.csv
+@actor_csv  csv  actor.csv
+$ sq @actor_csv.data
+id   first        last          date
+1    PENELOPE     GUINESS       2020-02-15T06:59:28Z
+2    NICK         WAHLBERG      2020-02-15T06:59:28Z
+```
+
+{{< alert icon="👉" >}}
+An error will be returned if the number of fields in the CSV data does not
+match the number of explicit column names to `--opts cols`.
+{{< /alert >}}

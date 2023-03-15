@@ -1,7 +1,6 @@
 ---
 title: "Cookbook"
 description: "Recipes for various tasks"
-lead: "Recipes for various tasks"
 draft: false
 images: []
 weight: 1040
@@ -55,8 +54,6 @@ The above snippet will:
 - pipe those table names to `xargs`
 - `xargs` invokes `sq .% --csv --output %.csv` for each table name (e.g. `sq .actor --csv --output actor.csv`)
 - thus the content of each table is outputted in CSV format to an individual `.csv` file.
-
-[![asciicast](https://asciinema.org/a/6cUvURZo7xitJQMkHQNIjooM1.svg)](https://asciinema.org/a/6cUvURZo7xitJQMkHQNIjooM1)
 
 
 ## Import JSON Array to database

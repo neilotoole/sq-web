@@ -111,9 +111,15 @@ main nav.d-xl-none {
   margin-bottom: 20px;
 }
 
+a > code {
+  text-decoration: underline;
+  text-decoration-style: dotted;
+}
+
 table > code,
 p > code,
 li > code,
+a > code,
 .tab-pane > code, {
   border-radius: 3px;
   padding: 3px 6px;
