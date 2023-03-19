@@ -5,6 +5,8 @@ draft: false
 images: []
 weight: 4030
 toc: false
+aliases:
+- /docs/driver/sql-server
 ---
 The `sq` SQL Server driver implements connectivity for
 the Microsoft [SQL Server](https://www.microsoft.com/en-us/sql-server) and

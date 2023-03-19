@@ -19,7 +19,7 @@ the config file (e.g. `vi ~/.config/sq/sq.yml`).
 
 A data source has three main elements:
 
-- `driver`: such as `postgres`, or `csv`. You may also see this referred to as the _source type_
+- `driver type`: such as `postgres`, or `csv`. You may also see this referred to as the _source type_
   or simply _type_.
 - `handle`: such as `@sakila_pg`. A handle always starts with `@`. The handle is used to refer
   to the data source.
@@ -29,7 +29,7 @@ A data source has three main elements:
 The format of the command is:
 
 ```shell
-sq add [--handle HANDLE] [--driver DRIVER] [--opts OPTS] LOCATION
+sq add [--handle HANDLE] [--driver DRIVER] [--active] [--opts OPTS] LOCATION
 ```
 
 For example, to add a postgres data source:
@@ -42,7 +42,9 @@ $ sq add postgres://sakila:p_ssW0rd@localhost/sakila
 Note that flags can generally be omitted. If `--handle` is omitted,
 `sq` will generate a handle. In the example above, the generated handle
 is `@sakila_pg`. Usually `--driver` can also be omitted, and `sq`
-will determine the driver type.
+will determine the driver type. The `--active` flag immediately sets
+the newly-added source as the active source (this also happens regardless if there is
+not currently an active source).
 
 To add a document source, you can generally just add the file path:
 
