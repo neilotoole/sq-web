@@ -69,6 +69,34 @@ need to specify the handle.
 $ sq .actor
 ```
 
+## Column Aliases
+
+You can use the column alias feature to change the name of one or more columns.
+For example:
+
+```shell
+$ sq '.actor | .first_name:given_name, .last_name:family_name'
+given_name   family_name
+PENELOPE     GUINESS
+NICK         WAHLBERG
+```
+
+Behind the scenes, `sq` uses the SQL `column AS alias` construct. The query
+above would be rendered into SQL like this:
+
+```sql
+SELECT "first_name" AS "given_name", "last_name" AS "family_name" FROM "actor"
+```
+
+This works for any type of column expression, including functions.
+
+```sql
+$ sq '.actor | count(*):quantity'
+quantity
+200
+```
+
+
 [//]: # (## Joins)
 
 [//]: # ()
