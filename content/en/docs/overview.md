@@ -17,14 +17,16 @@ to actual SQL for trickier work. In essence, `sq` treats every data source as if
 ## Key Concepts
 
 - `sq` is the command-line utility itself.
-- `SLQ` is the formal name of `sq`'s language, similar to `jq` syntax.
-- `source` is a specific data source such as a database instance, or Excel or CSV file etc.. A `source` has a:
-  - `type`: such as `postgres`, `sqlserver`, `csv`, or `xlsx`; effectively `type` means the _source driver type_.
-  - `location`: the location of the _source_, such as `postgres://sakila:****@localhost/sakila` or `/Users/neilotoole/sq/xl_demo.xlsx`.
+- _SLQ_ is the formal name of `sq`'s language, similar to `jq` syntax.
+- _Source_ is a specific data source such as a database instance, or Excel or CSV file etc.. A `source` has a:
+  - `driver type`: such as [`postgres`](/docs/drivers/postgres), [`sqlserver`](/docs/drivers/sqlserver),
+    [`csv`](/docs/drivers/csv), or [`xlsx`](/docs/drivers/xlsx).
+  - `location`: URI or filepath of the source, such as `postgres://sakila:****@localhost/sakila` or `/Users/neilotoole/sq/xl_demo.xlsx`.
   - `handle`: this is how `sq` refers to that particular _source_, e.g. `@sakila_pg` or `@xl_demo`. A `handle` must begin with `@`.
-- `active source` is the default _source_ upon which `sq` acts if no other source is specified.
-- a `driver` is implemented by `sq` for each data source type. For example, `postgres`, or `csv`.
-- `sq inspect` returns _metadata_ about your source, such as table names or number of rows.
+- [Active Source](/docs/concepts/#active-source) is the default source upon which `sq` acts if no other source is specified.
+- [`sq inspect`](/docs/cmd/inspect) returns _metadata_ about your source, such as table names or number of rows.
+
+Read more in [Concepts](/docs/concepts).
 
 ## Quick start
 

@@ -19,7 +19,7 @@ Examples:
 
 Flags:
   -j, --json   Output JSON
-      --data   Copy table data (default true) (default true)
+      --data   Copy table data (default true)
       --help   help for copy
 
 Global Flags:

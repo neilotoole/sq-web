@@ -58,10 +58,16 @@ div.docs-sidebar {
 
 h2 {
   font-size: 1.3em;
-
-  //border-bottom: 1px solid $nord4;
+  padding-bottom: 8px;
+  border-bottom: 1px solid $nord4;
+  border-bottom-style: dashed;
 }
 
+[data-dark-mode] h2 {
+  border-bottom: 1px solid $nord1;
+  border-bottom-style: dashed;
+
+}
 h3 {
   font-size: 1.1em;
 }

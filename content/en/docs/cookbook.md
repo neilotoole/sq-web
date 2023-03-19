@@ -3,7 +3,7 @@ title: "Cookbook"
 description: "Recipes for various tasks"
 draft: false
 images: []
-weight: 1040
+weight: 1050
 toc: true
 ---
 This cookbook demonstrates how to perform various tasks using `sq`.

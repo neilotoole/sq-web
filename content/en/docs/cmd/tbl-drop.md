@@ -8,6 +8,8 @@ menu:
     parent: "cmd"
 weight: 2130
 toc: false
+aliases:
+- /docs/cmd/tbl_drop
 ---
 
-{{< readfile file="tbl_drop.help.txt" code="true" lang="text" >}}
+{{< readfile file="tbl-drop.help.txt" code="true" lang="text" >}}

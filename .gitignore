@@ -9,3 +9,4 @@ resources
 /scratch
 /*.iml
 /.idea
+/.serve-lint

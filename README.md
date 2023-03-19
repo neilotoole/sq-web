@@ -34,7 +34,11 @@ npm install
 ### 3. Make changes and test locally
 
 ```bash
-npm run start
+# Start a local webserver on http://localhost:1313 to test you changes.
+npm start
+
+# Run linters, link checks, etc.
+npm test
 ```
 
 ### 4. Submit a Pull Request

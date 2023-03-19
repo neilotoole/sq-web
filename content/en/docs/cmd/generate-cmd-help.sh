@@ -27,14 +27,18 @@ cmds=(
    )
 
 rm -f ./*.help.txt
-
-# Special handling for the root command.
-sq --help > root.help.txt
+rm -f ./*.output.txt
 
 for cmd in "${cmds[@]}"; do
-  # space -> underscore, e.g. "driver ls" -> "driver_ls"
-  dest="${cmd// /_}.help.txt"
+  # space -> dash, e.g. "driver ls" -> "driver-ls"
+  dest="${cmd// /-}.help.txt"
 
   # shellcheck disable=SC2086
   sq $cmd --help > "$dest"
 done
+
+# Special handling for the root command.
+sq --help > sq.help.txt
+
+# Show output for some commands
+sq driver ls > driver-ls.output.txt

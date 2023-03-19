@@ -12,16 +12,21 @@ set -e
 trap "exit" INT TERM
 trap "kill -- -$$ &> /dev/null && exit 0" EXIT
 
-port=31313
+port=31317
 base_url="http://localhost:$port"
 
-# Build a nice fresh site (into the public dir)
-npm run clean && ./node_modules/.bin/hugo/hugo --gc --minify -b $base_url
+# Build a nice fresh site into $lint_dir
+lint_dir="./.serve-lint"
+rm -rf $lint_dir
+./node_modules/.bin/hugo/hugo --gc --minify -b $base_url -d $lint_dir
 
 # Start a local webserver (background process)
 echo "Starting server for linting at: $base_url"
-npx serve -l $port public/ > /dev/null &
+npx serve -l $port $lint_dir &
+#npx serve -l $port $lint_dir > /dev/null &
 sleep 2 # Give server time to start
 echo "Server started"
 
 npx linkinator --config ./linkinator.config.json -r $base_url
+
+echo "Linkinator finished"

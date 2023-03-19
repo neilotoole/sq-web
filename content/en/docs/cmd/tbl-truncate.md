@@ -8,6 +8,8 @@ menu:
     parent: "cmd"
 weight: 2140
 toc: false
+aliases:
+- /docs/cmd/tbl_truncate
 ---
 
-{{< readfile file="tbl_truncate.help.txt" code="true" lang="text" >}}
+{{< readfile file="tbl-truncate.help.txt" code="true" lang="text" >}}
