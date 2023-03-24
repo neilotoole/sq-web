@@ -69,7 +69,6 @@ need to specify the handle.
 $ sq .actor
 ```
 
-**
 ## Filter results
 
 Use a filter expression to filter results.
