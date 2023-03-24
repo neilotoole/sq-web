@@ -1,6 +1,6 @@
 ---
-title: "Query Language"
-description: "Query Language Reference"
+title: "Query Guide"
+description: "Guide to sq's query language"
 lead: ""
 draft: false
 images: []
@@ -34,7 +34,7 @@ You can probably guess what's going on above. This query has 4 _segments_:
 |--------------|-------------------|---------------------------|-----------|
 | `@sakila_pg` | `.actor`          | `.first_name, .last_name` | `.[0:3]`  |
 
-Behind the scenes, this SLQ query is translated to a SQL query, which is executed
+Behind the scenes, the SLQ query is translated to a SQL query, which is executed
 against the `@sakila_pg` source (which in this example is a [Postgres](/docs/drivers/postgres)
 database). The SQL generated query will look something like:
 
@@ -69,9 +69,81 @@ need to specify the handle.
 $ sq .actor
 ```
 
-## Column Aliases
+**
+## Filter results
 
-You can use the column alias feature to change the name of one or more columns.
+Use a filter expression to filter results.
+
+```shell
+$ sq '.actor | .first_name, .last_name | .first_name == "TOM"'
+first_name  last_name
+TOM         MCKELLEN
+TOM         MIRANDA
+```
+
+Ultimately a filter is translated into a SQL `WHERE` clause such as:
+
+```sql
+SELECT "first_name", "last_name" FROM "actor" WHERE  "first_name" = "TOM"
+```
+
+If a column has an [alias](#column-aliases), you can use either the original
+name or the alias in the expression.
+
+```shell
+$ sq '.actor | .first_name:given_name | .given_name == "TOM"'
+```
+
+## Operators
+
+The typical comparison operators are available in expressions:
+
+```shell
+$ sq '.actor | .actor_id < 3'
+actor_id  first_name  last_name  last_update
+1         PENELOPE    GUINESS    2020-06-11T02:50:54Z
+2         NICK        WAHLBERG   2020-06-11T02:50:54Z
+```
+
+| Operator | Description              |
+|----------|--------------------------|
+| `==`     | Equal to                 |
+| `!=`     | Not equal to             |
+| `<`      | Less than                |
+| `<=`     | Less than or equal to    |
+| `>`      | Greater than             |
+| `>=`     | Greater than or equal to |
+
+## Row range
+
+You can limit the number of returned rows using the row range construct `.[x:y]`.
+Note that the elements are [zero-indexed](https://en.wikipedia.org/wiki/Zero-based_numbering).
+
+```shell
+$ sq '.actor | .[3]'      # Return row index 3 (fourth row)
+$ sq '.actor | .[0:3]'    # Return rows 0-3
+$ sq '.actor | .[:3]'     # Same as above; return rows 0-3
+$ sq '.actor | .[100:]'   # Return rows 100 onwards
+```
+
+At the backend, a row range becomes a `LIMIT x OFFSET y` clause:
+
+```sql
+SELECT * FROM "actor" LIMIT 3 OFFSET 2
+```
+
+## Whitespace names
+
+If a table or column name has whitespace, simply surround the name in quotes.
+
+```shell
+$ sq '.actor | ."first name", ."last name"'
+$ sq '."film actor" | .actor_id'
+```
+
+## Column aliases
+
+You can give an alias to a column expression using `.name:alias`.
 For example:
 
 ```shell
@@ -81,7 +153,7 @@ PENELOPE     GUINESS
 NICK         WAHLBERG
 ```
 
-Behind the scenes, `sq` uses the SQL `column AS alias` construct. The query
+On the backend, `sq` uses the SQL `column AS alias` construct. The query
 above would be rendered into SQL like this:
 
 ```sql
@@ -90,29 +162,126 @@ SELECT "first_name" AS "given_name", "last_name" AS "family_name" FROM "actor"
 
 This works for any type of column expression, including functions.
 
-```sql
+```shell
 $ sq '.actor | count(*):quantity'
 quantity
 200
 ```
 
+It's common to alias [whitespace names](#whitespace-names):
 
-[//]: # (## Joins)
+```shell
+$ sq '.actor | ."first name":first_name, ."last name":last_name'
+given_name  family_name
+PENELOPE    GUINESS
+NICK        WAHLBERG
+```
 
-[//]: # ()
-[//]: # (Use the `join` construct to join two tables, in a single data source, or across)
 
-[//]: # (data sources.)
+## Joins
 
-[//]: # ()
-[//]: # (## Single-source join)
+Use the `join` construct to join two tables. You can join tables in a single data source,
+or across data sources. That is, you can join a Postgres table and a CSV file, or
+an Excel worksheet and a JSON file, etc.
 
-[//]: # ()
-[//]: # (This example joins two tables in the same source.)
+{{< alert icon="⚠️" >}}
+`sq` only implements a limited subset of the SQL JOIN standard.
 
-[//]: # ()
-[//]: # (```shell)
+At this time,
+you cannot join more than two tables. There's
+an [open issue](https://github.com/neilotoole/sq/issues/12).
 
-[//]: # ()
-[//]: # (```)
+Also, the only JOIN variant available is the plain old JOIN. There's no
+support for `RIGHT OUTER JOIN`, `CROSS JOIN`, etc. See the
+[issue](https://github.com/neilotoole/sq/issues/157).
+{{< /alert >}}
 
+Take the `film` and `language` tables from the [Sakila](/docs/develop/sakila/) DB:
+
+```text
+TABLE     ROWS  COL NAMES
+film      1000  film_id, title, description, release_year, language_id [...]
+language  6     language_id, name, last_update
+```
+
+Note that both tables have a column `language_id`. This is the simplest join:
+
+```shell
+$ sq '.film, .language | join(.language_id)'
+title             name      [...]
+ACADEMY DINOSAUR  English
+ACE GOLDFINGER    English
+```
+
+Behind the scenes, the executed SQL looks like:
+
+```sql
+SELECT * FROM "film"
+    INNER JOIN "language" ON "film"."language_id" = "language"."language_id"
+```
+
+If the joined columns have different names, then you need to explicitly specify
+those names. Generally it's safer to specify `.table.column`, instead of
+just the column name. Let's pretend the `actor` table's primary key was named `id`
+instead of `actor_id`. Then the query would be:
+
+```shell
+$ sq '.actor, .film_actor | join(.actor.id == .film_actor.actor_id)'
+```
+
+This would produce SQL like:
+
+```sql
+SELECT * FROM "actor"
+    INNER JOIN "film_actor" ON "actor"."id" = "film_actor"."actor_id"
+```
+
+Thus, a join query has this structure:
+
+| Handle (optional) | Table Selectors       | Join constraint                                 | Column expressions                       |
+|-------------------|-----------------------|-------------------------------------------------|------------------------------------------|
+| `@sakila_pg`      | `.actor, .film_actor` | `join(.actor.actor_id == .film_actor.actor_id)` | `.actor.first_name, .film_actor.film_id` |
+
+### Cross-source joins
+
+`sq` can join across data sources. Below, we join a CSV file with a Postgres table.
+
+```shell
+sq '@actor_csv.data, @sakila_pg12.film_actor | join (.data.id == .film_actor.actor_id) | .data.first:first_name, .film_actor.film_id'
+first_name  film_id
+PENELOPE    1
+PENELOPE    23
+```
+
+This would turn into this SQL query:
+
+```sql
+SELECT "data"."first" AS "first_name", "film_actor"."film_id" FROM "data"
+    INNER JOIN "film_actor" ON "data"."id" = "film_actor"."actor_id"
+```
+
+If there is no ambiguity in the column names, you can use the short-form selectors:
+
+```shell
+$ sq '@actor_csv.data, @sakila_pg12.film_actor | join (.id == .actor_id) | .first:first_name, .film_id'
+```
+
+This would translate to:
+
+```sql
+SELECT "first" AS "first_name", "film_id" FROM "data"
+    INNER JOIN "film_actor" ON "id" = "actor_id"
+```
+
+{{< alert icon="👉" >}}
+How do cross-source joins work?
+
+The implementation is very basic (and could be dramatically enhanced).
+
+1. `sq` copies the full contents of the left table to the [scratch DB](/docs/concepts/#scratch-db).
+2. `sq` copies the full content of the right table to the scratch DB.
+3. `sq` executes the query against the scratch DB.
+
+Given that this naive implementation perform a full copy of both tables, cross-source joins
+are only suitable for smaller datasets.
+{{< /alert >}}
