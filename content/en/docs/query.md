@@ -132,7 +132,7 @@ At the backend, a row range becomes a `LIMIT x OFFSET y` clause:
 SELECT * FROM "actor" LIMIT 3 OFFSET 2
 ```
 
-## Ordering
+## Order By
 
 Use `orderby()` to sort the results.
 
@@ -166,7 +166,8 @@ SELECT * FROM "actor" ORDER BY "first_name" ASC, "last_name" DESC
 ```
 
 {{< alert icon="👉" >}}
-To stay aligned with `jq`, you can also use the [`sort_by`](https://stedolan.github.io/jq/manual/v1.6/#sort,sort_by(path_expression))
+For interoperability with `jq`, you can use the
+[`sort_by`](https://stedolan.github.io/jq/manual/v1.6/#sort,sort_by(path_expression))
 synonym for `orderby`:
 
 ```shell
@@ -174,6 +175,35 @@ $ sq '.actor | sort_by(.first_name)'
 actor_id  first_name  last_name  last_update
 71        ADAM        GRANT      2006-02-15T04:34:33Z
 132       ADAM        HOPPER     2006-02-15T04:34:33Z
+```
+{{< /alert >}}
+
+## Group By
+
+Use `groupby` to [group](https://en.wikipedia.org/wiki/Group_by_(SQL)) results.
+
+```shell
+$ sq '.payment | .customer_id, sum(.amount) | groupby(.customer_id)'
+```
+
+This translates into:
+
+```sql
+SELECT "customer_id", SUM("amount") FROM "payment" GROUP BY "customer_id"
+```
+
+You can use multiple terms in `groupby`:
+
+```shell
+$ sq '.payment | .customer_id, .staff_id, sum(.amount) | group(.customer_id, .staff_id)'
+```
+
+{{< alert icon="👉" >}}
+For`jq` interoperability, you can also use the [`group_by`](https://stedolan.github.io/jq/manual/v1.6/#group_by(path_expression))
+synonym for `groupby`:
+
+```shell
+$ sq '.payment | .customer_id, sum(.amount) | group_by(.customer_id)'
 ```
 {{< /alert >}}
 
