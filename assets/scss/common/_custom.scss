@@ -121,12 +121,6 @@ main nav.d-xl-none {
   text-decoration-style: dotted;
 }
 
-.alert a > code,
-a > code {
-  text-decoration: underline;
-  text-decoration-style: dotted;
-}
-
 table > code,
 p > code,
 li > code,
@@ -139,6 +133,8 @@ a > code,
   border: 1px solid $code-border-color;
   background-color: $code-bg-color;
   color: $code-color;
+  text-decoration: underline;
+  text-decoration-style: dotted;
 }
 
 [data-dark-mode] code,
