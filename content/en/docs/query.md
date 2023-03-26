@@ -1,12 +1,13 @@
 ---
-title: "Query Guide"
-description: "Guide to sq's query language"
-lead: ""
+title: Query Guide
+description: Guide to sq's query language
+lead: ''
 draft: false
 images: []
 weight: 1035
 toc: true
 ---
+
 `sq` implements a [`jq`](https://stedolan.github.io/jq/)-style query language, formally
 known as [`SLQ`](https://github.com/neilotoole/sq/tree/master/grammar).
 
@@ -31,10 +32,10 @@ ED          CHASE
 You can probably guess what's going on above. This query has 4 _segments_:
 
 | Handle       | Table Selector(s) | Column Expression(s)      | Row Range |
-|--------------|-------------------|---------------------------|-----------|
+| ------------ | ----------------- | ------------------------- | --------- |
 | `@sakila_pg` | `.actor`          | `.first_name, .last_name` | `.[0:3]`  |
 
-Behind the scenes, the SLQ query is translated to a SQL query, which is executed
+Ultimately the SLQ query is translated to a SQL query, which is executed
 against the `@sakila_pg` source (which in this example is a [Postgres](/docs/drivers/postgres)
 database). The SQL generated query will look something like:
 
@@ -105,7 +106,7 @@ actor_id  first_name  last_name  last_update
 ```
 
 | Operator | Description              |
-|----------|--------------------------|
+| -------- | ------------------------ |
 | `==`     | Equal to                 |
 | `!=`     | Not equal to             |
 | `<`      | Less than                |
@@ -130,6 +131,52 @@ At the backend, a row range becomes a `LIMIT x OFFSET y` clause:
 ```sql
 SELECT * FROM "actor" LIMIT 3 OFFSET 2
 ```
+
+## Ordering
+
+Use the `orderby()` function to sort the results.
+
+```shell
+$ sq '.actor | orderby(.first_name)'
+actor_id  first_name  last_name  last_update
+71        ADAM        GRANT      2006-02-15T04:34:33Z
+132       ADAM        HOPPER     2006-02-15T04:34:33Z
+```
+
+This translates to:
+
+```sql
+SELECT * FROM "actor" ORDER BY "first_name"
+```
+
+Change the sort order by appending `+` (ascending) or `-` (descending)
+to the column selector:
+
+```shell
+$ sq '.actor | orderby(.first_name+, .last_name-)'
+actor_id  first_name  last_name  last_update
+132       ADAM        HOPPER     2006-02-15T04:34:33Z
+71        ADAM        GRANT      2006-02-15T04:34:33Z
+```
+
+That query becomes:
+
+```sql
+SELECT * FROM "actor" ORDER BY "first_name" ASC, "last_name" DESC
+```
+
+{{< alert icon="👉" >}}
+To stay aligned with `jq`, you can also use the [`sort_by`](https://stedolan.github.io/jq/manual/v1.6/#sort,sort_by(path_expression))
+synonym for `orderby`:
+
+```shell
+$ sq '.actor | sort_by(.first_name)'
+actor_id  first_name  last_name  last_update
+71        ADAM        GRANT      2006-02-15T04:34:33Z
+132       ADAM        HOPPER     2006-02-15T04:34:33Z
+```
+{{< /alert >}}
+
 
 ## Whitespace names
 
@@ -175,7 +222,6 @@ given_name  family_name
 PENELOPE    GUINESS
 NICK        WAHLBERG
 ```
-
 
 ## Joins
 
@@ -238,7 +284,7 @@ SELECT * FROM "actor"
 Thus, a join query has this structure:
 
 | Handle (optional) | Table Selectors       | Join constraint                                 | Column expressions                       |
-|-------------------|-----------------------|-------------------------------------------------|------------------------------------------|
+| ----------------- | --------------------- | ----------------------------------------------- | ---------------------------------------- |
 | `@sakila_pg`      | `.actor, .film_actor` | `join(.actor.actor_id == .film_actor.actor_id)` | `.actor.first_name, .film_actor.film_id` |
 
 ### Cross-source joins
@@ -278,8 +324,8 @@ How do cross-source joins work?
 The implementation is very basic (and could be dramatically enhanced).
 
 1. `sq` copies the full contents of the left table to the [scratch DB](/docs/concepts/#scratch-db).
-2. `sq` copies the full content of the right table to the scratch DB.
-3. `sq` executes the query against the scratch DB.
+1. `sq` copies the full content of the right table to the scratch DB.
+1. `sq` executes the query against the scratch DB.
 
 Given that this naive implementation perform a full copy of both tables, cross-source joins
 are only suitable for smaller datasets.
