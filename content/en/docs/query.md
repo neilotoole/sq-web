@@ -134,7 +134,7 @@ SELECT * FROM "actor" LIMIT 3 OFFSET 2
 
 ## Ordering
 
-Use the `orderby()` function to sort the results.
+Use `orderby()` to sort the results.
 
 ```shell
 $ sq '.actor | orderby(.first_name)'
