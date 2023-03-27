@@ -132,91 +132,6 @@ At the backend, a row range becomes a `LIMIT x OFFSET y` clause:
 SELECT * FROM "actor" LIMIT 3 OFFSET 2
 ```
 
-## Order By
-
-Use `orderby()` to sort the results.
-
-```shell
-$ sq '.actor | orderby(.first_name)'
-actor_id  first_name  last_name  last_update
-71        ADAM        GRANT      2006-02-15T04:34:33Z
-132       ADAM        HOPPER     2006-02-15T04:34:33Z
-```
-
-This translates to:
-
-```sql
-SELECT * FROM "actor" ORDER BY "first_name"
-```
-
-Change the sort order by appending `+` (ascending) or `-` (descending)
-to the column selector:
-
-```shell
-$ sq '.actor | orderby(.first_name+, .last_name-)'
-actor_id  first_name  last_name  last_update
-132       ADAM        HOPPER     2006-02-15T04:34:33Z
-71        ADAM        GRANT      2006-02-15T04:34:33Z
-```
-
-That query becomes:
-
-```sql
-SELECT * FROM "actor" ORDER BY "first_name" ASC, "last_name" DESC
-```
-
-{{< alert icon="👉" >}}
-For interoperability with `jq`, you can use the
-[`sort_by`](https://stedolan.github.io/jq/manual/v1.6/#sort,sort_by(path_expression))
-synonym for `orderby`:
-
-```shell
-$ sq '.actor | sort_by(.first_name)'
-actor_id  first_name  last_name  last_update
-71        ADAM        GRANT      2006-02-15T04:34:33Z
-132       ADAM        HOPPER     2006-02-15T04:34:33Z
-```
-{{< /alert >}}
-
-## Group By
-
-Use `groupby` to [group](https://en.wikipedia.org/wiki/Group_by_(SQL)) results.
-
-```shell
-$ sq '.payment | .customer_id, sum(.amount) | groupby(.customer_id)'
-```
-
-This translates into:
-
-```sql
-SELECT "customer_id", SUM("amount") FROM "payment" GROUP BY "customer_id"
-```
-
-You can use multiple terms in `groupby`:
-
-```shell
-$ sq '.payment | .customer_id, .staff_id, sum(.amount) | group(.customer_id, .staff_id)'
-```
-
-{{< alert icon="👉" >}}
-For`jq` interoperability, you can also use the [`group_by`](https://stedolan.github.io/jq/manual/v1.6/#group_by(path_expression))
-synonym for `groupby`:
-
-```shell
-$ sq '.payment | .customer_id, sum(.amount) | group_by(.customer_id)'
-```
-{{< /alert >}}
-
-
-## Whitespace names
-
-If a table or column name has whitespace, simply surround the name in quotes.
-
-```shell
-$ sq '.actor | ."first name", ."last name"'
-$ sq '."film actor" | .actor_id'
-```
-
 ## Column aliases
 
 You can give an alias to a column expression using `.name:alias`.
@@ -251,6 +166,15 @@ $ sq '.actor | ."first name":first_name, ."last name":last_name'
 given_name  family_name
 PENELOPE    GUINESS
 NICK        WAHLBERG
+```
+
+## Whitespace names
+
+If a table or column name has whitespace, simply surround the name in quotes.
+
+```shell
+$ sq '.actor | ."first name", ."last name"'
+$ sq '."film actor" | .actor_id'
 ```
 
 ## Joins
@@ -360,3 +284,109 @@ The implementation is very basic (and could be dramatically enhanced).
 Given that this naive implementation perform a full copy of both tables, cross-source joins
 are only suitable for smaller datasets.
 {{< /alert >}}
+
+## Functions
+
+### `group_by`
+
+Use `group_by` to [group](<https://en.wikipedia.org/wiki/Group_by_(SQL)>) results.
+
+```shell
+$ sq '.payment | .customer_id, sum(.amount) | group_by(.customer_id)'
+```
+
+This translates into:
+
+```sql
+SELECT "customer_id", SUM("amount") FROM "payment" GROUP BY "customer_id"
+```
+
+You can use multiple terms in `group_by`:
+
+```shell
+$ sq '.payment | .customer_id, .staff_id, sum(.amount) | group_by(.customer_id, .staff_id)'
+```
+
+You can also use functions inside `group_by`. For example, to group the payment
+amount by month:
+
+```shell
+$ sq '.payment | strftime("%Y/%m", .payment_date), sum(.amount) | group_by(strftime("%Y/%m", .payment_date))'
+strftime('%Y/%m', "payment_date")  sum("amount")
+2005/05                            4824.429999999861
+2005/06                            9631.87999999961
+```
+
+That translates into:
+
+```sql
+SELECT strftime('%Y/%m', "payment_date"), sum("amount") FROM "payment"
+GROUP BY strftime('%Y/%m', "payment_date")
+```
+
+In practice, you probably want to use [column aliases](#column-aliases):
+
+```shell
+$ sq '.payment | strftime("%Y/%m", .payment_date):month, sum(.amount):amount | group_by(.month)'
+month    amount
+2005/05  4824.429999999861
+2005/06  9631.87999999961
+```
+
+{{< alert icon="👉" >}}
+Note the `strftime` function in the example above. That function is specific
+to [SQLite](https://www.sqlite.org/lang_datefunc.html): it won't work with Postgres,
+MySQL etc. `sq` passes functions through
+to the backend, and some of those functions won't be portable to other data sources.
+
+This situation is contra to `sq`'s goal of being cross-source compatible. To that end,
+it's possible that the syntax for invoking a DB-specific function may change to make
+it clear that a non-portable function is being invoked.
+
+TLDR: Use DB-specific functions with caution.
+{{< /alert >}}
+
+
+
+### `order_by`
+
+Use `order_by()` to sort results.
+
+```shell
+$ sq '.actor | order_by(.first_name)'
+actor_id  first_name  last_name  last_update
+71        ADAM        GRANT      2006-02-15T04:34:33Z
+132       ADAM        HOPPER     2006-02-15T04:34:33Z
+```
+
+This translates to:
+
+```sql
+SELECT * FROM "actor" ORDER BY "first_name"
+```
+
+Change the sort order by appending `+` (ascending) or `-` (descending)
+to the column selector:
+
+```shell
+$ sq '.actor | order_by(.first_name+, .last_name-)'
+actor_id  first_name  last_name  last_update
+132       ADAM        HOPPER     2006-02-15T04:34:33Z
+71        ADAM        GRANT      2006-02-15T04:34:33Z
+```
+
+That query becomes:
+
+```sql
+SELECT * FROM "actor" ORDER BY "first_name" ASC, "last_name" DESC
+```
+
+#### Synonyms
+
+For interoperability with `jq`, you can use the
+[`sort_by`](<https://stedolan.github.io/jq/manual/v1.6/#sort,sort_by(path_expression)>)
+synonym:
+
+```shell
+$ sq '.actor | sort_by(.first_name)'
+```

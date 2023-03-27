@@ -11,6 +11,7 @@
     "scss/double-slash-comment-whitespace-inside": null,
     "color-function-notation": null,
     "alpha-value-notation": null,
+    "no-descending-specificity": null,
     "selector-id-pattern": null,
     "selector-class-pattern": null,
     "scss/no-global-function-names": null,

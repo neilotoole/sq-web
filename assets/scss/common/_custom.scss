@@ -125,7 +125,8 @@ table > code,
 p > code,
 li > code,
 a > code,
-.tab-pane > code, {
+td > code,
+.tab-pane > code {
   border-radius: 3px;
   padding: 3px 6px;
   font-size: 0.75em;
@@ -135,11 +136,29 @@ a > code,
   color: $code-color;
 }
 
+// This section is for the Query Guide,
+h3 > code:not(.hljs) {
+  //background-color: transparent;
+  padding: 5px 10px;
+  margin-bottom: 50px;
+  font-size: 1.2em;
+  border: 1px solid $code-border-color;
+  background-color: $code-bg-color;
+  color: $code-color;
+}
+
 [data-dark-mode] code,
+[data-dark-mode] table > code,
 [data-dark-mode] p code,
 [data-dark-mode] li code,
 [data-dark-mode] .tab-pane > code,
 [data-dark-mode] body code:not(.hljs) {
+  border-color: $code-bg-color-dark;
+  color: $code-color-dark;
+  background-color: $code-bg-color-dark;
+}
+
+[data-dark-mode] h3 > code:not(.hljs) {
   border-color: $code-bg-color-dark;
   color: $code-color-dark;
   background-color: $code-bg-color-dark;
@@ -362,4 +381,9 @@ div.sticky-top header.navbar a.navbar-brand {
 
 [data-dark-mode] div.sticky-top header.navbar a.navbar-brand {
   color: $sq-logo-color-dark !important;
+}
+
+#functions ~ h3 {
+  margin-top: 60px;
+  margin-bottom: 20px;
 }
