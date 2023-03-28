@@ -287,6 +287,48 @@ are only suitable for smaller datasets.
 
 ## Functions
 
+### `count`
+
+The no-arg `count` function returns the total number of rows.
+
+```shell
+$ sq '.actor | count'
+count
+200
+```
+
+That renders to SQL as:
+
+```sql
+SELECT COUNT(*) AS "count" FROM "actor"
+```
+
+With an argument, `count(.x)` returns a count of the number of times
+that `.x` is not null in a group.
+
+```shell
+# count of non-null values in col first_name
+$ sq '.actor | count(.first_name)'
+```
+
+You can also supply an alias:
+
+```shell
+$ sq '.actor | count:quantity'
+quantity
+200
+```
+
+### `count_unique`
+
+`count_unique` counts the unique non-null values of a column.
+
+```shell
+$ sq '.actor | count_unique(.first_name)'
+count_unique(.first_name)
+128
+```
+
 ### `group_by`
 
 Use `group_by` to [group](<https://en.wikipedia.org/wiki/Group_by_(SQL)>) results.
@@ -346,8 +388,6 @@ it clear that a non-portable function is being invoked.
 TLDR: Use DB-specific functions with caution.
 {{< /alert >}}
 
-
-
 ### `order_by`
 
 Use `order_by()` to sort results.
@@ -389,4 +429,19 @@ synonym:
 
 ```shell
 $ sq '.actor | sort_by(.first_name)'
+```
+
+### `unique`
+
+`unique` filters results, only returning unique values.
+
+```shell
+# Return only unique first names
+$ sq '.actor | .first_name | unique'
+```
+
+The function maps to the SQL `DISTINCT` keyword:
+
+```sql
+SELECT DISTINCT "first_name" FROM "actor"
 ```
