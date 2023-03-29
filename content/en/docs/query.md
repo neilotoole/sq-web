@@ -433,7 +433,7 @@ $ sq '.actor | sort_by(.first_name)'
 
 ### `unique`
 
-`unique` filters results, only returning unique values.
+`unique` filters results, returning only unique values.
 
 ```shell
 # Return only unique first names
