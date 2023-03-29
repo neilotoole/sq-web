@@ -287,6 +287,18 @@ are only suitable for smaller datasets.
 
 ## Functions
 
+### `avg`
+
+`avg` returns the average of all non-null values of the column.
+
+```shell
+$ sq '.payment | avg(.amount)'
+avg(.amount)
+4.2006673312974065
+```
+
+
+
 ### `count`
 
 The no-arg `count` function returns the total number of rows.
@@ -388,6 +400,26 @@ it clear that a non-portable function is being invoked.
 TLDR: Use DB-specific functions with caution.
 {{< /alert >}}
 
+### `max`
+
+`max` returns the maximum value of the column.
+
+```shell
+sq '.payment | max(.amount)'
+max(.amount)
+11.99
+```
+
+### `min`
+
+`min` returns the minimum non-null value of the column.
+
+```shell
+$ sq '.payment | min(.amount)'
+min(.amount)
+0
+```
+
 ### `order_by`
 
 Use `order_by` to sort results.
@@ -429,6 +461,17 @@ synonym:
 
 ```shell
 $ sq '.actor | sort_by(.first_name)'
+```
+
+### `sum`
+
+`sum` returns the sum of all non-null values for the column. If there are no
+input rows, null is returned.
+
+```shell
+$ sq '.payment | sum(.amount)'
+sum(.amount)
+67416.50999999208
 ```
 
 ### `unique`
