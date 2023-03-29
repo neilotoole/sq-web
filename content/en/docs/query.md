@@ -300,7 +300,7 @@ count
 That renders to SQL as:
 
 ```sql
-SELECT COUNT(*) AS "count" FROM "actor"
+SELECT count(*) AS "count" FROM "actor"
 ```
 
 With an argument, `count(.x)` returns a count of the number of times
@@ -340,7 +340,7 @@ $ sq '.payment | .customer_id, sum(.amount) | group_by(.customer_id)'
 This translates into:
 
 ```sql
-SELECT "customer_id", SUM("amount") FROM "payment" GROUP BY "customer_id"
+SELECT "customer_id", sum("amount") FROM "payment" GROUP BY "customer_id"
 ```
 
 You can use multiple terms in `group_by`:
