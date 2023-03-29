@@ -390,7 +390,7 @@ TLDR: Use DB-specific functions with caution.
 
 ### `order_by`
 
-Use `order_by()` to sort results.
+Use `order_by` to sort results.
 
 ```shell
 $ sq '.actor | order_by(.first_name)'
