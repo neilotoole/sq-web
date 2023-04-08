@@ -177,6 +177,46 @@ $ sq '.actor | ."first name", ."last name"'
 $ sq '."film actor" | .actor_id'
 ```
 
+## Predefined variables
+
+The `--arg` flag passes a value to `sq` as a predefined variable. If you
+run `sq` with `--arg foo bar`, then `$foo` is available in the query and
+has the value `bar`. Note that the value will be treated as a string,
+so `--arg foo 123` will bind `$foo` to `"123"`.
+
+```shell
+$ sq --arg first TOM '.actor | .first_name == $first'
+actor_id  first_name  last_name  last_update
+38        TOM         MCKELLEN   2020-06-11T02:50:54Z
+42        TOM         MIRANDA    2020-06-11T02:50:54Z
+```
+
+This is particularly useful when dealing with values that contain
+whitespace, shell tokens, long strings, etc..
+
+```shell
+# Value containing single-quote
+$ sq --arg last "O'Toole" '.actor | .last_name == $last'
+
+# Value containing double-quote
+sq --arg first 'Elvis "The King"' '.actor | .first_name == $first'
+```
+
+It's common to combine `sq --arg` with shell variables:
+
+```shell
+$ PASSWD=`cat password.txt`
+$ sq --arg pw "$PASSWD" '.secrets | .password == $pw'
+```
+
+Note that you can supply multiple variables:
+
+```shell
+$ sq --arg first TOM --arg last MIRANDA '.actor | .first_name == $first && .last_name == $last'
+actor_id  first_name  last_name  last_update
+42        TOM         MIRANDA    2020-06-11T02:50:54Z
+```
+
 ## Joins
 
 Use the `join` construct to join two tables. You can join tables in a single data source,
