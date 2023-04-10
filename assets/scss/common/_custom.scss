@@ -108,6 +108,24 @@ nav.docs-links {
   }
 }
 
+nav.docs-links ul li a.docs-link.changelog {
+  font-weight: bold;
+  margin-top: 50px;
+  padding: 14px 0px 12px 12px;
+  margin-bottom: 30px;
+  margin-right: 20px;
+  color: $nord10;
+  background-color: $code-bg-color;
+}
+
+[data-dark-mode] nav.docs-links ul li a.docs-link.changelog {
+  //background-color: $code-bg-color-dark;
+  color: $nord13;
+  //background-color: darken($code-bg-color-dark, 10%);
+  background-color: transparent;
+  //background-color: $nord14;
+}
+
 div.tab-content > div:not(:has(>div.highlight)) {
   padding-top: 20px;
   padding-bottom: 20px;
