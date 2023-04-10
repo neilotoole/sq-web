@@ -1,15 +1,17 @@
 ---
-title: "Tutorial"
-description: "sq tutorial"
-lead: ""
+title: Tutorial
+description: sq tutorial
+lead: ''
 draft: false
 images: []
 weight: 1040
 toc: true
 ---
-This tutorial walks through sq's features.
 
-If you haven't installed `sq`, see [here](/docs/install). If you've already installed `sq`, check that you're on a
+This tutorial walks through `sq`'s features.
+
+If you haven't installed `sq`, see [here](/docs/install). If you've already
+installed `sq`, check that you're on a
 recent version like so:
 
 ```shell
@@ -17,7 +19,8 @@ $ sq version
 sq v0.24.0
 ```
 
-If your version is older than that, please [upgrade](/docs/install). Then start with `sq help`.
+If your version is older than that, please [upgrade](/docs/install).
+Then start with `sq help`.
 
 ## Basics
 
@@ -50,15 +53,15 @@ address  2     address_id, street, city, state, zip, country
 
 Let's step through the above:
 
-* `sq ls`: list the current sources. There are none.
-* `wget`: download an Excel file to use for this demo.
-* `sq add`: add a source. The _type_ is inferred (or can be specified with `--driver=xlsx`) to be `xlsx`, and we give
+- `sq ls`: list the current sources. There are none.
+- `wget`: download an Excel file to use for this demo.
+- `sq add`: add a source. The _type_ is inferred (or can be specified with `--driver=xlsx`) to be `xlsx`, and we give
   this _source_ the handle `@xl_demo`. This Excel file has a header row, so we also specify `--opts=header=true` to
   indicate that the actual data begins on row 1, not row 0 (which is the header row).
-* `sq ls`: lists the sources again; this time we see our new `@xl_demo` source. The asterisk beside the
+- `sq ls`: lists the sources again; this time we see our new `@xl_demo` source. The asterisk beside the
   _handle_ (`@xl_demo*`) indicates that this is the _active source_.
-* `sq ls -v`: lists the sources yet again, this time verbosely (`-v`).
-* `sq inspect`: inspects `@xl_demo`, showing the structure of the source.
+- `sq ls -v`: lists the sources yet again, this time verbosely (`-v`).
+- `sq inspect`: inspects `@xl_demo`, showing the structure of the source.
 
 ## Query
 
@@ -206,7 +209,6 @@ data   7     -     4         A, B, C, D  INTEGER, TEXT, TEXT, INTEGER
 > Note that because CSV is  "_monotable_" (only has one table of data), its data is represented as a single table
 > named `data`. Also note that because this particular CSV file doesn't have a header row, its columns are given
 > names `A`, `B`, `C`, etc., following what Excel would do.
-
 
 We can pipe that CSV file to `sq` and performs the usual actions on it:
 
@@ -374,7 +376,7 @@ $ sq add "mysql://sakila:p_ssW0rd@localhost/sakila"
 
 And get some data from `@sakila_my`:
 
-```shell
+````shell
 $ sq '@sakila_my.actor | .[0:2]'
 actor_id  first_name  last_name  last_update
 1         PENELOPE    GUINESS    2006-02-15 04:34:33 +0000 UTC
@@ -407,7 +409,7 @@ count
 $ sq '@sakila_my.film_category | count()'
 COUNT(*)
 1000
-```
+````
 
 Make a copy of the table as a backup.
 
