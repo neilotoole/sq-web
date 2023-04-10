@@ -76,6 +76,23 @@ $ echo 'open:;"_Ses@me' > password.txt
 $ sq add 'postgres://user@localhost/sakila' -p < password.txt
 ```
 
+## Header row
+
+File formats like CSV/TSV often have a header row. `sq` can usually auto-detect
+if a header row is present. But depending on the nature of the data file,
+it may be necessary to explicitly tell `sq` to use a header row (or not).
+
+```shell
+$ sq add ./actor.csv --opts header=true
+```
+
+{{< alert icon="👉" >}}
+Header auto-detection is implemented for CSV/TSV. There is an open
+[feature request](https://github.com/neilotoole/sq/issues/191) for XLSX.
+{{< /alert >}}
+
+
+
 ## Reference
 
 {{< readfile file="add.help.txt" code="true" lang="text" >}}
