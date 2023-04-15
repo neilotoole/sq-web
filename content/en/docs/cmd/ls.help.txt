@@ -29,9 +29,9 @@ Examples:
 Flags:
   -h, --header   Print header row in output (default true)
   -j, --json     Output JSON
-  -g, --groups   List groups instead of sources (default true)
+  -g, --group    List groups instead of sources
       --help     help for ls
 
 Global Flags:
   -M, --monochrome   Don't colorize output
-  -v, --verbose      Print verbose outputaa
+  -v, --verbose      Verbose output

@@ -86,8 +86,8 @@ Available Commands:
   driver      List or manage drivers
   tbl         Useful table actions (copy, truncate, drop)
   completion  Generate shell completion script
-  version     Print sq version
-  help        Show sq help
+  version     Show version info
+  help        Show help
 
 Flags:
   -o, --output string   Write output to <file> instead of stdout
@@ -108,9 +108,9 @@ Flags:
       --src string      Override the active source for this query
       --driver string   Explicitly specify the data source driver to use when piping input
       --opts string     Driver-dependent data source options when piping input
-      --version         Print sq version
+      --version         Print version info
       --help            Show sq help
   -M, --monochrome      Don't colorize output
-  -v, --verbose         Print verbose outputaa
+  -v, --verbose         Verbose output
 
 Use "sq [command] --help" for more information about a command.

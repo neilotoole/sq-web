@@ -111,7 +111,7 @@ nav.docs-links {
 nav.docs-links ul li a.docs-link.changelog {
   font-weight: bold;
   margin-top: 50px;
-  padding: 14px 0px 12px 12px;
+  padding: 14px 0 12px 12px;
   margin-bottom: 30px;
   margin-right: 20px;
   color: $nord10;
@@ -119,11 +119,8 @@ nav.docs-links ul li a.docs-link.changelog {
 }
 
 [data-dark-mode] nav.docs-links ul li a.docs-link.changelog {
-  //background-color: $code-bg-color-dark;
   color: $nord13;
-  //background-color: darken($code-bg-color-dark, 10%);
   background-color: transparent;
-  //background-color: $nord14;
 }
 
 div.tab-content > div:not(:has(>div.highlight)) {
@@ -144,6 +141,7 @@ p > code,
 li > code,
 a > code,
 td > code,
+div.alert > div.w-100 > code,
 .tab-pane > code {
   border-radius: 3px;
   padding: 3px 6px;
@@ -152,6 +150,10 @@ td > code,
   border: 1px solid $code-border-color;
   background-color: $code-bg-color;
   color: $code-color;
+}
+
+div.alert > div.w-100 {
+  line-height: 1.6em;
 }
 
 // This section is for the Query Guide,
@@ -169,6 +171,7 @@ h3 > code:not(.hljs) {
 [data-dark-mode] table > code,
 [data-dark-mode] p code,
 [data-dark-mode] li code,
+[data-dark-mode] div.alert > div.w-100 > code,
 [data-dark-mode] .tab-pane > code,
 [data-dark-mode] body code:not(.hljs) {
   border-color: $code-bg-color-dark;
@@ -404,4 +407,9 @@ div.sticky-top header.navbar a.navbar-brand {
 #functions ~ h3 {
   margin-top: 60px;
   margin-bottom: 20px;
+}
+
+main > ul > li {
+  padding-top: 4px;
+  padding-bottom: 4px;
 }

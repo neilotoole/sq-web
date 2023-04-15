@@ -10,4 +10,10 @@ weight: 2080
 toc: false
 ---
 
+Use `sq ping` to check data source connection health.
+
+![sq ping](/images/sq_ping_sakila.png)
+
+## Reference
+
 {{< readfile file="ping.help.txt" code="true" lang="text" >}}

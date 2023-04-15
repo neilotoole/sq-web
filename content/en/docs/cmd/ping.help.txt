@@ -1,26 +1,29 @@
-Ping data sources to check connection health. If no arguments provided, the
-active data source is pinged. Provide the handles of one or more sources
-to ping those sources, or --all to ping all sources.
+Ping data sources (or groups of sources) to check connection health.
+If no arguments provided, the active data source is pinged. Otherwise, ping
+the specified sources or groups.
 
 The exit code is 1 if ping fails for any of the sources.
 
 Usage:
-  sq ping [@HANDLE [@HANDLE_N]] [flags]
+  sq ping [@HANDLE|GROUP]* [flags]
 
 Examples:
-  # ping active data source
+  # Ping active data source.
   $ sq ping
 
-  # ping all data sources
-  $ sq ping --all
-
-  # ping @my1 and @pg1
+  # Ping @my1 and @pg1.
   $ sq ping @my1 @pg1
 
-  # ping @my1 with 2s timeout
-  $ sq ping @my1 --timeout=2s
+  # Ping sources in the root group (i.e. all sources).
+  $ sq ping /
 
-  # output in TSV format
+  # Ping sources in the "prod" and "staging" groups.
+  $ sq ping prod staging
+
+  # Ping @my1 with 2s timeout.
+  $ sq ping @my1 --timeout 2s
+
+  # Output in TSV format.
   $ sq ping --tsv @my1
 
 Flags:
@@ -29,9 +32,8 @@ Flags:
   -T, --tsv                Output TSV
   -j, --json               Output JSON
       --timeout duration   Max time to wait for ping (default 10s)
-  -a, --all                Ping all sources
       --help               help for ping
 
 Global Flags:
   -M, --monochrome   Don't colorize output
-  -v, --verbose      Print verbose outputaa
+  -v, --verbose      Verbose output

@@ -1,4 +1,4 @@
-Show sq help
+Show help.
 
 Usage:
   sq help [flags]
@@ -8,4 +8,4 @@ Flags:
 
 Global Flags:
   -M, --monochrome   Don't colorize output
-  -v, --verbose      Print verbose outputaa
+  -v, --verbose      Verbose output

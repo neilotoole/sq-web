@@ -293,7 +293,8 @@ A  B           C                      D
 A useful feature is to ping the sources to verify that they're accessible:
 
 ```shell
-$ sq ping --all
+# Ping sources in the root group, i.e. all sources.
+$ sq ping /
 @csv_demo       1ms  pong
 @xl_demo        3ms  pong
 ```
