@@ -7,8 +7,20 @@ Examples:
 
 When adding a data source, LOCATION is the only required arg.
 
-  # Add a postgres source with handle "@sakila_pg"
-  $ sq add -h @sakila_pg 'postgres://user:pass@localhost/sakila'
+  $ sq add ./actor.csv
+  @actor  csv  actor.csv
+
+Note that sq generated the handle "@actor". But you can explicitly specify
+a handle.
+
+  # Add a postgres source with handle "@sakila/pg"
+  $ sq add -h @sakila/pg 'postgres://user:pass@localhost/sakila'
+
+This handle format "@sakila/pg" includes a group, "sakila". Using a group
+is entirely optional: it is a way to organize sources. For example:
+
+  $ sq add -h @dev/pg 'postgres://user:pass@dev.db.example.com/sakila'
+  $ sq add -h @prod/pg 'postgres://user:pass@prod.db.acme.com/sakila'
 
 The format of LOCATION is driver-specific,but is generally a DB connection
 string, a file path, or a URL.
@@ -67,7 +79,8 @@ minimum, the following drivers are bundled:
   xlsx       Microsoft Excel XLSX 
 
 If there isn't already an active source, the newly added source becomes the
-active source. Otherwise you can use --active to make the new source active.
+active source (and its group becomes the active group). Otherwise you can
+use flag --active to make the new source (and its group) active.
 
 More examples:
 
@@ -96,6 +109,9 @@ More examples:
   # Add a CSV source from a URL (will be downloaded)
   $ sq add https://sq.io/testdata/actor.csv
 
+  # Add a source, and make it the active source (and group)
+  $ sq add ./actor.csv -h @csv/actor
+
 Flags:
   -d, --driver string   Explicitly specify the data source driver to use
       --opts string     Driver-dependent data source options
@@ -103,9 +119,9 @@ Flags:
   -p, --password        Read password from stdin or prompt
       --skip-verify     Don't ping source before adding it
   -j, --json            Output JSON
-  -a, --active          Make this the active source
+  -a, --active          Make this the active source and active group
       --help            help for add
 
 Global Flags:
   -M, --monochrome   Don't colorize output
-  -v, --verbose      Print verbose output, if applicable
+  -v, --verbose      Print verbose outputaa

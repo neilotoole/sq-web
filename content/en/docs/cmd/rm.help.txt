@@ -1,14 +1,22 @@
-Remove data source.
+Remove data source or group. Removing a group removes
+all sources in that group. On return, the active source or active group
+may have changed, if that source or group was removed.
 
 Usage:
-  sq rm @HANDLE1 [@HANDLE2...] [flags]
+  sq rm @HANDLE|GROUP [flags]
 
 Examples:
-  # Remove @my1 data source
-  $ sq rm @my1
+  # Remove @sakila source
+  $ sq rm @sakila_db
 
   # Remove multiple data sources
-  $ sq rm @my1 @pg1 @sqlserver1
+  $ sq rm @sakila/pg @sakila_my
+
+  # Remove the "prod" group (and all its children)
+  $ sq rm prod
+
+  # Remove a mix of sources and groups
+  $ sq rm @staging/sakila_db @staging/backup_db dev
 
 Flags:
   -j, --json   Output JSON
@@ -16,4 +24,4 @@ Flags:
 
 Global Flags:
   -M, --monochrome   Don't colorize output
-  -v, --verbose      Print verbose output, if applicable
+  -v, --verbose      Print verbose outputaa

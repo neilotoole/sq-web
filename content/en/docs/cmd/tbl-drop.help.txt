@@ -20,4 +20,4 @@ Flags:
 
 Global Flags:
   -M, --monochrome   Don't colorize output
-  -v, --verbose      Print verbose output, if applicable
+  -v, --verbose      Print verbose outputaa

@@ -10,20 +10,22 @@ set -e
 cd $(dirname "$0")
 
 cmds=(
+  "add"
+  "completion"
+  "driver ls"
+  "group"
+  "help"
+  "inspect"
+  "ls"
+  "mv"
+  "ping"
+  "rm"
   "sql"
   "src"
-  "add"
-  "ls"
-  "rm"
-  "inspect"
-  "ping"
-  "version"
-  "driver ls"
   "tbl copy"
-  "tbl truncate"
   "tbl drop"
-  "completion"
-  "help"
+  "tbl truncate"
+  "version"
    )
 
 rm -f ./*.help.txt

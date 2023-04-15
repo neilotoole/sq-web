@@ -1,13 +1,37 @@
-List data sources.
+List data sources for active group. If GROUP is specified, list for only that group.
+If --group is set, list groups instead of sources.
+
+The source list includes all descendants of the group: direct children, and also
+any further descendants.
 
 Usage:
-  sq ls [flags]
+  sq ls [GROUP] [flags]
+
+Examples:
+  # List sources in active group
+  $ sq ls
+
+  # List sources in the "prod" group
+  $ sq ls prod
+
+  # List sources in the root group (will list all sources)
+  $ sq ls /
+
+  # List groups (all) instead of sources
+  $ sq ls -g
+
+  # Print verbose group details
+  $ sq ls -gv
+
+  # List subgroups in "prod" group
+  $ sq ls -g prod
 
 Flags:
   -h, --header   Print header row in output (default true)
   -j, --json     Output JSON
+  -g, --groups   List groups instead of sources (default true)
       --help     help for ls
 
 Global Flags:
   -M, --monochrome   Don't colorize output
-  -v, --verbose      Print verbose output, if applicable
+  -v, --verbose      Print verbose outputaa

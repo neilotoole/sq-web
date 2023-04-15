@@ -1,0 +1,31 @@
+Move/rename sources and groups.
+
+The mv command works analogously to the UNIX "mv" command, where
+source handles are files, and groups are directories.
+
+Usage:
+  sq mv OLD NEW [flags]
+
+Examples:
+  # Rename a source
+  $ sq mv @sakila_postgres @sakila_pg
+  @sakila_pg
+
+  # Move a source into a group (same as renaming)
+  $ sq mv @sakila_pg @sakila/pg
+  @sakila/pg
+
+  # Move a source into a group, keep current name
+  $ sq mv @sakila/pg prod
+  @prod/pg
+
+  # Rename the group "production" to "prod". This will rename
+  # any sources already in that group.
+  $ sq mv production prod
+
+Flags:
+      --help   help for mv
+
+Global Flags:
+  -M, --monochrome   Don't colorize output
+  -v, --verbose      Print verbose outputaa

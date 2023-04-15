@@ -1,14 +1,15 @@
 sq is a swiss-army knife for wrangling data.
 
-Use sq to query Postgres, SQLite, SQLServer, MySQL, CSV, TSV
-and Excel, and output in text, JSON, CSV, Excel, HTML, etc., or
-output to a database table.
+Use sq to query Postgres, SQLite, SQLServer, MySQL, CSV, Excel, etc,
+and output in text, JSON, CSV, Excel and so on, or
+write output to a database table.
 
 You can query using sq's own jq-like syntax, or in native SQL.
 
-Execute "sq completion --help" for instructions to install shell completion.
+Use "sq inspect" to view schema metadata. Use the "sq tbl" commands
+to copy, truncate and drop tables. 
 
-More at https://sq.io
+See docs and more: https://sq.io
 
 Usage:
   sq [command]
@@ -73,17 +74,19 @@ Examples:
 
 
 Available Commands:
-  sql         Execute DB-native SQL query or statement
-  src         Get or set active data source
   add         Add data source
-  ls          List data sources
-  rm          Remove data source
+  src         Get or set active data source
+  group       Get or set active group
+  ls          List sources and groups
+  mv          Move/rename sources and groups
+  rm          Remove data source or group
   inspect     Inspect data source schema and stats
   ping        Ping data sources
-  version     Print sq version
+  sql         Execute DB-native SQL query or statement
   driver      List or manage drivers
   tbl         Useful table actions (copy, truncate, drop)
   completion  Generate shell completion script
+  version     Print sq version
   help        Show sq help
 
 Flags:
@@ -98,7 +101,7 @@ Flags:
   -T, --tsv             Output TSV
   -r, --raw             Output each record field in raw format without any encoding or delimiter
       --html            Output HTML table
-      --markdown        Output Markdown
+      --md              Output Markdown
   -h, --header          Print header row in output (default true)
       --pretty          Pretty-print output (default true)
       --insert string   Insert query results into @HANDLE.TABLE. If not existing, TABLE will be created.
@@ -108,6 +111,6 @@ Flags:
       --version         Print sq version
       --help            Show sq help
   -M, --monochrome      Don't colorize output
-  -v, --verbose         Print verbose output, if applicable
+  -v, --verbose         Print verbose outputaa
 
 Use "sq [command] --help" for more information about a command.

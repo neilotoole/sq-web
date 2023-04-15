@@ -1,0 +1,29 @@
+Get or set active group. If no argument provided, get the active group.
+Otherwise, set GROUP as the active group. An error is returned if GROUP does
+not exist.
+
+Use 'sq ls -g' to list groups.
+
+Usage:
+  sq group [GROUP] [flags]
+
+Examples:
+  # Get active group ("dev" in this case).
+  $ sq group
+  dev
+
+  # Set "prod" as active group
+  $ sq group prod
+  prod
+
+  # Reset to the root group
+  $ sq group /
+  /
+
+Flags:
+  -j, --json   Output JSON
+      --help   help for group
+
+Global Flags:
+  -M, --monochrome   Don't colorize output
+  -v, --verbose      Print verbose outputaa
