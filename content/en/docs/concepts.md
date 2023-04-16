@@ -7,11 +7,9 @@ images: []
 weight: 1030
 toc: true
 aliases:
-
 - /docs/terminology
 
 ---
-
 ## sq
 
 `sq` is the command-line utility itself. It is free/libre open-source software, available
@@ -32,6 +30,8 @@ or an Excel or CSV file ([document source](#document-source)).
 A source has a [driver type](#driver-type), [location](#location) and [handle](#handle).
 Some driver types accept options via [`sq add --opts`](/docs/cmd/add).
 
+Learn more in the [sources](/docs/source) section.
+
 ### Driver Type
 
 The _type_ is the [driver](#driver) type used to connect to the source,
@@ -49,11 +49,12 @@ invoking [`sq add`](/docs/cmd/add).
 ### Handle
 
 The _handle_ is how `sq` refers to a data source, such as `@sakila` or `@customer_csv`.
-A `handle` must begin with `@`. You specify the handle when adding a source with [`sq add`](/docs/cmd/add).
+The handle must begin with `@`. You specify the handle when adding a source with [`sq add`](/docs/cmd/add).
+The handle can also be used to specify a source [group](/docs/source#groups), e.g. `@prod/sales`, `@dev/sales`.
 
-## Active Source
+## Active source
 
-An `active source` is the _source_ upon which `sq` acts if no other source is specified.
+The _active source_ is the _source_ upon which `sq` acts if no other source is specified.
 
 By default, `sq` requires that the first element of a query is the source handle:
 
@@ -70,17 +71,28 @@ $ sq '.actor | .first_name, .last_name'
 
 You can use [`sq src`](/docs/cmd/src) to get or set the active source.
 
-## SQL Source
+## SQL source
 
-A _SQL Source_ is a source backed by a "real" DB, such as Postgres. Contrast
+A _SQL source_ is a source backed by a "real" DB, such as Postgres. Contrast
 with [document source](#document-source).
 
-## Document Source
+## Document source
 
 A _document source_ is a source backed by a document or file such as [CSV](/docs/drivers/csv) or
 [XLSX](/docs/drivers/xlsx). Some functionality
 is not available for document sources. For example, `sq` doesn't provide a mechanism to insert query
-results into a CSV file. Contrast with [SQL Source](#sql-source).
+results into a CSV file. Contrast with [SQL source](#sql-source).
+
+## Group
+
+The _group_ mechanism organizes sources into groups, based on path-like names.
+Given handles `@prod/sales`, `@dev/sales` and `@dev/test`, we have three
+sources, but two groups, `prod` and `dev`. See the [groups](/docs/source#groups) docs.
+
+## Active group
+
+Like [active source](#active-source), there is an active [group](/docs/source#groups). Use
+the [`sq group`](/docs/cmd/group) to get or set the active group.
 
 ## Driver
 

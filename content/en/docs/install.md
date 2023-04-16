@@ -80,3 +80,24 @@ Generally you can use `install.sh`.
 
 If you need more control over the install,
 consult [install.sh source](https://raw.githubusercontent.com/neilotoole/sq/master/install.sh).
+
+## Upgrade
+
+The `sq version` command reports on whether a new version is available.
+
+```shell
+$ sq version
+sq v0.32.0    Update available: v0.33.0
+```
+
+Note that `sq` is still pre-`v1.0.0`. Occasionally a release introduces a breaking change.
+
+Before upgrading, check the [CHANGELOG](https://github.com/neilotoole/sq/blob/master/CHANGELOG.md)
+or the notes for the latest [release](https://github.com/neilotoole/sq/releases).
+
+To upgrade, use the mechanism specific to the package manager for
+your system, e.g.:
+
+```shell
+brew upgrade sq
+```
