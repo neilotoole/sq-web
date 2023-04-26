@@ -1,6 +1,6 @@
 ---
 title : "sq"
-description: "sq is for wrangling data"
+description: "sq data wrangler"
 lead: "wrangle data"
 draft: false
 images: []
