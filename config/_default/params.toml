@@ -4,13 +4,13 @@
 title = "sq"
 titleSeparator = "|"
 titleAddition = "wrangle data"
-description = "sq is for wrangling data."
+description = "sq data wrangler"
 
 ## Documentation
 # docsVersion = "0.3"
 
 ## Open Graph
-images = ["doks.png"]
+images = ["sq-wrangle.png"]
 ogLocale = "en_US"
 domainTLD = "sq.io"
 titleHome = "Doks Theme"
@@ -28,12 +28,12 @@ schemaAuthor = "Neil O'Toole"
 schemaAuthorLinkedIn = "https://www.linkedin.com/in/neilot/"
 schemaAuthorGitHub = "https://github.com/neilotoole"
 schemaLocale = "en-US"
-schemaLogo = "logo-doks.png"
-schemaLogoWidth = 512
-schemaLogoHeight = 512
-schemaImage = "doks.png"
-schemaImageWidth = 1280
-schemaImageHeight = 640
+schemaLogo = "sq-wrangle.png"
+schemaLogoWidth = 1200
+schemaLogoHeight = 407
+schemaImage = "sq-wrangle.png"
+schemaImageWidth = 1200
+schemaImageHeight = 407
 #schemaTwitter = "https://twitter.com/getdoks"
 schemaLinkedIn = ""
 schemaGitHub = "https://github.com/neilotoole/sq"
