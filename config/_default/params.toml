@@ -10,7 +10,7 @@ description = "sq data wrangler"
 # docsVersion = "0.3"
 
 ## Open Graph
-images = ["sq-wrangle.png"]
+images = ["sq-wrangle2.png"]
 ogLocale = "en_US"
 domainTLD = "sq.io"
 titleHome = "sq data wrangler"
@@ -28,10 +28,10 @@ schemaAuthor = "Neil O'Toole"
 schemaAuthorLinkedIn = "https://www.linkedin.com/in/neilot/"
 schemaAuthorGitHub = "https://github.com/neilotoole"
 schemaLocale = "en-US"
-schemaLogo = "sq-wrangle.png"
+schemaLogo = "sq-wrangle2.png"
 schemaLogoWidth = 1200
 schemaLogoHeight = 630
-schemaImage = "sq-wrangle.png"
+schemaImage = "sq-wrangle2.png"
 schemaImageWidth = 1200
 schemaImageHeight = 630
 #schemaTwitter = "https://twitter.com/getdoks"
@@ -61,7 +61,7 @@ singleSize = false
 imageAddClass = "img-fluid lazyload blur-up"
 
 ### Image template
-defaultImage = "sq-wrangle.png" # put in `./assets/images/`
+defaultImage = "sq-wrangle2.png" # put in `./assets/images/`
 fillImage = "1200x630 Center" # normalize image size
 
 # Footer
