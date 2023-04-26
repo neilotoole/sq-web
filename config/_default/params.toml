@@ -13,7 +13,7 @@ description = "sq data wrangler"
 images = ["sq-wrangle.png"]
 ogLocale = "en_US"
 domainTLD = "sq.io"
-titleHome = "Doks Theme"
+titleHome = "sq data wrangler"
 
 ## Twitter Cards
 #twitterSite = "@getdoks"
@@ -30,14 +30,14 @@ schemaAuthorGitHub = "https://github.com/neilotoole"
 schemaLocale = "en-US"
 schemaLogo = "sq-wrangle.png"
 schemaLogoWidth = 1200
-schemaLogoHeight = 407
+schemaLogoHeight = 630
 schemaImage = "sq-wrangle.png"
 schemaImageWidth = 1200
-schemaImageHeight = 407
+schemaImageHeight = 630
 #schemaTwitter = "https://twitter.com/getdoks"
 schemaLinkedIn = ""
 schemaGitHub = "https://github.com/neilotoole/sq"
-schemaSection = "blog"
+#schemaSection = "blog"
 
 ## Sitelinks Search Box
 siteLinksSearchBox = false
@@ -61,8 +61,8 @@ singleSize = false
 imageAddClass = "img-fluid lazyload blur-up"
 
 ### Image template
-defaultImage = "default-image.png" # put in `./assets/images/`
-fillImage = "1270x740 Center" # normalize image size
+defaultImage = "sq-wrangle.png" # put in `./assets/images/`
+fillImage = "1200x630 Center" # normalize image size
 
 # Footer
 footer = "Powered by <a class=\"text-muted\" href=\"https://www.netlify.com/\">Netlify</a>, <a class=\"text-muted\" href=\"https://gohugo.io/\">Hugo</a>, <a class=\"text-muted\" href=\"https://getdoks.org/\">Doks</a>, and <a class=\"text-muted\" href=\"https://asciinema.org/\">asciinema</a>."
@@ -91,7 +91,7 @@ pygmentsUseClasses = true
 
 
 [sections]
-  sectionNav = ["docs", "guides"]
+  sectionNav = ["docs"]
 
 [options]
   lazySizes = true
