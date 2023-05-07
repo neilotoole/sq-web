@@ -147,14 +147,6 @@ additional help for the options.
 ![sq config edit v](sq_config_edit_v.png)
 
 
-## Options
-
-Some config options apply only to base config. For example, `format=json` applies
-to the `sq` CLI itself, and not to a particular source such as `@sakila`. However,
-some options can apply to a source, and also have a base value. For example,
-`conn.max-open` controls the maximum number of connections that `sq` will open
-to a database. You can
-
 
 ## Logging
 
@@ -176,3 +168,106 @@ $ sq config get log.file -v
 KEY       VALUE  DEFAULT
 log.file         /Users/neilotoole/Library/Logs/sq/sq.log
 ```
+
+## Options
+
+Some config options apply only to base config. For example, `format=json` applies
+to the `sq` CLI itself, and not to a particular source such as `@sakila`. However,
+some options can apply to a source, and also have a base value. For example,
+`conn.max-open` controls the maximum number of connections that `sq` will open
+to a database. You can
+
+
+### CLI
+
+#### log
+{{< readfile file="../cmd/options/log.help.txt" code="true" lang="text" >}}
+
+#### log.file
+{{< readfile file="../cmd/options/log.file.help.txt" code="true" lang="text" >}}
+
+#### log.level
+{{< readfile file="../cmd/options/log.level.help.txt" code="true" lang="text" >}}
+
+#### ping.timeout
+{{< readfile file="../cmd/options/ping.timeout.help.txt" code="true" lang="text" >}}
+
+#### retry.max-interval
+{{< readfile file="../cmd/options/retry.max-interval.help.txt" code="true" lang="text" >}}
+
+#### shell-completion.timeout
+{{< readfile file="../cmd/options/shell-completion.timeout.help.txt" code="true" lang="text" >}}
+
+### Formatting
+
+#### compact
+{{< readfile file="../cmd/options/compact.help.txt" code="true" lang="text" >}}
+
+#### format
+{{< readfile file="../cmd/options/format.help.txt" code="true" lang="text" >}}
+
+#### format.datetime
+{{< readfile file="../cmd/options/format.datetime.help.txt" code="true" lang="text" >}}
+
+#### format.datetime.number
+{{< readfile file="../cmd/options/format.datetime.number.help.txt" code="true" lang="text" >}}
+
+#### format.date
+{{< readfile file="../cmd/options/format.date.help.txt" code="true" lang="text" >}}
+
+#### format.date.number
+{{< readfile file="../cmd/options/format.date.number.help.txt" code="true" lang="text" >}}
+
+#### format.time
+{{< readfile file="../cmd/options/format.time.help.txt" code="true" lang="text" >}}
+
+#### format.time.number
+{{< readfile file="../cmd/options/format.time.number.help.txt" code="true" lang="text" >}}
+
+#### header
+{{< readfile file="../cmd/options/header.help.txt" code="true" lang="text" >}}
+
+#### monochrome
+{{< readfile file="../cmd/options/monochrome.help.txt" code="true" lang="text" >}}
+
+#### verbose
+{{< readfile file="../cmd/options/verbose.help.txt" code="true" lang="text" >}}
+
+### Tuning
+
+#### conn.max-idle
+{{< readfile file="../cmd/options/conn.max-idle.help.txt" code="true" lang="text" >}}
+
+#### conn.max-idle-time
+{{< readfile file="../cmd/options/conn.max-idle-time.help.txt" code="true" lang="text" >}}
+
+#### conn.max-lifetime
+{{< readfile file="../cmd/options/conn.max-lifetime.help.txt" code="true" lang="text" >}}
+
+#### conn.max-open
+{{< readfile file="../cmd/options/conn.max-open.help.txt" code="true" lang="text" >}}
+
+#### tuning.errgroup-limit
+{{< readfile file="../cmd/options/tuning.errgroup-limit.help.txt" code="true" lang="text" >}}
+
+#### tuning.flush-threshold
+{{< readfile file="../cmd/options/tuning.flush-threshold.help.txt" code="true" lang="text" >}}
+
+#### tuning.record-buffer
+{{< readfile file="../cmd/options/tuning.record-buffer.help.txt" code="true" lang="text" >}}
+
+### Ingest
+
+#### ingest.header
+{{< readfile file="../cmd/options/ingest.header.help.txt" code="true" lang="text" >}}
+
+#### ingest.sample-size
+{{< readfile file="../cmd/options/ingest.sample-size.help.txt" code="true" lang="text" >}}
+
+#### driver.csv.delim
+{{< readfile file="../cmd/options/driver.csv.delim.help.txt" code="true" lang="text" >}}
+
+#### driver.csv.empty-as-null
+{{< readfile file="../cmd/options/driver.csv.empty-as-null.help.txt" code="true" lang="text" >}}
+
+
