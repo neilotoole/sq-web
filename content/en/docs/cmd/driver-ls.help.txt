@@ -1,14 +1,21 @@
-List available drivers.
+List installed drivers.
 
 Usage:
   sq driver ls [flags]
 
 Flags:
-  -j, --json     Output JSON
-  -t, --table    Output text table
-  -h, --header   Print header row in output (default true)
-      --help     help for ls
+  -j, --json      Output JSON
+  -y, --yaml      Output YAML
+  -c, --compact   Compact instead of pretty-printed output
+      --help      help for ls
 
 Global Flags:
-  -M, --monochrome   Don't colorize output
-  -v, --verbose      Verbose output
+      --config string      Load config from here
+  -h, --header             Print header row (default true)
+      --log                Enable logging
+      --log.file string    Path to log file; empty disables logging
+      --log.level string   Log level: one of DEBUG, INFO, WARN, ERROR
+  -M, --monochrome         Don't colorize output
+  -H, --no-header          Don't print header row
+  -t, --text               Output text
+  -v, --verbose            Verbose output

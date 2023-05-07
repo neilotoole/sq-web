@@ -14,15 +14,15 @@ Note that sq generated the handle "@actor". But you can explicitly specify
 a handle.
 
   # Add a postgres source with handle "@sakila/pg"
-  $ sq add -h @sakila/pg 'postgres://user:pass@localhost/sakila'
+  $ sq add --handle @sakila/pg 'postgres://user:pass@localhost/sakila'
 
 This handle format "@sakila/pg" includes a group, "sakila". Using a group
 is entirely optional: it is a way to organize sources. For example:
 
-  $ sq add -h @dev/pg 'postgres://user:pass@dev.db.example.com/sakila'
-  $ sq add -h @prod/pg 'postgres://user:pass@prod.db.acme.com/sakila'
+  $ sq add --handle @dev/pg 'postgres://user:pass@dev.db.example.com/sakila'
+  $ sq add --handle @prod/pg 'postgres://user:pass@prod.db.acme.com/sakila'
 
-The format of LOCATION is driver-specific,but is generally a DB connection
+The format of LOCATION is driver-specific, but is generally a DB connection
 string, a file path, or a URL.
 
   DRIVER://USER:PASS@HOST:PORT/DBNAME
@@ -50,33 +50,29 @@ there instead of prompting the user:
   $ echo 'open:;"_Ses@me' > password.txt
   $ sq add 'postgres://user@localhost/sakila' -p < password.txt
 
-Flag --opts sets source-specific options. Generally, opts are relevant
-to document source types (such as a CSV file). The most common
-use is to specify that the document has a header row:
+There are various driver-specific options available. For example:
 
-  $ sq add actor.csv --opts=header=true
-
-Use query string encoding for multiple options, e.g. "--opts a=b&x=y".
+  $ sq add actor.csv --ingest.header=false --driver.csv.delim=colon
 
 If flag --driver is omitted, sq will attempt to determine the
 type from LOCATION via file suffix, content type, etc.. If the result
 is ambiguous, explicitly specify the driver type.
-  
+
   $ sq add --driver=tsv ./mystery.data
 
 Available source driver types can be listed via "sq driver ls". At a
 minimum, the following drivers are bundled:
 
-  sqlite3    SQLite                               
-  postgres   PostgreSQL                           
-  sqlserver  Microsoft SQL Server / Azure SQL Edge                 
-  mysql      MySQL                                
-  csv        Comma-Separated Values               
-  tsv        Tab-Separated Values                 
-  json       JSON                                 
-  jsona      JSON Array: LF-delimited JSON arrays 
+  sqlite3    SQLite
+  postgres   PostgreSQL
+  sqlserver  Microsoft SQL Server / Azure SQL Edge
+  mysql      MySQL
+  csv        Comma-Separated Values
+  tsv        Tab-Separated Values
+  json       JSON
+  jsona      JSON Array: LF-delimited JSON arrays
   jsonl      JSON Lines: LF-delimited JSON objects
-  xlsx       Microsoft Excel XLSX 
+  xlsx       Microsoft Excel XLSX
 
 If there isn't already an active source, the newly added source becomes the
 active source (but the active group does not change). Otherwise you can
@@ -89,39 +85,53 @@ More examples:
   Password: ****
 
   # Explicitly set flags
-  $ sq add --handle=@sakila_pg --driver=postgres 'postgres://user:pass@localhost/sakila'
+  $ sq add --handle @sakila_pg --driver postgres 'postgres://user:pass@localhost/sakila'
 
   # Same as above, but with short flags
-  $ sq add -h @sakila_pg --d postgres 'postgres://user:pass@localhost/sakila'
+  $ sq add -n @sakila_pg -d postgres 'postgres://user:pass@localhost/sakila'
 
-  # Add a SQL Server source; will have generated handle @sakila_mssql or similar
-  $ sq add 'sqlserver://user:pass@localhost?database=sakila' 
+  # Add a SQL Server source; will have generated handle @sakila
+  $ sq add 'sqlserver://user:pass@localhost?database=sakila'
 
   # Add a sqlite db, and immediately make it the active source
-  $ sq add ./testdata/sqlite1.db --active 
+  $ sq add ./testdata/sqlite1.db --active
 
   # Add an Excel spreadsheet, with options
-  $ sq add ./testdata/test1.xlsx --opts=header=true
-  
+  $ sq add ./testdata/test1.xlsx --ingest.header=true
+
   # Add a CSV source, with options
-  $ sq add ./testdata/person.csv --opts=header=true
+  $ sq add ./testdata/person.csv --ingest.header=true
 
   # Add a CSV source from a URL (will be downloaded)
   $ sq add https://sq.io/testdata/actor.csv
 
   # Add a source, and make it the active source (and group)
-  $ sq add ./actor.csv -h @csv/actor
+  $ sq add ./actor.csv --handle @csv/actor
+
+  # Add a currently unreachable source
+  $ sq add 'postgres://user:pass@db.offline.com/sakila' --skip-verify
 
 Flags:
-  -d, --driver string   Explicitly specify the data source driver to use
-      --opts string     Driver-dependent data source options
-  -h, --handle string   Handle for the source
-  -p, --password        Read password from stdin or prompt
-      --skip-verify     Don't ping source before adding it
-  -j, --json            Output JSON
-  -a, --active          Make this the active source
-      --help            help for add
+  -j, --json                       Output JSON
+  -c, --compact                    Compact instead of pretty-printed output
+  -y, --yaml                       Output YAML
+  -d, --driver string              Explicitly specify the driver to use
+  -n, --handle string              Handle for the source
+  -p, --password                   Read password from stdin or prompt
+      --skip-verify                Don't ping source before adding it
+  -a, --active                     Make this the active source
+      --ingest.header              Treat first row of ingest data as header
+      --driver.csv.empty-as-null   Treat empty CSV fields as null (default true)
+      --driver.csv.delim string    CSV delimiter: one of comma, space, pipe, tab, colon, semi, period (default "comma")
+      --help                       help for add
 
 Global Flags:
-  -M, --monochrome   Don't colorize output
-  -v, --verbose      Verbose output
+      --config string      Load config from here
+  -h, --header             Print header row (default true)
+      --log                Enable logging
+      --log.file string    Path to log file; empty disables logging
+      --log.level string   Log level: one of DEBUG, INFO, WARN, ERROR
+  -M, --monochrome         Don't colorize output
+  -H, --no-header          Don't print header row
+  -t, --text               Output text
+  -v, --verbose            Verbose output

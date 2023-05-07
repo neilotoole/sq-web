@@ -12,6 +12,11 @@ cd $(dirname "$0")
 cmds=(
   "add"
   "completion"
+  "config location"
+  "config ls"
+  "config get"
+  "config set"
+  "config edit"
   "driver ls"
   "group"
   "help"

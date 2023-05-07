@@ -18,10 +18,18 @@ Examples:
 
 
 Flags:
-  -j, --json   Output JSON
-      --data   Copy table data (default true)
-      --help   help for copy
+  -j, --json      Output JSON
+  -c, --compact   Compact instead of pretty-printed output
+      --data      Copy table data (default true)
+      --help      help for copy
 
 Global Flags:
-  -M, --monochrome   Don't colorize output
-  -v, --verbose      Verbose output
+      --config string      Load config from here
+  -h, --header             Print header row (default true)
+      --log                Enable logging
+      --log.file string    Path to log file; empty disables logging
+      --log.level string   Log level: one of DEBUG, INFO, WARN, ERROR
+  -M, --monochrome         Don't colorize output
+  -H, --no-header          Don't print header row
+  -t, --text               Output text
+  -v, --verbose            Verbose output

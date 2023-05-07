@@ -1,21 +1,25 @@
-Get or set active data source. If no argument provided, get the active data
-source. Otherwise, set @HANDLE as the active data source.
+Print config location. Use --verbose for more detail.
 
 Usage:
-  sq src [@HANDLE] [flags]
+  sq config location [flags]
+
+Aliases:
+  location, loc
 
 Examples:
-  # Get active data source
-  $ sq src
+  # Print config location
+  $ sq config location
+  /Users/neilotoole/.config/sq
 
-  # Set @my1 as active data source
-  $ sq src @my1
+  # Print location, also show origin (flag, env, default)
+  $ sq config location -v
+  /Users/neilotoole/.config/sq
+  Origin: env
 
 Flags:
-  -j, --json      Output JSON
-  -c, --compact   Compact instead of pretty-printed output
-  -y, --yaml      Output YAML
-      --help      help for src
+  -j, --json   Output JSON
+  -y, --yaml   Output YAML
+      --help   help for location
 
 Global Flags:
       --config string      Load config from here

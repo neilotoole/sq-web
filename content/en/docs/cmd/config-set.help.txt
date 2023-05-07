@@ -1,0 +1,41 @@
+Set option value, for base config, or for a specified source.
+To get help for an individual option, use "sq config set OPTION --help".
+Use "sq config get -v" to list available options.
+
+Usage:
+  sq config set OPTION VALUE [flags]
+
+Examples:
+  # Set base output format
+  $ sq config set format json
+
+  # Set base max DB connections
+  $ sq config set conn.max-open 10
+
+  # Set max DB connections for source @sakila
+  $ sq config set --src @sakila conn.max-open 50
+
+  # Delete an option (resets to default value)
+  $ sq config set -D conn.max-open
+
+  # Help for an individual option
+  $ sq config set conn.max-open --help
+
+Flags:
+  -j, --json         Output JSON
+  -c, --compact      Compact instead of pretty-printed output
+  -y, --yaml         Output YAML
+      --src string   Config for source
+  -D, --delete       Reset this option to default value
+      --help         help for set
+
+Global Flags:
+      --config string      Load config from here
+  -h, --header             Print header row (default true)
+      --log                Enable logging
+      --log.file string    Path to log file; empty disables logging
+      --log.level string   Log level: one of DEBUG, INFO, WARN, ERROR
+  -M, --monochrome         Don't colorize output
+  -H, --no-header          Don't print header row
+  -t, --text               Output text
+  -v, --verbose            Verbose output

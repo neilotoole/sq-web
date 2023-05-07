@@ -1,4 +1,6 @@
 Show version info. Use --verbose for more detail.
+The output will note if a new version of sq is available.
+Before upgrading, check the changelog: https://sq.io/changelog
 
 Usage:
   sq version [flags]
@@ -26,9 +28,17 @@ Examples:
   v0.32.0
 
 Flags:
-  -j, --json   Output JSON
-      --help   help for version
+  -j, --json      Output JSON
+  -c, --compact   Compact instead of pretty-printed output
+      --help      help for version
 
 Global Flags:
-  -M, --monochrome   Don't colorize output
-  -v, --verbose      Verbose output
+      --config string      Load config from here
+  -h, --header             Print header row (default true)
+      --log                Enable logging
+      --log.file string    Path to log file; empty disables logging
+      --log.level string   Log level: one of DEBUG, INFO, WARN, ERROR
+  -M, --monochrome         Don't colorize output
+  -H, --no-header          Don't print header row
+  -t, --text               Output text
+  -v, --verbose            Verbose output

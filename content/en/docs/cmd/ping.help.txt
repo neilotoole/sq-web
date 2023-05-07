@@ -27,13 +27,20 @@ Examples:
   $ sq ping --tsv @my1
 
 Flags:
-  -t, --table              Output text table
-  -c, --csv                Output CSV
-  -T, --tsv                Output TSV
   -j, --json               Output JSON
+  -C, --csv                Output CSV
+  -T, --tsv                Output TSV
+  -c, --compact            Compact instead of pretty-printed output
       --timeout duration   Max time to wait for ping (default 10s)
       --help               help for ping
 
 Global Flags:
-  -M, --monochrome   Don't colorize output
-  -v, --verbose      Verbose output
+      --config string      Load config from here
+  -h, --header             Print header row (default true)
+      --log                Enable logging
+      --log.file string    Path to log file; empty disables logging
+      --log.level string   Log level: one of DEBUG, INFO, WARN, ERROR
+  -M, --monochrome         Don't colorize output
+  -H, --no-header          Don't print header row
+  -t, --text               Output text
+  -v, --verbose            Verbose output

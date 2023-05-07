@@ -1,0 +1,43 @@
+Show config. By default, only explicitly set options are shown.
+Use the -v flag to see all options. When flag --src is provided, show config
+just for that source.
+
+Usage:
+  sq config ls [--src @HANDLE] [flags]
+
+Examples:
+  # Show base config
+  $ sq config ls
+
+  # Also show defaults and unset options
+  $ sq config ls -v
+
+  # Show all config in YAML
+  $ sq config ls -yv
+
+  # Show config for source
+  $ sq config ls --src @sakila
+
+  # Show config for source, including defaults and unset options
+  $ sq config ls --src @sakila -v
+
+  # Show config for active source
+  $ sq config ls --src @active
+
+Flags:
+  -j, --json         Output JSON
+  -y, --yaml         Output YAML
+  -c, --compact      Compact instead of pretty-printed output
+      --src string   Config for source
+      --help         help for ls
+
+Global Flags:
+      --config string      Load config from here
+  -h, --header             Print header row (default true)
+      --log                Enable logging
+      --log.file string    Path to log file; empty disables logging
+      --log.level string   Log level: one of DEBUG, INFO, WARN, ERROR
+  -M, --monochrome         Don't colorize output
+  -H, --no-header          Don't print header row
+  -t, --text               Output text
+  -v, --verbose            Verbose output

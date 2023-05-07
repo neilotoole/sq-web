@@ -156,12 +156,19 @@ div.alert > div.w-100 {
   line-height: 1.6em;
 }
 
-// This section is for the Query Guide,
-h3 > code:not(.hljs) {
-  //background-color: transparent;
+h2 > code:not(.hljs) {
   padding: 5px 10px;
   margin-bottom: 50px;
-  font-size: 1.2em;
+  font-size: 1em;
+  border: 1px solid $code-border-color;
+  background-color: $code-bg-color;
+  color: $code-color;
+}
+
+h3 > code:not(.hljs) {
+  padding: 5px 10px;
+  margin-bottom: 50px;
+  font-size: 1.1em;
   border: 1px solid $code-border-color;
   background-color: $code-bg-color;
   color: $code-color;
@@ -177,6 +184,13 @@ h3 > code:not(.hljs) {
   border-color: $code-bg-color-dark;
   color: $code-color-dark;
   background-color: $code-bg-color-dark;
+}
+
+[data-dark-mode] h2 > code:not(.hljs) {
+  border-color: $code-bg-color-dark;
+  color: $code-color-dark;
+  border: none;
+  background-color: transparent;
 }
 
 [data-dark-mode] h3 > code:not(.hljs) {

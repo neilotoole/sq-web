@@ -13,27 +13,35 @@ Usage:
 Examples:
   # inspect active data source
   $ sq inspect
-  
+
   # inspect @pg1 data source
   $ sq inspect @pg1
-  
+
   # inspect @pg1 data source, showing verbose output
   $ sq inspect -v @pg1
 
   # inspect 'actor' in @pg1 data source
   $ sq inspect @pg1.actor
-  
+
   # inspect 'actor' in active data source
   $ sq inspect .actor
-  
+
   # inspect piped data
   $ cat data.xlsx | sq inspect
 
 Flags:
-  -j, --json    Output JSON
-  -t, --table   Output text table
-      --help    help for inspect
+  -j, --json      Output JSON
+  -c, --compact   Compact instead of pretty-printed output
+  -y, --yaml      Output YAML
+      --help      help for inspect
 
 Global Flags:
-  -M, --monochrome   Don't colorize output
-  -v, --verbose      Verbose output
+      --config string      Load config from here
+  -h, --header             Print header row (default true)
+      --log                Enable logging
+      --log.file string    Path to log file; empty disables logging
+      --log.level string   Log level: one of DEBUG, INFO, WARN, ERROR
+  -M, --monochrome         Don't colorize output
+  -H, --no-header          Don't print header row
+  -t, --text               Output text
+  -v, --verbose            Verbose output

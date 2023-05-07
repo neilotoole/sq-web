@@ -115,31 +115,13 @@ Flags:
 ## Issues
 
 File any bug reports or other issues [here](https://github.com/neilotoole/sq/issues).
-When filing a bug report, submit a log file. For example, this:
-
-```sh
-SQ_LOGFILE=./sq.log sq [some command]
-```
-
-will create `sq.log` in the current dir. That `sq.log` file should be submitted with the bug report.
+When filing a bug report, submit a [log file](/docs/config#logging).
 
 ## Config
 
-By default, `sq` stores its config in `~/.config/sq/sq.yml`.
+`sq` is highly configurable. See the [config](/docs/config) section.
 
 ### Logging
 
-By default, `sq` debug logging is disabled. For one-time logging, this will
-generate a `sq.log` file in the current dir:
-
-```shell
-SQ_LOGFILE=./sq.log sq [some command]
-```
-
-To enable logging generally, add this line to your `.bashrc` or `.zshrc` etc..
-
-```shell
-export SQ_LOGFILE=~/.config/sq/sq.log
-```
-
-For Windows, set the `SQ_LOGFILE` environment variable per the usual mechanism.
+By default, `sq` logging is disabled. See the [logging](/docs/config#logging) section
+to learn how to enable logging.

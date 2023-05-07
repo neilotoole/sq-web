@@ -24,8 +24,18 @@ Examples:
   $ sq mv production prod
 
 Flags:
-      --help   help for mv
+  -j, --json      Output JSON
+  -c, --compact   Compact instead of pretty-printed output
+  -y, --yaml      Output YAML
+      --help      help for mv
 
 Global Flags:
-  -M, --monochrome   Don't colorize output
-  -v, --verbose      Verbose output
+      --config string      Load config from here
+  -h, --header             Print header row (default true)
+      --log                Enable logging
+      --log.file string    Path to log file; empty disables logging
+      --log.level string   Log level: one of DEBUG, INFO, WARN, ERROR
+  -M, --monochrome         Don't colorize output
+  -H, --no-header          Don't print header row
+  -t, --text               Output text
+  -v, --verbose            Verbose output
