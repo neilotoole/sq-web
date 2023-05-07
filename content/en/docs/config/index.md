@@ -175,7 +175,7 @@ Some config options apply only to base config. For example, `format=json` applie
 to the `sq` CLI itself, and not to a particular source such as `@sakila`. However,
 some options can apply to a source, and also have a base value. For example,
 `conn.max-open` controls the maximum number of connections that `sq` will open
-to a database. You can
+to a database.
 
 
 ### CLI
