@@ -47,7 +47,7 @@ it frequently modifies the behavior of other `sq` commands.
 
 ![sq -v](sq_verbose.png)
 
-It works with a significant number of `sq` commands. Give it a try.
+`-v` works with a significant number of `sq` commands. Give it a try.
 It can also be set via [config](/docs/config#verbose).
 
 
