@@ -50,7 +50,7 @@ address.csv  city.csv      customer.csv  film_actor.csv  film_text.csv      lang
 The above snippet will:
 
 - invoke `sq inspect` on the active source (`@sakila_sl3`) and output in JSON
-- pipe that JSON to `jq`, and filter for just the table names
+- pipe that JSON to jq, and filter for just the table names
 - pipe those table names to `xargs`
 - `xargs` invokes `sq .% --csv --output %.csv` for each table name (e.g. `sq .actor --csv --output actor.csv`)
 - thus the content of each table is outputted in CSV format to an individual `.csv` file.

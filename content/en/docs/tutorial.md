@@ -471,7 +471,7 @@ Dropped table @sakila_my.film_category_bak
 
 ## jq
 
-Note that `sq` plays nicely with `jq`. For example, list the names of the columns in table `@sakila_pg.actor`:
+Note that `sq` plays nicely with jq. For example, list the names of the columns in table `@sakila_pg.actor`:
 
 ```shell
 $ sq inspect --json @sakila_pg.actor | jq -r '.columns[] | .name'

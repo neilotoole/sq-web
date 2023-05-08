@@ -10,7 +10,7 @@ toc: true
 
 `sq` is the missing tool for wrangling data. A swiss-army knife for data.
 
-`sq` provides a `jq`-style syntax to query, join, migrate, and export data from a variety of data sources,
+`sq` provides a [jq](https://stedolan.github.io/jq/)-style syntax to query, join, migrate, and export data from a variety of data sources,
 such as Postgres, SQLite, SQL Server, MySQL, Excel or CSV, with the ability to fall back
 to actual SQL for trickier work. In essence, `sq` treats every data source as if it were a SQL database.
 `sq` also provides several handy commands such as `inspect`, `ping`, or `tbl copy`.

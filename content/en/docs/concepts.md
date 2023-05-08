@@ -19,7 +19,7 @@ by [Neil O'Toole](https://github.com/neilotoole).
 
 ## SLQ
 
-`SLQ` is the formal name of `sq`'s query language, similar to `jq`'s syntax.
+`SLQ` is the formal name of `sq`'s query language, similar to jq's syntax.
 The [Antlr](https://www.antlr.org) grammar
 is available on [GitHub](https://github.com/neilotoole/sq/tree/master/grammar).
 

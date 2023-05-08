@@ -76,12 +76,26 @@ Use `--monochrome` (`-M`) flag to output without color. Or set via [config](/doc
 ![sq query -M](sq_query_monochrome.png)
 
 
+### datetime
+
+By default, `sq` outputs timestamps in an [IS08601](https://en.wikipedia.org/wiki/ISO_8601)
+format, in [UTC](https://en.wikipedia.org/wiki/Coordinated_Universal_Time), e.g. `2020-06-11T02:50:54Z`.
+
+You can use [`--format.datetime`](/docs/config/#formatdatetime) to specify a [pre-defined](/docs/config/#formatdatetime)
+format such as `unix` or `RFC3339`. Or you can supply an arbitrary
+[`strftime`](https://pubs.opengroup.org/onlinepubs/009695399/functions/strftime.html)
+format, such as `%Y/%m/%d %H:%M:%S`.
+
+![sq query datetime](sq_query_format_datetime.png)
+
+Similarly [`--format.date`](/docs/config/#formatdate)
+and [`--format.time`](/docs/config/#formattime) control the rendering of
+date and time values.
+
 {{< alert icon="👉" >}}
-There are yet more formatting options available, e.g. `format.datetime=RFC3339`.
-
-Check out the full list in the [config guide](/docs/config/#formatting).
+There are yet more formatting options available. Check out the full list
+in the [config guide](/docs/config/#formatting).
 {{< /alert >}}
-
 
 ## Formats
 
