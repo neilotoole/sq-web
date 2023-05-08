@@ -93,26 +93,32 @@ sq inspect -j | jq -r '.tables[] | .name' | xargs -I % sq sql 'SELECT * FROM %' 
 
 ### Source commands
 
-Commands to add, set active, list, ping, or remove sources.
+Commands to [add](/docs/cmd/add), [activate](/docs/cmd/src), [move](/docs/cmd/mv),
+[list](/docs/cmd/ls), [group](/docs/cmd/group), [ping](/docs/cmd/ping)
+or [remove](/docs/cmd/rm) sources.
 
 ```shell
-$ sq src                # show active source
-$ sq add ./actor.tsv    # add a source
-$ sq src @actor_tsv     # set active source
-$ sq ls                 # list sources
-$ sq ls -v              # list sources (verbose)
-$ sq ping --all         # ping all sources
-$ sq rm @actor_tsv      # remove a source
+$ sq src                      # show active source
+$ sq add ./actor.tsv          # add a source
+$ sq src @actor_tsv           # set active source
+$ sq ls                       # list sources
+$ sq ls -v                    # list sources (verbose)
+$ sq group                    # get active group
+$ sq group prod               # set active group
+$ sq mv @sales @prod/sales    # rename a source
+$ sq ping --all               # ping all sources
+$ sq rm @actor_tsv            # remove a source
 ```
 
 {{< asciicast src="/casts/source-cmds.cast" poster="npt:0:20" idleTimeLimit=0.5 rows=10 speed=2 >}}
 
 ### Database table commands
 
-Convenient commands that act on database tables.
+Convenient commands that act on database tables: [copy](/docs/cmd/tbl-copy), [truncate](/docs/cmd/tbl-truncate), [drop](/docs/cmd/tbl-drop).
 
-Note that `sq tbl copy` only applies within a single database. That is, to copy a table from one database to another,
-use a query with `--insert @target.tbl`.
+Note that `sq tbl copy` only applies within a single database.
+If you want to copy a table from one database to another,
+use the [`--insert`](/docs/output#insert) mechanism.
 
 ```shell
 $ sq tbl copy .actor .actor2  # copy table "actor" to "actor2", creating if necessary
@@ -125,7 +131,7 @@ $ sq tbl drop .actor2         # drop table "actor2"
 ### Query JSONL (e.g. log files)
 
 JSONL output is a row of JSON per line (hence "JSON Lines"). Lots of log output is like this.
-We can use `sq`'s own log output (typically in `~/.config/sq/sq.log`) as an example:
+We can use `sq`'s own [log](/docs/config/#logging) output as an example:
 
 ```json lines
 {"level":"debug","time":"00:07:48.799992","caller":"sqlserver/sqlserver.go:452:(*database).Close","msg":"Close database: @sakila_mssql | sqlserver | sqlserver://sakila:xxxxx@localhost?database=sakila"}

@@ -51,7 +51,7 @@ It works with a significant number of `sq` commands. Give it a try.
 It can also be set via [config](/docs/config#verbose).
 
 
-### header / no-header
+### header
 
 Some formats optionally display a header row. This is controlled via
 `--header` (`-h`) or `--no-header` (`-H`).
@@ -75,6 +75,12 @@ Use `--monochrome` (`-M`) flag to output without color. Or set via [config](/doc
 
 ![sq query -M](sq_query_monochrome.png)
 
+
+{{< alert icon="👉" >}}
+There are yet more formatting options available, e.g. `format.datetime=RFC3339`.
+
+Check out the full list in the [config guide](/docs/config/#formatting).
+{{< /alert >}}
 
 
 ## Formats

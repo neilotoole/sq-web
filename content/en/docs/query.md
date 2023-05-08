@@ -17,6 +17,14 @@ or [XLSX](/docs/drivers/xlsx). For those document
 sources, `sq` loads the source data into a [scratch database](/docs/concepts#scratch-db),
 and executes the query against that database.
 
+{{< alert icon="👉" >}}
+Because it's all SQL behind the scenes, you can always bypass `sq`'s query language
+and execute database-native SQL queries using the [`sq sql`](/docs/cmd/sql) command.
+{{< /alert >}}
+
+
+
+
 ## Fundamentals
 
 Let's take a look at a query.

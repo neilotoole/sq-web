@@ -9,27 +9,21 @@ weight: 1037
 toc: true
 ---
 `sq` aims to work out of the box with sane defaults, but allows you to configure most
-everything. Let's start off with the basics.
+everything. `sq`'s total configuration state consists of a collection of
+data [sources](/docs/source) and [groups](/docs/source/#groups), and a plethora
+of configuration options. That's what this section is about. There are two levels
+of options:
 
-`sq`'s total configuration state is:
-
-- A collection of data [sources](/docs/source) and [groups](/docs/source/#groups).
-- And a bunch of configuration options.
-
-The config options consist of:
-- Base config, consisting of many options.
-  - Each option is a key-value pair, e.g. `format=json`, or `conn.max-open=50`
-- Source-specific config.
-  - If an option is not explicitly set on a source, the source inherits that
-    option value from base config.
-
-Let's take a look at the functionality.
+- Base config, consisting of many options. Each option is a key-value pair, e.g. `format=json`, or `conn.max-open=50`
+- Source-specific config. Each source can have its own value for, say, `conn.max-open`. If an option is not explicitly set on a source, the source inherits that
+  option value from base config.
 
 ## Commands
 
-`sq` provides commands to `ls`, `get`, `set`, and `edit` config. Note that
-the commands provide extensive shell-completion, so feel free to hit `TAB` while
-entering the command, and `sq` will guide you.
+`sq` provides commands to [locate](#location), [list](#ls), [`get`](#get),
+[`set`](#set), and [`edit`](#edit) config. The config commands provide extensive
+shell-completion, so feel free to hit `TAB` while
+entering a command, and `sq` will guide you.
 
 
 ### `location`
@@ -168,6 +162,19 @@ $ sq config get log.file -v
 KEY       VALUE  DEFAULT
 log.file         /Users/neilotoole/Library/Logs/sq/sq.log
 ```
+
+
+{{< alert icon="🤬️" >}}
+If there's a problem with `sq`'s bootstrap
+mechanism (e.g. corrupt config file),
+and logs aren't being generated, it's preferable
+to use envars to force logging.
+
+```shell
+export SQ_LOG=true; export SQ_LOG_LEVEL=DEBUG; export SQ_LOG_FILE=./sq.log
+```
+{{< /alert >}}
+
 
 ## Options
 
