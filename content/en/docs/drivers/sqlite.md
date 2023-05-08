@@ -6,7 +6,7 @@ images: []
 weight: 4040
 toc: false
 ---
-The `sq` Postgres driver implements connectivity for
+The `sq` SQLite driver implements connectivity for
 the [SQLite](https://www.sqlite.org) database.
 The driver implements all optional driver features.
 
