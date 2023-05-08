@@ -33,5 +33,5 @@ You can use `sq` to create a new, empty, SQLite DB file.
 
 ```shell
 $ sq add --driver sqlite3 hello.db
-@hello_sqlite  sqlite3  hello.db
+@hello  sqlite3  hello.db
 ```
