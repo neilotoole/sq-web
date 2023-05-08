@@ -44,7 +44,7 @@ including the [tutorial](/docs/tutorial) and [cookbook](/docs/cookbook).
 
 ### Import Excel worksheet into Postgres table
 
-Insert the contents of an Excel XLSX worksheet (from a sheet named `actor`) into
+[Insert](/docs/output#insert) the contents of an Excel XLSX worksheet (from a sheet named `actor`) into
 a new Postgres table named `xl_actor`. Note that the import mechanism
 is reasonably sophisticated in that it tries to preserve data types.
 
@@ -53,7 +53,7 @@ is reasonably sophisticated in that it tries to preserve data types.
 
 ### View metadata for a database
 
-The `--json` flag to `sq inspect` outputs schema and other metadata in JSON.
+The `--json` flag to [`sq inspect`](/docs/cmd/inspect) outputs schema and other metadata in JSON.
 Typically the output is piped to `jq` to select the interesting elements.
 
 {{< asciicast src="/casts/inspect-sakila-mysql-json.cast" poster="npt:0:9" rows=10 >}}
@@ -71,8 +71,8 @@ sq inspect @sakila_my.actor -j | jq -r '.columns[] | .name'
 ### Execute SQL query against SQL Server, insert results to SQLite
 
 This snippet adds a (pre-existing) SQL Server source, and creates a
-new SQLite source. Then, a raw native SQL query is executed against
-SQL Server, and the results are inserted into SQLite.
+new [SQLite](/docs/drivers/sqlite) source. Then, a raw native SQL query is executed against
+[SQL Server](/docs/drivers/sqlserver), and the results are inserted into SQLite.
 
 {{< asciicast src="/casts/sql-query-then-insert.cast" poster="npt:0:55" rows=6 >}}
 
@@ -130,7 +130,7 @@ $ sq tbl drop .actor2         # drop table "actor2"
 
 ### Query JSONL (e.g. log files)
 
-JSONL output is a row of JSON per line (hence "JSON Lines"). Lots of log output is like this.
+[JSONL](/docs/output#jsonl) output is a row of JSON per line (hence "JSON Lines"). Lots of log output is like this.
 We can use `sq`'s own [log](/docs/config/#logging) output as an example:
 
 ```json lines

@@ -110,6 +110,19 @@ compact instead of pretty-printed JSON.
 
 ![sq query --jsonl](sq_query_jsonl.png)
 
+
+<a id="tsv" />
+
+<a id="csv" />
+
+### csv, tsv
+
+`csv` (`-C`) outputs [Comma-Separated Values](https://en.wikipedia.org/wiki/Comma-separated_values).
+Its twin `tsv` (`-T`) outputs [Tab-Separated Values](https://en.wikipedia.org/wiki/Tab-separated_values).
+
+![sq query csv](sq_query_csv_tsv.png)
+
+
 ### markdown
 
 `markdown` outputs markdown tables.
