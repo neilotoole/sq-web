@@ -81,35 +81,49 @@ Available Commands:
   inspect     Inspect data source schema and stats
   ping        Ping data sources
   sql         Execute DB-native SQL query or statement
-  driver      List or manage drivers
   tbl         Useful table actions (copy, truncate, drop)
+  driver      Manage drivers
+  config      Manage config
   completion  Generate shell completion script
-  version     Print sq version
-  help        Show sq help
+  version     Show version info
+  help        Show help
 
 Flags:
-  -o, --output string   Write output to <file> instead of stdout
-  -j, --json            Output JSON
-  -A, --jsona           Output LF-delimited JSON arrays
-  -l, --jsonl           Output LF-delimited JSON objects
-  -t, --table           Output text table
-  -X, --xml             Output XML
-  -x, --xlsx            Output Excel XLSX
-  -c, --csv             Output CSV
-  -T, --tsv             Output TSV
-  -r, --raw             Output each record field in raw format without any encoding or delimiter
-      --html            Output HTML table
-      --md              Output Markdown
-  -h, --header          Print header row in output (default true)
-      --pretty          Pretty-print output (default true)
-      --insert string   Insert query results into @HANDLE.TABLE. If not existing, TABLE will be created.
-      --src string      Override the active source for this query
-      --driver string   Explicitly specify the data source driver to use when piping input
-      --opts string     Driver-dependent data source options when piping input
-      --version         Print sq version
-      --help            Show sq help
-  -M, --monochrome      Don't colorize output
-  -v, --verbose         Print verbose output, if applicable
+  -j, --json                       Output JSON
+  -A, --jsona                      Output LF-delimited JSON arrays
+  -l, --jsonl                      Output LF-delimited JSON objects
+  -C, --csv                        Output CSV
+  -T, --tsv                        Output TSV
+      --html                       Output HTML table
+      --md                         Output Markdown
+  -r, --raw                        Output each record field in raw format without any encoding or delimiter
+  -x, --xlsx                       Output Excel XLSX
+  -X, --xml                        Output XML
+  -c, --compact                    Compact instead of pretty-printed output
+      --format.datetime string     Timestamp format: constant such as RFC3339 or a strftime format (default "RFC3339")
+      --format.datetime.number     Render numeric datetime value as number instead of string (default true)
+      --format.date string         Date format: constant such as DateOnly or a strftime format (default "DateOnly")
+      --format.date.number         Render numeric date value as number instead of string (default true)
+      --format.time string         Time format: constant such as TimeOnly or a strftime format (default "TimeOnly")
+      --format.time.number         Render numeric time value as number instead of string (default true)
+  -o, --output string              Write output to <file> instead of stdout
+      --insert string              Insert query results into @HANDLE.TABLE. If not existing, TABLE will be created.
+      --src string                 Override the active source for this query
+      --ingest.driver string       Explicitly specify the driver to use for ingesting data
+      --ingest.header              Treat first row of ingest data as header
+      --driver.csv.empty-as-null   Treat empty CSV fields as null (default true)
+      --driver.csv.delim string    CSV delimiter: one of comma, space, pipe, tab, colon, semi, period (default "comma")
+      --version                    Print version info
+  -h, --header                     Print header row (default true)
+      --help                       Show help
+  -H, --no-header                  Don't print header row
+  -t, --text                       Output text
+      --config string              Load config from here
+      --log                        Enable logging
+      --log.file string            Path to log file; empty disables logging
+      --log.level string           Log level: one of DEBUG, INFO, WARN, ERROR
+  -M, --monochrome                 Don't colorize output
+  -v, --verbose                    Verbose output
 ```
 
 ## Issues
