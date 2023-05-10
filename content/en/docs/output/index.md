@@ -64,7 +64,7 @@ Or set via [config](/docs/config#header). The default is to print the header.
 For some formats, the `--compact` (`-c`) flag prints compact instead of
 pretty-printed output. It can also be set via [config](/docs/config#compact).
 
-JSON is the main use case for `--compact`. This examples outputs a query in compact JSON (`-jc`), followed by the same
+JSON is the main use case for `--compact`. This example outputs a query in compact JSON (`-jc`), followed by the same
 query in pretty JSON.
 
 ![sq query -jc](sq_query_json_compact.png)
