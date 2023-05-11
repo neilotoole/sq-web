@@ -163,6 +163,12 @@ Its twin `tsv` (`-T`) outputs [Tab-Separated Values](https://en.wikipedia.org/wi
 
 ![sq query --xlsx](sq_query_xlsx.png)
 
+### yaml
+
+`yaml` (`-y`) outputs YAML.
+
+![sq query --yaml](sq_query_yaml.png)
+
 
 ### raw
 

@@ -93,11 +93,10 @@ value of a single option.
 ```shell
 # Get base value of "format" option
 $ sq config get format
-format  text
+text
 
 $ sq config get --src @actor_csv conn.max-open
-conn.max-open  10
-
+10
 ```
 
 ### `set`
