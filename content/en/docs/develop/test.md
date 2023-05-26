@@ -6,6 +6,12 @@ images: []
 weight: 6002
 toc: true
 ---
+In a nutshell:
+
+```shell
+$ go test ./...
+```
+
 `sq` is a much more difficult beast to test than a typical Go project. `sq` is all about integrating data sources, and
 that means databases. Much of the test code is testing of interaction with actual databases instances via that
 database's Go driver. This is not something that can or should be mocked. We must test against the real thing.
@@ -46,12 +52,6 @@ sources:
     - handle: '@sakila_my57'
       type: mysql
       location: mysql://sakila:p_ssW0rd@${SQ_TEST_SRC__SAKILA_MY57}/sakila
-    - handle: '@sakila_xlsx'
-        type: xlsx
-        location: "${SQ_ROOT}/drivers/xlsx/testdata/sakila.xlsx"
-        options:
-          header:
-            - "true"
 ```
 
 Note that for each of the external databases, there is a matching envar. For example, `@sakila_pg9` has its `location`
@@ -81,37 +81,5 @@ export SQ_TEST_SRC__SAKILA_PG11=192.168.30.135
 export SQ_TEST_SRC__SAKILA_PG12=192.168.30.136
 # MSSQL
 export SQ_TEST_SRC__SAKILA_MS17=192.168.30.137
-```
-
-## Start Sakila containers
-
-There is a `mage` target to locally start a Sakila container for each database/version. Note that this requires a
-significantly beefy machine with lots of RAM. It is typically more advisable to run the containers on an external
-server, or to simply start one or a few containers at a time while working or testing against that particular database.
-
-```sh
-# Remove any existing containers
-> mage sakila:removeall
-
-# Start all containers
-> mage sakila:startall
-Starting all containers...
-'src' the following:
-===
-export SQ_TEST_SRC__SAKILA_MY56=localhost:33066
-export SQ_TEST_SRC__SAKILA_MY57=localhost:33067
-export SQ_TEST_SRC__SAKILA_MY8=localhost:33068
-export SQ_TEST_SRC__SAKILA_PG9=localhost:54329
-export SQ_TEST_SRC__SAKILA_PG10=localhost:54330
-export SQ_TEST_SRC__SAKILA_PG11=localhost:54331
-export SQ_TEST_SRC__SAKILA_PG12=localhost:54332
-export SQ_TEST_SRC__SAKILA_MS17=localhost:14337
-===
-
-Starting container sakiladb-mysql-8 for sakiladb/mysql:8
-Starting container sakiladb-postgres-9 for sakiladb/postgres:9
-Starting container sakiladb-postgres-12 for sakiladb/postgres:12
-Starting container sakiladb-mysql-5.6 for sakiladb/mysql:5.6
-[...]
 ```
 
