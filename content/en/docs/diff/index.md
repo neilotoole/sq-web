@@ -141,6 +141,8 @@ Use `--dbprops` to diff database/server properties. Applies only to source diff.
 $ sq diff @sakila/staging @sakila/prod --dbprops
 ```
 
+![sq diff dbprops](sq_diff_src_dbprops.png)
+
 ## `--all`
 
 Use `--all` to diff every element in both sources. Use with caution with
