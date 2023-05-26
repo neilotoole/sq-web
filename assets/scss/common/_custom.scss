@@ -152,6 +152,31 @@ div.alert > div.w-100 > code,
   color: $code-color;
 }
 
+a > code,
+table > a > code,
+p > a > code,
+li > a > code,
+div.alert > div.w-100 > a > code,
+.tab-pane > a > code,
+body a > code:not(.hljs) {
+  color: $link-color;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+}
+
+.page-links nav ul li a code {
+  font-size: 0.8em;
+  text-decoration: none;
+  background-color: transparent;
+  border: none;
+  color: $body-color;
+}
+
+.page-links nav ul li a code:hover {
+  color: $link-color;
+}
+
+
 div.alert > div.w-100 {
   line-height: 1.6em;
 }
@@ -159,18 +184,18 @@ div.alert > div.w-100 {
 h2 > code:not(.hljs) {
   padding: 5px 10px;
   margin-bottom: 50px;
-  font-size: 1em;
-  border: 1px solid $code-border-color;
-  background-color: $code-bg-color;
+  font-size: 0.9em;
+  //border: 1px solid $code-border-color;
+  //background-color: $code-bg-color;
   color: $code-color;
 }
 
 h3 > code:not(.hljs) {
   padding: 5px 10px;
   margin-bottom: 50px;
-  font-size: 1.1em;
-  border: 1px solid $code-border-color;
-  background-color: $code-bg-color;
+  font-size: 0.8em;
+  //border: 1px solid $code-border-color;
+  //background-color: $code-bg-color;
   color: $code-color;
 }
 
@@ -186,17 +211,46 @@ h3 > code:not(.hljs) {
   background-color: $code-bg-color-dark;
 }
 
+[data-dark-mode] a > code,
+[data-dark-mode] table > a > code,
+[data-dark-mode] p > a > code,
+[data-dark-mode] li > a > code,
+[data-dark-mode] div.alert > div.w-100 > a > code,
+[data-dark-mode] .tab-pane > a > code,
+[data-dark-mode] body a > code:not(.hljs) {
+  color: $link-color-dark;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+}
+
+[data-dark-mode] .page-links nav ul li a code {
+  font-size: 0.8em;
+  text-decoration: none;
+  background-color: transparent;
+  border: none;
+  color: $body-color-dark;
+}
+
+[data-dark-mode] .page-links nav ul li a code:hover {
+  color: $link-color-dark;
+}
+
 [data-dark-mode] h2 > code:not(.hljs) {
-  border-color: $code-bg-color-dark;
-  color: $code-color-dark;
+  //border-color: $code-bg-color-dark;
+  //color: $code-color-dark;
   border: none;
   background-color: transparent;
+  font-size: 1.0em;
 }
 
 [data-dark-mode] h3 > code:not(.hljs) {
-  border-color: $code-bg-color-dark;
-  color: $code-color-dark;
-  background-color: $code-bg-color-dark;
+  //border-color: $code-bg-color-dark;
+  //color: $code-color-dark;
+  //background-color: $code-bg-color-dark;
+  border: none;
+  background-color: transparent;
+  font-size: 0.9em;
+//font-size: 0.;
 }
 
 [data-dark-mode] pre.chroma code {

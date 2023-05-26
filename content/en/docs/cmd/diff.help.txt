@@ -99,7 +99,7 @@ Flags:
   -O, --overview        Compare source overview
   -B, --dbprops         Compare DB properties
   -S, --schema          Compare schema structure
-  -N, --count           When comparing table schema structure, include row counts
+  -N, --counts          When comparing table schema structure, include row counts
   -d, --data            Compare values of each data row (caution: may be slow)
   -a, --all             Compare everything (caution: may be slow)
       --help            help for diff

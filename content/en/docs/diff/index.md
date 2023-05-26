@@ -33,6 +33,19 @@ Use flags to specify the elements you want to compare. The available elements:
 - `--data`: row data values
 - `--all`: all of the above
 
+{{< alert icon="👉" >}}
+Note that you can combine flags:
+
+```shell
+# Longhand
+$ sq diff @sakila/staging @sakila/prod --overview --dbprops --schema
+
+# Shorthand
+$ sq diff @sakila/staging @sakila/prod -OBS
+```
+{{< /alert >}}
+
+
 ## Default behavior
 
 For table diff, the default behavior is to diff table schema and row counts.
@@ -61,8 +74,7 @@ $ sq diff @sakila/staging @sakila/prod
 
 ## `--data`
 
-To compare row data, use the `--data` flag. Caution: this results in
-full table reads.
+To compare row data, use the `--data` (`-d`) flag.
 
 ```shell
 # Diff the rows of the "actor" table in staging vs prod.
@@ -78,7 +90,7 @@ are compared. Obviously this may take some time to complete.
 
 ### `--format`
 
-Use the `--format` flag to specify the row data output format.
+Use the `--format` (`-f`) flag with `--data` to specify the row data output format.
 
 ![sq diff table data format](sq_diff_table_data_jsonl.png)
 
@@ -96,7 +108,7 @@ diff (e.g. `--schema`) is currently always output in YAML.
 
 ## `--schema`
 
-Use `--schema` to compare only schema/structure. This applies both
+Use `--schema` (`-S`) to compare only schema/structure. This applies both
 to source diff and table diff.
 
 
@@ -109,7 +121,7 @@ $ sq diff @sakila/staging @sakila/prod --schema
 
 ### `--counts`
 
-Use `--counts` in conjunction with `--schema` to also see row counts.
+Use `--counts` (`-N`) in conjunction with `--schema` to also see row counts.
 
 ```shell
 # Show schema for each table, and row counts.
@@ -122,7 +134,7 @@ $ sq diff @sakila/staging @sakila/prod -SC
 
 ## `--overview`
 
-Use `--overview` to diff high-level source metadata. This flag applies
+Use `--overview` (`-O`) to diff high-level source metadata. This flag applies
 only to source diff. It compares
 the source definitions (handle, driver, location), as well as some high-level
 information about the database (product, version, etc.).
@@ -135,7 +147,7 @@ $ sq diff @sakila/staging @sakila/prod --overview
 
 ## `--dbprops`
 
-Use `--dbprops` to diff database/server properties. Applies only to source diff.
+Use `--dbprops` (`-B`) to diff database/server properties. Applies only to source diff.
 
 ```shell
 $ sq diff @sakila/staging @sakila/prod --dbprops
@@ -145,7 +157,7 @@ $ sq diff @sakila/staging @sakila/prod --dbprops
 
 ## `--all`
 
-Use `--all` to diff every element in both sources. Use with caution with
+Use `--all` (`-a`) to diff every element in both sources. Use with caution with
 large tables.
 
 ```shell
@@ -153,7 +165,7 @@ $ sq diff @sakila/staging @sakila/prod --all
 ```
 
 
-## Context lines
+## `--unified` (lines)
 
 You can control the number of surrounding lines using the `--unified` (`-U`) flag.
 The default is `3`.
@@ -166,16 +178,14 @@ $ sq diff @sakila/staging.actor @sakila/prod.actor --data -U0
 $ sq diff @sakila/staging.actor @sakila/prod.actor --data -U5
 ```
 
+![sq diff unified](sq_diff_unified.png)
+
 You can set the default number of lines
 via [`sq config set diff.lines`](/docs/config/#difflines).
 
-
-![sq diff unified](sq_diff_unified.png)
 
 {{< alert icon="👉" >}}
 The `--unified` flag could easily have been named `--lines` or such, but we
 stick with `--unified` for alignment with the familiar `diff` and `git diff` commands.
 {{< /alert >}}
-
-
 
