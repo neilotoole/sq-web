@@ -10,11 +10,15 @@ toc: true
 `sq` can output in many formats, e.g. `text` or `json`. It can also write
 results to a database, using [`--insert`](#insert). The output format
 can be specified using command-line flags (e.g. `--text`, `--json` etc.), or
-it can be set using config. The default is `text`.
+it can be set using config. The default is `text`. As an alternative to the
+shorthand forms, you can also use `--format text` etc.
 
 ```shell
 # Execute a query, and output in CSV
 $ sq '.actor | .first_name, .last_name' --csv
+
+# Alternative --format flag
+$ sq '.actor | .first_name, .last_name' --format csv
 
 # Check default format
 $ sq config get format
