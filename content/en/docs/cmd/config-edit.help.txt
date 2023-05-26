@@ -2,7 +2,7 @@ Edit config or source options in the editor specified
 in envar $SQ_EDITOR or $EDITOR.
 
 Usage:
-  sq config edit [@HANDLE] [flags]
+  sq config edit [@HANDLE]
 
 Examples:
   # Edit default options
@@ -25,11 +25,8 @@ Flags:
 
 Global Flags:
       --config string      Load config from here
-  -h, --header             Print header row (default true)
       --log                Enable logging
       --log.file string    Path to log file; empty disables logging
       --log.level string   Log level: one of DEBUG, INFO, WARN, ERROR
   -M, --monochrome         Don't colorize output
-  -H, --no-header          Don't print header row
-  -t, --text               Output text
   -v, --verbose            Verbose output

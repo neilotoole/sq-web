@@ -177,6 +177,9 @@ export SQ_LOG=true; export SQ_LOG_LEVEL=DEBUG; export SQ_LOG_FILE=./sq.log
 
 ## Options
 
+This section lists all available options. Use `sq config set OPTION` to
+modify the option value.
+
 Some config options apply only to base config. For example, `format=json` applies
 to the `sq` CLI itself, and not to a particular source such as `@sakila`. However,
 some options can apply to a source, and also have a base value. For example,
@@ -239,6 +242,12 @@ to a database.
 #### verbose
 {{< readfile file="../cmd/options/verbose.help.txt" code="true" lang="text" >}}
 
+#### diff.data.format
+{{< readfile file="../cmd/options/diff.data.format.help.txt" code="true" lang="text" >}}
+
+#### diff.lines
+{{< readfile file="../cmd/options/diff.lines.help.txt" code="true" lang="text" >}}
+
 ### Tuning
 
 #### conn.max-idle
@@ -252,6 +261,9 @@ to a database.
 
 #### conn.max-open
 {{< readfile file="../cmd/options/conn.max-open.help.txt" code="true" lang="text" >}}
+
+#### conn.open-timeout
+{{< readfile file="../cmd/options/conn.open-timeout.help.txt" code="true" lang="text" >}}
 
 #### tuning.errgroup-limit
 {{< readfile file="../cmd/options/tuning.errgroup-limit.help.txt" code="true" lang="text" >}}

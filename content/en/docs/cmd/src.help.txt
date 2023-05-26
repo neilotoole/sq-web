@@ -2,7 +2,7 @@ Get or set active data source. If no argument provided, get the active data
 source. Otherwise, set @HANDLE as the active data source.
 
 Usage:
-  sq src [@HANDLE] [flags]
+  sq src [@HANDLE]
 
 Examples:
   # Get active data source
@@ -12,18 +12,18 @@ Examples:
   $ sq src @my1
 
 Flags:
-  -j, --json      Output JSON
-  -c, --compact   Compact instead of pretty-printed output
-  -y, --yaml      Output YAML
-      --help      help for src
+  -t, --text        Output text
+  -h, --header      Print header row (default true)
+  -H, --no-header   Don't print header row
+  -j, --json        Output JSON
+  -c, --compact     Compact instead of pretty-printed output
+  -y, --yaml        Output YAML
+      --help        help for src
 
 Global Flags:
       --config string      Load config from here
-  -h, --header             Print header row (default true)
       --log                Enable logging
       --log.file string    Path to log file; empty disables logging
       --log.level string   Log level: one of DEBUG, INFO, WARN, ERROR
   -M, --monochrome         Don't colorize output
-  -H, --no-header          Don't print header row
-  -t, --text               Output text
   -v, --verbose            Verbose output

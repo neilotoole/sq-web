@@ -4,7 +4,7 @@ description: sq tutorial
 lead: ''
 draft: false
 images: []
-weight: 1040
+weight: 1070
 toc: true
 ---
 
@@ -32,15 +32,15 @@ $ sq ls
 
 $ wget https://sq.io/testdata/xl_demo.xlsx
 
-$ sq add xl_demo.xlsx --opts header=true --handle @xl_demo
+$ sq add xl_demo.xlsx --ingest.header --handle @xl_demo
 @xl_demo  xlsx  xl_demo.xlsx
 
 $ sq ls
 @xl_demo*  xlsx  xl_demo.xlsx
 
 $ sq ls -v
-HANDLE     DRIVER  LOCATION                           OPTIONS
-@xl_demo*  xlsx    /Users/neilotoole/sq/xl_demo.xlsx  header=true
+HANDLE     DRIVER  LOCATION
+@xl_demo*  xlsx    /Users/neilotoole/sq/xl_demo.xlsx
 
 $ sq inspect @xl_demo
 HANDLE    DRIVER  NAME          SIZE   TABLES  LOCATION
@@ -56,7 +56,7 @@ Let's step through the above:
 - `sq ls`: list the current sources. There are none.
 - `wget`: download an Excel file to use for this demo.
 - `sq add`: add a source. The _type_ is inferred (or can be specified with `--driver=xlsx`) to be `xlsx`, and we give
-  this _source_ the handle `@xl_demo`. This Excel file has a header row, so we also specify `--opts=header=true` to
+  this _source_ the handle `@xl_demo`. This Excel file has a header row, so we also specify `--ingest.header=true` to
   indicate that the actual data begins on row 1, not row 0 (which is the header row).
 - `sq ls`: lists the sources again; this time we see our new `@xl_demo` source. The asterisk beside the
   _handle_ (`@xl_demo*`) indicates that this is the _active source_.

@@ -29,7 +29,7 @@ A data source has three main elements:
 The format of the command is:
 
 ```shell
-sq add [--handle HANDLE] [--driver DRIVER] [--active] [--opts OPTS] LOCATION
+sq add [--handle HANDLE] [--driver DRIVER] [--active] LOCATION
 ```
 
 For example, to add a postgres data source:
@@ -83,7 +83,7 @@ if a header row is present. But depending on the nature of the data file,
 it may be necessary to explicitly tell `sq` to use a header row (or not).
 
 ```shell
-$ sq add ./actor.csv --opts header=true
+$ sq add ./actor.csv --ingest.header
 ```
 
 {{< alert icon="👉" >}}

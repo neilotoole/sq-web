@@ -3,7 +3,7 @@ Use the -v flag to see all options. When flag --src is provided, show config
 just for that source.
 
 Usage:
-  sq config get [flags]
+  sq config get
 
 Examples:
   # Show individual base option
@@ -16,6 +16,9 @@ Examples:
   $ sq config get --src @sakila conn.max-open
 
 Flags:
+  -t, --text         Output text
+  -h, --header       Print header row (default true)
+  -H, --no-header    Don't print header row
   -j, --json         Output JSON
   -y, --yaml         Output YAML
   -c, --compact      Compact instead of pretty-printed output
@@ -24,11 +27,8 @@ Flags:
 
 Global Flags:
       --config string      Load config from here
-  -h, --header             Print header row (default true)
       --log                Enable logging
       --log.file string    Path to log file; empty disables logging
       --log.level string   Log level: one of DEBUG, INFO, WARN, ERROR
   -M, --monochrome         Don't colorize output
-  -H, --no-header          Don't print header row
-  -t, --text               Output text
   -v, --verbose            Verbose output

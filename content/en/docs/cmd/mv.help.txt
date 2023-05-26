@@ -4,7 +4,7 @@ The mv command works analogously to the UNIX "mv" command, where
 source handles are files, and groups are directories.
 
 Usage:
-  sq mv OLD NEW [flags]
+  sq mv OLD NEW
 
 Examples:
   # Rename a source
@@ -24,18 +24,18 @@ Examples:
   $ sq mv production prod
 
 Flags:
-  -j, --json      Output JSON
-  -c, --compact   Compact instead of pretty-printed output
-  -y, --yaml      Output YAML
-      --help      help for mv
+  -t, --text        Output text
+  -h, --header      Print header row (default true)
+  -H, --no-header   Don't print header row
+  -j, --json        Output JSON
+  -c, --compact     Compact instead of pretty-printed output
+  -y, --yaml        Output YAML
+      --help        help for mv
 
 Global Flags:
       --config string      Load config from here
-  -h, --header             Print header row (default true)
       --log                Enable logging
       --log.file string    Path to log file; empty disables logging
       --log.level string   Log level: one of DEBUG, INFO, WARN, ERROR
   -M, --monochrome         Don't colorize output
-  -H, --no-header          Don't print header row
-  -t, --text               Output text
   -v, --verbose            Verbose output

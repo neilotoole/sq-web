@@ -40,6 +40,11 @@
     <a class="docs-link rounded {{ if $active }} active{{ end }}" href="{{- $hackURL -}}">Output</a>
   </li>
   <li class="mb-1">
+    {{ $hackURL := "/docs/diff" }}
+    {{ $active := in $currentPage.RelPermalink $hackURL }}
+    <a class="docs-link rounded {{ if $active }} active{{ end }}" href="{{- $hackURL -}}">Diff</a>
+  </li>
+  <li class="mb-1">
     {{ $hackURL := "/docs/tutorial" }}
     {{ $active := in $currentPage.RelPermalink $hackURL }}
     <a class="docs-link rounded {{ if $active }} active{{ end }}" href="{{- $hackURL -}}">Tutorial</a>

@@ -2,7 +2,7 @@ Truncate one or more tables. Note that this command
 only applies to SQL sources.
 
 Usage:
-  sq tbl truncate @HANDLE.TABLE|.TABLE [flags]
+  sq tbl truncate @HANDLE.TABLE|.TABLE
 
 Examples:
   # truncate table "actor"" in source @sakila_sl3
@@ -14,18 +14,17 @@ Examples:
   # truncate multiple tables
   $ sq tbl truncate .payment @sakila_sl3.actor
 
-
 Flags:
-  -j, --json   Output JSON
-      --help   help for truncate
+  -t, --text        Output text
+  -h, --header      Print header row (default true)
+  -H, --no-header   Don't print header row
+  -j, --json        Output JSON
+      --help        help for truncate
 
 Global Flags:
       --config string      Load config from here
-  -h, --header             Print header row (default true)
       --log                Enable logging
       --log.file string    Path to log file; empty disables logging
       --log.level string   Log level: one of DEBUG, INFO, WARN, ERROR
   -M, --monochrome         Don't colorize output
-  -H, --no-header          Don't print header row
-  -t, --text               Output text
   -v, --verbose            Verbose output

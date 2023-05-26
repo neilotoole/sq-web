@@ -3,7 +3,7 @@ all sources in that group. On return, the active source or active group
 may have changed, if that source or group was removed.
 
 Usage:
-  sq rm @HANDLE|GROUP [flags]
+  sq rm @HANDLE|GROUP
 
 Examples:
   # Remove @sakila source
@@ -19,18 +19,18 @@ Examples:
   $ sq rm @staging/sakila_db @staging/backup_db dev
 
 Flags:
-  -j, --json      Output JSON
-  -c, --compact   Compact instead of pretty-printed output
-  -y, --yaml      Output YAML
-      --help      help for rm
+  -t, --text        Output text
+  -h, --header      Print header row (default true)
+  -H, --no-header   Don't print header row
+  -j, --json        Output JSON
+  -c, --compact     Compact instead of pretty-printed output
+  -y, --yaml        Output YAML
+      --help        help for rm
 
 Global Flags:
       --config string      Load config from here
-  -h, --header             Print header row (default true)
       --log                Enable logging
       --log.file string    Path to log file; empty disables logging
       --log.level string   Log level: one of DEBUG, INFO, WARN, ERROR
   -M, --monochrome         Don't colorize output
-  -H, --no-header          Don't print header row
-  -t, --text               Output text
   -v, --verbose            Verbose output

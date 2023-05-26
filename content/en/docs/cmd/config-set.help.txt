@@ -1,9 +1,9 @@
 Set option value, for base config, or for a specified source.
 To get help for an individual option, use "sq config set OPTION --help".
-Use "sq config get -v" to list available options.
+Use "sq config ls -v" to list available options.
 
 Usage:
-  sq config set OPTION VALUE [flags]
+  sq config set OPTION VALUE
 
 Examples:
   # Set base output format
@@ -22,6 +22,9 @@ Examples:
   $ sq config set conn.max-open --help
 
 Flags:
+  -t, --text         Output text
+  -h, --header       Print header row (default true)
+  -H, --no-header    Don't print header row
   -j, --json         Output JSON
   -c, --compact      Compact instead of pretty-printed output
   -y, --yaml         Output YAML
@@ -31,11 +34,8 @@ Flags:
 
 Global Flags:
       --config string      Load config from here
-  -h, --header             Print header row (default true)
       --log                Enable logging
       --log.file string    Path to log file; empty disables logging
       --log.level string   Log level: one of DEBUG, INFO, WARN, ERROR
   -M, --monochrome         Don't colorize output
-  -H, --no-header          Don't print header row
-  -t, --text               Output text
   -v, --verbose            Verbose output

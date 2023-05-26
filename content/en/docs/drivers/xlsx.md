@@ -54,10 +54,10 @@ A    B            C             D
 2    NICK         WAHLBERG      2020-02-15T06:59:28Z
 ```
 
-But often an XLSX sheet will have a header row. In that case, use the `--header=true` option:
+But often an XLSX sheet will have a header row. In that case, use the `--ingest.header` flag:
 
 ```shell
-sq add sakila.xlsx --opts header=true
+sq add sakila.xlsx --ingest.header
 ```
 
 Then the sheet header row names will become the column names.
@@ -70,7 +70,7 @@ actor_id  first_name   last_name     last_update
 ```
 
 {{< alert icon="👉" >}}
-A known limitation is that the `header` option is set on a per-source basis, not per-sheet.
+A known limitation is that the `--ingest.header` option is set on a per-source basis, not per-sheet.
 That is to say, each of the sheets in the XLSX source should have a header, or none of the
 sheets should have a header.
 {{< /alert >}}

@@ -17,6 +17,7 @@ cmds=(
   "config get"
   "config set"
   "config edit"
+  "diff"
   "driver ls"
   "group"
   "help"

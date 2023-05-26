@@ -5,7 +5,7 @@ The source list includes all descendants of the group: direct children, and also
 any further descendants.
 
 Usage:
-  sq ls [GROUP] [flags]
+  sq ls [GROUP]
 
 Examples:
   # List sources in active group
@@ -27,19 +27,19 @@ Examples:
   $ sq ls -g prod
 
 Flags:
-  -j, --json      Output JSON
-  -c, --compact   Compact instead of pretty-printed output
-  -y, --yaml      Output YAML
-  -g, --group     List groups instead of sources
-      --help      help for ls
+  -t, --text        Output text
+  -h, --header      Print header row (default true)
+  -H, --no-header   Don't print header row
+  -j, --json        Output JSON
+  -c, --compact     Compact instead of pretty-printed output
+  -y, --yaml        Output YAML
+  -g, --group       List groups instead of sources
+      --help        help for ls
 
 Global Flags:
       --config string      Load config from here
-  -h, --header             Print header row (default true)
       --log                Enable logging
       --log.file string    Path to log file; empty disables logging
       --log.level string   Log level: one of DEBUG, INFO, WARN, ERROR
   -M, --monochrome         Don't colorize output
-  -H, --no-header          Don't print header row
-  -t, --text               Output text
   -v, --verbose            Verbose output

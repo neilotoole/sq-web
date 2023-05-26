@@ -28,7 +28,6 @@ is available on [GitHub](https://github.com/neilotoole/sq/tree/master/grammar).
 A _source_ is a data source such as a database instance ([SQL source](#sql-source)),
 or an Excel or CSV file ([document source](#document-source)).
 A source has a [driver type](#driver-type), [location](#location) and [handle](#handle).
-Some driver types accept options via [`sq add --opts`](/docs/cmd/add).
 
 Learn more in the [sources](/docs/source) section.
 

@@ -61,12 +61,12 @@ actor_id  first_name   last_name     last_update
 ## Delimiters
 
 It's common to encounter delimiters other than comma. TSV (tab) is the most common, but other
-variants exist, e.g. pipe (`a|b|c`). Use the `--opts delim=DELIM` flag to specify
+variants exist, e.g. pipe (`a|b|c`). Use the `--driver.csv.delim` flag to specify
 the delimiter. Because the delimiter is often a shell token (e.g. `|`), the `delim` option
 requires text aliases. For example:
 
 ```shell
-sq add ./actor.csv --opts delim=pipe
+sq add ./actor.csv --driver.csv.delim=pipe
 ```
 
 The accepted values are:
@@ -90,7 +90,7 @@ Note:
 
   ```shell
   $ sq add --driver=tsv ./actor.tsv
-  $ sq add --driver=csv --opts delim=tab ./actor.tsv
+  $ sq add --driver=csv --driver.csv.delim=tab ./actor.tsv
   $ sq add ./actor.tsv
   ```
 
@@ -114,10 +114,10 @@ actor_id,first_name,last_name,last_update
 2,NICK,WAHLBERG,2020-02-15T06:59:28Z
 ```
 
-In that case, use the `--header=true` option:
+In that case, use the `--ingest.header` flag:
 
 ```shell
-sq add --opts header=true ./actor.csv
+sq add --ingest.header ./actor.csv
 ```
 
 Then the CSV header field names will become the column names.
@@ -129,33 +129,3 @@ actor_id  first_name   last_name     last_update
 2         NICK         WAHLBERG      2020-02-15T06:59:28Z
 ```
 
-### Explicit column names
-
-If the CSV file doesn't have a header row, you can use the `cols` option to provide semantic
-column names instead of the default `A, B, C`. For example:
-
-```shell
-$ sq add --opts cols=id,first,last,date ./actor_noheader.csv
-@actor_noheader_csv  csv  actor_noheader.csv
-$ sq @actor_noheader_csv.data
-id   first        last          date
-1    PENELOPE     GUINESS       2020-02-15T06:59:28Z
-2    NICK         WAHLBERG      2020-02-15T06:59:28Z
-```
-
-You can also use the `cols` option to override the column names even if the CSV
-file does have a header row.
-
-```shell
-$ sq add --opts 'header=true&cols=id,first,last,date' ./actor.csv
-@actor_csv  csv  actor.csv
-$ sq @actor_csv.data
-id   first        last          date
-1    PENELOPE     GUINESS       2020-02-15T06:59:28Z
-2    NICK         WAHLBERG      2020-02-15T06:59:28Z
-```
-
-{{< alert icon="👉" >}}
-An error will be returned if the number of fields in the CSV data does not
-match the number of explicit column names to `--opts cols`.
-{{< /alert >}}

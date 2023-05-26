@@ -3,45 +3,58 @@ listing table details such as column names and row counts, etc.
 
 NOTE: If a schema is large, it may take some time for the command to complete.
 
-Use the --verbose flag to see more detail.
+The --dbprops flag shows the database properties for a source's *underlying*
+database. The flag is disregarded when inspecting a table.
+
+Use the --verbose flag to see more detail in some output formats.
 
 If @HANDLE is not provided, the active data source is assumed.
 
 Usage:
-  sq inspect [@HANDLE|@HANDLE.TABLE|.TABLE] [flags]
+  sq inspect [@HANDLE|@HANDLE.TABLE|.TABLE]
 
 Examples:
-  # inspect active data source
+  # Inspect active data source.
   $ sq inspect
 
-  # inspect @pg1 data source
+  # Inspect @pg1 data source.
   $ sq inspect @pg1
 
-  # inspect @pg1 data source, showing verbose output
+  # Inspect @pg1 data source, showing verbose output.
   $ sq inspect -v @pg1
 
-  # inspect 'actor' in @pg1 data source
+  # Show output in JSON (useful for piping to jq).
+  $ sq inspect --json @pg1
+
+  # Show output in YAML.
+  $ sq inspect --yaml @pg1
+
+  # Show DB properties for @pg1.
+  $ sq inspect --dbprops @pg1
+
+  # Inspect table "actor" in @pg1 data source.
   $ sq inspect @pg1.actor
 
-  # inspect 'actor' in active data source
+  # Inspect "actor" in active data source.
   $ sq inspect .actor
 
-  # inspect piped data
+  # Inspect piped data.
   $ cat data.xlsx | sq inspect
 
 Flags:
-  -j, --json      Output JSON
-  -c, --compact   Compact instead of pretty-printed output
-  -y, --yaml      Output YAML
-      --help      help for inspect
+  -t, --text        Output text
+  -h, --header      Print header row (default true)
+  -H, --no-header   Don't print header row
+  -j, --json        Output JSON
+  -c, --compact     Compact instead of pretty-printed output
+  -y, --yaml        Output YAML
+  -p, --dbprops     Show DB properties only
+      --help        help for inspect
 
 Global Flags:
       --config string      Load config from here
-  -h, --header             Print header row (default true)
       --log                Enable logging
       --log.file string    Path to log file; empty disables logging
       --log.level string   Log level: one of DEBUG, INFO, WARN, ERROR
   -M, --monochrome         Don't colorize output
-  -H, --no-header          Don't print header row
-  -t, --text               Output text
   -v, --verbose            Verbose output

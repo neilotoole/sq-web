@@ -17,8 +17,6 @@ like:
 sq '@postgres_db | .actor | .first_name, .last_name | .[0:5]'
 ```
 
-
-
 ## Installation
 
 {{< tabs name="sq-install" >}}
@@ -41,6 +39,12 @@ For help, `sq help` is your starting point. And then see the [docs](/docs/overvi
 
 Some feature highlights are shown below. For more, see the [docs](/docs/overview),
 including the [query guide](/docs/query), [tutorial](/docs/tutorial) and [cookbook](/docs/cookbook).
+
+### Diff database tables
+
+Use the [diff](/docs/diff) command to compare source metadata or row values.
+
+![sq diff](/images/sq_diff_table_data.png)
 
 ### Import Excel worksheet into Postgres table
 
