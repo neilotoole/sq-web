@@ -23,8 +23,6 @@ and execute database-native SQL queries using the [`sq sql`](/docs/cmd/sql) comm
 {{< /alert >}}
 
 
-
-
 ## Fundamentals
 
 Let's take a look at a query.
@@ -413,7 +411,7 @@ You can also use functions inside `group_by`. For example, to group the payment
 amount by month:
 
 ```shell
-$ sq '.payment | strftime("%Y/%m", .payment_date), sum(.amount) | group_by(strftime("%Y/%m", .payment_date))'
+$ sq '.payment | _strftime("%Y/%m", .payment_date), sum(.amount) | group_by(_strftime("%Y/%m", .payment_date))'
 strftime('%Y/%m', "payment_date")  sum("amount")
 2005/05                            4824.429999999861
 2005/06                            9631.87999999961
@@ -429,23 +427,21 @@ GROUP BY strftime('%Y/%m', "payment_date")
 In practice, you probably want to use [column aliases](#column-aliases):
 
 ```shell
-$ sq '.payment | strftime("%Y/%m", .payment_date):month, sum(.amount):amount | group_by(.month)'
+$ sq '.payment | _strftime("%Y/%m", .payment_date):month, sum(.amount):amount | group_by(.month)'
 month    amount
 2005/05  4824.429999999861
 2005/06  9631.87999999961
 ```
 
 {{< alert icon="👉" >}}
-Note the `strftime` function in the example above. That function is specific
+Note the `_strftime` function in the example above, and in particular note the
+leading underscore. That function is
+[proprietary](#proprietary-functions)
 to [SQLite](https://www.sqlite.org/lang_datefunc.html): it won't work with Postgres,
 MySQL etc. `sq` passes functions through
 to the backend, and some of those functions won't be portable to other data sources.
 
-This situation is contra to `sq`'s goal of being cross-source compatible. To that end,
-it's possible that the syntax for invoking a DB-specific function may change to make
-it clear that a non-portable function is being invoked.
-
-TLDR: Use DB-specific functions with caution.
+TLDR: Use [proprietary functions](#proprietary-functions) with caution.
 {{< /alert >}}
 
 ### `max`
@@ -536,3 +532,27 @@ The function maps to the SQL `DISTINCT` keyword:
 ```sql
 SELECT DISTINCT "first_name" FROM "actor"
 ```
+
+## Proprietary functions
+
+The standard functions listed above are all _portable_: that is to say, they
+behave (more or less) the same whether the backing DB is Postgres, MySQL, etc.
+Portability / compatability is a primary design goal for `sq`. Over time,
+it's probable that `sq`'s "standard library" of portable functions will grow.
+However, sometimes you simply need to invoke a function that exists only
+in Postgres, or SQL Server, etc. To invoke such a function, simply prefix
+the proprietary function name with an underscore.
+
+  ```shell
+  # SQLite "strftime"
+  $ sq '@sakila | .payment | _strftime("%m", .payment_date)'
+
+  # MySQL "date_format"
+  $ sq '@sakila/mysql | .payment | _date_format(.payment_date, "%m")'
+
+  # Postgres "date_trunc" func
+  $ sq '@sakila/postgres | .payment | _date_trunc("month", .payment_date)'
+
+  # SQL Server "month" func
+  $ sq '@sakila | .payment | _month(.payment_date)'
+  ```
