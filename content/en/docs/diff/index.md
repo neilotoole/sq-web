@@ -24,7 +24,7 @@ General feedback can be left on the [diff discussion](https://github.com/neiloto
 {{< /alert >}}
 
 
-Use flags to specify the elements you want to compare. The available elements:
+Use flags to specify the elements you want to compare. The available elements are:
 
 - `--overview`: source metadata, without schema (source diff only)
 - `--dbprops`:  database/server properties (source diff only)
