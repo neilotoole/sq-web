@@ -76,6 +76,30 @@ $ echo 'open:;"_Ses@me' > password.txt
 $ sq add 'postgres://user@localhost/sakila' -p < password.txt
 ```
 
+### Location completion
+
+It can be difficult to remember the format of database URLs (i.e. the source **location**).
+To make life easier, `sq` provides shell completion for the `sq add LOCATION` field. To
+use it, just press `TAB` after `$ sq add`.
+
+For location completion to work, do not enclose the location in single quotes. However,
+this does mean that the inputted location string must escape special shell characters
+such as `?` and `&`.
+
+```shell
+# Location completion not available, because location is in quotes.
+$ sq add 'postgres://sakila@192.168.50.132/sakila?sslmode=disable'
+
+# Location completion available: note the escaped ?.
+$ sq add postgres://sakila@192.168.50.132/sakila\?sslmode=disable
+```
+
+The location completion mechanism suggests usernames, hostnames (from history),
+database names, and even values for query params (e.g. `?sslmode=disable`) for
+each supported database. It never suggests passwords.
+
+{{< asciicast src="/casts/src-add-location-completion-pg.cast" poster="npt:0:8" idleTimeLimit=0.5 rows=6 speed=1.5 >}}
+
 ## Header row
 
 File formats like CSV/TSV often have a header row. `sq` can usually auto-detect
