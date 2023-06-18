@@ -82,6 +82,7 @@ Available Commands:
   ping        Ping data sources
   sql         Execute DB-native SQL query or statement
   tbl         Useful table actions (copy, truncate, drop)
+  diff        BETA: Compare sources, or tables
   driver      Manage drivers
   config      Manage config
   completion  Generate shell completion script
@@ -89,16 +90,22 @@ Available Commands:
   help        Show help
 
 Flags:
+  -f, --format string              Output format (default "text")
+  -t, --text                       Output text
+  -h, --header                     Print header row (default true)
+  -H, --no-header                  Don't print header row
+      --help                       Show help
   -j, --json                       Output JSON
   -A, --jsona                      Output LF-delimited JSON arrays
   -l, --jsonl                      Output LF-delimited JSON objects
   -C, --csv                        Output CSV
-  -T, --tsv                        Output TSV
+      --tsv                        Output TSV
       --html                       Output HTML table
-      --md                         Output Markdown
+      --markdown                   Output Markdown
   -r, --raw                        Output each record field in raw format without any encoding or delimiter
   -x, --xlsx                       Output Excel XLSX
-  -X, --xml                        Output XML
+      --xml                        Output XML
+  -y, --yaml                       Output YAML
   -c, --compact                    Compact instead of pretty-printed output
       --format.datetime string     Timestamp format: constant such as RFC3339 or a strftime format (default "RFC3339")
       --format.datetime.number     Render numeric datetime value as number instead of string (default true)
@@ -114,16 +121,12 @@ Flags:
       --driver.csv.empty-as-null   Treat empty CSV fields as null (default true)
       --driver.csv.delim string    CSV delimiter: one of comma, space, pipe, tab, colon, semi, period (default "comma")
       --version                    Print version info
-  -h, --header                     Print header row (default true)
-      --help                       Show help
-  -H, --no-header                  Don't print header row
-  -t, --text                       Output text
+  -M, --monochrome                 Don't colorize output
+  -v, --verbose                    Verbose output
       --config string              Load config from here
       --log                        Enable logging
       --log.file string            Path to log file; empty disables logging
       --log.level string           Log level: one of DEBUG, INFO, WARN, ERROR
-  -M, --monochrome                 Don't colorize output
-  -v, --verbose                    Verbose output
 ```
 
 ## Issues

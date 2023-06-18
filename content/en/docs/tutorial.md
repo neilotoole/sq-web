@@ -16,7 +16,7 @@ recent version like so:
 
 ```shell
 $ sq version
-sq v0.24.0
+sq v0.38.0
 ```
 
 If your version is older than that, please [upgrade](/docs/install).
@@ -99,7 +99,7 @@ uid  username    email                  address_id
 Here's some examples of using the _SLQ_ query language:
 
 ```shell
-$  sq '.person | .uid  == 3'
+$  sq '.person | where(.uid == 3)'
 uid  username  email          address_id
 3    kubla     kubla@khan.mn  NULL
 ```
@@ -124,7 +124,7 @@ uid  email                address_id
 5    augustus@caesar.org  2
 ```
 
-We could also output in JSON using `sq --json '.person | .[2:5] | .uid, .email, .address_id'`:
+We could also output in JSON using `sq --json '.person | .uid, .email, .address_id | .[2:5]'`:
 
 ```json
 [

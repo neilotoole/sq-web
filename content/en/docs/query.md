@@ -25,28 +25,30 @@ and execute database-native SQL queries using the [`sq sql`](/docs/cmd/sql) comm
 
 ## Fundamentals
 
-Let's take a look at a query.
+Let's take a look at a query that shows the main elements.
 
 ```shell
-$ sq '@sakila_pg | .actor | .first_name, .last_name | .[0:3]'
+$ sq '@sakila_pg | .actor | where(.actor_id < 10) | .first_name | .[0:3]'
 first_name  last_name
 PENELOPE    GUINESS
 NICK        WAHLBERG
 ED          CHASE
 ```
 
-You can probably guess what's going on above. This query has 4 _segments_:
+You can probably guess what's going on above. This query has 5 _segments_:
 
-| Handle       | Table Selector(s) | Column Expression(s)      | Row Range |
-| ------------ | ----------------- | ------------------------- | --------- |
-| `@sakila_pg` | `.actor`          | `.first_name, .last_name` | `.[0:3]`  |
+| Handle       | Table    | Filter                  | Column(s)                 | Row Range |
+|--------------|----------|-------------------------|---------------------------|-----------|
+| `@sakila_pg` | `.actor` | `where(.actor_id < 10)` | `.first_name, .last_name` | `.[0:3]`  |
 
 Ultimately the SLQ query is translated to a SQL query, which is executed
 against the `@sakila_pg` source (which in this example is a [Postgres](/docs/drivers/postgres)
-database). The SQL generated query will look something like:
+database). The generated SQL query will look something like:
 
 ```sql
-SELECT "first_name", "last_name" FROM "actor" LIMIT 3 OFFSET 0
+SELECT "first_name", "last_name" FROM "actor"
+WHERE "actor_id" < 10
+LIMIT 3 OFFSET 0
 ```
 
 ## Shorthand
@@ -76,12 +78,12 @@ need to specify the handle.
 $ sq .actor
 ```
 
-## Filter results
+## Filter results (`where`)
 
-Use a filter expression to filter results.
+Use the `where()` mechanism to filter results.
 
 ```shell
-$ sq '.actor | .first_name, .last_name | .first_name == "TOM"'
+$ sq '.actor | .first_name, .last_name | where(.first_name == "TOM")'
 first_name  last_name
 TOM         MCKELLEN
 TOM         MIRANDA
@@ -90,35 +92,62 @@ TOM         MIRANDA
 Ultimately a filter is translated into a SQL `WHERE` clause such as:
 
 ```sql
-SELECT "first_name", "last_name" FROM "actor" WHERE  "first_name" = "TOM"
+SELECT "first_name", "last_name" FROM "actor" WHERE "first_name" = "TOM"
 ```
 
-If a column has an [alias](#column-aliases), you can use either the original
-name or the alias in the expression.
+{{< alert icon="👉" >}}
+For interoperability with jq, you can use the
+[`select()`](https://jqlang.github.io/jq/manual/v1.6/#select(boolean_expression))
+synonym:
 
 ```shell
-$ sq '.actor | .first_name:given_name | .given_name == "TOM"'
+$ sq '.actor | select(.first_name == "TOM")'
 ```
+
+For discussion of `where()` vs `select()`, see this [issue](https://github.com/neilotoole/sq/issues/254).
+{{< /alert >}}
+
 
 ## Operators
 
 The typical comparison operators are available in expressions:
 
 ```shell
-$ sq '.actor | .actor_id < 3'
+$ sq '.actor | where(.actor_id < 3)'
 actor_id  first_name  last_name  last_update
 1         PENELOPE    GUINESS    2020-06-11T02:50:54Z
 2         NICK        WAHLBERG   2020-06-11T02:50:54Z
 ```
 
 | Operator | Description              |
-| -------- | ------------------------ |
+|----------|--------------------------|
 | `==`     | Equal to                 |
 | `!=`     | Not equal to             |
 | `<`      | Less than                |
 | `<=`     | Less than or equal to    |
 | `>`      | Greater than             |
 | `>=`     | Greater than or equal to |
+
+You can use boolean operators (`&&`, `||`) to combine expressions.
+
+```shell
+$ sq '.actor | where(.actor_id <= 2 || .actor_id == 105)'
+actor_id  first_name  last_name  last_update
+1         PENELOPE    GUINESS    2020-06-11T02:50:54Z
+2         NICK        WAHLBERG   2020-06-11T02:50:54Z
+105       SIDNEY      CROWE      2020-06-11T02:50:54Z
+```
+
+Use parentheses to group expressions.
+
+```shell
+$ sq '.actor | where(.actor_id <= 2 || (.actor_id > 100 && .first_name == "GROUCHO"))'
+actor_id  first_name  last_name  last_update
+1         PENELOPE    GUINESS    2020-06-11T02:50:54Z
+2         NICK        WAHLBERG   2020-06-11T02:50:54Z
+106       GROUCHO     DUNST      2020-06-11T02:50:54Z
+172       GROUCHO     WILLIAMS   2020-06-11T02:50:54Z
+```
 
 ## Row range
 
@@ -160,7 +189,7 @@ SELECT "first_name" AS "given_name", "last_name" AS "family_name" FROM "actor"
 This works for any type of column expression, including functions.
 
 ```shell
-$ sq '.actor | count(*):quantity'
+$ sq '.actor | count():quantity'
 quantity
 200
 ```
@@ -174,13 +203,86 @@ PENELOPE    GUINESS
 NICK        WAHLBERG
 ```
 
+But note that the alias itself can contain whitespace if desired. Simply
+enclose the alias in double quotes.
+
+```shell
+$ sq '.actor | .first_name:"First Name"'
+First Name
+PENELOPE
+NICK
+```
+
 ## Whitespace names
 
-If a table or column name has whitespace, simply surround the name in quotes.
+If a table or column name has whitespace, surround the name in quotes.
 
 ```shell
 $ sq '.actor | ."first name", ."last name"'
 $ sq '."film actor" | .actor_id'
+```
+
+## Select literal
+
+You can select a literal as a column value:
+
+```shell
+# Postgres source
+$ sq '.actor | .first_name, "X", .last_name'
+first_name  X  last_name
+PENELOPE    X  GUINESS
+NICK        X  WAHLBERG
+```
+
+You may want to alias the literal column:
+
+```shell
+$ sq '.actor | .first_name, "X":middle_name, .last_name'
+first_name  middle_name  last_name
+PENELOPE    X            GUINESS
+NICK        X            WAHLBERG
+```
+
+## Select expression
+
+In addition to literals, you can also select expressions. If the
+expression does not refer to any column or table, you can omit
+the table selector, and use `sq` as a calculator.
+
+```shell
+$ sq 1+2
+1+2
+3
+```
+
+{{< alert icon="👉" >}}
+If the query doesn't reference a handle (such as `@sakila_pg`), the
+[active source](/docs/cmd/src) is used. If there's no active source,
+such as immediately after a new install, `sq` falls back to using
+the [scratch DB](/docs/concepts/#scratch-db) (typically SQLite).
+{{< /alert >}}
+
+Calculator mode is probably better with `--no-header` (`-H`).
+
+```shell
+$ sq -H 1 + 2 + 3
+6
+```
+
+Use parentheses to groups expressions.
+
+```shell
+$ sq '(1+2)*3'
+(1+2)*3
+9
+```
+
+You can alias an expression if desired.
+
+```shell
+$ sq '((1+2)*3):answer'
+answer
+9
 ```
 
 ## Predefined variables
@@ -191,7 +293,7 @@ has the value `bar`. Note that the value will be treated as a string,
 so `--arg foo 123` will bind `$foo` to `"123"`.
 
 ```shell
-$ sq --arg first TOM '.actor | .first_name == $first'
+$ sq --arg first TOM '.actor | where(.first_name == $first)'
 actor_id  first_name  last_name  last_update
 38        TOM         MCKELLEN   2020-06-11T02:50:54Z
 42        TOM         MIRANDA    2020-06-11T02:50:54Z
@@ -202,7 +304,7 @@ whitespace, shell tokens, long strings, etc..
 
 ```shell
 # Value containing single-quote
-$ sq --arg last "O'Toole" '.actor | .last_name == $last'
+$ sq --arg last "O'Toole" '.actor | where(.last_name == $last)'
 
 # Value containing double-quote
 sq --arg first 'Elvis "The King"' '.actor | .first_name == $first'
@@ -212,13 +314,13 @@ It's common to combine `sq --arg` with shell variables:
 
 ```shell
 $ PASSWD=`cat password.txt`
-$ sq --arg pw "$PASSWD" '.secrets | .password == $pw'
+$ sq --arg pw "$PASSWD" '.secrets | where(.password == $pw)'
 ```
 
 Note that you can supply multiple variables:
 
 ```shell
-$ sq --arg first TOM --arg last MIRANDA '.actor | .first_name == $first && .last_name == $last'
+$ sq --arg first TOM --arg last MIRANDA '.actor | where(.first_name == $first && .last_name == $last)'
 actor_id  first_name  last_name  last_update
 42        TOM         MIRANDA    2020-06-11T02:50:54Z
 ```
@@ -284,7 +386,7 @@ SELECT * FROM "actor"
 Thus, a join query has this structure:
 
 | Handle (optional) | Table Selectors       | Join constraint                                 | Column expressions                       |
-| ----------------- | --------------------- | ----------------------------------------------- | ---------------------------------------- |
+|-------------------|-----------------------|-------------------------------------------------|------------------------------------------|
 | `@sakila_pg`      | `.actor, .film_actor` | `join(.actor.actor_id == .film_actor.actor_id)` | `.actor.first_name, .film_actor.film_id` |
 
 ### Cross-source joins
@@ -389,7 +491,7 @@ count_unique(.first_name)
 
 ### `group_by`
 
-Use `group_by` to [group](<https://en.wikipedia.org/wiki/Group_by_(SQL)>) results.
+Use `group_by` to [group](https://en.wikipedia.org/wiki/Group_by_(SQL)) results.
 
 ```shell
 $ sq '.payment | .customer_id, sum(.amount) | group_by(.customer_id)'
@@ -449,7 +551,7 @@ TLDR: Use [proprietary functions](#proprietary-functions) with caution.
 `max` returns the maximum value of the column.
 
 ```shell
-sq '.payment | max(.amount)'
+$ sq '.payment | max(.amount)'
 max(.amount)
 11.99
 ```
@@ -500,7 +602,7 @@ SELECT * FROM "actor" ORDER BY "first_name" ASC, "last_name" DESC
 #### Synonyms
 
 For interoperability with jq, you can use the
-[`sort_by`](<https://stedolan.github.io/jq/manual/v1.6/#sort,sort_by(path_expression)>)
+[`sort_by`](https://jqlang.github.io/jq/manual/v1.6/#sort,sort_by(path_expression))
 synonym:
 
 ```shell
