@@ -17,7 +17,7 @@ A source has three main elements:
 - _**driver:**_ a [driver](/docs/drivers) type such as `postgres`, or `csv`.
 - _**handle:**_ such as `@sakila_pg`. A handle always starts with `@`. The handle is used to refer
   to the data source. A handle can also specify a [group](#groups), e.g. `@prod/sakila`.
-- _**location:**_ such as `postgres://user:p_ssW0rd@@localhost/sakila`. For
+- _**location:**_ such as `postgres://user:p_ssW0rd@localhost/sakila`. For
   a document source, _location_ may just be a file path, e.g. `/Users/neilotoole/sakila.csv`.
 
 {{< alert icon="👉" >}}
