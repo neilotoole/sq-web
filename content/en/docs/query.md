@@ -8,7 +8,7 @@ weight: 1035
 toc: true
 ---
 
-`sq` implements a [jq](https://stedolan.github.io/jq/)-style query language, formally
+`sq` implements a [jq ](https://jqlang.github.io/jq/)-style query language, formally
 known as [`SLQ`](https://github.com/neilotoole/sq/tree/master/grammar).
 
 Behind the scenes, all `sq` queries execute against a SQL database. This is true even for

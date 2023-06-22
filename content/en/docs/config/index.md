@@ -5,7 +5,7 @@ lead: ''
 draft: false
 images:
   - sq_config_ls.png
-weight: 1037
+weight: 1038
 toc: true
 ---
 `sq` aims to work out of the box with sane defaults, but allows you to configure most

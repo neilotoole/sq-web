@@ -10,7 +10,7 @@ images: []
 
 `sq` is a free/libre [open-source](https://github.com/neilotoole/sq) data wrangling swiss-army knife
 to inspect, query, join, import, and export data. You could think of `sq`
-as [jq](https://stedolan.github.io/jq/) for databases and documents, facilitating one-liners
+as [jq](https://jqlang.github.io/jq/) for databases and documents, facilitating one-liners
 like:
 
 ```shell
@@ -57,7 +57,7 @@ is reasonably sophisticated in that it tries to preserve data types.
 
 ### View metadata for a database
 
-The `--json` flag to [`sq inspect`](/docs/cmd/inspect) outputs schema and other metadata in JSON.
+The `--json` flag to [`sq inspect`](/docs/inspect) outputs schema and other metadata in JSON.
 Typically the output is piped to jq to select the interesting elements.
 
 {{< asciicast src="/casts/inspect-sakila-mysql-json.cast" poster="npt:0:9" rows=10 >}}

@@ -128,7 +128,7 @@ address                     603    address_id, address, address2, district, city
 
 `sq inspect` comes into its own when used with the `--json` flag, which outputs voluminous info
 on the data source. It is a frequent practice to combine `sq inspect`
-with [jq](https://stedolan.github.io/jq/).
+with [jq ](https://jqlang.github.io/jq/).
 For example, to list the tables of the active source:
 
 ```shell

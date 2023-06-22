@@ -11,7 +11,7 @@ This cookbook demonstrates how to perform various tasks using `sq`.
 - If not otherwise specified, assume the `@sakila_sl3` data source is present.
   See [here](/docs/develop/sakila#sqlite) to add that source.
 - The snippets were created on macOS (using `zsh`).
-- Some of these examples require [jq](https://stedolan.github.io/jq/).
+- Some of these examples require [jq ](https://jqlang.github.io/jq/).
 
 ## List table names
 
