@@ -394,9 +394,9 @@ The most explicit form of that query would be (linebreaks added for legibility):
 
 ```shell
 $ sq '.actor
-  | join(.film_actor, .actor.actor_id == .film_actor.actor_id)
-  | join(.film, .film_actor.film_id == .film.film_id)
-  | .actor.first_name, .actor.last_name, .film.title'
+| join(.film_actor, .actor.actor_id == .film_actor.actor_id)
+| join(.film, .film_actor.film_id == .film.film_id)
+| .actor.first_name, .actor.last_name, .film.title'
 ```
 
 ### Table aliases
@@ -405,9 +405,9 @@ That's obviously very verbose. We can use _table aliases_ to do better:
 
 ```shell
 $ sq '.actor:a
-  | join(.film_actor:fa, .a.actor_id == .fa.actor_id)
-  | join(.film:f, .fa.film_id == .f.film_id)
-  | .a.first_name, .a.last_name, .f.title'
+| join(.film_actor:fa, .a.actor_id == .fa.actor_id)
+| join(.film:f, .fa.film_id == .f.film_id)
+| .a.first_name, .a.last_name, .f.title'
 ```
 
 Table aliases work like [column aliases](#column-aliases).
@@ -441,7 +441,7 @@ $ sq '.actor | join(.film_actor, .actor_id)'
 This form is logically equivalent to SQL's `USING(col)` mechanism, although
 `sq` chooses to render it using the explicit equality comparison `ON tbl1.col = tbl2.col`.
 
-## Multiple join predicates
+### Multiple join predicates
 
 The join predicate is an expression, and can feature an arbitrary number
 of terms. For example:
@@ -471,6 +471,113 @@ $ sq '.tbl1 | join(.tbl2, (.tbl1.col1 == .tbl2.col1) && (.tbl1.col2 != .tbl2.col
 ```shell
 $ sq '.film:f | xjoin(.language:l) | .f.title, .l.name'
 ```
+
+### Cross-source joins
+
+`sq` can join across two or more data sources. Given three sources:
+
+- `@sakila/pg12` (Postgres)
+- `@sakila/my8` (MySQL)
+- `@sakila/ms17` (Microsoft SQL Server)
+
+You can join them as follows:
+
+```shell
+$ sq '@sakila/pg12.actor
+| join(@sakila/my8.film_actor, .actor_id)
+| join(@sakila/ms17.film, .film_id)
+| .first_name, .last_name, .title'
+```
+
+If there's an active source (`@sakila/pg12` in this example),
+you don't need to qualify the left (first) table:
+
+```shell
+$ sq '.actor
+| join(@sakila/my8.film_actor, .actor_id)
+| join(@sakila/ms17.film, .film_id)
+| .first_name, .last_name, .title'
+```
+
+If the handle is omitted from any join table reference, the table's
+source is assumed to be that of the leftmost table.
+
+```shell
+$ sq '@sakila/pg12.actor
+| join(@sakila/my8.film_actor, .actor_id)
+| join(.film, .film_id)
+| .first_name, .last_name, .title'
+```
+
+In the example above, the `.film` table's source is taken
+to be the same as the `@sakila/pg12.actor`
+table's source, i.e. `@sakila/pg12`.
+
+With `@sakila/pg12` as the active source, this query is equivalent to the above:
+
+```shell
+$ sq '.actor
+| join(@sakila/my8.film_actor, .actor_id)
+| join(.film, .film_id)
+| .first_name, .last_name, .title'
+```
+
+### Ambiguous columns
+
+There are two scenarios where column name ambiguity can cause trouble: in
+the query, and in the result set.
+
+The query below selects the `actor_id` column, which exists in both the
+`actor` table and the `film_actor` table. The query will fail.
+
+```shell
+$ sq '.actor | join(.film_actor, .actor_id) | .first_name, .actor_id'
+sq: ... ERROR: column reference "actor_id" is ambiguous (SQLSTATE 42702)
+```
+
+The solution here is to qualify the `.actor_id` column, using either the
+table name, or table alias (if specified).
+
+```shell
+# Explicitly specify the column's table
+$ sq '.actor | join(.film_actor, .actor_id) | .first_name, .actor.actor_id'
+
+# Same, but using table alias
+$ sq '.actor:a | join(.film_actor, .actor_id) | .first_name, .a.actor_id'
+```
+
+If you do want the column values from both tables, you can use a column alias:
+
+```shell
+$ sq '.actor:a | join(.film_actor:fa, .actor_id)
+| .first_name, .a.actor_id:a_actor, .fa.actor_id:fa_actor'
+first_name  a_actor  fa_actor
+PENELOPE    1        1
+```
+
+What happens if you don't use a column alias?
+
+```shell
+$ sq '.actor:a | join(.film_actor:fa, .actor_id) | .first_name, .a.actor_id, .fa.actor_id'
+first_name  actor_id  actor_id_1
+PENELOPE    1         1
+```
+
+`sq` automatically renames duplicate column names in the result set. Thus the
+second `actor_id` column becomes `actor_id_1`. This is most frequently seen
+when executing a `SELECT * FROM tbl1 JOIN tbl2`: note the `actor_id_1` and
+`last_update_1` columns.
+
+```shell
+ $ sq '.actor | join(.film_actor, .actor_id) | .[0:2]'
+actor_id  first_name  last_name  last_update           actor_id_1  film_id  last_update_1
+1         PENELOPE    GUINESS    2006-02-15T04:34:33Z  1           1        2006-02-15T05:05:03Z
+
+```
+
+
+
+
 
 ### Join examples
 
@@ -538,7 +645,7 @@ Thus, a join query has this structure:
 |-------------------|-----------------------|-------------------------------------------------|------------------------------------------|
 | `@sakila_pg`      | `.actor, .film_actor` | `join(.actor.actor_id == .film_actor.actor_id)` | `.actor.first_name, .film_actor.film_id` |
 
-### Cross-source joins
+### Cross-source joins old
 
 `sq` can join across data sources. Below, we join a CSV file with a Postgres table.
 
