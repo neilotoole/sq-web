@@ -242,6 +242,40 @@ to a database.
 #### verbose
 {{< readfile file="../cmd/options/verbose.help.txt" code="true" lang="text" >}}
 
+#### record.column.rename
+
+{{< readfile file="../cmd/options/record.column.rename.help.txt" code="true" lang="text" >}}
+
+The `record.column.rename` option is rather arcane: it allows you to change
+the way `sq` de-duplicates column names. By default, a result containing
+duplicate column names is renamed like this:
+
+```SQL
+-- Columns returned from DB...
+actor_id, first_name, last_name, last_update, actor_id, film_id, last_update
+
+-- are renamed to
+actor_id, first_name, last_name, last_update, actor_id_1, film_id, last_update_1
+```
+
+Thus, the second `actor_id` column becomes `actor_id_1`. Let's say you instead
+wanted the column to be renamed to `actor_id:1`. Set the option to
+use `:` instead of `_`.
+
+
+```shell
+$ sq config set record.column.rename '{{.Name}}{{with .Recurrence}}:{{.}}{{end}}'
+```
+
+The option value must be a valid [Go text template](https://pkg.go.dev/text/template).
+In addition to the standard Go functions, the [sprig](https://masterminds.github.io/sprig/)
+functions are available. Here's an example of a template using the spring `upper` function to
+rename each column to uppercase.
+
+```text
+{{.Name | upper}}{{with .Recurrence}}:{{.}}{{end}}
+```
+
 #### diff.data.format
 {{< readfile file="../cmd/options/diff.data.format.help.txt" code="true" lang="text" >}}
 
