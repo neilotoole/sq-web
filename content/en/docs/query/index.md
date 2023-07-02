@@ -327,6 +327,155 @@ actor_id  first_name  last_name  last_update
 
 ## Joins
 
+Use the `join` construct to [join](https://en.wikipedia.org/wiki/Join_(SQL)#Inner_join)
+two or more tables. You can join tables in a
+single data source, or across data sources. That is, you can join a Postgres table
+and a CSV file, or an Excel worksheet and a JSON file, etc.
+
+Given our Sakila dataset, let's say we want to get the names of the films
+that each actor appears in. The relevant tables here are `actor`, `film_actor`,
+and `film`.
+
+In SQL, the join would look like:
+
+```sql
+SELECT first_name, last_name, title
+FROM actor a
+    INNER JOIN film_actor fa ON a.actor_id = fa.actor_id
+    INNER JOIN film f ON fa.film_id = f.film_id
+```
+
+The most terse `sq` query to express this is:
+
+```shell
+$ sq '.actor | join(.film_actor, .actor_id) | join(.film, .film_id) | .first_name, .last_name, .title'
+```
+![sq join actor film_actor film using](sq_query_join_actor_film_actor_film_using.png)
+
+
+The general form of a join is:
+
+```shell
+join_type(.table, predicate_expression)
+```
+
+### Join types
+
+The usual SQL join types are supported, except `NATURAL JOIN`[^1]. Each join
+type has a short form and a synonym, e.g. `fojoin` and `full_outer_join`. You can use
+either form in your query.
+
+| Join type | Synonym            | SQL                | Notes                                                              |
+|-----------|--------------------|--------------------|--------------------------------------------------------------------|
+| `join`    | `inner_join`       | `INNER JOIN`       | <small>A plain SQL `JOIN` is actually an  `INNER JOIN`</small>     |
+| `ljoin`   | `left_join`        | `LEFT JOIN`        |                                                                    |
+| `loj`     | `left_outer_join`  | `LEFT OUTER JOIN`  |                                                                    |
+| `rjoin`   | `right_join`       | `RIGHT JOIN`       |                                                                    |
+| `rojoin`  | `right_outer_join` | `RIGHT OUTER JOIN` |                                                                    |
+| `fojoin`  | `full_outer_join`  | `FULL OUTER JOIN`  | <small>Not supported in [MySQL](/docs/drivers/mysql)</small>       |
+| `xjoin`   | `cross_join`       | `CROSS JOIN`       | <small>Doesn't take a predicate, e.g. `xjoin(.film_actor)`</small> |
+
+[^1]: `NATURAL JOIN` is not implemented, for several reasons. It's not universally
+supported (e.g. [SQL Server](/docs/drivers/sqlserver)). It's considered an [anti-pattern](https://stackoverflow.com/a/6039758) by some.
+And in testing, it doesn't always work consistently from one DB to the other, leading to user surprise.
+That said, it's possible this decision will be reconsidered based on [user feedback](https://github.com/neilotoole/sq/issues/new/choose).
+
+### Join predicate
+
+The join predicate is an expression that renders to the SQL `JOIN ... ON x` term.
+
+Let's take our terse example from above.
+
+```shell
+$ sq '.actor | join(.film_actor, .actor_id) | join(.film, .film_id) | .first_name, .last_name, .title'
+```
+
+The most explicit form of that query would be (linebreaks added for legibility):
+
+```shell
+$ sq '.actor
+  | join(.film_actor, .actor.actor_id == .film_actor.actor_id)
+  | join(.film, .film_actor.film_id == .film.film_id)
+  | .actor.first_name, .actor.last_name, .film.title'
+```
+
+### Table aliases
+
+That's obviously very verbose. We can use _table aliases_ to do better:
+
+```shell
+$ sq '.actor:a
+  | join(.film_actor:fa, .a.actor_id == .fa.actor_id)
+  | join(.film:f, .fa.film_id == .f.film_id)
+  | .a.first_name, .a.last_name, .f.title'
+```
+
+Table aliases work like [column aliases](#column-aliases).
+
+
+Table aliases aren't
+restricted to join scenarios. You can use them anywhere you reference a table,
+although it's often somewhat pointless:
+
+```shell
+# No table alias
+$ sq '.actor | .first_name, .last_name'
+
+# With table alias
+$ sq '.actor:a | .a.first_name, .a.last_name'
+```
+
+### Unary join predicate
+
+In the common case where tables are joined on equality of
+identically-named columns, you can simply specify the column name.
+
+```shell
+# Explicit column equality predicate
+$ sq '.actor | join(.film_actor, .actor.actor_id == .film_actor.actor_id)'
+
+# Much better!
+$ sq '.actor | join(.film_actor, .actor_id)'
+```
+
+This form is logically equivalent to SQL's `USING(col)` mechanism, although
+`sq` chooses to render it using the explicit equality comparison `ON tbl1.col = tbl2.col`.
+
+## Multiple join predicates
+
+The join predicate is an expression, and can feature an arbitrary number
+of terms. For example:
+
+```shell
+$ sq '.tbl1 | join(.tbl2, .tbl1.col1 == .tbl2.col1 && .tbl1.col2 != .tbl2.col2)'
+```
+
+This would render to:
+
+```sql
+SELECT * FROM "tbl1" INNER JOIN "tbl2"
+    ON "tbl1"."col1" = "tbl2"."col1"
+    AND "tbl1"."col2" != "tbl2"."col2"
+```
+
+Like any `sq` expression, you can add parentheses if desired.
+
+```shell
+$ sq '.tbl1 | join(.tbl2, (.tbl1.col1 == .tbl2.col1) && (.tbl1.col2 != .tbl2.col2))'
+```
+
+### No join predicate
+
+`CROSS JOIN` is the odd man out, in that it doesn't take a predicate.
+
+```shell
+$ sq '.film:f | xjoin(.language:l) | .f.title, .l.name'
+```
+
+### Join examples
+
+## Joins (OLD - REMOVE ME)
+
 Use the `join` construct to join two tables. You can join tables in a single data source,
 or across data sources. That is, you can join a Postgres table and a CSV file, or
 an Excel worksheet and a JSON file, etc.
