@@ -124,7 +124,7 @@ compact instead of pretty-printed JSON.
 
 ### jsonl
 
-`jsonl` (`-l`) outputs JSON Lines. This is LF-delimited JSON objects.
+`jsonl` (`-J`) outputs JSON Lines. This is LF-delimited JSON objects.
 
 ![sq query --jsonl](sq_query_jsonl.png)
 

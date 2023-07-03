@@ -97,7 +97,7 @@ Flags:
       --help                       Show help
   -j, --json                       Output JSON
   -A, --jsona                      Output LF-delimited JSON arrays
-  -l, --jsonl                      Output LF-delimited JSON objects
+  -J, --jsonl                      Output LF-delimited JSON objects
   -C, --csv                        Output CSV
       --tsv                        Output TSV
       --html                       Output HTML table

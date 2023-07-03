@@ -46,7 +46,7 @@ actor_id  first_name  last_name  last_update
 | `--table` | `-t`      | Text table                                   |
 | `--json`  | `-j`      | JSON                                         |
 | `--jsona` | `-A`      | LF-delimited JSON arrays                     |
-| `--jsonl` | `-l`      | LF-delimited JSON objects                    |
+| `--jsonl` | `-J`      | LF-delimited JSON objects                    |
 | `--raw`   | `-r`      | Raw bytes, without any encoding or delimiter |
 | `--xlsx`  | `-x`      | Excel XLSX                                   |
 | `--csv`   | `-c`      | CSV                                          |
