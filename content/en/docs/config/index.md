@@ -177,7 +177,7 @@ export SQ_LOG=true; export SQ_LOG_LEVEL=DEBUG; export SQ_LOG_FILE=./sq.log
 
 ## Options
 
-This section lists all available options. Use `sq config set OPTION` to
+Below, all available options are listed. Use `sq config set OPTION` to
 modify the option value.
 
 Some config options apply only to base config. For example, `format=json` applies
@@ -187,67 +187,67 @@ some options can apply to a source, and also have a base value. For example,
 to a database.
 
 
-### CLI
+## CLI
 
-#### log
+### `log`
 {{< readfile file="../cmd/options/log.help.txt" code="true" lang="text" >}}
 
-#### log.file
+### `log.file`
 {{< readfile file="../cmd/options/log.file.help.txt" code="true" lang="text" >}}
 
-#### log.level
+### `log.level`
 {{< readfile file="../cmd/options/log.level.help.txt" code="true" lang="text" >}}
 
-#### ping.timeout
+### `ping.timeout`
 {{< readfile file="../cmd/options/ping.timeout.help.txt" code="true" lang="text" >}}
 
-#### retry.max-interval
-{{< readfile file="../cmd/options/retry.max-interval.help.txt" code="true" lang="text" >}}
 
-#### shell-completion.timeout
+
+### `shell-completion.timeout`
 {{< readfile file="../cmd/options/shell-completion.timeout.help.txt" code="true" lang="text" >}}
 
-### Formatting
+<a id="formatting"></a>
+## Output
 
-#### compact
+### `compact`
 {{< readfile file="../cmd/options/compact.help.txt" code="true" lang="text" >}}
 
-#### format
+### `format`
 {{< readfile file="../cmd/options/format.help.txt" code="true" lang="text" >}}
 
-#### format.datetime
+### `format.datetime`
 {{< readfile file="../cmd/options/format.datetime.help.txt" code="true" lang="text" >}}
 
-#### format.datetime.number
+### `format.datetime.number`
 {{< readfile file="../cmd/options/format.datetime.number.help.txt" code="true" lang="text" >}}
 
-#### format.date
+### `format.date`
 {{< readfile file="../cmd/options/format.date.help.txt" code="true" lang="text" >}}
 
-#### format.date.number
+### `format.date.number`
 {{< readfile file="../cmd/options/format.date.number.help.txt" code="true" lang="text" >}}
 
-#### format.time
+### `format.time`
 {{< readfile file="../cmd/options/format.time.help.txt" code="true" lang="text" >}}
 
-#### format.time.number
+### `format.time.number`
 {{< readfile file="../cmd/options/format.time.number.help.txt" code="true" lang="text" >}}
 
-#### header
+### `header`
 {{< readfile file="../cmd/options/header.help.txt" code="true" lang="text" >}}
 
-#### monochrome
+### `monochrome`
 {{< readfile file="../cmd/options/monochrome.help.txt" code="true" lang="text" >}}
 
-#### verbose
+### `verbose`
 {{< readfile file="../cmd/options/verbose.help.txt" code="true" lang="text" >}}
 
-#### record.column.rename
+### `result.column.rename`
 
-{{< readfile file="../cmd/options/record.column.rename.help.txt" code="true" lang="text" >}}
+{{< readfile file="../cmd/options/result.column.rename.help.txt" code="true" lang="text" >}}
 
-The `record.column.rename` option is rather arcane: it allows you to change
-the way `sq` de-duplicates column names. By default, a result containing
+The `result.column.rename` option is rather arcane: it allows you to change
+the way `sq` de-duplicates column names. By default, a result set containing
 duplicate column names is renamed like this:
 
 ```SQL
@@ -259,67 +259,70 @@ actor_id, first_name, last_name, last_update, actor_id_1, film_id, last_update_1
 ```
 
 Thus, the second `actor_id` column becomes `actor_id_1`. Let's say you instead
-wanted the column to be renamed to `actor_id:1`. Set the option to
+wanted the column to be renamed to `actor_id:1`. Change the template value to
 use `:` instead of `_`.
 
 
 ```shell
-$ sq config set record.column.rename '{{.Name}}{{with .Recurrence}}:{{.}}{{end}}'
+$ sq config set result.column.rename '{{.Name}}{{with .Recurrence}}:{{.}}{{end}}'
 ```
 
 The option value must be a valid [Go text template](https://pkg.go.dev/text/template).
 In addition to the standard Go functions, the [sprig](https://masterminds.github.io/sprig/)
-functions are available. Here's an example of a template using the spring `upper` function to
+functions are available. Here's an example of a template using the sprig `upper` function to
 rename each column to uppercase.
 
 ```text
 {{.Name | upper}}{{with .Recurrence}}:{{.}}{{end}}
 ```
 
-#### diff.data.format
+### `diff.data.format`
 {{< readfile file="../cmd/options/diff.data.format.help.txt" code="true" lang="text" >}}
 
-#### diff.lines
+### `diff.lines`
 {{< readfile file="../cmd/options/diff.lines.help.txt" code="true" lang="text" >}}
 
-### Tuning
+## Tuning
 
-#### conn.max-idle
+### `conn.max-idle`
 {{< readfile file="../cmd/options/conn.max-idle.help.txt" code="true" lang="text" >}}
 
-#### conn.max-idle-time
+### `conn.max-idle-time`
 {{< readfile file="../cmd/options/conn.max-idle-time.help.txt" code="true" lang="text" >}}
 
-#### conn.max-lifetime
+### `conn.max-lifetime`
 {{< readfile file="../cmd/options/conn.max-lifetime.help.txt" code="true" lang="text" >}}
 
-#### conn.max-open
+### `conn.max-open`
 {{< readfile file="../cmd/options/conn.max-open.help.txt" code="true" lang="text" >}}
 
-#### conn.open-timeout
+### `conn.open-timeout`
 {{< readfile file="../cmd/options/conn.open-timeout.help.txt" code="true" lang="text" >}}
 
-#### tuning.errgroup-limit
+### `retry.max-interval`
+{{< readfile file="../cmd/options/retry.max-interval.help.txt" code="true" lang="text" >}}
+
+### `tuning.errgroup-limit`
 {{< readfile file="../cmd/options/tuning.errgroup-limit.help.txt" code="true" lang="text" >}}
 
-#### tuning.flush-threshold
+### `tuning.flush-threshold`
 {{< readfile file="../cmd/options/tuning.flush-threshold.help.txt" code="true" lang="text" >}}
 
-#### tuning.record-buffer
+### `tuning.record-buffer`
 {{< readfile file="../cmd/options/tuning.record-buffer.help.txt" code="true" lang="text" >}}
 
-### Ingest
+## Ingest
 
-#### ingest.header
+### `ingest.header`
 {{< readfile file="../cmd/options/ingest.header.help.txt" code="true" lang="text" >}}
 
-#### ingest.sample-size
+### `ingest.sample-size`
 {{< readfile file="../cmd/options/ingest.sample-size.help.txt" code="true" lang="text" >}}
 
-#### driver.csv.delim
+### `driver.csv.delim`
 {{< readfile file="../cmd/options/driver.csv.delim.help.txt" code="true" lang="text" >}}
 
-#### driver.csv.empty-as-null
+### `driver.csv.empty-as-null`
 {{< readfile file="../cmd/options/driver.csv.empty-as-null.help.txt" code="true" lang="text" >}}
 
 

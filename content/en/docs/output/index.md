@@ -98,7 +98,7 @@ date and time values.
 
 {{< alert icon="👉" >}}
 There are yet more formatting options available. Check out the full list
-in the [config guide](/docs/config/#formatting).
+in the [config guide](/docs/config/#output).
 {{< /alert >}}
 
 ## Formats

@@ -1,5 +1,5 @@
 Usage:
-  sq config set record.column.rename {{.Name}}{{with .Recurrence}}_{{.}}{{end}}
+  sq config set result.column.rename '{{.Name}}{{with .Recurrence}}_{{.}}{{end}}'
 
 This Go text template is executed on the column names returned
 from the DB. Its primary purpose is to rename duplicate column names. For
@@ -19,7 +19,7 @@ duplicate column could appear.
 The fields available in the template are:
 
   .Name         column name
-  .Index        index of the column in the result set
+  .Index        zero-based index of the column in the result set
   .Recurrence   nth recurrence of the colum name in the result set
 
 For a unique column name, e.g. "first_name" above, ".Recurrence" will be 0.
@@ -29,5 +29,3 @@ then 1 for the next instance, and so on.
 The default template renames the columns to:
 
   actor_id, first_name, last_name, last_update, actor_id_1, film_id, last_update_1
-
-For more, see: INSERT_URL

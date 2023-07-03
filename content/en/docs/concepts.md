@@ -115,16 +115,7 @@ have multiple tables, where each worksheet is effectively equivalent to a DB tab
 [`sq inspect`](/docs/cmd/inspect) returns metadata about a source. At a minimum, `sq inspect`
 is useful for a quick reminder of table and column names:
 
-```shell
-$ sq inspect
-HANDLE      DRIVER    NAME    FQ NAME        SIZE    TABLES  LOCATION
-@sakila_pg  postgres  sakila  sakila.public  14.6MB  28      postgres://sakila:xxxxx@localhost/sakila
-
-TABLE                       ROWS   COL NAMES
-actor                       200    actor_id, first_name, last_name, last_update
-actor_info                  200    actor_id, first_name, last_name, film_info
-address                     603    address_id, address, address2, district, city_id, postal_code, phone, last_update
-```
+![sq inspect source text](/images/sq_inspect_source_text.png)
 
 `sq inspect` comes into its own when used with the `--json` flag, which outputs voluminous info
 on the data source. It is a frequent practice to combine `sq inspect`

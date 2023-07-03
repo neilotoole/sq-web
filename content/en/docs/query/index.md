@@ -572,11 +572,10 @@ when executing a `SELECT * FROM tbl1 JOIN tbl2`: note the `actor_id_1` and
  $ sq '.actor | join(.film_actor, .actor_id) | .[0:2]'
 actor_id  first_name  last_name  last_update           actor_id_1  film_id  last_update_1
 1         PENELOPE    GUINESS    2006-02-15T04:34:33Z  1           1        2006-02-15T05:05:03Z
-
 ```
 
-
-
+The renaming behavior is configurable via the [`result.column.rename`](/docs/config/#recordcolumnrename)
+option.
 
 
 ### Join examples
