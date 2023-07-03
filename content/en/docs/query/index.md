@@ -523,6 +523,20 @@ $ sq '.actor
 | .first_name, .last_name, .title'
 ```
 
+{{< alert icon="👉" >}}
+How do cross-source joins work?
+
+The implementation is very basic (and could be dramatically enhanced).
+Given a two-source join:
+
+1. `sq` copies the full contents of the left table to the [scratch DB](/docs/concepts/#scratch-db).
+1. `sq` copies the full content of the right table to the scratch DB.
+1. `sq` executes the query against the scratch DB.
+
+Given that this naive implementation perform a full copy of both tables, cross-source joins
+are only suitable for smaller datasets.
+{{< /alert >}}
+
 ### Ambiguous columns
 
 There are two scenarios where column name ambiguity can cause trouble: in
@@ -578,19 +592,30 @@ actor_id  first_name  last_name  last_update           actor_id_1  film_id  last
 The renaming behavior is configurable via the [`result.column.rename`](/docs/config/#resultcolumnrename)
 option.
 
+### Join examples
 
-{{< alert icon="👉" >}}
-How do cross-source joins work?
+```shell
+# INNER JOIN
+$ sq '.actor | join(.film_actor, .actor_id)'
 
-The implementation is very basic (and could be dramatically enhanced).
+# LEFT JOIN
+$ sq '.actor | ljoin(.film_actor, .actor_id)'
 
-1. `sq` copies the full contents of the left table to the [scratch DB](/docs/concepts/#scratch-db).
-1. `sq` copies the full content of the right table to the scratch DB.
-1. `sq` executes the query against the scratch DB.
+# LEFT OUTER JOIN
+$ sq '.actor | lojoin(.film_actor, .actor_id)'
 
-Given that this naive implementation perform a full copy of both tables, cross-source joins
-are only suitable for smaller datasets.
-{{< /alert >}}
+# RIGHT JOIN
+$ sq '.actor | rjoin(.film_actor, .actor_id)'
+
+# RIGHT OUTER JOIN
+$ sq '.actor | rojoin(.film_actor, .actor_id)'
+
+# FULL OUTER JOIN
+$ sq '.actor | fojoin(.film_actor, .actor_id)'
+
+# CROSS JOIN
+$ sq '.actor | xjoin(.film_actor)'
+```
 
 ## Functions
 
