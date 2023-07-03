@@ -327,7 +327,7 @@ actor_id  first_name  last_name  last_update
 
 ## Joins
 
-Use the `join` construct to [join](https://en.wikipedia.org/wiki/Join_(SQL)#Inner_join)
+Use the `join` construct to [join](https://en.wikipedia.org/wiki/Join_(SQL))
 two or more tables. You can join tables in a
 single data source, or across data sources. That is, you can join a Postgres table
 and a CSV file, or an Excel worksheet and a JSON file, etc.
