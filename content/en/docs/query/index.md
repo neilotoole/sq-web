@@ -399,7 +399,7 @@ $ sq '.actor
 | .actor.first_name, .actor.last_name, .film.title'
 ```
 
-The query above obviously very verbose.
+The query above is obviously needlessly verbose.
 
 ### Table aliases
 
