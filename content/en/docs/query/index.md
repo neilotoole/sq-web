@@ -415,7 +415,7 @@ $ sq '.actor:a
 Table aliases work like [column aliases](#column-aliases).
 
 Note that table aliases aren't
-restricted to join scenarios. You can use them anywhere you reference a table,
+restricted to join scenarios. You can generally use them anywhere you reference a table,
 although it's often somewhat pointless:
 
 ```shell
@@ -575,7 +575,7 @@ actor_id  first_name  last_name  last_update           actor_id_1  film_id  last
 1         PENELOPE    GUINESS    2006-02-15T04:34:33Z  1           1        2006-02-15T05:05:03Z
 ```
 
-The renaming behavior is configurable via the [`result.column.rename`](/docs/config/#recordcolumnrename)
+The renaming behavior is configurable via the [`result.column.rename`](/docs/config/#resultcolumnrename)
 option.
 
 
