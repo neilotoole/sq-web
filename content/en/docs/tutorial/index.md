@@ -328,7 +328,7 @@ $ sq ping @film_csv @tutorial_db
 Having read this far, you can be forgiven for thinking that `sq` only deals with file formats such as CSV
 or even SQLite, but that is not the case. Let's add some SQL databases.
 
-First we'll do postgres; we'll start a pre-built [Sakila](https://dev.mysql.com/doc/sakila/en/sakila-introduction.html)
+First we'll do [Postgres](/docs/drivers/postgres); we'll start a pre-built [Sakila](https://dev.mysql.com/doc/sakila/en/sakila-introduction.html)
 database via docker on port (note that it will take a moment for the Postgres container to start up):
 
 ```shell
