@@ -399,9 +399,11 @@ $ sq '.actor
 | .actor.first_name, .actor.last_name, .film.title'
 ```
 
+The query above obviously very verbose.
+
 ### Table aliases
 
-That's obviously very verbose. We can use _table aliases_ to do better:
+We can use _table aliases_ to make the query more legible:
 
 ```shell
 $ sq '.actor:a
@@ -412,8 +414,7 @@ $ sq '.actor:a
 
 Table aliases work like [column aliases](#column-aliases).
 
-
-Table aliases aren't
+Note that table aliases aren't
 restricted to join scenarios. You can use them anywhere you reference a table,
 although it's often somewhat pointless:
 
