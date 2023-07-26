@@ -87,7 +87,7 @@ $ sq config ls --src @actor_csv -v
 
 ### `get`
 
-`sq get` is like the single-friend counterpart of `sq ls`. It gets the
+`sq config get` is like the single-friend counterpart of `sq ls`. It gets the
 value of a single option.
 
 ```shell
@@ -95,6 +95,7 @@ value of a single option.
 $ sq config get format
 text
 
+# Get the "conn.max-open" option value for a particular source
 $ sq config get --src @actor_csv conn.max-open
 10
 ```
@@ -275,6 +276,15 @@ rename each column to uppercase.
 ```text
 {{.Name | upper}}{{with .Recurrence}}:{{.}}{{end}}
 ```
+
+The `.AlphaIndex` template fields maps the column index to `A, B ... Y, Z, AA, AB...`,
+similar to how Microsoft Excel names columns. To use this style:
+
+```shell
+$ sq config set result.column.rename '{{.AlphaIndex}}'
+$ sq .actor
+```
+
 
 ### `diff.data.format`
 {{< readfile file="../cmd/options/diff.data.format.help.txt" code="true" lang="text" >}}
