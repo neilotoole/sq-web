@@ -24,38 +24,41 @@ Examples:
   $ sq sql 'SELECT * FROM actor' --insert=@sakila_ms17.actor
 
 Flags:
-  -f, --format string              Output format (default "text")
-  -t, --text                       Output text
-  -h, --header                     Print header row (default true)
-  -H, --no-header                  Don't print header row
-  -j, --json                       Output JSON
-  -A, --jsona                      Output LF-delimited JSON arrays
-  -l, --jsonl                      Output LF-delimited JSON objects
-  -C, --csv                        Output CSV
-      --tsv                        Output TSV
-      --html                       Output HTML table
-      --markdown                   Output Markdown
-  -r, --raw                        Output each record field in raw format without any encoding or delimiter
-  -x, --xlsx                       Output Excel XLSX
-      --xml                        Output XML
-  -y, --yaml                       Output YAML
-  -c, --compact                    Compact instead of pretty-printed output
-      --format.datetime string     Timestamp format: constant such as RFC3339 or a strftime format (default "RFC3339")
-      --format.datetime.number     Render numeric datetime value as number instead of string (default true)
-      --format.date string         Date format: constant such as DateOnly or a strftime format (default "DateOnly")
-      --format.date.number         Render numeric date value as number instead of string (default true)
-      --format.time string         Time format: constant such as TimeOnly or a strftime format (default "TimeOnly")
-      --format.time.number         Render numeric time value as number instead of string (default true)
-  -o, --output string              Write output to <file> instead of stdout
-      --insert string              Insert query results into @HANDLE.TABLE. If not existing, TABLE will be created.
-      --src string                 Override the active source for this query
-      --ingest.driver string       Explicitly specify the driver to use for ingesting data
-      --ingest.header              Treat first row of ingest data as header
-      --driver.csv.empty-as-null   Treat empty CSV fields as null (default true)
-      --driver.csv.delim string    CSV delimiter: one of comma, space, pipe, tab, colon, semi, period (default "comma")
-      --query                      Execute the SQL as a query (as opposed to statement)
-      --exec                       Execute the SQL as a statement (as opposed to query)
-      --help                       help for sql
+  -f, --format string                  Specify output format (default "text")
+  -t, --text                           Output text
+  -h, --header                         Print header row (default true)
+  -H, --no-header                      Don't print header row
+  -j, --json                           Output JSON
+  -A, --jsona                          Output LF-delimited JSON arrays
+  -J, --jsonl                          Output LF-delimited JSON objects
+  -C, --csv                            Output CSV
+      --tsv                            Output TSV
+      --html                           Output HTML table
+      --markdown                       Output Markdown
+  -r, --raw                            Output each record field in raw format without any encoding or delimiter
+  -x, --xlsx                           Output Excel XLSX
+      --xml                            Output XML
+  -y, --yaml                           Output YAML
+  -c, --compact                        Compact instead of pretty-printed output
+      --format.datetime string         Timestamp format: constant such as RFC3339 or a strftime format (default "RFC3339")
+      --format.datetime.number         Render numeric datetime value as number instead of string (default true)
+      --format.date string             Date format: constant such as DateOnly or a strftime format (default "DateOnly")
+      --format.date.number             Render numeric date value as number instead of string (default true)
+      --format.time string             Time format: constant such as TimeOnly or a strftime format (default "TimeOnly")
+      --format.time.number             Render numeric time value as number instead of string (default true)
+      --format.excel.datetime string   Timestamp format string for Excel datetime values (default "yyyy-mm-dd hh:mm")
+      --format.excel.date string       Date format string for Excel date-only values (default "yyyy-mm-dd")
+      --format.excel.time string       Time format string for Excel time-only values (default "hh:mm:ss")
+  -o, --output string                  Write output to <file> instead of stdout
+      --insert string                  Insert query results into @HANDLE.TABLE. If not existing, TABLE will be created.
+      --src string                     Override the active source for this query
+      --ingest.driver string           Explicitly specify the driver to use for ingesting data
+      --ingest.header                  Treat first row of ingest data as header
+      --driver.csv.empty-as-null       Treat empty CSV fields as null (default true)
+      --driver.csv.delim string        CSV delimiter: one of comma, space, pipe, tab, colon, semi, period (default "comma")
+      --query                          Execute the SQL as a query (as opposed to statement)
+      --exec                           Execute the SQL as a statement (as opposed to query)
+      --help                           help for sql
 
 Global Flags:
       --config string      Load config from here

@@ -219,6 +219,9 @@ to a database.
 ### `format.datetime`
 {{< readfile file="../cmd/options/format.datetime.help.txt" code="true" lang="text" >}}
 
+### `error.format`
+{{< readfile file="../cmd/options/error.format.help.txt" code="true" lang="text" >}}
+
 ### `format.datetime.number`
 {{< readfile file="../cmd/options/format.datetime.number.help.txt" code="true" lang="text" >}}
 
@@ -233,6 +236,22 @@ to a database.
 
 ### `format.time.number`
 {{< readfile file="../cmd/options/format.time.number.help.txt" code="true" lang="text" >}}
+
+### `format.excel.datetime`
+{{< readfile file="../cmd/options/format.excel.datetime.help.txt" code="true" lang="text" >}}
+
+See also: [Excel date/time format reference](https://support.microsoft.com/en-gb/office/format-numbers-as-dates-or-times-418bd3fe-0577-47c8-8caa-b4d30c528309#bm2)
+
+### `format.excel.date`
+{{< readfile file="../cmd/options/format.excel.date.help.txt" code="true" lang="text" >}}
+
+See also: [Excel date/time format reference](https://support.microsoft.com/en-gb/office/format-numbers-as-dates-or-times-418bd3fe-0577-47c8-8caa-b4d30c528309#bm2)
+
+### `format.excel.time`
+{{< readfile file="../cmd/options/format.excel.time.help.txt" code="true" lang="text" >}}
+
+See also: [Excel date/time format reference](https://support.microsoft.com/en-gb/office/format-numbers-as-dates-or-times-418bd3fe-0577-47c8-8caa-b4d30c528309#bm2)
+
 
 ### `header`
 {{< readfile file="../cmd/options/header.help.txt" code="true" lang="text" >}}
@@ -285,6 +304,14 @@ $ sq config set result.column.rename '{{.AlphaIndex}}'
 $ sq .actor
 ```
 
+{{< alert icon="👉" >}}
+Note that [`ingest.column.rename`](#ingestcolumnrename) and
+[`result.column.rename`](#resultcolumnrename) are distinct options.
+The _ingest_ option is applied to ingest data (e.g. a CSV file) column names before the data is sent to
+the database (pre-processing). The _result_ option, by contrast, is applied
+to result set column names after the data is returned from the database (post-processing).
+It is possible (and normal) to use both options.
+{{< /alert >}}
 
 ### `diff.data.format`
 {{< readfile file="../cmd/options/diff.data.format.help.txt" code="true" lang="text" >}}
@@ -322,6 +349,19 @@ $ sq .actor
 {{< readfile file="../cmd/options/tuning.record-buffer.help.txt" code="true" lang="text" >}}
 
 ## Ingest
+
+### `ingest.column.rename`
+{{< readfile file="../cmd/options/ingest.column.rename.help.txt" code="true" lang="text" >}}
+
+{{< alert icon="👉" >}}
+Note that [`ingest.column.rename`](#ingestcolumnrename) and
+[`result.column.rename`](#resultcolumnrename) are distinct options.
+The _ingest_ option is applied to ingest data (e.g. a CSV file) column names before the data is sent to
+the database (pre-processing). The _result_ option, by contrast, is applied
+to result set column names after the data is returned from the database (post-processing).
+It is possible (and normal) to use both options.
+{{< /alert >}}
+
 
 ### `ingest.header`
 {{< readfile file="../cmd/options/ingest.header.help.txt" code="true" lang="text" >}}

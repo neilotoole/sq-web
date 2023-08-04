@@ -96,10 +96,17 @@ Similarly [`--format.date`](/docs/config/#formatdate)
 and [`--format.time`](/docs/config/#formattime) control the rendering of
 date and time values.
 
+
 {{< alert icon="👉" >}}
+Microsoft Excel uses its own format string mechanism,
+so it has separate but equivalent options:
+[`--format.excel.datetime`](/docs/config/#formatexceldatetime),
+[`--format.excel.date`](/docs/config/#formatexceldate) and [`--format.excel.time`](/docs/config/#formatexceltime)
+
+{{< /alert >}}
+
 There are yet more formatting options available. Check out the full list
 in the [config guide](/docs/config/#output).
-{{< /alert >}}
 
 ## Formats
 

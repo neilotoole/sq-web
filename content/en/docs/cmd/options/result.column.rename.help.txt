@@ -20,6 +20,7 @@ The fields available in the template are:
 
   .Name         column name
   .Index        zero-based index of the column in the result set
+  .Alpha        alphabetical index of the column, i.e. e.g. [A, B ... Z, AA, AB]
   .Recurrence   nth recurrence of the colum name in the result set
 
 For a unique column name, e.g. "first_name" above, ".Recurrence" will be 0.
