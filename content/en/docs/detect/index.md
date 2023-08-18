@@ -20,8 +20,8 @@ a distinct name (e.g. `actor`), and each column in the table has a distinct
 name (`actor_id`) and type (`INTEGER`), as well as other attributes such
 as nullability.
 
-However, this doesn't hold for all sources, in particular file-based sources
-such as `CSV`. Let's say we add a CSV file:
+However, this doesn't hold for all sources. In particular, it's not
+the case for some file-based sources such as `CSV`. Let's say we add a CSV file:
 
 ```shell
 $ sq add ./actor.csv
