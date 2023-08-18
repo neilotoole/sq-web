@@ -66,21 +66,20 @@ film_actor              table  5462   actor_id, film_id, last_update
 
 Let's step through the above:
 
-- `sq ls`: list the current sources. There are none.
-- `wget`: download an Excel file to use for this demo.
-- `sq add`: add a source. The _driver type_ is inferred (or can be specified
-  with `--driver=sqlite3`) to be `sqlite3`, and we give
-  this _source_ the handle `@tutorial_db`.
+- `sq ls`: list the current [sources](/docs/source). There are none.
+- `wget`: download a [SQLite](/docs/drivers/sqlite) datafile to use for this demo.
+- `sq add`: add a source. The [_driver type_](/docs/concepts/#driver-type) is [detected](/docs/detect/#driver-type)
+  to be `sqlite3`, and we give this _source_ the handle `@tutorial_db`.
 - `sq ls`: lists the sources again; this time we see our new `@tutorial_db` source.
-- `sq ls -v`: lists the sources yet again, this time verbosely (`-v`).
-- `sq inspect`: inspects `@tutorial_db`, showing the structure of the source.
+- `sq ls -v`: lists the sources yet again, this time [verbosely](/docs/config/#verbose) (`-v`).
+- `sq inspect`: [inspects](/docs/inspect) `@tutorial_db`, showing the structure of the source.
 
 > 👉 Most `sq` commands feature sophisticated shell completion. Try it out
 > by hitting `TAB` when typing a command.
 
 ## Query
 
-Now that we have added a source to `sq`, we can query it. Let's select
+Now that we have added a source to `sq`, we can [query](/docs/query) it. Let's select
 everything from the `actor` table.
 
 ```shell
@@ -100,7 +99,7 @@ actor_id  first_name   last_name     last_update
 
 That listed the contents of the `actor` table.
 
-The same query can be executed in native SQL:
+The same query can be executed in [native SQL](/docs/cmd/sql/):
 
 ```shell
 $ sq sql "SELECT * FROM actor"
@@ -214,7 +213,7 @@ data  table  1000  13    film_id               INTEGER
                          last_update           DATETIME
 ```
 
-> Note that because CSV is [_monotable_](/docs/concepts#monotable) (only has one table of data),
+> Note that because CSV is [_monotable_](/docs/concepts/#monotable) (only has one table of data),
 > its data is represented as a single table
 > named `data`.
 

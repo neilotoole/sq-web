@@ -28,7 +28,7 @@ an absolute path when saved to `sq`'s config).
 
 {{< alert icon="👉" >}}
 The `sq add` command accepts a `--driver=TYPE` flag, e.g. `--driver=xlsx`. However,
-in practice this flag can be omitted, because sq can [detect](/docs/driver/detect)
+in practice this flag can be omitted, because sq can [detect](/docs/detect/#driver-type)
 the driver type. {{< /alert >}}
 
 
@@ -59,15 +59,16 @@ $ sq add --ingest.header=false ./sakila-no-header.xlsx
 ```
 
 {{< alert icon="👉" >}}
-A downside to `--ingest.header` is that the option is set on a per-source basis, not per-sheet.
-That is to say: when using `--ingest.header`, each of the sheets in the XLSX source
+A downside to `--ingest.header` is that the option applies on a per-source basis, not per-sheet.
+That is to say: when using `--ingest.header`, every sheet in the workbook
 should have a header, or none of the sheets should have a header.
 {{< /alert >}}
 
-## Column kinds
+## Column kind
 
-When ingesting an Excel workbook, `sq` attempts to detect the data "kind"
-of each column. Thus an Excel date becomes a date in the backing DB, an Excel
+When ingesting an Excel workbook, `sq` attempts to detect the data ["kind"](/docs/detect/#column-kind)
+of each column (`int`, `float`, `text`, etc.). Thus an Excel date becomes a date in
+the backing DB, an Excel
 number becomes an int or a float, and various date & time values are parsed
 into an appropriate DB type. See the [column kind section](/docs/detect/#column-kind)
 for more on this mechanism.

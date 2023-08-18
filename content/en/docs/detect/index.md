@@ -53,9 +53,7 @@ $ sq add ./sakila.db
 `sq` has driver-type detection for [SQLite](/docs/drivers/sqlite), [Excel](/docs/drivers/xlsx),
 the three [JSON](/docs/drivers/json/) variants
 ([JSON](/docs/drivers/json/#json), [JSONA](/docs/drivers/json/#jsona), [JSONL](/docs/drivers/json/#jsonl)),
-and [CSV](/docs/drivers/csv)/[TSV](/docs/drivers/csv). For CSV files, the detector
-can also generally determine non-standard record
-separators ([delimiters](/docs/drivers/csv/#delimiters)) such as `|` or `;`.
+and [CSV](/docs/drivers/csv)/[TSV](/docs/drivers/csv).
 
 ## Header row
 
@@ -99,6 +97,12 @@ $ sq add --ingest.header ./actor_header.csv
 # Explicitly specify no header row
 $ sq add --ingest.header=false ./actor_no_header.csv
 ```
+
+{{< alert icon="👉" >}}
+If `sq` fails to detect the header row correctly in your data, but it seems
+like it should be able to, please [open an issue](https://github.com/neilotoole/sq/issues/new/choose), and attach a copy of your data (sanitized
+if necessary).
+{{< /alert >}}
 
 ## Column kind
 
@@ -289,5 +293,5 @@ ingested as [UTC](https://en.wikipedia.org/wiki/Coordinated_Universal_Time).
 {{< alert icon="👉" >}}
 Note that these date & time formats are for data ingestion. Date & time
 output formats are controlled [by](/docs/config/#formatdatetime)
-[config](docs/config/#formatdate) [options](/docs/config/#formattime).
+[config](/docs/config/#formatdate) [options](/docs/config/#formattime).
 {{< /alert >}}
