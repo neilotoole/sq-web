@@ -7,6 +7,7 @@ images:
   - sq_config_ls.png
 weight: 1038
 toc: true
+url: /docs/config
 ---
 `sq` aims to work out of the box with sane defaults, but allows you to configure most
 everything. `sq`'s total configuration state consists of a collection of
