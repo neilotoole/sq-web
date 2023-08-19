@@ -110,7 +110,7 @@
                 </li>
               {{ else }}
                 {{ $active := in $currentPage.RelPermalink .RelPermalink }}
-                <li><a class="docs-link rounded{{ if $active }} active{{ end }}" href="{{ .Permalink }}">{{ .Title }}</a></li>
+                <li><a class="docs-link rounded{{ if $active }} active{{ end }}" href="{{ strings.TrimRight "/" .Permalink }}">{{ .Title }}</a></li>
               {{ end }}
             {{ end }}
           </ul>

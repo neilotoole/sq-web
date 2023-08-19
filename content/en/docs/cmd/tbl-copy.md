@@ -9,8 +9,6 @@ menu:
 weight: 2120
 toc: false
 url: /docs/cmd/tbl-copy
-aliases:
-- /docs/cmd/tbl_copy
 ---
 
 {{< readfile file="tbl-copy.help.txt" code="true" lang="text" >}}
