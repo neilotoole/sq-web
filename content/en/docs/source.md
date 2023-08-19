@@ -41,7 +41,7 @@ $ sq add postgres://sakila:p_ssW0rd@localhost/sakila
 @sakila_pg  postgres  sakila@localhost/sakila
 
 # Add a CSV source, specifying the handle.
-$ sq add ./actor.csv -h @actors
+$ sq add ./actor.csv --handle @actor
 ```
 
 ### Location completion
