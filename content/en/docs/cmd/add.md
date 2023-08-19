@@ -8,6 +8,7 @@ menu:
     parent: "cmd"
 weight: 2020
 toc: false
+url: /docs/cmd/add
 ---
 Use `sq add` to add a data source. The source can be a SQL database, or a document
 such as a CSV or Excel file. This action will add an entry to `sq`'s

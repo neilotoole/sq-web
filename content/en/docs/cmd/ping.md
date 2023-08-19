@@ -8,6 +8,7 @@ menu:
     parent: "cmd"
 weight: 2080
 toc: false
+url: /docs/cmd/ping
 ---
 
 Use `sq ping` to check data source connection health.

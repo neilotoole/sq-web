@@ -8,6 +8,7 @@ menu:
     parent: "cmd"
 weight: 2010
 toc: false
+url: /docs/cmd/sq
 ---
 Use the root `sq` cmd to execute queries against data sources.
 

@@ -8,6 +8,7 @@ menu:
     parent: "cmd"
 weight: 2100
 toc: false
+url: /docs/cmd/sql
 ---
 
 {{< readfile file="sql.help.txt" code="true" lang="text" >}}

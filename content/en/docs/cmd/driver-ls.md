@@ -8,6 +8,7 @@ menu:
     parent: "cmd"
 weight: 2040
 toc: false
+url: /docs/cmd/driver-ls
 aliases:
 - /docs/cmd/driver_ls
 ---

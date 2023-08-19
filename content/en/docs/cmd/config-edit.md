@@ -8,7 +8,7 @@ menu:
     parent: "cmd"
 weight: 2038
 toc: false
-aliases:
+url: /docs/cmd/config-edit
 ---
 See the [config](/docs/config) section for an overview of `sq` configuration.
 

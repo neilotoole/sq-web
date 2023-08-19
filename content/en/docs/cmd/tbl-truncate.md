@@ -8,6 +8,7 @@ menu:
     parent: "cmd"
 weight: 2140
 toc: false
+url: /docs/cmd/tbl_truncate
 aliases:
 - /docs/cmd/tbl_truncate
 ---

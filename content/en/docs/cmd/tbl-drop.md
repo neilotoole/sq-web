@@ -8,6 +8,7 @@ menu:
     parent: "cmd"
 weight: 2130
 toc: false
+url: /docs/cmd/tbl-drop
 aliases:
 - /docs/cmd/tbl_drop
 ---

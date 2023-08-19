@@ -8,6 +8,7 @@ menu:
     parent: "cmd"
 weight: 2120
 toc: false
+url: /docs/cmd/tbl-copy
 aliases:
 - /docs/cmd/tbl_copy
 ---

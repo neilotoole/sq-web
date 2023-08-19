@@ -8,6 +8,7 @@ menu:
     parent: "cmd"
 weight: 2030
 toc: false
+url: /docs/cmd/completion
 ---
 
 {{< readfile file="completion.help.txt" code="true" lang="text" >}}
