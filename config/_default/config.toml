@@ -8,6 +8,7 @@ enableRobotsTXT = true
 paginate = 7
 rssLimit = 10
 
+uglyURLs = true
 timeout = 1200000
 
 # Multilingual

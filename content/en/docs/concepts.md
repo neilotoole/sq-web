@@ -6,6 +6,7 @@ draft: false
 images: []
 weight: 1030
 toc: true
+url: /docs/concepts
 aliases:
 - /docs/terminology
 

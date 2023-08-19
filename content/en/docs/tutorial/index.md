@@ -6,6 +6,7 @@ draft: false
 images: []
 weight: 1070
 toc: true
+url: /docs/tutorial
 ---
 
 This tutorial walks through `sq`'s features.
