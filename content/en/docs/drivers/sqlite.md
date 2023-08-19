@@ -5,6 +5,7 @@ draft: false
 images: []
 weight: 4040
 toc: false
+url: /docs/drivers/sqlite
 ---
 The `sq` SQLite driver implements connectivity for
 the [SQLite](https://www.sqlite.org) database.
