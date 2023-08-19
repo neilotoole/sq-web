@@ -6,7 +6,7 @@ draft: false
 images: []
 weight: 1039
 toc: true
-url: /docs/detect
+url: /docs/detect2
 ---
 In an ideal world, all data is strongly typed, and there's no ambiguity.
 Take a DB source:

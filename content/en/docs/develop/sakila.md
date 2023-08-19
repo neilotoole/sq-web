@@ -6,6 +6,7 @@ draft: false
 images: []
 weight: 6001
 toc: true
+url: /docs/develop/sakila
 ---
 `sq` documentation typically uses the [Sakila](https://dev.mysql.com/doc/sakila/en/) example database. Sakila was
 originally created for MySQL, but the data is available for many database implementations.
