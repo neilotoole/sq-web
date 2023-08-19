@@ -5,6 +5,7 @@ draft: false
 images: []
 weight: 1080
 toc: true
+url: /docs/cookbook
 ---
 This cookbook demonstrates how to perform various tasks using `sq`.
 

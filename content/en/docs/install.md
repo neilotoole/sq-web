@@ -6,6 +6,7 @@ draft: false
 images: []
 weight: 1020
 toc: true
+url: /docs/install.md
 ---
 
 `sq` can be installed from source, via an install script, or via package managers for various platforms.

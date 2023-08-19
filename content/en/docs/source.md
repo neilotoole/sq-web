@@ -6,6 +6,7 @@ draft: false
 images: []
 weight: 1036
 toc: true
+url: /docs/source
 ---
 A _source_ is an individual data source, such as a database connection, or
 a CSV or Excel document.

@@ -6,6 +6,7 @@ draft: false
 images: []
 weight: 1010
 toc: true
+url: /docs/overview
 ---
 
 `sq` is the missing tool for wrangling data. A swiss-army knife for data.

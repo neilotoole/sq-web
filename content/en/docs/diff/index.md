@@ -6,6 +6,7 @@ draft: false
 images:
 weight: 1050
 toc: true
+url: /docs/diff
 ---
 [`sq diff`](/docs/cmd/diff) compares metadata, or row data, for sources, or individual tables.
 

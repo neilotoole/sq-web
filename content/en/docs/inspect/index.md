@@ -1,11 +1,12 @@
 ---
 title: Inspect
-description: Inspect
+description: Inspect source or table metadata
 lead: ''
 draft: false
 images:
 weight: 1037
 toc: true
+url: /docs/inspect
 ---
 
 [`sq inspect`](/docs/cmd/inspect) inspects metadata (schema/structure, tables, columns) for a source,
