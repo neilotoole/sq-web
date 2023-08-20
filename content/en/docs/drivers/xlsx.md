@@ -9,10 +9,16 @@ url: /docs/drivers/xlsx
 ---
 The `sq` XLSX driver implements connectivity
 for Microsoft [XLSX](https://www.microsoft.com/en-us/microsoft-365/excel)
-files.
+files and [variants](#supported-file-formats).
 
 Note that XLSX sources are read-only. That is to say, while you can query the XLSX
 source as if it were a SQL database, you cannot use `sq` to insert values into the XLSX file.
+
+## Supported file formats
+
+The driver supports `.xlsx`, `.xlam`, `.xlsm`,`.xltm` and `.xltx`. Note that even
+if the file format is, say, `.xlam`, the driver type is still `xlsx`. The driver
+does not support the older `.xls` and `.xlsb` formats.
 
 ## Add source
 
