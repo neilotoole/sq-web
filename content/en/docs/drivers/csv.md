@@ -5,6 +5,7 @@ draft: false
 images: []
 weight: 4050
 toc: true
+url: /docs/drivers/csv
 ---
 The `sq` CSV driver implements connectivity for [CSV](https://en.wikipedia.org/wiki/Comma-separated_values)
 and variants, such as [TSV](https://en.wikipedia.org/wiki/Tab-separated_values), pipe-delimited, etc..
@@ -26,7 +27,7 @@ You can also pass an absolute filepath (and, in fact, any relative path is expan
 an absolute path when saved to `sq`'s config).
 
 Usually you can omit the `--driver=csv` flag, because `sq` will inspect the file contents
-and figure out that it's a CSV file. However, it's safer to explicitly specify the flag.
+and [detect](/docs/detect/#driver-type) that it's a CSV file. However, it's safer to explicitly specify the flag.
 
 ```shell
 sq add --driver=csv ./actor.csv
@@ -35,7 +36,7 @@ sq add --driver=csv ./actor.csv
 The same is true for TSV files. You can specify the driver explicitly:
 
 ```shell
-$ sq add ./actor.tsv
+$ sq add ./actor.tsv --driver=tsv
 @actor_tsv  tsv  actor.tsv
 ```
 
@@ -85,7 +86,7 @@ Note:
 
 - `comma` is the default. You generally never need to specify this.
 - `tab` is the delimiter for TSV files. Because this is such a common variant, `sq` allows
-  you to specify `--driver=tsv` instead. But usually `sq` will figure out that it's a TSV file.
+  you to specify `--driver=tsv` instead. But usually `sq` will [detect](/docs/detect/#driver-type) that it's a TSV file.
   The following are equivalent:
 
   ```shell
@@ -96,36 +97,28 @@ Note:
 
 ## Header row
 
-By default, `sq` treats CSV files as raw data files, without a header row. The fields (columns)
-are then named `A`, `B`, `C`, etc.
+CSV files will often have a header row containing column names. If the sheet
+doesn't have a header row, by default `sq` will name the columns `A`, `B`, `C`, etc.
+(Note that the column naming behavior is [configurable](/docs/config/#ingestcolumnrename).
+
+Generally, `sq` will automatically [detect](/docs/detect)
+whether or not the first row of a CSV file is a header row. If the header row detection
+is having difficulty with your CSV file, you can explicitly specify that a
+header row is present (or not) via [`--ingest.header`](/docs/config/#ingestheader).
 
 ```shell
-$ sq @actor_noheader_csv.data
-A    B            C             D
-1    PENELOPE     GUINESS       2020-02-15T06:59:28Z
-2    NICK         WAHLBERG      2020-02-15T06:59:28Z
+# Explicitly specify that a header row exists
+$ sq add --ingest.header ./actor_header.csv
+
+# Explicitly specify no header row
+$ sq add --ingest.header=false ./actor_no_header.csv
 ```
 
-But often a CSV file will have a header row. For example:
+## Column kind
 
-```text
-actor_id,first_name,last_name,last_update
-1,PENELOPE,GUINESS,2020-02-15T06:59:28Z
-2,NICK,WAHLBERG,2020-02-15T06:59:28Z
-```
-
-In that case, use the `--ingest.header` flag:
-
-```shell
-sq add --ingest.header ./actor.csv
-```
-
-Then the CSV header field names will become the column names.
-
-```shell
-$ sq @actor_csv.data
-actor_id  first_name   last_name     last_update
-1         PENELOPE     GUINESS       2020-02-15T06:59:28Z
-2         NICK         WAHLBERG      2020-02-15T06:59:28Z
-```
-
+When ingesting a CSV file, `sq` attempts to detect the data ["kind"](/docs/detect/#column-kind)
+of each column (`int`, `float`, `text`, etc.). Thus a CSV date string such as `1989-11-09`
+becomes a date in the backing DB, a number string becomes an int or float,
+and various date & time values are parsed
+into an appropriate DB type. See the [column kind section](/docs/detect/#column-kind)
+for more on this mechanism.

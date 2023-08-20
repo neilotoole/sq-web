@@ -6,6 +6,7 @@ draft: false
 images: []
 weight: 6001
 toc: true
+url: /docs/develop/sakila
 ---
 `sq` documentation typically uses the [Sakila](https://dev.mysql.com/doc/sakila/en/) example database. Sakila was
 originally created for MySQL, but the data is available for many database implementations.
@@ -24,7 +25,7 @@ $ sq add ./sakila.db --handle=@sakila_sl3
 ```
 
 Note above the `--handle=@sakila_sl3` flag. This flag is optional: if no handle specified, a suitable handle is
-generated. You can also use the shorthand flag `-h @sakila_sl3`.
+generated. You can also use the shorthand flag `-N @sakila_sl3`.
 
 ## Postgres
 
@@ -39,7 +40,7 @@ Run the image and then `sq add`.
 $ docker run -d -p 5432:5432 sakiladb/postgres:latest
 # Wait a while...
 
-sq add 'postgres://sakila:p_ssW0rd@localhost/sakila?sslmode=disable' -h @sakila_pg
+sq add 'postgres://sakila:p_ssW0rd@localhost/sakila' --handle @sakila_pg
 @sakila_pg  postgres  sakila@localhost/sakila
 ```
 
@@ -61,7 +62,7 @@ Run the image and then `sq add`.
 $ docker run -d -p 1433:1433 sakiladb/sqlserver:latest
 # Wait a while...
 
-$ sq add 'sqlserver://sakila:p_ssW0rd@localhost:1433?database=sakila' -h @sakila_sqlserver
+$ sq add 'sqlserver://sakila:p_ssW0rd@localhost:1433?database=sakila' --handle @sakila_sqlserver
 @sakila_sqlserver  sqlserver  sakila@localhost:1433/sakila
 ```
 
@@ -83,7 +84,7 @@ Run the image and then `sq add`.
 $ docker run -d -p 1433:1433 sakiladb/azure-sql-edge:latest
 # Wait a while...
 
-$ sq add 'sqlserver://sakila:p_ssW0rd@localhost:1433?database=sakila' -h @sakila_sqlserver
+$ sq add 'sqlserver://sakila:p_ssW0rd@localhost:1433?database=sakila' --handle @sakila_sqlserver
 @sakila_sqlserver  sqlserver  sakila@localhost:1433/sakila
 ```
 
@@ -100,7 +101,7 @@ Run the image and then `sq add`.
 $ docker run -d -p 3306:3306 sakiladb/mysql:latest
 # Wait a while...
 
-$ sq add 'mysql://sakila:p_ssW0rd@localhost:3306/sakila' -h @sakila_mysql
+$ sq add 'mysql://sakila:p_ssW0rd@localhost:3306/sakila' --handle @sakila_mysql
 @sakila_mysql  mysql  sakila@localhost:3306/sakila
 ```
 
@@ -111,7 +112,7 @@ To add a source with handle `@sakila_xlsx`, download [sakila.xlsx](https://sq.io
 ```shell
 $ wget https://sq.io/testdata/sakila.xlsx
 
-$ sq add ./sakila.xlsx -h @sakila_xlsx
+$ sq add ./sakila.xlsx --handle @sakila_xlsx
 @sakila_xlsx  xlsx  sakila.xlsx
 ```
 
@@ -132,6 +133,6 @@ $ ls
 actor.csv    category.csv  country.csv   film.csv        film_category.csv  inventory.csv  payment.csv  staff.csv
 address.csv  city.csv      customer.csv  film_actor.csv  film_text.csv      language.csv   rental.csv   store.csv
 
-$ sq add actor.csv -h @sakila_csv_actor
+$ sq add actor.csv --handle @sakila_csv_actor
 @sakila_csv_actor  csv  actor.csv
 ```

@@ -6,6 +6,7 @@ draft: false
 images: []
 weight: 1036
 toc: true
+url: /docs/source
 ---
 A _source_ is an individual data source, such as a database connection, or
 a CSV or Excel document.
@@ -40,7 +41,7 @@ $ sq add postgres://sakila:p_ssW0rd@localhost/sakila
 @sakila_pg  postgres  sakila@localhost/sakila
 
 # Add a CSV source, specifying the handle.
-$ sq add ./actor.csv -h @actors
+$ sq add ./actor.csv --handle @actor
 ```
 
 ### Location completion

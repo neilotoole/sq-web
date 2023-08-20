@@ -8,6 +8,7 @@ enableRobotsTXT = true
 paginate = 7
 rssLimit = 10
 
+uglyURLs = true
 timeout = 1200000
 
 # Multilingual
@@ -45,7 +46,7 @@ mediaType = "application/xml"
 baseName = "sitemap"
 isHTML = false
 isPlainText = true
-noUgly = true
+noUgly = false
 rel  = "sitemap"
 
 [caches]
@@ -58,14 +59,14 @@ rel  = "sitemap"
   filename = "sitemap.xml"
   priority = 0.5
 
-[taxonomies]
-  contributor = "contributors"
-  category = "categories"
-  tag = "tags"
+#[taxonomies]
+#  contributor = "contributors"
+#  category = "categories"
+#  tag = "tags"
 
 [permalinks]
-  blog = "/blog/:title/"
-# docs = "/docs/1.0/:sections[1:]/:title/"
+  blog = "/blog/:title"
+#  docs = "/docs/:sections[1:]/:title"
 
 [minify.tdewolff.html]
   keepWhitespace = false

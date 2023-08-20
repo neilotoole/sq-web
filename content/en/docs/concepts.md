@@ -6,6 +6,7 @@ draft: false
 images: []
 weight: 1030
 toc: true
+url: /docs/concepts
 aliases:
 - /docs/terminology
 
@@ -19,7 +20,7 @@ by [Neil O'Toole](https://github.com/neilotoole).
 
 ## SLQ
 
-`SLQ` is the formal name of `sq`'s query language, similar to jq's syntax.
+`SLQ` is the formal name of `sq`'s query language, similar to [jq](https://jqlang.github.io/jq/)'s syntax.
 The [Antlr](https://www.antlr.org) grammar
 is available on [GitHub](https://github.com/neilotoole/sq/tree/master/grammar).
 
@@ -31,12 +32,12 @@ A source has a [driver type](#driver-type), [location](#location) and [handle](#
 
 Learn more in the [sources](/docs/source) section.
 
-### Driver Type
+### Driver type
 
-The _type_ is the [driver](#driver) type used to connect to the source,
+This is the [driver](#driver) type used to connect to the source,
 e.g. `postgres`, `sqlserver`, `csv`, etc. You can specify the type explicitly
-when invoking [`sq add`](/docs/cmd/add), but usually `sq` can infer the type
-from the [location](#location).
+when invoking [`sq add`](/docs/cmd/add), but usually `sq` can [detect](/docs/detect/#driver-type)
+the driver automatically.
 
 ### Location
 

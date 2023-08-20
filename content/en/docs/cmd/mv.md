@@ -8,6 +8,7 @@ menu:
     parent: "cmd"
 weight: 2112
 toc: false
+url: /docs/cmd/mv
 ---
 
 {{< readfile file="mv.help.txt" code="true" lang="text" >}}

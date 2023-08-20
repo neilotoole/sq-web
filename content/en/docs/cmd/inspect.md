@@ -8,8 +8,8 @@ menu:
     parent: "cmd"
 weight: 2060
 toc: false
+url: /docs/cmd/inspect
 ---
-
 `sq inspect` inspects metadata (schema/structure, tables, columns) for a source,
 or for an individual table. When used with `--json`, the output of `sq inspect` can
 be fed into other tools such as [jq ](https://jqlang.github.io/jq/) to enable complex data pipelines.

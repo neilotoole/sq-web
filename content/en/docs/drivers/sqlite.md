@@ -5,6 +5,7 @@ draft: false
 images: []
 weight: 4040
 toc: false
+url: /docs/drivers/sqlite
 ---
 The `sq` SQLite driver implements connectivity for
 the [SQLite](https://www.sqlite.org) database.
@@ -25,6 +26,13 @@ For example:
 ```shell
 $ sq add /Users/neilotoole/sakila.db
 $ sq add 'sqlite3:///Users/neilotoole/sakila.db'
+```
+
+`sq` usually can detect that a file is a SQLite datafile, but in the event
+it doesn't, you can explicitly specify the driver type:
+
+```shell
+$ sq add --driver=sqlite3 ./sakila.db
 ```
 
 ### Create new SQLite DB

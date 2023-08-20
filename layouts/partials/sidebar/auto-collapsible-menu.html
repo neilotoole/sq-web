@@ -40,6 +40,11 @@
     <a class="docs-link rounded {{ if $active }} active{{ end }}" href="{{- $hackURL -}}">Config</a>
   </li>
   <li class="mb-1">
+    {{ $hackURL := "/docs/detect" }}
+    {{ $active := in $currentPage.RelPermalink $hackURL }}
+    <a class="docs-link rounded {{ if $active }} active{{ end }}" href="{{- $hackURL -}}">Detect</a>
+  </li>
+  <li class="mb-1">
     {{ $hackURL := "/docs/output" }}
     {{ $active := in $currentPage.RelPermalink $hackURL }}
     <a class="docs-link rounded {{ if $active }} active{{ end }}" href="{{- $hackURL -}}">Output</a>
@@ -105,7 +110,7 @@
                 </li>
               {{ else }}
                 {{ $active := in $currentPage.RelPermalink .RelPermalink }}
-                <li><a class="docs-link rounded{{ if $active }} active{{ end }}" href="{{ .Permalink }}">{{ .Title }}</a></li>
+                <li><a class="docs-link rounded{{ if $active }} active{{ end }}" href="{{ strings.TrimRight "/" .Permalink }}">{{ .Title }}</a></li>
               {{ end }}
             {{ end }}
           </ul>

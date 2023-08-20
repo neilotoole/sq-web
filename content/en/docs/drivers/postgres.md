@@ -5,6 +5,7 @@ draft: false
 images: []
 weight: 4020
 toc: false
+url: /docs/drivers/postgres
 ---
 The `sq` Postgres driver implements connectivity for
 the [Postgres](https://www.postgresql.org) database.

@@ -8,6 +8,7 @@ menu:
     parent: "cmd"
 weight: 2110
 toc: false
+url: /docs/cmd/src
 ---
 
 {{< readfile file="src.help.txt" code="true" lang="text" >}}

@@ -83,7 +83,7 @@ Source:
     {{ range $index, $page := (where .Site.Pages "Section" "docs") -}}
       {
         id: {{ $index }},
-        href: "{{ .Permalink }}",
+        href: "{{ strings.TrimRight "/" .Permalink }}",
         title: {{ .Title | jsonify }},
         description: {{ .Params.description | jsonify }},
         content: {{ .Content | jsonify }}
@@ -114,7 +114,7 @@ Source:
     index.add(
       {
         id: {{ $index }},
-        href: "{{ .RelPermalink }}",
+        href: "{{ strings.TrimRight "/" .RelPermalink }}",
         title: {{ .Title | jsonify }},
         {{ with .Description -}}
           description: {{ . | jsonify }},

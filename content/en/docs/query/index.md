@@ -6,6 +6,7 @@ draft: false
 images: []
 weight: 1035
 toc: true
+url: /docs/query
 ---
 
 `sq` implements a [jq ](https://jqlang.github.io/jq/)-style query language, formally

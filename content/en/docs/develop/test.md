@@ -5,6 +5,7 @@ draft: false
 images: []
 weight: 6002
 toc: true
+url: /docs/develop/test
 ---
 In a nutshell:
 
@@ -42,10 +43,10 @@ sources:
       location: sqlite3://${SQ_ROOT}/drivers/sqlite3/testdata/sakila.db
     - handle: '@sakila_pg9'
       type: postgres
-      location: postgres://sakila:p_ssW0rd@${SQ_TEST_SRC__SAKILA_PG9}/sakila?sslmode=disable
+      location: postgres://sakila:p_ssW0rd@${SQ_TEST_SRC__SAKILA_PG9}/sakila
     - handle: '@sakila_pg10'
       type: postgres
-      location: postgres://sakila:p_ssW0rd@${SQ_TEST_SRC__SAKILA_PG10}/sakila?sslmode=disable
+      location: postgres://sakila:p_ssW0rd@${SQ_TEST_SRC__SAKILA_PG10}/sakila
     - handle: '@sakila_my56'
       type: mysql
       location: mysql://sakila:p_ssW0rd@${SQ_TEST_SRC__SAKILA_MY56}/sakila
