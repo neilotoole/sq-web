@@ -114,6 +114,24 @@ $ sq add --ingest.header ./actor_header.csv
 $ sq add --ingest.header=false ./actor_no_header.csv
 ```
 
+### Duplicate columns
+
+If the header row has duplicate column names, the later columns are renamed.
+For example, these columns:
+
+```text
+actor_id, first_name, actor_id
+```
+
+become:
+
+```text
+actor_id, first_name, actor_id_1
+```
+
+The renaming behavior is configurable via [`ingest.column.rename`](/docs/config#ingestcolumnrename).
+
+
 ## Column kind
 
 When ingesting a CSV file, `sq` attempts to detect the data ["kind"](/docs/detect/#column-kind)
