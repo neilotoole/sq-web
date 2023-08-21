@@ -39,7 +39,7 @@ Available formats:
 
 The output format applies to queries (e.g. `sq .actor --json`), and also to
 other `sq` commands, e.g. `sq inspect @sakila --yaml`. Not every
-command implements each format. For example, there's no `xml` output format
+command implements each format. For example, there's no `markdown` output format
 for `sq version`. But every command (except for `help`) supports at least `text`
 and `json` output.
 
@@ -100,7 +100,7 @@ date and time values.
 
 {{< alert icon="👉" >}}
 Microsoft Excel uses its own format string mechanism,
-so it has separate but equivalent options:
+thus the [`xlsx`](#xlsx) format has separate but equivalent options:
 [`--format.excel.datetime`](/docs/config/#formatexceldatetime),
 [`--format.excel.date`](/docs/config/#formatexceldate) and [`--format.excel.time`](/docs/config/#formatexceltime)
 
@@ -174,6 +174,13 @@ Its twin `tsv` (`-T`) outputs [Tab-Separated Values](https://en.wikipedia.org/wi
 `xlsx` (`-x`) outputs an Excel `.xlsx` document.
 
 ![sq query --xlsx](sq_query_xlsx.png)
+
+There are three config options for controlling date/time output.
+Note that these format strings are distinct from [`format.datetime`](https://sq.io/docs/config#formatdatetime)
+and friends, because Excel has its own format string mechanism.
+- [`format.excel.datetime`](/docs/config#formatexceldatetime): Controls datetime format, e.g. `2023-08-03 16:07:01`.
+- [`format.excel.date`](/docs/config#formatexceldatetime): Controls date-only format, e.g. `2023-08-03`.
+- [`format.excel.time`](/docs/config#formatexceldatetime): Controls time-only format, e.g. `4:07 pm`.
 
 ### yaml
 
