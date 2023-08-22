@@ -75,7 +75,7 @@ extension features.
 | `introspect`     | Additional `PRAGMA` statements: `function_list`, `module_list`, `pragma_list`                                                                           |
 | `stat4`          | Additional statistics to assist query planning                                                                                                          |
 
-{{< alert icon="⚠️" >}}
+{{< alert icon="👉" >}}
 There is already a [feature request](https://github.com/neilotoole/sq/issues/86) to
 add [SpatiaLite](https://www.gaia-gis.it/fossil/libspatialite/index) support.
 {{< /alert >}}
