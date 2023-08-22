@@ -70,7 +70,6 @@ extension features.
 |------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `vtable`         | [Virtual Table](https://www.sqlite.org/vtab.html) <br/><small>👉 [`sq inspect`](/docs/inspect) will show the virtual table's type as `virtual`.</small> |
 | `fts5`           | [Full Text Search 5](https://www.sqlite.org/fts5.html)                                                                                                  |
-| `icu`            | [Internation Components for Unicode](https://sqlite.org/src/dir/ext/icu) <br/> <small>⚠️ Not yet available on Windows build</small>                     |
 | `json`           | [JSON](https://sqlite.org/json1.html)                                                                                                                   |
 | `math_functions` | [Math Functions](https://www.sqlite.org/lang_mathfunc.html)                                                                                             |
 | `introspect`     | Additional `PRAGMA` statements: `function_list`, `module_list`, `pragma_list`                                                                           |
