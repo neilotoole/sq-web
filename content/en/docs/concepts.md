@@ -139,7 +139,7 @@ _Scratch DB_ refers to the temporary ("_scratch_") database that `sq` uses for u
 activity
 such as converting a [document source](#document-source) like [CSV](/docs/drivers/csv) to relational
 format. By default, `sq`
-uses an embedded [SQLite](/docs/drivers/sqlite) instance for the Join DB.
+uses an embedded [SQLite](/docs/drivers/sqlite) instance for the Scratch DB.
 
 ## Join DB
 
