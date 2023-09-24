@@ -29,6 +29,7 @@ The following have been tested:
 | `apk`           | Alpine Linux                         | `arm64` `amd64` |
 | `pacman`        | Arch Linux                           | `amd64`         |
 | `yay`           | Arch Linux                           | `amd64`         |
+| `xbps`          | Void Linux                           | `arm64` `amd64` |
 | `brew`          | macOS                                | `arm64` `amd64` |
 | `brew`          | Linux                                | `arm64`         |
 
