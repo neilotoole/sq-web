@@ -23,6 +23,11 @@ Because it's all SQL behind the scenes, you can always bypass `sq`'s query langu
 and execute database-native SQL queries using the [`sq sql`](/docs/cmd/sql) command.
 {{< /alert >}}
 
+{{< alert icon="👉" >}}
+The `sq` query command has many flags. See the [`sq`](/docs/cmd/sq) command reference
+for details.
+{{< /alert >}}
+
 
 ## Fundamentals
 
@@ -793,6 +798,34 @@ synonym:
 ```shell
 $ sq '.actor | sort_by(.first_name)'
 ```
+
+### `schema`
+
+`schema` returns the default [schema](/docs/concepts#schema--catalog) of the DB connection.
+
+```shell
+# Postgres source
+$ sq 'schema()'
+public
+
+# Switch to SQL Server source
+$ sq src @sakila/ms19
+$ sq 'schema()'
+dbo
+```
+
+TODO: Add alert
+
+The `schema()` function honors the `--src.schema` flag, except for [SQL Server]().
+This is because SQL Server does not permit setting the default
+schema on a per-connection basis (it can only be changed per-user). Thus, `schema()`
+always returns the user's default schema for SQL Server.
+
+```shell
+
+```
+
+
 
 ### `sum`
 
