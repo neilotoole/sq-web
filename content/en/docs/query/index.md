@@ -635,7 +635,40 @@ avg(.amount)
 4.2006673312974065
 ```
 
+### `catalog`
 
+`catalog` returns the default [catalog](/docs/concepts#schema--catalog) of the DB connection.
+See also: [`schema`](#schema).
+
+```shell
+# Postgres source
+$ sq 'catalog()'
+sakila
+
+# Switch to SQL Server source
+$ sq src @sakila/ms19
+$ sq 'schema()'
+dbo
+```
+
+
+`catalog` honors the `--src.schema` flag, when used in
+the `catalog.schema` form. For example:
+
+```shell
+$ sq --src.schema postgres.information_scheam 'catalog(), schema()'
+catalog()  schema()
+postgres   public
+````
+
+However, not every driver supports the catalog mechanism fully.
+
+- MySQL treats catalog and schema as somewhat [interchangeable](https://dev.mysql.com/doc/connector-odbc/en/connector-odbc-usagenotes-functionality-catalog-schema.html).
+  It's a mess. But, looking into `INFORMATION_SCHEMA.SCHEMATA`, MySQL lists `CATALOG_NAME` as `def` (for `default`).
+  Thus, with a MySQL source, `catalog()` returns the value of `CATALOG_NAME`, i.e. `def`.
+- SQLite doesn't support catalogs at all. Nor does it implement `INFORMATION_SCHEMA`. Rather
+  than return `NULL` or an empty string, `sq`'s SQLite driver chooses to implement `catalog()` by returning
+  the string `default`.
 
 ### `count`
 
@@ -789,8 +822,7 @@ That query becomes:
 SELECT * FROM "actor" ORDER BY "first_name" ASC, "last_name" DESC
 ```
 
-#### Synonyms
-
+{{< alert icon="👉" >}}
 For interoperability with jq, you can use the
 [`sort_by`](https://jqlang.github.io/jq/manual/v1.6/#sort,sort_by(path_expression))
 synonym:
@@ -798,10 +830,13 @@ synonym:
 ```shell
 $ sq '.actor | sort_by(.first_name)'
 ```
+{{< /alert >}}
+
+
 
 ### `schema`
 
-`schema` returns the default [schema](/docs/concepts#schema--catalog) of the DB connection.
+`schema` returns the default [schema](/docs/concepts#schema--catalog) of the DB connection. See also: [`catalog`](#catalog).
 
 ```shell
 # Postgres source
@@ -814,17 +849,25 @@ $ sq 'schema()'
 dbo
 ```
 
-TODO: Add alert
 
-The `schema()` function honors the `--src.schema` flag, except for [SQL Server]().
+`schema` honors the `--src.schema` flag, except for [SQL Server]().
 This is because SQL Server does not permit setting the default
 schema on a per-connection basis (it can only be changed per-user). Thus, `schema()`
-always returns the user's default schema for SQL Server.
+always returns the user's default schema, which is typically `dbo`.
 
 ```shell
+# Postgres source
+$ sq src @sakila/pg12
+$ sq --src.schema information_schema 'schema()'
+schema()
+information_schema
 
+# SQL Server doesn't honor --src.schema
+$ sq src @sakila/ms19
+$ sq --src.schema information_schema 'schema()'
+schema()
+dbo
 ```
-
 
 
 ### `sum`
@@ -852,6 +895,13 @@ The function maps to the SQL `DISTINCT` keyword:
 ```sql
 SELECT DISTINCT "first_name" FROM "actor"
 ```
+
+{{< alert icon="👉" >}}
+You can also use the `uniq` synonym:
+```shell
+$ sq '.actor | .first_name | uniq'
+```
+{{< /alert >}}
 
 ## Proprietary functions
 

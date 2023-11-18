@@ -155,7 +155,7 @@ Often the terms _catalog_ and _database_ are used interchangeably, and, in pract
 the various terms are used inconsistently and confusedly.
 
 {{< alert icon="👉" >}}
-Above _schema_, there's also the concept of a _cluster_,
+Above _catalog_, there's also the concept of a _cluster_,
 which is the database server (logical or physical) that hosts catalogs. `sq` doesn't concern itself
 with clusters.
 {{< /alert >}}
@@ -167,10 +167,13 @@ Here's what the hierarchy looks like for Postgres ([credit](https://stackoverflo
 Each of the `sq` DB driver implementations supports the concept of a schema in some way,
 but some drivers don't support catalogs. Here's a summary:
 
-| Driver                             | Default schema       | Catalog support?                                                                                              |
-|------------------------------------|----------------------|---------------------------------------------------------------------------------------------------------------|
-| [Postgres](/docs/drivers/postgres) | `public`             | Yes                                                                                                           |
-| [SQLite](/docs/drivers/sqlite)     | `main`               | No                                                                                                            |
-| [MySQL](/docs/drivers/mysql)       | Connection-dependent | [No](https://dev.mysql.com/doc/connector-odbc/en/connector-odbc-usagenotes-functionality-catalog-schema.html) |
-| [SQLite](/docs/drivers/sqlserver)  | `dbo`                | Yes                                                                                                           |
+| Driver                                | Default schema       | Catalog support?                                                                                                             |
+|---------------------------------------|----------------------|------------------------------------------------------------------------------------------------------------------------------|
+| [Postgres](/docs/drivers/postgres)    | `public`             | Yes                                                                                                                          |
+| [SQLite](/docs/drivers/sqlite)        | `main`               | No                                                                                                                           |
+| [MySQL](/docs/drivers/mysql)          | Connection-dependent | [No](https://dev.mysql.com/doc/connector-odbc/en/connector-odbc-usagenotes-functionality-catalog-schema.html) <sup>hey</sup> |
+| [SQL server](/docs/drivers/sqlserver) | `dbo`                | Yes                                                                                                                          |
 
+The SLQ functions [`schema()`](/docs/query#schema) and [`catalog()`](/docs/query#catalog) return
+the schema and catalog of the active source. See the docs for details of how each driver implements
+these functions.
