@@ -8,7 +8,6 @@ weight: 1037
 toc: true
 url: /docs/inspect
 ---
-
 [`sq inspect`](/docs/cmd/inspect) inspects metadata (schema/structure, tables, columns) for a source,
 or for an individual table. When used with `--json`, the output of `sq inspect` can
 be fed into other tools such as [jq](https://jqlang.github.io/jq/) to enable complex data pipelines.
@@ -125,3 +124,27 @@ And, as you might expect, you can also see the output in `--json` and `--yaml` f
 Note that the `--overview` and `--dbprops` flags apply only to inspecting sources,
 not tables.
 {{< /alert >}}
+
+## Override active schema
+
+By default, `sq inspect` uses the active [schema](/docs/concepts#schema--catalog)
+for the source. You can override the active schema (and catalog)
+using the `--src.schema` flag. See the [`sq`](/docs/cmd/sq#override-active-schema) command docs
+for a fuller explanation of `--src.schema`, but here's a quick example of
+inspecting Postgres's `information_schema` schema:
+
+```shell
+$ sq inspect @sakila/pg12 --src.schema sakila.information_schema
+SOURCE        DRIVER    NAME    FQ NAME                    SIZE    TABLES  VIEWS  LOCATION
+@sakila/pg12  postgres  sakila  sakila.information_schema  16.6MB  7       61     postgres://sakila:xxxxx@192.168.50.132/sakila
+
+NAME                                   TYPE   ROWS   COLS
+sql_features                           table  716    feature_id, feature_name, sub_feature_id, sub_feature_name, is_supported, is_verified_by, comments
+sql_implementation_info                table  12     implementation_info_id, implementation_info_name, integer_value, character_value, comments
+sql_languages                          table  4      sql_language_source, sql_language_year, sql_language_conformance, sql_language_integrity, sql_language_implementation, sql_language_binding_style, sql_language_programming_language
+sql_packages                           table  10     feature_id, feature_name, is_supported, is_verified_by, comments
+sql_parts                              table  9      feature_id, feature_name, is_supported, is_verified_by, comments
+sql_sizing                             table  23     sizing_id, sizing_name, supported_value, comments
+sql_sizing_profiles                    table  0      sizing_id, sizing_name, profile_id, required_value, comments
+_pg_foreign_data_wrappers              view   0      oid, fdwowner, fdwoptions, foreign_data_wrapper_catalog, foreign_da
+```

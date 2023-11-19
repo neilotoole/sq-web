@@ -12,6 +12,7 @@ url: /docs/cmd/sq
 ---
 Use the root `sq` cmd to execute queries against data sources.
 
+
 ## Pipe Data
 
 For file-based sources (such as CSV or XLSX), you can [`sq add`](/docs/cmd/add) the source file,
@@ -96,9 +97,7 @@ count
 
 ## Override active schema
 
-
-
-Similarly, you can override the active schema using `--src.schema`. For example,
+Similarly, you can override the active [schema](/docs/concepts#schema--catalog) using `--src.schema`. For example,
 let's say you have a Postgres source `@customers`, with a schema for each
 customer. Use `--src.schema=SCHEMA_NAME` to override the active schema:
 
@@ -113,11 +112,38 @@ count
 300
 ```
 
-You can use the `sq` builtin `schema()` function to see the active schema:
+You can use the `sq` builtin [`schema()`](/docs/query#schema) function to output the active schema:
 
 ```shell
-
+$ sq --src.schema=acme 'schema()'
+schema()
+acme
 ```
+
+In addition to overriding the active schema, `--src.schema` can also
+be used to override the active [catalog](/docs/concepts#schema--catalog)
+when used in the `catalog.schema` form.
+Let's say you had another catalog (database) named `projects` on the
+same Postgres cluster, and a schema named `apollo` in that catalog.
+You would specify `catalog.schema` like this:
+
+```shell
+$ sq --src.schema=projects.apollo '.missions | count'
+count
+17
+```
+
+There's also an equivalent [`catalog()`](/docs/query#catalog) builtin function
+that returns the active catalog:
+
+```shell
+$ sq --src.schema=projects.apollo 'catalog(), schema()'
+catalog()  schema()
+projects   apollo
+```
+
+Note that not every database implements catalog support (this includes MySQL
+and SQLite). See the driver support [matrix](/docs/concepts#catalog-schema-support).
 
 
 ## Reference
