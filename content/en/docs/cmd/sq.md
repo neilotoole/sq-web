@@ -7,7 +7,7 @@ menu:
   docs:
     parent: "cmd"
 weight: 2010
-toc: false
+toc: true
 url: /docs/cmd/sq
 ---
 Use the root `sq` cmd to execute queries against data sources.
@@ -68,6 +68,57 @@ But you can also use `--output` (`-o`) to specify a file:
 ```shell
 $ sq --csv .actor -o actor.csv
 ```
+
+## Override active source
+
+As explained in the [sources](/docs/source#active-source) section,
+when you [`add`](/docs/cmd/add) your first source, it becomes the active source. That means
+that queries without an explicit `@handle` are assumed to refer to the
+active source. You can change the active source using [`sq src @othersrc`](/docs/cmd/src).
+
+Sometimes you may want to override the active source just for a single query.
+You can do that using the `--src` flag:
+
+```shell
+# Show the active source
+$ sq src
+@staging
+
+$ sq  '.actor | count'
+count
+200
+
+# Execute the same query, this time against @prod
+$ sq --src @prod '.actor | count'
+count
+199
+```
+
+## Override active schema
+
+
+
+Similarly, you can override the active schema using `--src.schema`. For example,
+let's say you have a Postgres source `@customers`, with a schema for each
+customer. Use `--src.schema=SCHEMA_NAME` to override the active schema:
+
+
+```shell
+$ sq --src.schema=acme '.orders | count'
+count
+200
+
+$ sq --src.schema=momcorp '.orders | count'
+count
+300
+```
+
+You can use the `sq` builtin `schema()` function to see the active schema:
+
+```shell
+
+```
+
 
 ## Reference
 

@@ -50,9 +50,10 @@ Flags:
       --format.excel.date string       Date format string for Excel date-only values (default "yyyy-mm-dd")
       --format.excel.time string       Time format string for Excel time-only values (default "hh:mm:ss")
   -o, --output string                  Write output to <file> instead of stdout
-      --insert string                  Insert query results into @HANDLE.TABLE. If not existing, TABLE will be created.
-      --src string                     Override the active source for this query
-      --ingest.driver string           Explicitly specify the driver to use for ingesting data
+      --insert string                  Insert query results into @HANDLE.TABLE; if not existing, TABLE will be created
+      --src string                     Override active source for this query
+      --src.schema string              Override active schema or catalog.schema for this query
+      --ingest.driver string           Explicitly specify driver to use for ingesting data
       --ingest.header                  Treat first row of ingest data as header
       --driver.csv.empty-as-null       Treat empty CSV fields as null (default true)
       --driver.csv.delim string        CSV delimiter: one of comma, space, pipe, tab, colon, semi, period (default "comma")

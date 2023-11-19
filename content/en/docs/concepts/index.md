@@ -145,3 +145,35 @@ uses an embedded [SQLite](/docs/drivers/sqlite) instance for the Scratch DB.
 
 _Join DB_ is similar to [Scratch DB](#join-db), but is used for cross-source joins. By default, `sq`
 uses an embedded [SQLite](/docs/drivers/sqlite) instance for the Join DB.
+
+## Schema & Catalog
+
+Database implementations have the concept of a _schema_, which
+you can think of as a namespace for tables. Some databases go further and
+support the concept of a _catalog_, which is a collection of schemas.
+Often the terms _catalog_ and _database_ are used interchangeably, and, in practice,
+the various terms are used inconsistently and confusedly.
+
+{{< alert icon="👉" >}}
+Above _catalog_, there's also the concept of a _cluster_,
+which is the database server (logical or physical) that hosts catalogs. `sq` doesn't concern itself
+with clusters.
+{{< /alert >}}
+
+Here's what the hierarchy looks like for Postgres ([credit](https://stackoverflow.com/a/17943883)):
+
+![Hierarchy](db-hierarchy.png)
+
+Each of the `sq` DB driver implementations supports the concept of a schema in some way,
+but some drivers don't support catalogs. Here's a summary:
+
+| Driver                                | Default schema       | Catalog support?                                                                                                             |
+|---------------------------------------|----------------------|------------------------------------------------------------------------------------------------------------------------------|
+| [Postgres](/docs/drivers/postgres)    | `public`             | Yes                                                                                                                          |
+| [SQLite](/docs/drivers/sqlite)        | `main`               | No                                                                                                                           |
+| [MySQL](/docs/drivers/mysql)          | Connection-dependent | [No](https://dev.mysql.com/doc/connector-odbc/en/connector-odbc-usagenotes-functionality-catalog-schema.html) <sup>hey</sup> |
+| [SQL server](/docs/drivers/sqlserver) | `dbo`                | Yes                                                                                                                          |
+
+The SLQ functions [`schema()`](/docs/query#schema) and [`catalog()`](/docs/query#catalog) return
+the schema and catalog of the active source. See the docs for details of how each driver implements
+these functions.
