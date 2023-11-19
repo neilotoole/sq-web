@@ -68,7 +68,7 @@ SELECT * FROM "dbo"."actor"
 
 For other database implementations, such as [Postgres](/docs/drivers/postgres),
 `sq` implements `--src.schema` by setting the default schema
-when opening the DB connection (`USE schema_name`), in addition to explicitly
+when opening the DB connection, in addition to explicitly
 rendering the schema name in the SQL query.
 However, SQL Server [does not](https://stackoverflow.com/questions/48506918/is-it-possible-to-change-the-default-schema) support setting a default schema on a per-connection
 basis; the default schema is a property of the DB user. Most of the time this different behavior
@@ -82,6 +82,4 @@ dbo
 $ sq -H --src.schema=INFORMATION_SCHEMA 'schema()'
 dbo
 ```
-
-TODO: go on about catalog
 
