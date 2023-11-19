@@ -179,3 +179,10 @@ but some drivers don't support the catalog mechanism. Here's a summary:
 The SLQ functions [`schema()`](/docs/query#schema) and [`catalog()`](/docs/query#catalog) return
 the schema and catalog of the active source. See the docs for details of how each driver implements
 these functions.
+
+{{< alert icon="👉" >}}
+You can override the active schema (and catalog) using the `--src.schema` flag
+for the [`sq`](/docs/cmd/sq#override-active-schema), [`sql`](/docs/cmd/sql/#active-source--schema)
+and [`inspect`](/docs/inspect#override-active-schema) commands.
+{{< /alert >}}
+
