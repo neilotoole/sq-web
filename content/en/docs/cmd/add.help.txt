@@ -133,7 +133,7 @@ Flags:
   -j, --json                       Output JSON
   -c, --compact                    Compact instead of pretty-printed output
   -y, --yaml                       Output YAML
-  -d, --driver string              Explicitly specify the driver to use
+  -d, --driver string              Explicitly specify driver to use
   -n, --handle string              Handle for the source
   -p, --password                   Read password from stdin or prompt
       --skip-verify                Don't ping source before adding it
