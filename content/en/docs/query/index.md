@@ -19,7 +19,7 @@ sources, `sq` loads the source data into a [scratch database](/docs/concepts#scr
 and executes the query against that database.
 
 {{< alert icon="👉" >}}
-Because it's all SQL behind the scenes, you can always bypass `sq`'s query language
+Because it's all SQL at the backend, you can always bypass `sq`'s query language
 and execute database-native SQL queries using the [`sq sql`](/docs/cmd/sql) command.
 {{< /alert >}}
 
@@ -831,7 +831,40 @@ $ sq '.actor | sort_by(.first_name)'
 ```
 {{< /alert >}}
 
+### `rownum`
 
+`rownum` returns the one-indexed row number of the current row.
+
+```shell
+$ sq '.actor | rownum(), .first_name | order_by(.first_name)'
+rownum()  first_name
+1         ADAM
+2         ADAM
+3         AL
+```
+
+`rownum` should typically be invoked in conjunction with `order_by`,
+or the order of the rows may be undefined.
+
+It's trivial to return zero-indexed row numbers: simply subtract 1 from the result.
+
+```shell
+$ sq '.actor | rownum()-1, .first_name | order_by(.first_name)'
+rownum()-1  first_name
+0           ADAM
+1           ADAM
+2           AL
+```
+
+Although, you may want to use a column alias:
+
+```shell
+$ sq '.actor | rownum()-1:index, .first_name | order_by(.first_name)'
+index  first_name
+0       ADAM
+1       ADAM
+2       AL
+```
 
 ### `schema`
 
