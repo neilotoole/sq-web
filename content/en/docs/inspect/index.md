@@ -103,6 +103,21 @@ Here's `--dbprops` from a [SQLite](/docs/drivers/sqlite/) database (in `--yaml` 
 
 ![sq inspect source dbprops sqlite yaml](sq_inspect_source_dbprops_sqlite_yaml.png)
 
+## Catalogs
+
+The `--catalogs` mode lists the [catalogs](/docs/concepts#schema--catalog) (databases)
+available to the current source.
+
+![sq inspect source catalogs pg yaml](sq_inspect_source_catalogs_yaml.png)
+
+## Schemata
+
+Like `--catalogs`, the `--schemata` mode lists the [schemas](/docs/concepts#schema--catalog)
+available to the current source.
+
+![sq inspect source schemata pg yaml](sq_inspect_source_schemata_yaml.png)
+
+
 ## Inspect table
 
 In additional to inspecting a source, you can drill down on a specific table.
