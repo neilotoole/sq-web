@@ -51,7 +51,7 @@ Usage:
 
 Examples:
 
-  Metadata diff
+  Source diff
   -------------
 
   # Diff sources (compare default elements).

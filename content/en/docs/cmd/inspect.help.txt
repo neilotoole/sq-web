@@ -3,15 +3,22 @@ listing table details such as column names and row counts, etc.
 
 NOTE: If a schema is large, it may take some time for the command to complete.
 
-If @HANDLE is not provided, the active data source is assumed.
+If @HANDLE is not provided, the active data source is assumed. If @HANDLE.TABLE
+is provided, table inspection is performed (as opposed to source inspection).
 
-When flag --overview is true, only the source's' metadata is shown,
-not the schema. The flag is disregarded when inspecting a table.
+There are several modes of operation, controlled by flags. Each of the following
+modes apply only to source inspection, not table inspection. When no mode flag
+is supplied, the default is to show the source metadata and schema.
 
-When flag --dbprops is true, only the database properties for the source's
-*underlying* database are shown. The flag is disregarded when inspecting a table.
+  --overview:  Displays the source's metadata, but not the schema.
 
-Use --verbose with the --text format to see more detail. The --json and --yaml
+  --dbprops:   Displays database properties for the sources' *underlying* database.
+
+  --catalogs:  List the catalogs (databases) available via the source.
+
+  --schemata:  List the schemas available in the source's active catalog.
+
+Use --verbose with --text format to see more detail. The --json and --yaml
 formats both show extensive detail.
 
 Usage:
@@ -39,6 +46,12 @@ Examples:
   # Show only the source metadata (and not schema details).
   $ sq inspect --overview @pg1
 
+  # List the schemas in @pg1.
+  $ sq inspect --schemata @pg1
+
+  # List the catalogs in @pg1.
+  $ sq inspect --catalogs @pg1
+
   # Inspect table "actor" in @pg1 data source.
   $ sq inspect @pg1.actor
 
@@ -52,7 +65,6 @@ Examples:
   $ cat data.xlsx | sq inspect
 
 Flags:
-      --src.schema string   Override active schema or catalog.schema for this query
   -t, --text                Output text
   -h, --header              Print header row (default true)
   -H, --no-header           Don't print header row
@@ -61,6 +73,9 @@ Flags:
   -y, --yaml                Output YAML
   -O, --overview            Show metadata only (no schema)
   -p, --dbprops             Show DB properties only
+      --catalogs            List catalogs only
+      --schemata            List schemas (in current catalog) only
+      --src.schema string   Override active schema or catalog.schema for this query
       --help                help for inspect
 
 Global Flags:
