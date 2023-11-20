@@ -651,7 +651,6 @@ $ sq 'schema()'
 dbo
 ```
 
-
 `catalog` honors the `--src.schema` flag, when used in
 the `catalog.schema` form. For example:
 
