@@ -768,6 +768,35 @@ to the backend, and some of those functions won't be portable to other data sour
 TLDR: Use [proprietary functions](#proprietary-functions) with caution.
 {{< /alert >}}
 
+{{< alert icon="👉" >}}
+You can also use the `gb` synonym for brevity.
+```shell
+$ sq '.payment | .customer_id, sum(.amount) | gb(.customer_id)'
+```
+{{< /alert >}}
+
+### `having`
+
+Use `having` to filter results after grouping. The `having` function must
+always be preceded by [`group_by`](#groupby).
+
+```shell
+$ sq '.payment | .customer_id, sum(.amount) |
+group_by(.customer_id) | having(sum(.amount) > 180 && sum(.amount) < 195)'
+customer_id  sum(.amount)
+178          194.61
+459          186.62
+137          194.61
+```
+
+That renders to something like:
+
+```sql
+SELECT "customer_id", sum("amount") AS "sum(.amount)" FROM "payment"
+GROUP BY "customer_id" HAVING sum("amount") > 180 AND sum("amount") < 195
+```
+
+
 ### `max`
 
 `max` returns the maximum value of the column.
@@ -828,6 +857,11 @@ synonym:
 
 ```shell
 $ sq '.actor | sort_by(.first_name)'
+```
+
+And there's also the `ob` synonym for brevity:
+```shell
+$ sq '.actor | ob(.first_name)'
 ```
 {{< /alert >}}
 

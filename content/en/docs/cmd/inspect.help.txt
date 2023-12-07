@@ -73,8 +73,8 @@ Flags:
   -y, --yaml                Output YAML
   -O, --overview            Show metadata only (no schema)
   -p, --dbprops             Show DB properties only
-      --catalogs            List catalogs only
-      --schemata            List schemas (in current catalog) only
+  -C, --catalogs            List catalogs only
+  -S, --schemata            List schemas (in current catalog) only
       --src.schema string   Override active schema or catalog.schema for this query
       --help                help for inspect
 
