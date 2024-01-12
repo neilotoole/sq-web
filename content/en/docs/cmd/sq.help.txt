@@ -43,9 +43,6 @@ Examples:
   # Output all rows from 'actor' table in JSON.
   $ sq -j .actor
 
-  # Alternative way to specify format.
-  $ sq --format json .actor
-
   # Output in text format (with header).
   $ sq -th .actor
 
@@ -90,6 +87,7 @@ Available Commands:
   diff        BETA: Compare sources, or tables
   driver      Manage drivers
   config      Manage config
+  cache       Manage cache
   completion  Generate shell completion script
   version     Show version info
   help        Show help
@@ -131,6 +129,7 @@ Flags:
       --driver.csv.delim string        CSV delimiter: one of comma, space, pipe, tab, colon, semi, period (default "comma")
       --version                        Print version info
   -M, --monochrome                     Don't colorize output
+      --no-progress                    Progress bar shown for long-running operations
   -v, --verbose                        Verbose output
       --config string                  Load config from here
       --log                            Enable logging

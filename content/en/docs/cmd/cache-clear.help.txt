@@ -1,21 +1,13 @@
-Drop one or more tables. Note that this command
-only applies to SQL sources.
+Clear cache. May cause issues if another sq instance is running.
 
 Usage:
-  sq tbl drop @HANDLE.TABLE
+  sq cache clear
 
 Examples:
-# drop table "actor" in src @sakila_sl3
-  $ sq tbl drop @sakila_sl3.actor
-
-  # drop table "payment"" in the active src
-  $ sq tbl drop .payment
-
-  # drop multiple tables
-  $ sq drop .payment @sakila_sl3.actor
+  $ sq cache clear
 
 Flags:
-      --help   help for drop
+      --help   help for clear
 
 Global Flags:
       --config string      Load config from here

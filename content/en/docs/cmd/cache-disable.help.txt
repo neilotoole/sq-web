@@ -1,21 +1,15 @@
-Drop one or more tables. Note that this command
-only applies to SQL sources.
+Disable caching. This is equivalent to:
+
+  $ sq config set ingest.cache false
 
 Usage:
-  sq tbl drop @HANDLE.TABLE
+  sq cache disable
 
 Examples:
-# drop table "actor" in src @sakila_sl3
-  $ sq tbl drop @sakila_sl3.actor
-
-  # drop table "payment"" in the active src
-  $ sq tbl drop .payment
-
-  # drop multiple tables
-  $ sq drop .payment @sakila_sl3.actor
+  $ sq cache disable
 
 Flags:
-      --help   help for drop
+      --help   help for disable
 
 Global Flags:
       --config string      Load config from here

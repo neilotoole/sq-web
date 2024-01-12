@@ -1,21 +1,18 @@
-Drop one or more tables. Note that this command
-only applies to SQL sources.
+Print tree view of cache dir.
 
 Usage:
-  sq tbl drop @HANDLE.TABLE
+  sq cache tree
 
 Examples:
-# drop table "actor" in src @sakila_sl3
-  $ sq tbl drop @sakila_sl3.actor
+  # Print cache tree
+  $ sq cache tree
 
-  # drop table "payment"" in the active src
-  $ sq tbl drop .payment
-
-  # drop multiple tables
-  $ sq drop .payment @sakila_sl3.actor
+  # Print cache tree with sizes
+  $ sq cache tree --size
 
 Flags:
-      --help   help for drop
+  -s, --size   Show sizes in cache tree
+      --help   help for tree
 
 Global Flags:
       --config string      Load config from here

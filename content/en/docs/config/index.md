@@ -141,8 +141,6 @@ additional help for the options.
 
 ![sq config edit v](sq_config_edit_v.png)
 
-
-
 ## Logging
 
 By default, logging is turned off. If you need to submit a `sq`
@@ -164,6 +162,9 @@ KEY       VALUE  DEFAULT
 log.file         /Users/neilotoole/Library/Logs/sq/sq.log
 ```
 
+By default, `sq` logs in a human-friendly `devmode` format, controlled by
+the [`log.devmode`](https://sq.io/docs/config#logdevmode) config option. Set
+this option to `false` to log in JSON format instead.
 
 {{< alert icon="🤬️" >}}
 If there's a problem with `sq`'s bootstrap

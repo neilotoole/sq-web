@@ -1,0 +1,4 @@
+Usage:
+  sq config set log.devmode false
+
+Log in devmode.

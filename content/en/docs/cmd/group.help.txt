@@ -35,4 +35,5 @@ Global Flags:
       --log.file string    Path to log file; empty disables logging
       --log.level string   Log level: one of DEBUG, INFO, WARN, ERROR
   -M, --monochrome         Don't colorize output
+      --no-progress        Progress bar shown for long-running operations
   -v, --verbose            Verbose output
