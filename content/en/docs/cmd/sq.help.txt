@@ -135,5 +135,6 @@ Flags:
       --log                            Enable logging
       --log.file string                Path to log file; empty disables logging
       --log.level string               Log level: one of DEBUG, INFO, WARN, ERROR
+      --log.format string              Log format: one of "text" or "json"
 
 Use "sq [command] --help" for more information about a command.
