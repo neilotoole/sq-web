@@ -78,7 +78,7 @@ with [document source](#document-source).
 
 ## Document source
 
-A _document source_ is a source backed by a document or file such as [CSV](/docs/drivers/csv) or
+A [document source](/docs/source#document-source) is a source backed by a document or file such as [CSV](/docs/drivers/csv) or
 [XLSX](/docs/drivers/xlsx). Some functionality
 is not available for document sources. For example, `sq` doesn't provide a mechanism to insert query
 results into a CSV file. Contrast with [SQL source](#sql-source).

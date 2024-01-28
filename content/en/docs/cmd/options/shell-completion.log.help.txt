@@ -6,4 +6,4 @@ for debugging shell completion functionality. It's disabled by default,
 because it's frequently the case that shell completion handlers will trigger
 work (such as inspecting the schema) that doesn't complete by the shell
 completion timeout. This can result in the logs being filled with uninteresting
-junk when the timeout triggers logging of errors due to the cancellation.
+junk when the timeout triggers logging of errors.

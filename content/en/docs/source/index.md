@@ -370,7 +370,71 @@ These commands are effectively batch operations on the sources in each group.
 {{< /alert >}}
 
 
+## Document source
+
+A _document source_ is a source backed by a document or file such as [CSV](/docs/drivers/csv) or
+[Excel](/docs/drivers/xlsx). Some functionality is not available for document sources.
+For example, `sq` doesn't provide a mechanism to insert query
+results into an Excel file.
+
+A document source's location can be a local file path, or an HTTP URL. For example:
+
+```shell
+# Local file path
+$ sq add ./actor.csv
+
+# Remote URL
+$ sq add https://sq.io/testdata/actor.csv
+```
+
+### Ingest
+
+For any document source, `sq` must first _ingest_ the document data into
+a local, hidden "ingest DB". This is all managed automatically by `sq`: the user
+doesn't need to know anything about the ingest DB. Ingest is a generally a one-time operation:
+the data is ingested, stored in the ingest DB, and this DB is [cached](#cache) and re-used
+the next time `sq` is invoked. However, if the original source document is modified
+on disk, `sq` detects this, and kicks off a fresh ingest.
+
+### Download
+
+For remote document sources, `sq` downloads the source document to a local
+file, which is cached and re-used. On subsequent invocations, `sq` checks
+whether the cached file is fresh or stale (possibly making an HTTP request to do so),
+and downloads a fresh copy if necessary.
+
+There is currently no option to disable download caching. `sq`'s cache implementation
+is (mostly) compliant with the HTTP spec regarding caching
+([RFC 7234](https://datatracker.ietf.org/doc/html/rfc7234)) and
+is intelligent enough to detect when the remote document has changed, assuming
+the remote server follows the HTTP spec. However, if you want to force a
+cache invalidation and re-download, you can use [`sq cache clear @remote_src`](/docs/cmd/cache-clear).
+
+If a remote document is already cached but stale, `sq` makes an HTTP request
+to the server to check whether the document has changed. If the server
+is unavailable for some reason, `sq` emits a warning in the logs,
+but continues with the stale cached document.
+This is a sort of "Airplane Mode" for remote document sources. You can configure
+`sq` to instead return an error on failed refresh via the
+[`download.refresh.continue-on-error`](/docs/config#downloadrefreshcontinue-on-error) config option.
 
 
+
+### Cache
+
+`sq` makes use of an on-disk cache for document sources. Each source has its own cache
+in a subdirectory of the main `sq` cache dir. The cache is used to store
+the [ingest DB](#ingest), and any [downloaded](#download) files for remote document sources.
+
+Generally speaking, the user doesn't need to be concerned with caching
+mechanics. However, a number of [options](/docs/config#ingestcache) and commands are available to interact
+with the cache.
+
+The most relevant of these are [`sq cache enable`](/docs/cmd/cache-enable),
+[`sq cache disable`](/docs/cmd/cache-disable), and
+[`sq cache clear`](/docs/cmd/cache-clear). Note that the cache can be enabled,
+disabled or cleared on a global or per-source basis.
+
+FIXME: examples here.
 
 
