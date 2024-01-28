@@ -46,6 +46,14 @@ But, if you omit the driver, `sq` can generally figure out that it's a TSV file.
 sq add ./actor.tsv
 ```
 
+{{< alert icon="👉" >}}
+CSV is a [document source](/docs/source#document-source) and thus its data
+is [ingested](/docs/source#ingest) and [cached](/docs/source#cache).
+
+Note also that a CSV source is read-only; you can't [insert](/docs/output#insert)
+values into the source.
+{{< /alert >}}
+
 ## Monotable
 
 `sq` considers CSV to be a _monotable_ data source (unlike, say, a Postgres data source, which

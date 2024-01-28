@@ -374,7 +374,7 @@ These commands are effectively batch operations on the sources in each group.
 
 A _document source_ is a source backed by a document or file such as [CSV](/docs/drivers/csv) or
 [Excel](/docs/drivers/xlsx). Some functionality is not available for document sources.
-For example, `sq` doesn't provide a mechanism to insert query
+For example, `sq` doesn't provide a mechanism to [insert](docs/output#insert) query
 results into an Excel file.
 
 A document source's location can be a local file path, or an HTTP URL. For example:
@@ -416,15 +416,13 @@ is unavailable for some reason, `sq` emits a warning in the logs,
 but continues with the stale cached document.
 This is a sort of "Airplane Mode" for remote document sources. You can configure
 `sq` to instead return an error on failed refresh via the
-[`download.refresh.continue-on-error`](/docs/config#downloadrefreshcontinue-on-error) config option.
-
-
+[`download.refresh.continue-on-err`](/docs/config#downloadrefreshcontinue-on-err) config option.
 
 ### Cache
 
 `sq` makes use of an on-disk cache for document sources. Each source has its own cache
-in a subdirectory of the main `sq` cache dir. The cache is used to store
-the [ingest DB](#ingest), and any [downloaded](#download) files for remote document sources.
+in a subdirectory of the main `sq` [cache dir](/docs/cmd/cache-location). The cache is used to store
+the [ingest DB](#ingest) and any [downloaded](#download) files for remote document sources.
 
 Generally speaking, the user doesn't need to be concerned with caching
 mechanics. However, a number of [options](/docs/config#ingestcache) and commands are available to interact
@@ -435,6 +433,12 @@ The most relevant of these are [`sq cache enable`](/docs/cmd/cache-enable),
 [`sq cache clear`](/docs/cmd/cache-clear). Note that the cache can be enabled,
 disabled or cleared on a global or per-source basis.
 
-FIXME: examples here.
+```shell
+# Clear the cache for the active source
+$ sq cache clear @active
+
+# Disable the cache for @sakila_csv
+$ sq cache disable @sakila_csv
+```
 
 

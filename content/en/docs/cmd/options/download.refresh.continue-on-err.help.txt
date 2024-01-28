@@ -1,5 +1,5 @@
 Usage:
-  sq config set download.refresh.continue-on-error true
+  sq config set download.refresh.continue-on-err true
 
 Continue with stale download if refresh fails. This option applies if a download
 is in the cache, but is considered stale, and a refresh attempt fails. If set to

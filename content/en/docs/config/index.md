@@ -228,8 +228,8 @@ an individual source, overriding the base config.
 ### `download.cache`
 {{< readfile file="../cmd/options/download.cache.help.txt" code="true" lang="text" >}}
 
-### `download.refresh.continue-on-error`
-{{< readfile file="../cmd/options/download.refresh.continue-on-error.help.txt" code="true" lang="text" >}}
+### `download.refresh.continue-on-err`
+{{< readfile file="../cmd/options/download.refresh.continue-on-err.help.txt" code="true" lang="text" >}}
 
 ### `progress`
 {{< readfile file="../cmd/options/progress.help.txt" code="true" lang="text" >}}

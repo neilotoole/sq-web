@@ -81,7 +81,9 @@ with [document source](#document-source).
 A [document source](/docs/source#document-source) is a source backed by a document or file such as [CSV](/docs/drivers/csv) or
 [XLSX](/docs/drivers/xlsx). Some functionality
 is not available for document sources. For example, `sq` doesn't provide a mechanism to insert query
-results into a CSV file. Contrast with [SQL source](#sql-source).
+results into a CSV file. Contrast with [SQL source](#sql-source). A document source's data
+is automatically [ingested](/docs/source#ingest) by `sq`. The document source's location
+can be a local filepath or an [HTTP URL](/docs/source#download).
 
 ## Group
 
@@ -133,17 +135,16 @@ category
 
 See more examples in the [cookbook](/docs/cookbook).
 
-## Scratch DB
+<a id="scratch-db"></a>
+## Ingest DB
 
-_Scratch DB_ refers to the temporary ("_scratch_") database that `sq` uses for under-the-hood
-activity
-such as converting a [document source](#document-source) like [CSV](/docs/drivers/csv) to relational
-format. By default, `sq`
-uses an embedded [SQLite](/docs/drivers/sqlite) instance for the Scratch DB.
+[Ingest DB](/docs/source#ingest) refers to the temporary ("_ingest_") database that `sq` uses for under-the-hood
+activity such as converting a [document source](#document-source) like [CSV](/docs/drivers/csv) to relational
+format. By default, `sq` uses an embedded [SQLite](/docs/drivers/sqlite) instance for the ingest DB.
 
 ## Join DB
 
-_Join DB_ is similar to [Scratch DB](#join-db), but is used for cross-source joins. By default, `sq`
+_Join DB_ is similar to [Ingest DB](#ingest-db), but is used for cross-source joins. By default, `sq`
 uses an embedded [SQLite](/docs/drivers/sqlite) instance for the Join DB.
 
 ## Schema & catalog

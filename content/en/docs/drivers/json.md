@@ -10,8 +10,13 @@ url: /docs/drivers/json
 The `sq` JSON drivers implement connectivity
 for [JSON](https://en.wikipedia.org/wiki/JSON), JSON Array, and [JSON Lines](https://en.wikipedia.org/wiki/JSON_streaming#Newline-Delimited_JSON) data sources.
 
-Note that the JSON sources are read-only. That is to say, while you can query a JSON
-source as if it were a SQL database, you cannot use `sq` to insert values into the JSON file.
+{{< alert icon="👉" >}}
+JSON is a [document source](/docs/source#document-source) and thus its data
+is [ingested](/docs/source#ingest) and [cached](/docs/source#cache).
+
+Note also that a JSON source is read-only; you can't [insert](/docs/output#insert)
+values into the source.
+{{< /alert >}}
 
 ## Variants
 

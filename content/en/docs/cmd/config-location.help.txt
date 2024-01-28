@@ -3,9 +3,6 @@ Print config location. Use --verbose for more detail.
 Usage:
   sq config location
 
-Aliases:
-  location, loc
-
 Examples:
   # Print config location
   $ sq config location

@@ -3,9 +3,6 @@ Print cache location.
 Usage:
   sq cache location
 
-Aliases:
-  location, loc
-
 Examples:
   $ sq cache location
   /Users/neilotoole/Library/Caches/sq/f36ac695

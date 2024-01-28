@@ -7,13 +7,17 @@ weight: 4060
 toc: true
 url: /docs/drivers/xlsx
 ---
-The `sq` XLSX driver implements connectivity
+The `sq` Excel driver implements connectivity
 for Microsoft [XLSX](https://www.microsoft.com/en-us/microsoft-365/excel)
 files and [variants](#supported-file-formats).
 
-Note that XLSX sources are read-only. That is to say, while you can query the XLSX
-source as if it were a SQL database, you cannot use `sq` to insert values into the XLSX file.
+{{< alert icon="👉" >}}
+Excel is a [document source](/docs/source#document-source) and thus its data
+is [ingested](/docs/source#ingest) and [cached](/docs/source#cache).
 
+Note also that an Excel source is read-only; you can't [insert](/docs/output#insert)
+values into the source.
+{{< /alert >}}
 ## Supported file formats
 
 The driver supports `.xlsx`, `.xlam`, `.xlsm`,`.xltm` and `.xltx`. Note that even
