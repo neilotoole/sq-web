@@ -92,6 +92,7 @@ Available Commands:
   diff        BETA: Compare sources, or tables
   driver      Manage drivers
   config      Manage config
+  cache       Manage cache
   completion  Generate shell completion script
   version     Show version info
   help        Show help
@@ -129,15 +130,18 @@ Flags:
       --src.schema string              Override active schema or catalog.schema for this query
       --ingest.driver string           Explicitly specify driver to use for ingesting data
       --ingest.header                  Treat first row of ingest data as header
+      --no-cache                       Cache ingest data
       --driver.csv.empty-as-null       Treat empty CSV fields as null (default true)
       --driver.csv.delim string        CSV delimiter: one of comma, space, pipe, tab, colon, semi, period (default "comma")
       --version                        Print version info
   -M, --monochrome                     Don't colorize output
+      --no-progress                    Progress bar for long-running operations
   -v, --verbose                        Verbose output
       --config string                  Load config from here
       --log                            Enable logging
       --log.file string                Path to log file; empty disables logging
       --log.level string               Log level: one of DEBUG, INFO, WARN, ERROR
+      --log.format string              Log format: one of "text" or "json"
 ```
 
 ## Issues
