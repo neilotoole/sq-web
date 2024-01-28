@@ -225,6 +225,12 @@ an individual source, overriding the base config.
 ### `https.insecure-skip-verify`
 {{< readfile file="../cmd/options/https.insecure-skip-verify.help.txt" code="true" lang="text" >}}
 
+### `download.cache`
+{{< readfile file="../cmd/options/download.cache.help.txt" code="true" lang="text" >}}
+
+### `download.refresh.continue-on-error`
+{{< readfile file="../cmd/options/download.refresh.continue-on-error.help.txt" code="true" lang="text" >}}
+
 ### `progress`
 {{< readfile file="../cmd/options/progress.help.txt" code="true" lang="text" >}}
 
@@ -233,6 +239,9 @@ an individual source, overriding the base config.
 
 ### `shell-completion.timeout`
 {{< readfile file="../cmd/options/shell-completion.timeout.help.txt" code="true" lang="text" >}}
+
+### `shell-completion.log`
+{{< readfile file="../cmd/options/shell-completion.log.help.txt" code="true" lang="text" >}}
 
 ### `config.lock.timeout`
 {{< readfile file="../cmd/options/config.lock.timeout.help.txt" code="true" lang="text" >}}

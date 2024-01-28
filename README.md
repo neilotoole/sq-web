@@ -35,6 +35,8 @@ npm install
 
 ```bash
 # Start a local webserver on http://localhost:1313 to test you changes.
+# Note that it may take a minute or longer for the site to be served (and
+# you may not receive any indication of this). Be patient.
 npm start
 
 # Run linters, link checks, etc.
