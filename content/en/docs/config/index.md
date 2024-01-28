@@ -192,7 +192,8 @@ Some config options apply only to base config. For example, `format=json` applie
 to the `sq` CLI itself, and not to a particular source such as `@sakila`. However,
 some options can apply to a source, and also have a base value. For example,
 `conn.max-open` controls the maximum number of connections that `sq` will open
-to a database.
+to a database. This option can be set for base config, but can also be set for
+an individual source, overriding the base config.
 
 
 ## CLI
@@ -322,11 +323,11 @@ rename each column to uppercase.
 {{.Name | upper}}{{with .Recurrence}}:{{.}}{{end}}
 ```
 
-The `.AlphaIndex` template fields maps the column index to `A, B ... Y, Z, AA, AB...`,
+The `.Alpha` template fields maps the column index to `A, B ... Y, Z, AA, AB...`,
 similar to how Microsoft Excel names columns. To use this style:
 
 ```shell
-$ sq config set result.column.rename '{{.AlphaIndex}}'
+$ sq config set result.column.rename '{{.Alpha}}'
 $ sq .actor
 ```
 

@@ -1,10 +1,14 @@
-Clear cache. May cause issues if another sq instance is running.
+Clear cache for source or entire cache.
 
 Usage:
-  sq cache clear
+  sq cache clear [@HANDLE]
 
 Examples:
+  # Clear entire cache
   $ sq cache clear
+
+  # Clear cache for @sakila
+  $ sq cache clear @sakila
 
 Flags:
       --help   help for clear
@@ -16,5 +20,5 @@ Global Flags:
       --log.format string   Log format: one of "text" or "json"
       --log.level string    Log level: one of DEBUG, INFO, WARN, ERROR
   -M, --monochrome          Don't colorize output
-      --no-progress         Progress bar shown for long-running operations
+      --no-progress         Progress bar for long-running operations
   -v, --verbose             Verbose output

@@ -111,8 +111,12 @@ rel  = "sitemap"
   [[module.mounts]]
     source = "node_modules/@hyas/images/layouts"
     target = "layouts"
+#  [[module.imports]]
+#    path = "neilotoole/sq-web"
   [[module.imports]]
     path = "cj.rs/gohugo-asciinema"
+    # https://github.com/cljoly/gohugo-asciinema/
+    # https://cj.rs/gohugo-asciinema/
 
 
 

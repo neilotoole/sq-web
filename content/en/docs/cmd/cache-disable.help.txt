@@ -1,12 +1,14 @@
-Disable caching. This is equivalent to:
-
-  $ sq config set ingest.cache false
+Disable caching by default or for a specific source.
 
 Usage:
-  sq cache disable
+  sq cache disable [@HANDLE]
 
 Examples:
+  # Disable caching by default
   $ sq cache disable
+
+  # Disable caching for a particular source
+	$ sq cache disable @sakila
 
 Flags:
       --help   help for disable
@@ -18,5 +20,5 @@ Global Flags:
       --log.format string   Log format: one of "text" or "json"
       --log.level string    Log level: one of DEBUG, INFO, WARN, ERROR
   -M, --monochrome          Don't colorize output
-      --no-progress         Progress bar shown for long-running operations
+      --no-progress         Progress bar for long-running operations
   -v, --verbose             Verbose output

@@ -536,7 +536,7 @@ The implementation is very basic (and could be dramatically enhanced).
 Given a two-source join:
 
 1. `sq` copies the full contents of the left table to the [scratch DB](/docs/concepts/#scratch-db).
-1. `sq` copies the full content of the right table to the scratch DB.
+1. `sq` copies the full contents of the right table to the scratch DB.
 1. `sq` executes the query against the scratch DB.
 
 Given that this naive implementation perform a full copy of both tables, cross-source joins

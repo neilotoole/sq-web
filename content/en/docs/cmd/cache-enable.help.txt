@@ -1,12 +1,14 @@
-Enable caching. This is equivalent to:
-
-  $ sq config set ingest.cache true
+Enable caching by default or for a specific source.
 
 Usage:
-  sq cache enable
+  sq cache enable [@HANDLE]
 
 Examples:
+  # Enable caching by default
   $ sq cache enable
+
+	# Enable caching for a particular source
+	$ sq cache enable @sakila
 
 Flags:
       --help   help for enable
@@ -18,5 +20,5 @@ Global Flags:
       --log.format string   Log format: one of "text" or "json"
       --log.level string    Log level: one of DEBUG, INFO, WARN, ERROR
   -M, --monochrome          Don't colorize output
-      --no-progress         Progress bar shown for long-running operations
+      --no-progress         Progress bar for long-running operations
   -v, --verbose             Verbose output

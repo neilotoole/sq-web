@@ -9,8 +9,8 @@ database table.
 You can query using sq's own jq-like syntax, or in native SQL.
 
 Use "sq inspect" to view schema metadata. Use the "sq tbl" commands
-to copy, truncate and drop tables. Use "sq diff" to compare source metadata
-and row data.
+to copy, truncate and drop tables. Use "sq diff" to compare source
+metadata and row data.
 
 See docs and more: https://sq.io
 
@@ -125,11 +125,12 @@ Flags:
       --src.schema string              Override active schema or catalog.schema for this query
       --ingest.driver string           Explicitly specify driver to use for ingesting data
       --ingest.header                  Treat first row of ingest data as header
+      --no-cache                       Cache ingest data
       --driver.csv.empty-as-null       Treat empty CSV fields as null (default true)
       --driver.csv.delim string        CSV delimiter: one of comma, space, pipe, tab, colon, semi, period (default "comma")
       --version                        Print version info
   -M, --monochrome                     Don't colorize output
-      --no-progress                    Progress bar shown for long-running operations
+      --no-progress                    Progress bar for long-running operations
   -v, --verbose                        Verbose output
       --config string                  Load config from here
       --log                            Enable logging

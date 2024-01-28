@@ -76,6 +76,7 @@ Flags:
   -C, --catalogs            List catalogs only
   -S, --schemata            List schemas (in current catalog) only
       --src.schema string   Override active schema or catalog.schema for this query
+      --no-cache            Cache ingest data
       --help                help for inspect
 
 Global Flags:
@@ -85,5 +86,5 @@ Global Flags:
       --log.format string   Log format: one of "text" or "json"
       --log.level string    Log level: one of DEBUG, INFO, WARN, ERROR
   -M, --monochrome          Don't colorize output
-      --no-progress         Progress bar shown for long-running operations
+      --no-progress         Progress bar for long-running operations
   -v, --verbose             Verbose output

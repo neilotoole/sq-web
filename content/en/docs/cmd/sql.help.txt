@@ -50,6 +50,7 @@ Flags:
       --src.schema string              Override active schema or catalog.schema for this query
       --ingest.driver string           Explicitly specify driver to use for ingesting data
       --ingest.header                  Treat first row of ingest data as header
+      --no-cache                       Cache ingest data
       --driver.csv.empty-as-null       Treat empty CSV fields as null (default true)
       --driver.csv.delim string        CSV delimiter: one of comma, space, pipe, tab, colon, semi, period (default "comma")
       --help                           help for sql
@@ -61,5 +62,5 @@ Global Flags:
       --log.format string   Log format: one of "text" or "json"
       --log.level string    Log level: one of DEBUG, INFO, WARN, ERROR
   -M, --monochrome          Don't colorize output
-      --no-progress         Progress bar shown for long-running operations
+      --no-progress         Progress bar for long-running operations
   -v, --verbose             Verbose output

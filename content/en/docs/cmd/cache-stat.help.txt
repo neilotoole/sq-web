@@ -5,7 +5,7 @@ Usage:
 
 Examples:
   $ sq cache stat
-  /Users/neilotoole/Library/Caches/sq  enabled  (472.8MB)
+  /Users/neilotoole/Library/Caches/sq/f36ac695  enabled  (472.8MB)
 
 Flags:
   -t, --text        Output text
@@ -22,5 +22,5 @@ Global Flags:
       --log.format string   Log format: one of "text" or "json"
       --log.level string    Log level: one of DEBUG, INFO, WARN, ERROR
   -M, --monochrome          Don't colorize output
-      --no-progress         Progress bar shown for long-running operations
+      --no-progress         Progress bar for long-running operations
   -v, --verbose             Verbose output

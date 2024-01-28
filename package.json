@@ -36,6 +36,8 @@
     "lint:markdown": "npx markdownlint-cli2",
     "lint:markdown-fix": "npx markdownlint-cli2-fix \"*.md\" \"content/**/*.md\"",
     "server": "exec-bin node_modules/.bin/hugo/hugo server",
+    "hugo:mod-get": "exec-bin node_modules/.bin/hugo/hugo mod get -u -v cj.rs/gohugo-asciinema",
+    "hugo:mod-init": "exec-bin node_modules/.bin/hugo/hugo mod init github.com/neilotoole/sq-web",
     "test": "npm run -s lint",
     "env": "env",
     "precheck": "npm version",

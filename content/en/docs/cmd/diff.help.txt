@@ -102,6 +102,7 @@ Flags:
   -N, --counts          When comparing table schema structure, include row counts
   -d, --data            Compare values of each data row (caution: may be slow)
   -a, --all             Compare everything (caution: may be slow)
+      --no-cache        Cache ingest data
       --help            help for diff
 
 Global Flags:
@@ -111,5 +112,5 @@ Global Flags:
       --log.format string   Log format: one of "text" or "json"
       --log.level string    Log level: one of DEBUG, INFO, WARN, ERROR
   -M, --monochrome          Don't colorize output
-      --no-progress         Progress bar shown for long-running operations
+      --no-progress         Progress bar for long-running operations
   -v, --verbose             Verbose output
