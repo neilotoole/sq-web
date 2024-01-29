@@ -7,8 +7,8 @@ Examples:
   # Enable caching by default
   $ sq cache enable
 
-	# Enable caching for a particular source
-	$ sq cache enable @sakila
+  # Enable caching for a particular source
+  $ sq cache enable @sakila
 
 Flags:
       --help   help for enable

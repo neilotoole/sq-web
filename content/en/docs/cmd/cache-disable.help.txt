@@ -8,7 +8,7 @@ Examples:
   $ sq cache disable
 
   # Disable caching for a particular source
-	$ sq cache disable @sakila
+  $ sq cache disable @sakila
 
 Flags:
       --help   help for disable

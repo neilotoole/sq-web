@@ -5,7 +5,7 @@ Usage:
   sq tbl drop @HANDLE.TABLE
 
 Examples:
-# drop table "actor" in src @sakila_sl3
+  # drop table "actor" in src @sakila_sl3
   $ sq tbl drop @sakila_sl3.actor
 
   # drop table "payment"" in the active src
