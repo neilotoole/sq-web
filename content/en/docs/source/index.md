@@ -374,7 +374,7 @@ These commands are effectively batch operations on the sources in each group.
 
 A _document source_ is a source backed by a document or file such as [CSV](/docs/drivers/csv) or
 [Excel](/docs/drivers/xlsx). Some functionality is not available for document sources.
-For example, `sq` doesn't provide a mechanism to [insert](docs/output#insert) query
+For example, `sq` doesn't provide a mechanism to [insert](/docs/output#insert) query
 results into an Excel file.
 
 A document source's location can be a local file path, or an HTTP URL. For example:
