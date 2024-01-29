@@ -244,7 +244,7 @@ $ sq ping @sakila_my prod staging
 
 ## Groups
 
-If you find yourself dealing large numbers of sources, `sq` provides a
+If you find yourself dealing with a large number of sources, `sq` provides a
 simple mechanism to structure groups of sources. A typical handle looks like `@sales`.
 But if you use a path structure in the handle like `@prod/sales`,
 `sq` interprets that `prod` path as a _group_.
@@ -390,11 +390,24 @@ $ sq add https://sq.io/testdata/actor.csv
 ### Ingest
 
 For any document source, `sq` must first _ingest_ the document data into
-a local, hidden "ingest DB". This is all managed automatically by `sq`: the user
-doesn't need to know anything about the ingest DB. Ingest is a generally a one-time operation:
+a local, hidden "ingest DB" that functions as a cache. This is all managed automatically by `sq`:
+the user doesn't need to know anything about the ingest DB. Ingest is a generally a one-time operation:
 the data is ingested, stored in the ingest DB, and this DB is [cached](#cache) and re-used
 the next time `sq` is invoked. However, if the original source document is modified
 on disk, `sq` detects this, and kicks off a fresh ingest.
+
+{{< alert icon="👉" >}}
+Several `sq` commands can work with `stdin` input:
+
+```shell
+$ cat actor.csv | sq '.data | .first_name, .last_name'
+$ cat actor.csv | sq inspect
+```
+
+However, note that `stdin` sources can't take advantage of the ingest cache, because
+the `stdin` pipe is "anonymous", and `sq` can't do a cache lookup for it. If you're going to
+repeatedly use the same `stdin` data, you should probably just [`sq add`](/docs/source#add) it.
+{{< /alert >}}
 
 ### Download
 
@@ -416,7 +429,7 @@ is unavailable for some reason, `sq` emits a warning in the logs,
 but continues with the stale cached document.
 This is a sort of "Airplane Mode" for remote document sources. You can configure
 `sq` to instead return an error on failed refresh via the
-[`download.refresh.continue-on-err`](/docs/config#downloadrefreshcontinue-on-err) config option.
+[`download.refresh.ok-on-err`](/docs/config#downloadrefreshok-on-err) config option.
 
 ### Cache
 

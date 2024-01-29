@@ -3,4 +3,6 @@ Usage:
 
 How long to wait for the entire HTTP transaction to complete. This includes
 reading the body of the response, such as a large HTTP file download. Typically
-this is set to 0, indicating no timeout. Contrast with http.request.timeout.
+this is set to 0, indicating no timeout.
+
+Contrast with http.request.timeout.

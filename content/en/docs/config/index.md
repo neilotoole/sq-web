@@ -332,7 +332,7 @@ rename each column to uppercase.
 {{.Name | upper}}{{with .Recurrence}}:{{.}}{{end}}
 ```
 
-The `.Alpha` template fields maps the column index to `A, B ... Y, Z, AA, AB...`,
+The `.Alpha` template field maps the column index to `A, B ... Y, Z, AA, AB...`,
 similar to how Microsoft Excel names columns. To use this style:
 
 ```shell

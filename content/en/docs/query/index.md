@@ -375,7 +375,7 @@ either form in your query.
 |-----------|--------------------|--------------------|--------------------------------------------------------------------|
 | `join`    | `inner_join`       | `INNER JOIN`       | <small>A plain SQL `JOIN` is actually an  `INNER JOIN`</small>     |
 | `ljoin`   | `left_join`        | `LEFT JOIN`        |                                                                    |
-| `loj`     | `left_outer_join`  | `LEFT OUTER JOIN`  |                                                                    |
+| `lojoin`  | `left_outer_join`  | `LEFT OUTER JOIN`  |                                                                    |
 | `rjoin`   | `right_join`       | `RIGHT JOIN`       |                                                                    |
 | `rojoin`  | `right_outer_join` | `RIGHT OUTER JOIN` |                                                                    |
 | `fojoin`  | `full_outer_join`  | `FULL OUTER JOIN`  | <small>Not supported in [MySQL](/docs/drivers/mysql)</small>       |

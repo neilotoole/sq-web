@@ -10,5 +10,5 @@ Examples:
   "h:mm am/pm"	     4:07 pm
   "h:mm:ss AM/PM"    4:07:01 PM
 
-Note that time-only values are sometimes programmatically indistinguishable
-from datetime values. In that situation, use format.excel.datetime instead.
+Note that time-only values are sometimes programmatically indistinguishable from
+datetime values. In that situation, use format.excel.datetime instead.
