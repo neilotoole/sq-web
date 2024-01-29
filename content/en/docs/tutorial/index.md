@@ -75,8 +75,10 @@ Let's step through the above:
 - `sq ls -v`: lists the sources yet again, this time [verbosely](/docs/config/#verbose) (`-v`).
 - `sq inspect`: [inspects](/docs/inspect) `@tutorial_db`, showing the structure of the source.
 
-> 👉 Most `sq` commands feature sophisticated shell completion. Try it out
-> by hitting `TAB` when typing a command.
+{{< alert icon="👉" >}}
+Most `sq` commands feature sophisticated shell completion. Try it out
+by hitting `TAB` when typing a command.
+{{< /alert >}}
 
 ## Query
 
@@ -235,6 +237,12 @@ in this tutorial, we'll add it as a source:
 $ sq add film.csv --handle @film_csv
 @film_csv  csv  film.csv
 ```
+
+{{< alert icon="👉" >}}
+`stdin` sources can't take advantage of [ingest caching](/docs/source#ingest), because
+the `stdin` pipe is "anonymous", and `sq` can't do a cache lookup for it. If you're going to
+repeatedly query the same `stdin` data, you should probably just [`sq add`](/docs/source#add) it.
+{{< /alert >}}
 
 We've now got two sources: a SQLite database (`@tutorial_db`), and
 a CSV file (`@film_csv`). We can join across those sources:

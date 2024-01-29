@@ -1,8 +1,8 @@
 Usage:
   sq config set format.excel.date yyyy-mm-dd
 
-Date format string for Microsoft Excel date-only values. The exact format
-is specific to Excel, but is broadly similar to strftime.
+Date format string for Microsoft Excel date-only values. The exact format is
+specific to Excel, but is broadly similar to strftime.
 
 Examples:
 

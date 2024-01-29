@@ -1,9 +1,9 @@
 Usage:
   sq config set format.excel.datetime 'yyyy-mm-dd hh:mm'
 
-Timestamp format for datetime values: that is, for values that have
-both a date and time component. The exact format is specific to
-Microsoft Excel, but is broadly similar to strftime.
+Timestamp format for datetime values: that is, for values that have both a date
+and time component. The exact format is specific to Microsoft Excel, but is
+broadly similar to strftime.
 
 Examples:
 

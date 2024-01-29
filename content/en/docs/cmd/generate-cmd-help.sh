@@ -12,6 +12,12 @@ cd $(dirname "$0")
 cmds=(
   "add"
   "completion"
+  "cache clear"
+  "cache disable"
+  "cache enable"
+  "cache location"
+  "cache stat"
+  "cache tree"
   "config location"
   "config ls"
   "config get"

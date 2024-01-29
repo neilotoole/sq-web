@@ -132,8 +132,8 @@ data  table  200   4     actor_id     INTEGER
 ```
 
 Note the `TYPE` value for each column. This is the type of the column in the
-[scratch DB](/docs/concepts/#scratch-db) table that `sq` ingests the CSV data into.
-In this case, the scratch DB is actually a SQLite DB, and thus the `TYPE` is
+[ingest DB](/docs/concepts/#ingest-db) table that `sq` ingests the CSV data into.
+In this case, the ingest DB is actually a SQLite DB, and thus the `TYPE` is
 SQLite data type `INTEGER`.
 
 For the equivalent Postgres source, note the different `TYPE` value:

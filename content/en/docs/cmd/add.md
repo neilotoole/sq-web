@@ -24,7 +24,7 @@ A data source has three main elements:
   or simply _type_.
 - `handle`: such as `@sakila_pg`. A handle always starts with `@`. The handle is used to refer
   to the data source.
-- `location`: such as `postgres://user:p_ssW0rd@@localhost/sakila`. For
+- `location`: such as `postgres://user:p_ssW0rd@localhost/sakila`. For
   a document source, _location_ may just be a file path, e.g. `/Users/neilotoole/sakila.csv`.
 
 The format of the command is:

@@ -25,7 +25,21 @@ $ sq add postgres://sakila:p_ssW0rd@localhost/sakila --handle @sakila_pg
 
 ## Inspect source
 
-Use `sq inspect @sakila_pg` to inspect the source. This output includes the source
+Use `sq inspect @sakila_pg` to inspect the source.
+
+{{< alert icon="👉" >}}
+You can also use `sq inspect` with `stdin`, e.g.:
+
+```shell
+$ cat actor.csv | sq inspect
+```
+
+However, note that `stdin` sources can't take advantage of [ingest caching](/docs/source#ingest), because
+the `stdin` pipe is "anonymous", and `sq` can't do a cache lookup for it. If you're going to
+repeatedly inspect the same `stdin` data, you should probably just [`sq add`](#add) it.
+{{< /alert >}}
+
+This output includes the source
 metadata, and the schema structure (tables, columns, etc.).
 
 ### `--text` (default)

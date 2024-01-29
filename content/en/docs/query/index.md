@@ -13,9 +13,9 @@ url: /docs/query
 known as [`SLQ`](https://github.com/neilotoole/sq/tree/master/grammar).
 
 Behind the scenes, all `sq` queries execute against a SQL database. This is true even for
-[document sources](/docs/concepts#document-source) such as [CSV](/docs/drivers/csv)
+[document sources](/docs/source#document-source) such as [CSV](/docs/drivers/csv)
 or [XLSX](/docs/drivers/xlsx). For those document
-sources, `sq` loads the source data into a [scratch database](/docs/concepts#scratch-db),
+sources, `sq` loads the source data into an [ingest database](/docs/source#ingest),
 and executes the query against that database.
 
 {{< alert icon="👉" >}}
@@ -265,7 +265,7 @@ $ sq 1+2
 If the query doesn't reference a handle (such as `@sakila_pg`), the
 [active source](/docs/cmd/src) is used. If there's no active source,
 such as immediately after a new install, `sq` falls back to using
-the [scratch DB](/docs/concepts/#scratch-db) (typically SQLite).
+a temporary DB, typically SQLite.
 {{< /alert >}}
 
 Calculator mode is probably better with `--no-header` (`-H`).
@@ -375,7 +375,7 @@ either form in your query.
 |-----------|--------------------|--------------------|--------------------------------------------------------------------|
 | `join`    | `inner_join`       | `INNER JOIN`       | <small>A plain SQL `JOIN` is actually an  `INNER JOIN`</small>     |
 | `ljoin`   | `left_join`        | `LEFT JOIN`        |                                                                    |
-| `loj`     | `left_outer_join`  | `LEFT OUTER JOIN`  |                                                                    |
+| `lojoin`  | `left_outer_join`  | `LEFT OUTER JOIN`  |                                                                    |
 | `rjoin`   | `right_join`       | `RIGHT JOIN`       |                                                                    |
 | `rojoin`  | `right_outer_join` | `RIGHT OUTER JOIN` |                                                                    |
 | `fojoin`  | `full_outer_join`  | `FULL OUTER JOIN`  | <small>Not supported in [MySQL](/docs/drivers/mysql)</small>       |
@@ -535,9 +535,9 @@ How do cross-source joins work?
 The implementation is very basic (and could be dramatically enhanced).
 Given a two-source join:
 
-1. `sq` copies the full contents of the left table to the [scratch DB](/docs/concepts/#scratch-db).
-1. `sq` copies the full content of the right table to the scratch DB.
-1. `sq` executes the query against the scratch DB.
+1. `sq` copies the full contents of the left table to the [join DB](/docs/concepts#join-db).
+2. `sq` copies the full contents of the right table to the join DB.
+3. `sq` executes the query against the join DB.
 
 Given that this naive implementation perform a full copy of both tables, cross-source joins
 are only suitable for smaller datasets.

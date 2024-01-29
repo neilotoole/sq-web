@@ -35,6 +35,8 @@ npm install
 
 ```bash
 # Start a local webserver on http://localhost:1313 to test you changes.
+# Note that it may take a minute or longer for the site to be served (and
+# you may not receive any indication of this). Be patient.
 npm start
 
 # Run linters, link checks, etc.
@@ -60,6 +62,7 @@ for your changes.
 - Use `npm run gen:syntax-css` to regenerate the syntax highlight theme. The themes (light and dark)
   are specified in [generate-syntax-css.sh](./generate-syntax-css.sh).
 
+
 ### Asciinema
 
 The site makes use of [asciinema](https://asciinema.org) via
@@ -74,6 +77,15 @@ Typically, casts are stored in `./static/casts`. To include a cast, use this sho
 - `poster="npt:0:20"` specifies that the "poster" or cover image should be taken from 0m20s into the
   cast.
 - Add `autoPlay="true"` if the cast should start immediately. This is usually not the case.
+
+If you see this problem:
+
+```shell
+Error: Error building site: "content/en/_index.md:9:1": failed to extract shortcode: template for shortcode "asciicast" not found
+```
+
+It probably means that the hugo module cache is out of whack. Run `npm install` and try again.
+
 
 ## Documentation
 

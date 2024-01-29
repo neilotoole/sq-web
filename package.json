@@ -15,7 +15,7 @@
   "scripts": {
     "create": "exec-bin node_modules/.bin/hugo/hugo new",
     "prestart": "npm run clean",
-    "start": "exec-bin node_modules/.bin/hugo/hugo server --bind=0.0.0.0 --disableFastRender",
+    "start": "exec-bin node_modules/.bin/hugo/hugo server -v --disableFastRender --bind=0.0.0.0",
     "prebuild": "npm run clean",
     "build": "exec-bin node_modules/.bin/hugo/hugo --gc --minify",
     "postbuild": "shx cat static/_redirects >> public/_redirects",
@@ -36,6 +36,8 @@
     "lint:markdown": "npx markdownlint-cli2",
     "lint:markdown-fix": "npx markdownlint-cli2-fix \"*.md\" \"content/**/*.md\"",
     "server": "exec-bin node_modules/.bin/hugo/hugo server",
+    "hugo:mod-get": "exec-bin node_modules/.bin/hugo/hugo mod get -u -v cj.rs/gohugo-asciinema",
+    "hugo:mod-init": "exec-bin node_modules/.bin/hugo/hugo mod init github.com/neilotoole/sq-web",
     "test": "npm run -s lint",
     "env": "env",
     "precheck": "npm version",
@@ -82,6 +84,6 @@
     "watch": "^1.0.2"
   },
   "otherDependencies": {
-    "hugo": "0.109.0"
+    "hugo": "0.122.0"
   }
 }

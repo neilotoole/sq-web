@@ -141,8 +141,6 @@ additional help for the options.
 
 ![sq config edit v](sq_config_edit_v.png)
 
-
-
 ## Logging
 
 By default, logging is turned off. If you need to submit a `sq`
@@ -157,22 +155,30 @@ $ sq config set log true
 # But leave it on DEBUG if you're sending bug reports.
 $ sq config set log.level WARN
 
-# You can also change the log file location. The default location
-# is OS-dependent.
+# The default log format is "text", a human-friendly format. You can
+# also change it to "json" if you prefer.
+$ sq config set log.format json
+
+# You can also change the log file location.
+$ sq config set log.file /tmp/sq.log
+
+# Note that the default log file location is OS-dependent.
 $ sq config get log.file -v
 KEY       VALUE  DEFAULT
 log.file         /Users/neilotoole/Library/Logs/sq/sq.log
+
+# To output just the log file path:
+$ sq config get log.file -jv | jq -r .value
+/Users/neilotoole/Library/Logs/sq/sq.log
 ```
 
-
 {{< alert icon="🤬️" >}}
-If there's a problem with `sq`'s bootstrap
-mechanism (e.g. corrupt config file),
-and logs aren't being generated, it's preferable
-to use envars to force logging.
+If there's a problem with `sq`'s bootstrap mechanism (e.g. corrupt config file),
+and logs aren't being generated, you can use envars to force logging,
+overriding the config file. For example:
 
 ```shell
-export SQ_LOG=true; export SQ_LOG_LEVEL=DEBUG; export SQ_LOG_FILE=./sq.log
+export SQ_LOG=true; export SQ_LOG_LEVEL=DEBUG; export SQ_LOG_FORMAT=text; export SQ_LOG_FILE=./sq.log
 ```
 {{< /alert >}}
 
@@ -186,7 +192,8 @@ Some config options apply only to base config. For example, `format=json` applie
 to the `sq` CLI itself, and not to a particular source such as `@sakila`. However,
 some options can apply to a source, and also have a base value. For example,
 `conn.max-open` controls the maximum number of connections that `sq` will open
-to a database.
+to a database. This option can be set for base config, but can also be set for
+an individual source, overriding the base config.
 
 
 ## CLI
@@ -197,16 +204,47 @@ to a database.
 ### `log.file`
 {{< readfile file="../cmd/options/log.file.help.txt" code="true" lang="text" >}}
 
+### `log.format`
+{{< readfile file="../cmd/options/log.format.help.txt" code="true" lang="text" >}}
+
 ### `log.level`
 {{< readfile file="../cmd/options/log.level.help.txt" code="true" lang="text" >}}
+
+### `error.format`
+{{< readfile file="../cmd/options/error.format.help.txt" code="true" lang="text" >}}
 
 ### `ping.timeout`
 {{< readfile file="../cmd/options/ping.timeout.help.txt" code="true" lang="text" >}}
 
+### `http.request.timeout`
+{{< readfile file="../cmd/options/http.request.timeout.help.txt" code="true" lang="text" >}}
 
+### `http.response.timeout`
+{{< readfile file="../cmd/options/http.response.timeout.help.txt" code="true" lang="text" >}}
+
+### `https.insecure-skip-verify`
+{{< readfile file="../cmd/options/https.insecure-skip-verify.help.txt" code="true" lang="text" >}}
+
+### `download.cache`
+{{< readfile file="../cmd/options/download.cache.help.txt" code="true" lang="text" >}}
+
+### `download.refresh.ok-on-err`
+{{< readfile file="../cmd/options/download.refresh.ok-on-err.help.txt" code="true" lang="text" >}}
+
+### `progress`
+{{< readfile file="../cmd/options/progress.help.txt" code="true" lang="text" >}}
+
+### `progress.delay`
+{{< readfile file="../cmd/options/progress.delay.help.txt" code="true" lang="text" >}}
 
 ### `shell-completion.timeout`
 {{< readfile file="../cmd/options/shell-completion.timeout.help.txt" code="true" lang="text" >}}
+
+### `shell-completion.log`
+{{< readfile file="../cmd/options/shell-completion.log.help.txt" code="true" lang="text" >}}
+
+### `config.lock.timeout`
+{{< readfile file="../cmd/options/config.lock.timeout.help.txt" code="true" lang="text" >}}
 
 <a id="formatting"></a>
 ## Output
@@ -219,9 +257,6 @@ to a database.
 
 ### `format.datetime`
 {{< readfile file="../cmd/options/format.datetime.help.txt" code="true" lang="text" >}}
-
-### `error.format`
-{{< readfile file="../cmd/options/error.format.help.txt" code="true" lang="text" >}}
 
 ### `format.datetime.number`
 {{< readfile file="../cmd/options/format.datetime.number.help.txt" code="true" lang="text" >}}
@@ -297,11 +332,11 @@ rename each column to uppercase.
 {{.Name | upper}}{{with .Recurrence}}:{{.}}{{end}}
 ```
 
-The `.AlphaIndex` template fields maps the column index to `A, B ... Y, Z, AA, AB...`,
+The `.Alpha` template field maps the column index to `A, B ... Y, Z, AA, AB...`,
 similar to how Microsoft Excel names columns. To use this style:
 
 ```shell
-$ sq config set result.column.rename '{{.AlphaIndex}}'
+$ sq config set result.column.rename '{{.Alpha}}'
 $ sq .actor
 ```
 
@@ -351,6 +386,17 @@ It is possible (and normal) to use both options.
 
 ## Ingest
 
+### `ingest.cache`
+
+Enable or disable the ingest cache. You can also use the
+[`sq cache enable`](/docs/cmd/cache-enable) and [`sq cache disable`](/docs/cmd/cache-disable)
+commands.
+
+{{< readfile file="../cmd/options/ingest.cache.help.txt" code="true" lang="text" >}}
+
+### `cache.lock.timeout`
+{{< readfile file="../cmd/options/cache.lock.timeout.help.txt" code="true" lang="text" >}}
+
 ### `ingest.column.rename`
 {{< readfile file="../cmd/options/ingest.column.rename.help.txt" code="true" lang="text" >}}
 
@@ -362,7 +408,6 @@ the database (pre-processing). The _result_ option, by contrast, is applied
 to result set column names after the data is returned from the database (post-processing).
 It is possible (and normal) to use both options.
 {{< /alert >}}
-
 
 ### `ingest.header`
 {{< readfile file="../cmd/options/ingest.header.help.txt" code="true" lang="text" >}}

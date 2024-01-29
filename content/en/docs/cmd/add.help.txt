@@ -102,7 +102,7 @@ More examples:
   # Specify some params (note escaped chars)
   $ sq add postgres://user:pass@localhost/sakila\?sslmode=disable\&application_name=sq
 
-# Specify some params, but use quoted string (no shell completion)
+  # Specify some params, but use quoted string (no shell completion)
   $ sq add 'postgres://user:pass@localhost/sakila?sslmode=disable&application_name=sq''
 
   # Add a SQL Server source; will have generated handle @sakila
@@ -144,9 +144,11 @@ Flags:
       --help                       help for add
 
 Global Flags:
-      --config string      Load config from here
-      --log                Enable logging
-      --log.file string    Path to log file; empty disables logging
-      --log.level string   Log level: one of DEBUG, INFO, WARN, ERROR
-  -M, --monochrome         Don't colorize output
-  -v, --verbose            Verbose output
+      --config string       Load config from here
+      --log                 Enable logging
+      --log.file string     Path to log file; empty disables logging
+      --log.format string   Log format: one of "text" or "json"
+      --log.level string    Log level: one of DEBUG, INFO, WARN, ERROR
+  -M, --monochrome          Don't colorize output
+      --no-progress         Progress bar for long-running operations
+  -v, --verbose             Verbose output
