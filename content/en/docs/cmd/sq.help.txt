@@ -88,9 +88,9 @@ Available Commands:
   driver      Manage drivers
   config      Manage config
   cache       Manage cache
-  completion  Generate shell completion script
   version     Show version info
   help        Show help
+  completion  Generate the autocompletion script for the specified shell
 
 Flags:
   -f, --format string                  Specify output format (default "text")
