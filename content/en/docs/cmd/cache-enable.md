@@ -11,6 +11,8 @@ toc: false
 url: /docs/cmd/cache-enable
 ---
 
+For background on `sq`'s caching mechanism, see the [sources](/docs/source#cache) section.
+
 ## Reference
 
 {{< readfile file="cache-enable.help.txt" code="true" lang="text" >}}

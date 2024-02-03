@@ -94,7 +94,7 @@ sources, but two groups, `prod` and `dev`. See the [groups](/docs/source#groups)
 ## Active group
 
 Like [active source](#active-source), there is an active [group](/docs/source#groups). Use
-the [`sq group`](/docs/cmd/group) to get or set the active group.
+the [`sq group`](/docs/cmd/group) command to get or set the active group.
 
 ## Driver
 

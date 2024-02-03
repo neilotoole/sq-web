@@ -444,7 +444,7 @@ with the cache.
 The most relevant of these are [`sq cache enable`](/docs/cmd/cache-enable),
 [`sq cache disable`](/docs/cmd/cache-disable), and
 [`sq cache clear`](/docs/cmd/cache-clear). Note that the cache can be enabled,
-disabled or cleared on a global or per-source basis.
+disabled or cleared on a default or per-source basis.
 
 ```shell
 # Clear the cache for the active source
