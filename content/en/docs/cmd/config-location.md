@@ -6,7 +6,7 @@ images: []
 menu:
   docs:
     parent: "cmd"
-weight: 2032
+weight: 2038
 toc: false
 url: /docs/cmd/config-location
 ---

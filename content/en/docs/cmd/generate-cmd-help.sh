@@ -12,6 +12,10 @@ cd $(dirname "$0")
 cmds=(
   "add"
   "completion"
+  "completion bash"
+  "completion zsh"
+  "completion fish"
+  "completion powershell"
   "cache clear"
   "cache disable"
   "cache enable"

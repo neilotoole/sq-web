@@ -240,6 +240,9 @@ an individual source, overriding the base config.
 ### `shell-completion.timeout`
 {{< readfile file="../cmd/options/shell-completion.timeout.help.txt" code="true" lang="text" >}}
 
+### `shell-completion.group-filter`
+{{< readfile file="../cmd/options/shell-completion.group-filter.help.txt" code="true" lang="text" >}}
+
 ### `shell-completion.log`
 {{< readfile file="../cmd/options/shell-completion.log.help.txt" code="true" lang="text" >}}
 
