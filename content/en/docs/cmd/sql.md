@@ -19,9 +19,9 @@ $ sq sql 'SELECT * FROM actor WHERE actor_id < 5'
 
 ## Active source & schema
 
-The `sql` command works very similarly to the root [`sq`](/docs/cmd/sq) command.
-You can change the [active source](/docs/concepts#active-source) for the query using [`--src`](/docs/cmd/sq#override-active-source),
-and change tha active [catalog/schema](/docs/concepts#schema--catalog) using [`--src.schema`](/docs/cmd/sq#override-active-schema).
+The `sql` command works similarly to the root [`sq`](/docs/cmd/sq) command.
+You can override the [active source](/docs/source#active-source) for the query using [`--src`](/docs/source#source-override),
+and override the active [catalog/schema](/docs/concepts#schema--catalog) using [`--src.schema`](/docs/source#source-override).
 
 Here's an example tying these together:
 
