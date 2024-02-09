@@ -23,9 +23,13 @@ A source has three main elements:
 
 {{< alert icon="👉" >}}
 When `sq` prints a location containing security credentials (such as the password in the
-postgres string above), the credentials are redacted. Thus, that location string
+postgres string above), the password is redacted by default. Thus, that location string
 would be printed as `postgres://user:xxxxx@@localhost/sakila`.
+
+You can override this behavior via the global `--no-redact` flag, or by setting
+the [`redact`](/docs/config#redact) config option to `false`,
 {{< /alert >}}
+
 
 `sq` provides a set of commands to [add](#add), [list](#list-sources), [rename](#move)
 and [remove](#remove) sources.
