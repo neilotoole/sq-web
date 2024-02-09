@@ -166,7 +166,7 @@ not tables.
 
 By default, `sq inspect` uses the active [schema](/docs/concepts#schema--catalog)
 for the source. You can override the active schema (and catalog)
-using the `--src.schema` flag. See the [`sq`](/docs/cmd/sq#override-active-schema) command docs
+using the [`--src.schema`](/docs/source#source-override) flag. See the [sources](/docs/source#source-override) section
 for a fuller explanation of `--src.schema`, but here's a quick example of
 inspecting Postgres's `information_schema` schema:
 
