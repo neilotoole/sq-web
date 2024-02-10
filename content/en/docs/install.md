@@ -81,7 +81,39 @@ Generally you can use `install.sh`.
 ```
 
 If you need more control over the install,
-consult [install.sh source](https://raw.githubusercontent.com/neilotoole/sq/master/install.sh).
+consult the [install.sh source code](https://raw.githubusercontent.com/neilotoole/sq/master/install.sh).
+
+
+## Docker
+
+The [`ghcr.io/neilotoole/sq`](https://github.com/neilotoole/sq/pkgs/container/sq)
+image is preloaded with `sq` and a handful of related tools like `jq`.
+
+### Local
+
+```shell
+# Shell into a one-time container.
+$ docker run -it ghcr.io/neilotoole/sq zsh
+
+# Start detached (background) container named "sq-shell".
+$ docker run -d --name sq-shell ghcr.io/neilotoole/sq
+# Shell into that container.
+$ docker exec -it sq-shell zsh
+```
+
+### Kubernetes
+
+Running `sq` in a Kubernetes environment can be very useful for DB migrations,
+as well as general data wrangling.
+
+```shell
+# Start pod named "sq-shell".
+$ kubectl run sq-shell --image ghcr.io/neilotoole/sq
+# Shell into the pod.
+$ kubectl exec -it sq-shell -- zsh
+```
+
+
 
 ## Upgrade
 
