@@ -103,7 +103,7 @@ $ docker exec -it sq-shell zsh
 
 ### Kubernetes
 
-Running `sq` in a Kubernetes environment can be very useful for DB migrations,
+Running `sq` in a Kubernetes environment is useful for DB migrations,
 as well as general data wrangling.
 
 ```shell
