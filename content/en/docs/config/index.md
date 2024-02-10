@@ -213,6 +213,9 @@ an individual source, overriding the base config.
 ### `error.format`
 {{< readfile file="../cmd/options/error.format.help.txt" code="true" lang="text" >}}
 
+### `error.stack`
+{{< readfile file="../cmd/options/error.stack.help.txt" code="true" lang="text" >}}
+
 ### `ping.timeout`
 {{< readfile file="../cmd/options/ping.timeout.help.txt" code="true" lang="text" >}}
 
