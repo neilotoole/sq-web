@@ -120,16 +120,24 @@ Here's `--dbprops` from a [SQLite](/docs/drivers/sqlite/) database (in `--yaml` 
 ## Catalogs
 
 The `--catalogs` mode lists the [catalogs](/docs/concepts#schema--catalog) (databases)
-available to the current source.
+available in the source.
 
 ![sq inspect source catalogs pg yaml](sq_inspect_source_catalogs_yaml.png)
 
 ## Schemata
 
 Like `--catalogs`, the `--schemata` mode lists the [schemas](/docs/concepts#schema--catalog)
-available to the current source.
+available in the source.
 
 ![sq inspect source schemata pg yaml](sq_inspect_source_schemata_yaml.png)
+
+To list the schemas in a specific catalog, supply `CATALOG.` to the
+[`--src.schema`](/docs/source#source-override) flag:
+
+```shell
+# List the schemas in the "inventory" catalog.
+$ sq inspect @sakila/pg12 --schemata --src.schema inventory.
+````
 
 
 ## Inspect table
@@ -158,7 +166,7 @@ not tables.
 
 By default, `sq inspect` uses the active [schema](/docs/concepts#schema--catalog)
 for the source. You can override the active schema (and catalog)
-using the `--src.schema` flag. See the [`sq`](/docs/cmd/sq#override-active-schema) command docs
+using the [`--src.schema`](/docs/source#source-override) flag. See the [sources](/docs/source#source-override) section
 for a fuller explanation of `--src.schema`, but here's a quick example of
 inspecting Postgres's `information_schema` schema:
 

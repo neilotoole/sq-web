@@ -102,15 +102,18 @@ Flags:
   -N, --counts          When comparing table schema structure, include row counts
   -d, --data            Compare values of each data row (caution: may be slow)
   -a, --all             Compare everything (caution: may be slow)
-      --no-cache        Cache ingest data
+      --no-cache        Don't cache ingest data
       --help            help for diff
 
 Global Flags:
-      --config string       Load config from here
-      --log                 Enable logging
-      --log.file string     Path to log file; empty disables logging
-      --log.format string   Log format: one of "text" or "json"
-      --log.level string    Log level: one of DEBUG, INFO, WARN, ERROR
-  -M, --monochrome          Don't colorize output
-      --no-progress         Progress bar for long-running operations
-  -v, --verbose             Verbose output
+      --config string         Load config from here
+      --error.format string   Error output format (default "text")
+  -E, --error.stack           Print error stack trace to stderr
+      --log                   Enable logging
+      --log.file string       Log file path (default "/Users/neilotoole/Library/Logs/sq/sq.log")
+      --log.format string     Log output format (text or json) (default "text")
+      --log.level string      Log level, one of: DEBUG, INFO, WARN, ERROR (default "DEBUG")
+  -M, --monochrome            Don't print color output
+      --no-progress           Don't show progress bar
+      --no-redact             Don't redact passwords in output
+  -v, --verbose               Print verbose output

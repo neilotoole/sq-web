@@ -12,4 +12,3 @@ ingested each time.
 
   # Set ingest caching behavior for a specific source
   $ sq config set --src @sakila ingest.cache false
-

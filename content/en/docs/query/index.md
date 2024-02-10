@@ -84,6 +84,28 @@ need to specify the handle.
 $ sq .actor
 ```
 
+{{< alert icon="👉" >}}
+You can override the [active source](/docs/source#active-source)
+for the current query using the [`--src`](/docs/source#source-override) flag, or override the source's
+[catalog and/or schema](/docs/concepts#schema--catalog) using [`--src.schema`](/docs/source#source-override),
+or even combine the two.
+
+```shell
+# Query @sakila_pg instead of the active source.
+$ sq --src @sakila_pg '.actor'
+
+# Query using the "public" schema of the active source's current catalog.
+$ sq --src.schema public '.actor'
+
+# Query using the "public" schema of the active source's "inventory" catalog.
+$ sq --src.schema inventory.public '.products'
+
+# Query using the "public" schema of @sakila_pg's "inventory" catalog.
+$ sq --src @sakila_pg --src.schema inventory.public '.products'
+```
+{{< /alert >}}
+
+
 ## Filter results (`where`)
 
 Use the `where()` mechanism to filter results.

@@ -23,9 +23,13 @@ A source has three main elements:
 
 {{< alert icon="👉" >}}
 When `sq` prints a location containing security credentials (such as the password in the
-postgres string above), the credentials are redacted. Thus, that location string
+postgres string above), the password is redacted by default. Thus, that location string
 would be printed as `postgres://user:xxxxx@@localhost/sakila`.
+
+You can override this behavior via the global `--no-redact` flag, or by setting
+the [`redact`](/docs/config#redact) config option to `false`,
 {{< /alert >}}
+
 
 `sq` provides a set of commands to [add](#add), [list](#list-sources), [rename](#move)
 and [remove](#remove) sources.
@@ -178,6 +182,95 @@ When you `sq rm` the active source, there will no longer be an active source.
 
 Like the active source, there is an [active group](#groups). Use
 the equivalent [`sq group`](/docs/cmd/group) command to get or set the active group.
+
+### Source override
+
+Many commands accept a specific source handle as an argument. For example:
+
+```shell
+# Inspect the @sakila_pg source
+$ sq inspect @sakila_pg
+```
+
+When that source handle is omitted, `sq` uses the active source.
+
+```shell
+# Inspect the active source
+$ sq inspect
+```
+
+However, some commands (for ergonomic reasons) don't accept a source handle as an argument.
+
+```shell
+# Execute SQL query against the active source
+$ sq sql 'SELECT * FROM actor'
+```
+
+For these commands, you can generally use the `--src` flag to override the active source
+for just that single command invocation.
+
+```shell
+# Execute SQL query against the @sakila_pg source
+$ sq sql 'SELECT * FROM actor' --src @sakila_pg
+```
+
+When `sq` acts on a source, it uses the [catalog and schema](/docs/concepts#schema--catalog)
+specified in the source's location, or the default catalog and schema if not explicitly specified
+in the location. For example, a [Postgres](/docs/drivers/postgres) source defaults to the `public` schema.
+
+For some commands, you can override the catalog and/or schema for just that single command invocation.
+
+```shell
+# Execute SQL query against the active, using the "public" schema in
+# the "inventory" catalog.
+$ sq sql 'SELECT * FROM products' --src.schema inventory.public
+```
+
+`--src.schema` accepts a schema, or catalog, or both (delimited by a period).
+
+```shell
+# Target the "public" schema in the source's default catalog.
+$ sq sql 'SELECT * FROM products' --src.schema public
+
+# Target the "public" schema in the "inventory" catalog.
+$ sq sql 'SELECT * FROM products' --src.schema inventory.public
+
+# Target the default schema in the source's "inventory" catalog.
+$ sq sql 'SELECT * FROM products' --src.schema inventory.
+```
+
+For commands that accept both `--src` and `--src.schema` flags, you can combine them:
+
+```shell
+# Execute SQL query against the @sakila_pg source, using
+# the "public" schema in the "inventory" catalog.
+$ sq sql 'SELECT * FROM products' --src @sakila_pg --src.schema inventory.public
+```
+
+{{< alert icon="👉" >}}
+The `CATALOG.` form of `--src.schema` is useful when you don't
+care about specifying the schema (or are just happy to use the default schema),
+but you do want to specify the catalog.
+
+For example, this lists the schemas present in `@sakila_pg`'s default catalog:
+
+```shell
+$ sq inspect @sakila_pg --schemata
+```
+
+But if we're instead interested in the schemas of a non-default catalog,
+e.g. the `inventory` catalog, specify `CATALOG.`:
+
+```shell
+# List the schemas in the "inventory" catalog of @sakila_pg.
+$ sq inspect @sakila_pg --schemata --src.schema=inventory.
+```
+{{< /alert >}}
+
+
+
+
+
 
 ## Remove
 
