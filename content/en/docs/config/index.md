@@ -213,6 +213,9 @@ an individual source, overriding the base config.
 ### `error.format`
 {{< readfile file="../cmd/options/error.format.help.txt" code="true" lang="text" >}}
 
+### `error.stack`
+{{< readfile file="../cmd/options/error.stack.help.txt" code="true" lang="text" >}}
+
 ### `ping.timeout`
 {{< readfile file="../cmd/options/ping.timeout.help.txt" code="true" lang="text" >}}
 
@@ -300,6 +303,28 @@ See also: [Excel date/time format reference](https://support.microsoft.com/en-gb
 
 ### `verbose`
 {{< readfile file="../cmd/options/verbose.help.txt" code="true" lang="text" >}}
+
+### `redact`
+
+Controls whether sensitive fields (such as the password in a DB connection string)
+are redacted.
+
+```shell
+# Default behavior: password is redacted.
+$ sq src -v
+@sakila/pg12  postgres  postgres://sakila:xxxxx@192.168.50.132/sakila
+
+# Set redact to false.
+$ sq config set redact false
+
+# Now the password is visible.
+$ sq src -v
+@sakila/pg12  postgres  postgres://sakila:p_ssW0rd@192.168.50.132/sakila
+```
+
+You can also use the `--no-redact` global flag.
+
+{{< readfile file="../cmd/options/redact.help.txt" code="true" lang="text" >}}
 
 ### `result.column.rename`
 
