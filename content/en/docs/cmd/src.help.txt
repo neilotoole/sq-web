@@ -22,6 +22,7 @@ Flags:
 
 Global Flags:
       --config string         Load config from here
+      --debug.pprof string    pprof profiling mode (default "off")
       --error.format string   Error output format (default "text")
   -E, --error.stack           Print error stack trace to stderr
       --log                   Enable logging

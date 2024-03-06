@@ -240,6 +240,9 @@ an individual source, overriding the base config.
 ### `progress.delay`
 {{< readfile file="../cmd/options/progress.delay.help.txt" code="true" lang="text" >}}
 
+### `progress.max-bars`
+{{< readfile file="../cmd/options/progress.max-bars.help.txt" code="true" lang="text" >}}
+
 ### `shell-completion.timeout`
 {{< readfile file="../cmd/options/shell-completion.timeout.help.txt" code="true" lang="text" >}}
 
@@ -381,7 +384,33 @@ It is possible (and normal) to use both options.
 {{< readfile file="../cmd/options/diff.data.format.help.txt" code="true" lang="text" >}}
 
 ### `diff.lines`
+
+Configures the number of context lines that [`sq diff`](/docs/diff) shows before and after a difference.
+You can use the `--unified` (`-U`) flag, e.g.:
+
+```shell
+$ sq diff @prod/sales.payments @staging/sales.payments -U4
+```
+
 {{< readfile file="../cmd/options/diff.lines.help.txt" code="true" lang="text" >}}
+
+### `diff.stop`
+
+Configures the default stop-after value for [`sq diff`](/docs/diff). You can use the `--stop` (`-n`) flag, e.g.:
+
+```shell
+$ sq diff @prod/sales.payments @staging/sales.payments -n10
+```
+
+{{< readfile file="../cmd/options/diff.stop.help.txt" code="true" lang="text" >}}
+
+
+
+
+
+
+### `diff.max-hunk-size`
+{{< readfile file="../cmd/options/diff.max-hunk-size.help.txt" code="true" lang="text" >}}
 
 ## Tuning
 
@@ -411,6 +440,9 @@ It is possible (and normal) to use both options.
 
 ### `tuning.record-buffer`
 {{< readfile file="../cmd/options/tuning.record-buffer.help.txt" code="true" lang="text" >}}
+
+### `tuning.buffer-mem-limit`
+{{< readfile file="../cmd/options/tuning.buffer-mem-limit.help.txt" code="true" lang="text" >}}
 
 ## Ingest
 

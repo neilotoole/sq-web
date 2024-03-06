@@ -10,8 +10,7 @@ source overview, schema, and table row counts. Table row data is not compared.
 When comparing tables ("table diff"), the default is to diff table schema and
 row counts. Table row data is not compared.
 
-Use flags to specify the elements you want to compare. The available
-elements are:
+Use flags to specify the modes you want to compare. The available modes are:
 
   --overview   source metadata, without schema (source diff only)
   --dbprops    database/server properties (source diff only)
@@ -20,13 +19,14 @@ elements are:
   --data       row data values
   --all        all of the above
 
-Flag --data diffs the values of each row in the compared tables. Use with
-caution with large tables.
+Flag --data diffs the values of each row in the compared tables, until the stop
+limit is reached. Use the --stop (-n) flag or the diff.stop config option to
+specify the stop limit. The default is 3.
 
 Use --format with --data to specify the format to render the diff records.
 Line-based formats (e.g. "text" or "jsonl") are often the most ergonomic,
-although "yaml" may be preferable for comparing column values. The
-available formats are:
+although "yaml" may be preferable for comparing column values. The available
+formats are:
 
   text, csv, tsv,
   json, jsona, jsonl,
@@ -46,11 +46,12 @@ The default (3) can be changed via:
 
   $ sq config set diff.lines N
 
+Exit status is 0 if inputs are the same, 1 if different, 2 on any error.
+
 Usage:
   sq diff @HANDLE1[.TABLE] @HANDLE2[.TABLE] [--data]
 
 Examples:
-
   Metadata diff
   -------------
 
@@ -84,17 +85,18 @@ Examples:
   Row data diff
   -------------
 
-  # Compare data in the actor tables.
-  $ sq diff @prod/sakila.actor @staging/sakila.actor --data
+  # Compare data in the actor tables, stopping at the first difference.
+  $ sq diff @prod/sakila.actor @staging/sakila.actor --data --stop 1
 
   # Compare data in the actor tables, but output in JSONL.
   $ sq diff @prod/sakila.actor @staging/sakila.actor --data --format jsonl
 
   # Compare data in all tables and views. Caution: may be slow.
-  $ sq diff @prod/sakila @staging/sakila --data
+  $ sq diff @prod/sakila @staging/sakila --data --stop 0
 
 Flags:
   -U, --unified int     Generate diffs with <n> lines of context (default 3)
+  -n, --stop int        Stop after <n> differences (default 3)
   -f, --format string   Output format (json, csv…) when comparing data (default "text")
   -O, --overview        Compare source overview
   -B, --dbprops         Compare DB properties
@@ -107,6 +109,7 @@ Flags:
 
 Global Flags:
       --config string         Load config from here
+      --debug.pprof string    pprof profiling mode (default "off")
       --error.format string   Error output format (default "text")
   -E, --error.stack           Print error stack trace to stderr
       --log                   Enable logging

@@ -1,0 +1,4 @@
+Usage:
+  sq config set tuning.buffer-mem-limit 1024000
+
+Size in bytes after which in-memory temp buffers overflow to disk.
