@@ -402,6 +402,8 @@ Configures the default stop-after value for [`sq diff`](/docs/diff). You can use
 $ sq diff @prod/sales.payments @staging/sales.payments -n10
 ```
 
+Note that `diff.stop` only applies to table row data diffs, not to metadata diffs.
+
 {{< readfile file="../cmd/options/diff.stop.help.txt" code="true" lang="text" >}}
 
 
