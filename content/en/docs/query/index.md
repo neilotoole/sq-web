@@ -166,6 +166,18 @@ actor_id  first_name  last_name  last_update
 105       SIDNEY      CROWE      2020-06-11T02:50:54Z
 ```
 
+For boolean and boolean-like (`bit`, `int`) columns, you can compare using `true` and `false` literals.
+
+```shell
+$ sq '.people | where(.is_alive == false)'
+name        is_alive
+Kubla Khan  false
+
+$ sq '.people | where(.is_alive == true)'
+name         is_alive
+Kaiser Soze  true
+```
+
 Use parentheses to group expressions.
 
 ```shell
