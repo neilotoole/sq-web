@@ -94,3 +94,42 @@ $ sq add actor.jsonl
 $ sq '@actor_jsonl.data | .[0:10]' --insert @sakila_sl3.actor_jsonl
 Inserted 10 rows into @sakila_sl3.actor_jsonl
 ```
+
+## Access macOS Messages.app DB
+
+Being that macOS `Messages.app` uses SQLite to store its data, you can use `sq`
+to poke around.
+
+Here we'll count the number of messages sent and received over the years.
+
+```shell
+$ cat ~/Library/Messages/chat.db | sq '.message | count'
+count
+215439
+```
+
+I'm sure millenials will scoff at that amateur number 👴🏻.
+
+{{< alert icon="👉" >}}
+Note that you'll need to enable macOS [Full Disk Access](https://spin.atomicobject.com/search-imessage-sql/)
+to read the `chat.db` file.
+{{< /alert >}}
+
+You can also pipe `chat.db` to `sq inspect` for a look at the schema.
+
+![sq_inspect_macos_messages_chatdb.png](sq_inspect_macos_messages_chatdb.png)
+
+{{< alert icon="👉" >}}
+Like any other data source, if you find yourself piping `chat.db` to `sq` often,
+just add it as a source.
+
+```shell
+$ sq add ~/Library/Messages/chat.db
+@chat  sqlite3  chat.db
+
+$ sq '@chat | .message | where(.is_from_me > 0) | count'
+count
+96294
+```
+
+{{< /alert >}}

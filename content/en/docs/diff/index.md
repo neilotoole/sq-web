@@ -84,10 +84,28 @@ $ sq diff @sakila/staging.actor @sakila/prod.actor --data
 
 ![sq diff table data](sq_diff_table_data.png)
 
-{{< alert icon="⚠️" >}}
-When `--data` is used with source diff, all rows in all tables (and views)
-are compared. Obviously this may take some time to complete.
-{{< /alert >}}
+
+### `--stop`
+
+In early releases, `sq diff --data` would compare every row in the table. Most
+often this wasn't desired. After the first 500 differing rows or so, you probably
+got the idea; the next 999,500 rows of terminal output weren't really helping.
+
+Now diff will stop after N differences, where N is controlled by the `--stop`
+(`-n`) flag, or the [`diff.stop`](/docs/config/#diffstop) config setting. The
+default is `3`.
+
+```shell
+# Show the first 5 differing rows.
+$ sq diff @sakila/staging.actor @sakila/prod.actor --data --stop 5
+
+# Show only the first differing row, using the -n shorthand.
+$ sq diff @sakila/staging.actor @sakila/prod.actor --data -n1
+
+# You can still diff all rows using --stop 0.
+$ sq diff @sakila/staging.actor @sakila/prod.actor --data --stop 0
+```
+
 
 ### `--format`
 
