@@ -34,7 +34,7 @@ for details.
 Let's take a look at a query that shows the main elements.
 
 ```shell
-$ sq '@sakila_pg | .actor | where(.actor_id < 10) | .first_name | .[0:3]'
+$ sq '@sakila_pg | .actor | where(.actor_id < 10) | .first_name, .last_name | .[0:3]'
 first_name  last_name
 PENELOPE    GUINESS
 NICK        WAHLBERG
