@@ -20,7 +20,7 @@ sq '@postgres_db | .actor | .first_name, .last_name | .[0:5]'
 ## Installation
 
 {{< tabs name="sq-install" >}}
-{{{< tab name="mac" codelang="shell" >}}brew install neilotoole/sq/sq{{< /tab >}}
+{{{< tab name="mac" codelang="shell" >}}brew install sq{{< /tab >}}
 {{< tab name="linux" codelang="shell" >}}/bin/sh -c "$(curl -fsSL https://sq.io/install.sh)"{{< /tab >}}}
 {{< tab name="win" codelang="shell">}}scoop bucket add sq https://github.com/neilotoole/sq
 scoop install sq{{< /tab >}}}
