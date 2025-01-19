@@ -1,0 +1,7 @@
+Usage:
+  sq config set tuning.scan-buffer-limit 1MB
+
+Size of the buffer used for scanning tokens.
+
+Use units B, KB, MB, GB, etc. For example, 64KB, or 10MB. If no unit specified,
+bytes are assumed.
