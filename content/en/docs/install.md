@@ -32,6 +32,7 @@ The following have been tested:
 | `xbps`          | Void Linux                           | `arm64` `amd64` |
 | `brew`          | macOS                                | `arm64` `amd64` |
 | `brew`          | Linux                                | `arm64`         |
+| `nix`           | Arch Linux                           | `arm64` `amd64` |
 
 You can view the source for `install.sh` on [GitHub](https://raw.githubusercontent.com/neilotoole/sq/master/install.sh).
 
