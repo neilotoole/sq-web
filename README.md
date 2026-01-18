@@ -62,12 +62,9 @@ This is an important note for the reader.
 
 ## Development
 
-
-
 ### Commands
 
 Key npm scripts defined in `package.json`:
-
 | Command                  | Description                                             |
 |--------------------------|---------------------------------------------------------|
 | `npm start`              | Start local dev server with live reload                 |
