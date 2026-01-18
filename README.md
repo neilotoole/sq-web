@@ -48,6 +48,25 @@ npm test
 Create a [Pull Request](https://github.com/neilotoole/sq-web/pulls), providing context
 for your changes.
 
+## Development
+
+Key npm scripts defined in `package.json`:
+
+| Command                  | Description                                             |
+|--------------------------|---------------------------------------------------------|
+| `npm start`              | Start local dev server with live reload                 |
+| `npm run build`          | Build production site                                   |
+| `npm run preview`        | Build and serve locally at http://localhost:1313        |
+| `npm run lint`           | Run all linters (scripts, styles, markdown, links)      |
+| `npm run gen:cmd-help`   | Regenerate command help files in `content/en/docs/cmd/` |
+| `npm run gen:syntax-css` | Regenerate syntax highlighting CSS                      |
+
+### Regenerating Command Documentation
+
+The `gen:cmd-help` script (`./content/en/docs/cmd/generate-cmd-help.sh`) regenerates the `.help.txt`
+files in `content/en/docs/cmd/`. These files contain the help text for each `sq` command and are
+included in the documentation pages.
+
 ## Redirects
 
 - You can use the Hugo [alias](https://gohugo.io/content-management/urls/#aliases) mechanism to
