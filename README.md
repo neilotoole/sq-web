@@ -62,6 +62,10 @@ This is an important note for the reader.
 
 ## Development
 
+
+
+### Commands
+
 Key npm scripts defined in `package.json`:
 
 | Command                  | Description                                             |
@@ -78,6 +82,12 @@ Key npm scripts defined in `package.json`:
 The `gen:cmd-help` script (`./content/en/docs/cmd/generate-cmd-help.sh`) regenerates the `.help.txt`
 files in `content/en/docs/cmd/`. These files contain the help text for each `sq` command and are
 included in the documentation pages.
+
+### Link Checking
+
+The `npm run lint` command includes link checking via [linkinator](https://github.com/JustinBeckwith/linkinator).
+Some sites (e.g., StackOverflow) block automated crawlers, returning 403 errors in CI. These domains
+are excluded in `linkinator.config.json`.
 
 ## Redirects
 
