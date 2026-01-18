@@ -2,7 +2,7 @@
   "name": "sq.io",
   "description": "Website for sq",
   "engines": {
-    "node": ">=18.12.1"
+    "node": ">=22"
   },
   "browserslist": [
     "defaults"
@@ -54,7 +54,7 @@
     "@babel/preset-env": "^7.20",
     "@fullhuman/postcss-purgecss": "^5.0",
     "@hyas/images": "^0.2.2",
-    "@netlify/plugin-lighthouse": "^4.0.3",
+    "@netlify/plugin-lighthouse": "^6.0.4",
     "asciinema-player": "^3.0.1",
     "auto-changelog": "^2.4",
     "autoprefixer": "^10.4",
