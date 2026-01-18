@@ -62,6 +62,20 @@ This is an important note for the reader.
 
 ## Development
 
+### CI Workflow
+
+The project uses GitHub Actions and Netlify for continuous integration:
+
+| Trigger                               | Action                                                |
+|---------------------------------------|-------------------------------------------------------|
+| Push to `master` or `develop`         | GitHub Actions runs linting and build checks          |
+| Pull request to `master` or `develop` | GitHub Actions CI + Netlify deploy preview            |
+| Merge to `master`                     | Automatic production deploy to [sq.io](https://sq.io) |
+
+Netlify provides deploy previews for every PR with Lighthouse audits for performance,
+accessibility, best practices, and SEO. Before merging, click through to the
+deploy preview (e.g., `https://deploy-preview-59--sq-web.netlify.app`) to verify
+your changes look correct.
 
 
 ### Commands
