@@ -10,3 +10,5 @@ resources
 /*.iml
 /.idea
 /.serve-lint
+CLAUDE.local.md
+/.claude/

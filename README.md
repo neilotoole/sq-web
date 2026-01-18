@@ -48,6 +48,60 @@ npm test
 Create a [Pull Request](https://github.com/neilotoole/sq-web/pulls), providing context
 for your changes.
 
+## Content Style Guide
+
+### Alerts
+
+Use Hugo alert shortcodes to highlight important information:
+
+```gotemplate
+{{< alert icon="👉" >}}
+This is an important note for the reader.
+{{< /alert >}}
+```
+
+## Development
+
+### CI Workflow
+
+The project uses GitHub Actions and Netlify for continuous integration:
+
+| Trigger                               | Action                                                |
+|---------------------------------------|-------------------------------------------------------|
+| Push to `master` or `develop`         | GitHub Actions runs linting and build checks          |
+| Pull request to `master` or `develop` | GitHub Actions CI + Netlify deploy preview            |
+| Merge to `master`                     | Automatic production deploy to [sq.io](https://sq.io) |
+
+Netlify provides deploy previews for every PR with Lighthouse audits for performance,
+accessibility, best practices, and SEO. Before merging, click through to the
+deploy preview (e.g., `https://deploy-preview-59--sq-web.netlify.app`) to verify
+your changes look correct.
+
+
+### Commands
+
+Key npm scripts defined in `package.json`:
+| Command                  | Description                                             |
+|--------------------------|---------------------------------------------------------|
+| `npm start`              | Start local dev server with live reload                 |
+| `npm run build`          | Build production site                                   |
+| `npm run preview`        | Build and serve locally at http://localhost:1313        |
+| `npm run lint`           | Run all linters (scripts, styles, markdown, links)      |
+| `npm run gen:cmd-help`   | Regenerate command help files in `content/en/docs/cmd/` |
+| `npm run gen:syntax-css` | Regenerate syntax highlighting CSS                      |
+
+### Regenerating Command Documentation
+
+The `gen:cmd-help` script (`./content/en/docs/cmd/generate-cmd-help.sh`) regenerates the `.help.txt`
+files in `content/en/docs/cmd/`. These files contain the help text for each `sq` command and are
+included in the documentation pages.
+
+### Link Checking
+
+The `npm run lint` command includes link checking via [linkinator](https://github.com/JustinBeckwith/linkinator).
+Some sites (e.g., StackOverflow) block automated crawlers, returning 403 errors in CI. These domains
+are excluded in `linkinator.config.json`.
+
 ## Redirects
 
 - You can use the Hugo [alias](https://gohugo.io/content-management/urls/#aliases) mechanism to
