@@ -437,14 +437,17 @@ Note that `diff.stop` only applies to table row data diffs, not to metadata diff
 ### `tuning.errgroup-limit`
 {{< readfile file="../cmd/options/tuning.errgroup-limit.help.txt" code="true" lang="text" >}}
 
-### `tuning.flush-threshold`
-{{< readfile file="../cmd/options/tuning.flush-threshold.help.txt" code="true" lang="text" >}}
+### `tuning.output-flush-threshold`
+{{< readfile file="../cmd/options/tuning.output-flush-threshold.help.txt" code="true" lang="text" >}}
 
 ### `tuning.record-buffer`
 {{< readfile file="../cmd/options/tuning.record-buffer.help.txt" code="true" lang="text" >}}
 
-### `tuning.buffer-mem-limit`
-{{< readfile file="../cmd/options/tuning.buffer-mem-limit.help.txt" code="true" lang="text" >}}
+### `tuning.buffer-spill-limit`
+{{< readfile file="../cmd/options/tuning.buffer-spill-limit.help.txt" code="true" lang="text" >}}
+
+### `tuning.scan-buffer-limit`
+{{< readfile file="../cmd/options/tuning.scan-buffer-limit.help.txt" code="true" lang="text" >}}
 
 ## Ingest
 
