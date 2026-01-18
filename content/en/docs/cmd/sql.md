@@ -17,6 +17,11 @@ you can use `sq sql` to execute DB-native SQL queries or statements.
 $ sq sql 'SELECT * FROM actor WHERE actor_id < 5'
 ```
 
+{{< alert icon="👉" >}}
+`sq sql` is designed to accept only a single SQL statement or query
+in the input string; behavior is undefined for multiple statements.
+{{< /alert >}}
+
 ## Active source & schema
 
 The `sql` command works similarly to the root [`sq`](/docs/cmd/sq) command.

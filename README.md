@@ -48,6 +48,18 @@ npm test
 Create a [Pull Request](https://github.com/neilotoole/sq-web/pulls), providing context
 for your changes.
 
+## Content Style Guide
+
+### Alerts
+
+Use Hugo alert shortcodes to highlight important information:
+
+```gotemplate
+{{< alert icon="👉" >}}
+This is an important note for the reader.
+{{< /alert >}}
+```
+
 ## Development
 
 Key npm scripts defined in `package.json`:
