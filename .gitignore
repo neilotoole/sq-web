@@ -15,4 +15,4 @@ CLAUDE.local.md
 benchmark-results-*.txt
 BENCHMARK_PLAN.md
 BENCHMARK_README.md
-benchmark-node-vs-bun.sh
+
