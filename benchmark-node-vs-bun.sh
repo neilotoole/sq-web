@@ -24,7 +24,8 @@ TIMEOUT=120
 VERBOSE=false
 DRY_RUN=false
 NO_CONFIRM=false
-CLEANUP_MODE=false
+CLEAN_FIRST=false
+CLEAN_ONLY_MODE=false
 TEST_OUTPUT_MODE=false
 REPLAY_FILE=""
 RESULTS_FILE=""
@@ -33,10 +34,10 @@ STASH_CREATED=false
 SKIP_CLEANUP=false
 
 # Branch configuration - change these to compare different branches
-NPM_BRANCH="fix/flexsearch-bundle-path"  # Branch using Node.js/npm
-BUN_BRANCH="feature/bun-migration"  # Branch using Bun
-NPM_RUNTIME="npm"             # Runtime name for npm branch
-BUN_RUNTIME="bun"             # Runtime name for Bun branch
+NPM_BRANCH="master"                 # Default: Node.js/npm
+BUN_BRANCH="feature/bun-migration"  # Default: Bun migration branch
+NPM_RUNTIME="npm"                   # Default: Node.js/npm
+BUN_RUNTIME="bun"                   # Runtime name for Bun branch
 
 # Metrics storage
 declare -a NPM_INSTALL_TIMES
@@ -97,7 +98,8 @@ Options:
   -d, --dry-run        Show what would be done without executing
   -v, --verbose        Show detailed output during tests
   -1, --single         Run tests only once (equivalent to -r 1)
-  -c, --cleanup        Clean up old benchmark results and artifacts
+  -c, --clean          Clean up artifacts before running benchmarks
+  --clean-only         Clean up artifacts and exit (don't run benchmarks)
   -T, --test-output    Test output formatting with sample data (no benchmarks)
   -R, --replay FILE    Replay results from a previous benchmark file
 
@@ -106,8 +108,9 @@ Examples:
   $0 -1                Run tests once (quick benchmark)
   $0 -r 5 -v           Run 5 iterations with verbose output
   $0 --no-confirm      Run without confirmation prompt
-  $0 --cleanup         Remove old benchmark results and artifacts
-  $0 --cleanup -n      Clean up without confirmation
+  $0 -c                Clean up first, then run benchmarks
+  $0 --clean-only      Remove old benchmark results and artifacts only
+  $0 --clean-only -n   Clean up without confirmation
 
 EOF
     SKIP_CLEANUP=true
@@ -145,8 +148,12 @@ parse_args() {
                 VERBOSE=true
                 shift
                 ;;
-            -c|--cleanup)
-                CLEANUP_MODE=true
+            -c|--clean)
+                CLEAN_FIRST=true
+                shift
+                ;;
+            --clean-only)
+                CLEAN_ONLY_MODE=true
                 shift
                 ;;
             -T|--test-output)
@@ -246,7 +253,7 @@ restore_git_state() {
 # Cleanup function
 cleanup() {
     # Skip cleanup for quick-exit modes
-    if [[ "$SKIP_CLEANUP" == true ]] || [[ "$TEST_OUTPUT_MODE" == true ]] || [[ -n "$REPLAY_FILE" ]] || [[ "$CLEANUP_MODE" == true ]]; then
+    if [[ "$SKIP_CLEANUP" == true ]] || [[ "$TEST_OUTPUT_MODE" == true ]] || [[ -n "$REPLAY_FILE" ]] || [[ "$CLEAN_ONLY_MODE" == true ]]; then
         return
     fi
 
@@ -437,7 +444,7 @@ measure_server_memory() {
     # Get memory usage of hugo process (RSS in KB, convert to MB)
     local hugo_pid=$(pgrep -f "hugo server" | head -1)
     local memory_kb=0
-    
+
     if [[ -n "$hugo_pid" ]]; then
         # macOS uses different ps format than Linux
         if [[ "$(uname)" == "Darwin" ]]; then
@@ -884,7 +891,7 @@ generate_results() {
     printf "│ %-23s │ %11.2fs │ %11.2fs │ %-16s │\n" "Linting Time" "$npm_lint_avg" "$bun_lint_avg" "$lint_improvement"
     printf "│ %-23s │ %9s MB │ %9s MB │ %-16s │\n" "node_modules Size" "$NPM_NODE_MODULES_SIZE" "$BUN_NODE_MODULES_SIZE" "$size_improvement"
     printf "│ %-23s │ %9s MB │ %9s MB │ %-16s │\n" "Lockfile Size" "$NPM_LOCKFILE_SIZE" "$BUN_LOCKFILE_SIZE" "$lockfile_improvement"
-    
+
     # Calculate memory improvement
     local memory_improvement="Same"
     if [[ "$NPM_SERVER_MEMORY" =~ ^[0-9]+$ ]] && [[ "$BUN_SERVER_MEMORY" =~ ^[0-9]+$ ]] && [[ "$NPM_SERVER_MEMORY" -gt 0 ]]; then
@@ -897,7 +904,7 @@ generate_results() {
         fi
     fi
     printf "│ %-23s │ %9s MB │ %9s MB │ %-16s │\n" "Server Memory (RSS)" "$NPM_SERVER_MEMORY" "$BUN_SERVER_MEMORY" "$memory_improvement"
-    
+
     # Determine site verification status
     local site_status="Both pass"
     # Extract passed count from "X/Y" format
@@ -905,10 +912,10 @@ generate_results() {
     local npm_total=$(echo "$NPM_SITE_CHECK" | cut -d'/' -f2)
     local bun_passed=$(echo "$BUN_SITE_CHECK" | cut -d'/' -f1)
     local bun_total=$(echo "$BUN_SITE_CHECK" | cut -d'/' -f2)
-    
+
     local npm_all_pass=$([[ "$npm_passed" == "$npm_total" ]] && echo "yes" || echo "no")
     local bun_all_pass=$([[ "$bun_passed" == "$bun_total" ]] && echo "yes" || echo "no")
-    
+
     if [[ "$npm_all_pass" != "yes" ]] && [[ "$bun_all_pass" != "yes" ]]; then
         site_status="Both have issues"
     elif [[ "$npm_all_pass" != "yes" ]]; then
@@ -954,7 +961,7 @@ generate_results() {
     local npm_site_total=$(echo "$NPM_SITE_CHECK" | cut -d'/' -f2)
     local bun_site_passed=$(echo "$BUN_SITE_CHECK" | cut -d'/' -f1)
     local bun_site_total=$(echo "$BUN_SITE_CHECK" | cut -d'/' -f2)
-    
+
     if [[ "$npm_site_passed" == "$npm_site_total" ]] && [[ "$bun_site_passed" == "$bun_site_total" ]]; then
         print_success "Both versions successfully serve the site"
         print_success "All $npm_site_total site verification checks passed"
@@ -1132,10 +1139,10 @@ parse_times_from_file() {
     local file=$1
     local section=$2  # "npm" or "bun"
     local metric=$3   # "Installing dependencies" "Starting server" "Building production" "Running linters"
-    
+
     local in_section=false
     local times=()
-    
+
     while IFS= read -r line; do
         # Detect section start
         if [[ "$line" =~ Testing.*\(${section}\) ]]; then
@@ -1144,13 +1151,13 @@ parse_times_from_file() {
             # Hit next section, stop
             break
         fi
-        
+
         # Parse timing lines within section
         if [[ "$in_section" == true ]] && [[ "$line" =~ \[.*\].*${metric}.*\ ([0-9.]+)s$ ]]; then
             times+=("${BASH_REMATCH[1]}")
         fi
     done < "$file"
-    
+
     echo "${times[@]}"
 }
 
@@ -1159,9 +1166,9 @@ parse_metric_from_file() {
     local file=$1
     local section=$2  # "npm" or "bun"
     local pattern=$3  # e.g., "node_modules size:" or "Packages installed:"
-    
+
     local in_section=false
-    
+
     while IFS= read -r line; do
         # Detect section start
         if [[ "$line" =~ Testing.*\(${section}\) ]]; then
@@ -1169,57 +1176,57 @@ parse_metric_from_file() {
         elif [[ "$line" =~ Testing.*\((npm|bun)\) ]] && [[ "$in_section" == true ]]; then
             break
         fi
-        
+
         # Parse metric line within section
         if [[ "$in_section" == true ]] && [[ "$line" =~ ${pattern}[[:space:]]*([0-9.]+) ]]; then
             echo "${BASH_REMATCH[1]}"
             return
         fi
     done < "$file"
-    
+
     echo "0"
 }
 
 # Replay results from a previous benchmark file
 replay_results() {
     local file=$1
-    
+
     if [[ ! -f "$file" ]]; then
         print_error "File not found: $file"
         exit 1
     fi
-    
+
     print_header "Replaying Benchmark Results"
     echo
     print_info "Parsing results from: $file"
     echo
-    
+
     # Parse npm times
     read -ra NPM_INSTALL_TIMES <<< "$(parse_times_from_file "$file" "npm" "Installing dependencies")"
     read -ra NPM_SERVER_TIMES <<< "$(parse_times_from_file "$file" "npm" "Starting server")"
     read -ra NPM_BUILD_TIMES <<< "$(parse_times_from_file "$file" "npm" "Building production")"
     read -ra NPM_LINT_TIMES <<< "$(parse_times_from_file "$file" "npm" "Running linters")"
-    
+
     # Parse bun times
     read -ra BUN_INSTALL_TIMES <<< "$(parse_times_from_file "$file" "bun" "Installing dependencies")"
     read -ra BUN_SERVER_TIMES <<< "$(parse_times_from_file "$file" "bun" "Starting server")"
     read -ra BUN_BUILD_TIMES <<< "$(parse_times_from_file "$file" "bun" "Building production")"
     read -ra BUN_LINT_TIMES <<< "$(parse_times_from_file "$file" "bun" "Running linters")"
-    
+
     # Parse npm metrics
     NPM_NODE_MODULES_SIZE=$(parse_metric_from_file "$file" "npm" "node_modules size:")
     NPM_LOCKFILE_SIZE=$(parse_metric_from_file "$file" "npm" "Lockfile size:")
     NPM_PACKAGE_COUNT=$(parse_metric_from_file "$file" "npm" "Packages installed:")
     NPM_SERVER_MEMORY=$(parse_metric_from_file "$file" "npm" "server memory usage...")
     NPM_SITE_CHECK="4/4"  # Assume passed if we got this far
-    
+
     # Parse bun metrics
     BUN_NODE_MODULES_SIZE=$(parse_metric_from_file "$file" "bun" "node_modules size:")
     BUN_LOCKFILE_SIZE=$(parse_metric_from_file "$file" "bun" "Lockfile size:")
     BUN_PACKAGE_COUNT=$(parse_metric_from_file "$file" "bun" "Packages installed:")
     BUN_SERVER_MEMORY=$(parse_metric_from_file "$file" "bun" "server memory usage...")
     BUN_SITE_CHECK="4/4"
-    
+
     # Debug output
     if [[ "$VERBOSE" == true ]]; then
         print_info "Parsed NPM install times: ${NPM_INSTALL_TIMES[*]}"
@@ -1237,10 +1244,10 @@ replay_results() {
         print_info "Parsed BUN lockfile: ${BUN_LOCKFILE_SIZE} MB"
         echo
     fi
-    
+
     echo "==========================================="
     generate_results
-    
+
     print_success "Replay complete!"
 }
 
@@ -1249,10 +1256,16 @@ main() {
     # Parse arguments
     parse_args "$@"
 
-    # Handle cleanup mode
-    if [[ "$CLEANUP_MODE" == true ]]; then
+    # Handle clean-only mode (cleanup and exit)
+    if [[ "$CLEAN_ONLY_MODE" == true ]]; then
         do_cleanup
         exit 0
+    fi
+
+    # Handle clean-first mode (cleanup then continue to benchmarks)
+    if [[ "$CLEAN_FIRST" == true ]]; then
+        do_cleanup
+        # Continue to run benchmarks after cleanup
     fi
 
     # Handle test output mode
