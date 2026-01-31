@@ -12,3 +12,4 @@ resources
 /.serve-lint
 CLAUDE.local.md
 /.claude/
+benchmark-results-*.txt
