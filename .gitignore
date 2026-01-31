@@ -13,3 +13,6 @@ resources
 CLAUDE.local.md
 /.claude/
 benchmark-results-*.txt
+BENCHMARK_PLAN.md
+BENCHMARK_README.md
+benchmark-node-vs-bun.sh

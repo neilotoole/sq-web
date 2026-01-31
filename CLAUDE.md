@@ -138,7 +138,7 @@ Uses Hugo's built-in Chroma (not highlight.js):
 - Publish directory: `public`
 - Plugins: Lighthouse audits, sitemap submission
 - Deploy previews include full Lighthouse reports
-- Netlify automatically detects `bun.lockb` and uses `bun install`
+- Netlify automatically detects `bun.lock` and uses `bun install`
 
 ## Content Style Guide
 
@@ -179,4 +179,4 @@ Important note for readers.
 - **Build time:** Initial local server start can take 1+ minute
 - **Command help:** The `gen:cmd-help` script requires the `sq` CLI installed locally
 - **Module cache:** Run `bun install` if Hugo module issues occur
-- **Lockfile:** Project uses `bun.lockb` (binary lockfile) for dependency management
+- **Lockfile:** Project uses `bun.lock` (text-based lockfile, introduced in Bun 1.2+) for dependency management
