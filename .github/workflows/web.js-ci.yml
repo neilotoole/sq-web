@@ -23,7 +23,7 @@ jobs:
       run: bun install
 
     - name: Run test script
-      run: bun test
+      run: bun run test
 
     - name: Build production website
       run: bun run build
