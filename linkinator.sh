@@ -22,11 +22,11 @@ rm -rf $lint_dir
 
 # Start a local webserver (background process)
 echo "Starting server for linting at: $base_url"
-npx serve -l $port $lint_dir &
-#npx serve -l $port $lint_dir > /dev/null &
+bunx serve -l $port $lint_dir &
+#bunx serve -l $port $lint_dir > /dev/null &
 sleep 2 # Give server time to start
 echo "Server started"
 
-npx linkinator --config ./linkinator.config.json -r $base_url
+bunx linkinator --config ./linkinator.config.json -r $base_url
 
 echo "Linkinator finished"

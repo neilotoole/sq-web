@@ -4,20 +4,20 @@
 
 [build.environment]
   NODE_VERSION = "22"
-  NPM_VERSION = "10"
+  BUN_VERSION = "latest"
   HUGO_VERSION = "0.139.2"
 
 [context.production]
-  command = "npm run build"
+  command = "bun run build"
 
 [context.deploy-preview]
-  command = "npm run build -- -b $DEPLOY_PRIME_URL"
+  command = "bun run build -- -b $DEPLOY_PRIME_URL"
 
 [context.branch-deploy]
-  command = "npm run build -- -b $DEPLOY_PRIME_URL"
+  command = "bun run build -- -b $DEPLOY_PRIME_URL"
 
 [context.next]
-  command = "npm run build"
+  command = "bun run build"
 
 [context.next.environment]
   HUGO_ENV = "next"
@@ -52,7 +52,7 @@ output_path = "reports/lighthouse.html"
 
 [dev]
   framework = "#custom"
-  command = "npm run start"
+  command = "bun run start"
   targetPort = 1313
   port = 8888
   publish = "public"
