@@ -9,7 +9,7 @@ This site is built using:
 
 - [Hugo](https://gohugo.io) site generator
 - [Doks](https://getdoks.org) theme
-- [Node.js](https://nodejs.org/) tooling
+- [Bun](https://bun.sh) tooling
 - [Netlify](https://www.netlify.com) hosting
 
 Changes to the `master` branch kick off a redeploy on Netlify.
@@ -28,7 +28,7 @@ git clone https://github.com/neilotoole/sq-web.git && cd sq-web
 ### 2. Install dependencies
 
 ```bash
-npm install
+bun install
 ```
 
 ### 3. Make changes and test locally
@@ -37,10 +37,10 @@ npm install
 # Start a local webserver on http://localhost:1313 to test you changes.
 # Note that it may take a minute or longer for the site to be served (and
 # you may not receive any indication of this). Be patient.
-npm start
+bun start
 
 # Run linters, link checks, etc.
-npm test
+bun test
 ```
 
 ### 4. Submit a Pull Request
@@ -77,18 +77,18 @@ accessibility, best practices, and SEO. Before merging, click through to the
 deploy preview (e.g., `https://deploy-preview-59--sq-web.netlify.app`) to verify
 your changes look correct.
 
-
 ### Commands
 
-Key npm scripts defined in `package.json`:
+Key Bun scripts defined in `package.json`:
+
 | Command                  | Description                                             |
 |--------------------------|---------------------------------------------------------|
-| `npm start`              | Start local dev server with live reload                 |
-| `npm run build`          | Build production site                                   |
-| `npm run preview`        | Build and serve locally at http://localhost:1313        |
-| `npm run lint`           | Run all linters (scripts, styles, markdown, links)      |
-| `npm run gen:cmd-help`   | Regenerate command help files in `content/en/docs/cmd/` |
-| `npm run gen:syntax-css` | Regenerate syntax highlighting CSS                      |
+| `bun start`              | Start local dev server with live reload                 |
+| `bun run build`          | Build production site                                   |
+| `bun run preview`        | Build and serve locally at http://localhost:1313        |
+| `bun run lint`           | Run all linters (scripts, styles, markdown, links)      |
+| `bun run gen:cmd-help`   | Regenerate command help files in `content/en/docs/cmd/` |
+| `bun run gen:syntax-css` | Regenerate syntax highlighting CSS                      |
 
 ### Regenerating Command Documentation
 
@@ -98,7 +98,7 @@ included in the documentation pages.
 
 ### Link Checking
 
-The `npm run lint` command includes link checking via [linkinator](https://github.com/JustinBeckwith/linkinator).
+The `bun run lint` command includes link checking via [linkinator](https://github.com/JustinBeckwith/linkinator).
 Some sites (e.g., StackOverflow) block automated crawlers, returning 403 errors in CI. These domains
 are excluded in `linkinator.config.json`.
 
@@ -113,9 +113,8 @@ are excluded in `linkinator.config.json`.
 ## Misc
 
 - Doks comes with [commands](https://getdoks.org/docs/prologue/commands/) for common tasks.
-- Use `npm run gen:syntax-css` to regenerate the syntax highlight theme. The themes (light and dark)
+- Use `bun run gen:syntax-css` to regenerate the syntax highlight theme. The themes (light and dark)
   are specified in [generate-syntax-css.sh](./generate-syntax-css.sh).
-
 
 ### Asciinema
 
@@ -138,8 +137,7 @@ If you see this problem:
 Error: Error building site: "content/en/_index.md:9:1": failed to extract shortcode: template for shortcode "asciicast" not found
 ```
 
-It probably means that the hugo module cache is out of whack. Run `npm install` and try again.
-
+It probably means that the hugo module cache is out of whack. Run `bun install` and try again.
 
 ## Documentation
 
