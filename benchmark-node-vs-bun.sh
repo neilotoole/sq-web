@@ -365,14 +365,18 @@ benchmark_server_start() {
     local server_pid=$!
 
     # Wait for server to respond
-    local ready_time=$(wait_for_server "$TIMEOUT")
+    local wait_result=$(wait_for_server "$TIMEOUT")
 
-    if [[ "$ready_time" == "-1" ]]; then
+    if [[ "$wait_result" == "-1" ]]; then
         print_error "Server failed to start within ${TIMEOUT}s" >&2
         kill $server_pid 2>/dev/null || true
         echo "-1"
         return 1
     fi
+
+    # Calculate actual elapsed time from when server was started
+    local end=$(date +%s.%N 2>/dev/null || date +%s)
+    local ready_time=$(echo "$end - $start" | bc -l 2>/dev/null || echo "$wait_result")
 
     printf "%.2fs\n" "$ready_time" >&2
 
@@ -719,7 +723,11 @@ test_branch() {
 
     # Checkout branch
     print_info "Checking out $branch..."
-    git checkout "$branch" > /dev/null 2>&1
+    if ! git checkout "$branch" > /dev/null 2>&1; then
+        print_error "Failed to checkout branch '$branch'. Do you have uncommitted changes?"
+        print_error "Run 'git status' to check, or use 'git stash' to save changes."
+        return 1
+    fi
     echo
 
     # Benchmark install
@@ -1359,10 +1367,18 @@ main() {
 
     # Test npm branch
     echo "==========================================="
-    test_branch "$NPM_BRANCH" "$NPM_RUNTIME" "$NPM_RUNTIME install"
+    if ! test_branch "$NPM_BRANCH" "$NPM_RUNTIME" "$NPM_RUNTIME install"; then
+        print_error "Failed to test $NPM_BRANCH branch. Aborting benchmark."
+        restore_git_state
+        exit 1
+    fi
 
     echo "==========================================="
-    test_branch "$BUN_BRANCH" "$BUN_RUNTIME" "$BUN_RUNTIME install"
+    if ! test_branch "$BUN_BRANCH" "$BUN_RUNTIME" "$BUN_RUNTIME install"; then
+        print_error "Failed to test $BUN_BRANCH branch. Aborting benchmark."
+        restore_git_state
+        exit 1
+    fi
 
     # Generate comparison
     echo "==========================================="
