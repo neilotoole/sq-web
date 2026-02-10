@@ -9,14 +9,16 @@
 
 set -euo pipefail
 
-# Colors for output
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-CYAN='\033[0;36m'
-BOLD='\033[1m'
-NC='\033[0m' # No Color
+# Resolve script directory for reliable sourcing
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+LOG_BASH="${SCRIPT_DIR}/log.bash"
+if [[ -f "$LOG_BASH" ]]; then
+    # shellcheck disable=SC1090
+    source "$LOG_BASH"
+else
+    echo "Error: log.bash not found at $LOG_BASH" >&2
+    exit 1
+fi
 
 # Configuration
 RUNS=3
@@ -34,7 +36,8 @@ STASH_CREATED=false
 SKIP_CLEANUP=false
 
 # Branch configuration - change these to compare different branches
-NPM_BRANCH="master"                 # Default: Node.js/npm
+# NPM_BRANCH: last master commit with npm (so benchmark stays npm vs bun after Bun PR lands)
+NPM_BRANCH="8041c83"                # Upgrade to Node.js 22 and npm 10 for Netlify builds (#60)
 BUN_BRANCH="feature/bun-migration"  # Default: Bun migration branch
 NPM_RUNTIME="npm"                   # Default: Node.js/npm
 BUN_RUNTIME="bun"                   # Runtime name for Bun branch
@@ -64,28 +67,30 @@ BUN_SITE_CHECK=""
 
 # Print functions
 print_header() {
-    echo -e "${BOLD}${CYAN}$1${NC}"
+    log_info "$1"
 }
 
 print_success() {
-    echo -e "${GREEN}✓${NC} $1"
+    log_success "$1"
 }
 
 print_error() {
-    echo -e "${RED}✗${NC} $1"
+    log_error "$1"
 }
 
 print_info() {
-    echo -e "${BLUE}ℹ${NC} $1"
+    log_info "$1"
 }
 
 print_warning() {
-    echo -e "${YELLOW}⚠${NC} $1"
+    log_warning "$1"
 }
 
 # Usage information
 usage() {
-    cat << EOF
+    while IFS= read -r line; do
+        log "$line"
+    done << EOF
 Usage: $0 [OPTIONS]
 
 Benchmark performance comparison between Node.js/npm ($NPM_BRANCH) and Bun ($BUN_BRANCH).
@@ -165,7 +170,7 @@ parse_args() {
                 shift 2
                 ;;
             *)
-                echo "Unknown option: $1"
+                print_error "Unknown option: $1"
                 usage
                 ;;
         esac
@@ -221,7 +226,7 @@ check_prerequisites() {
     print_success "Node.js: $node_version"
     print_success "npm: $npm_version"
     print_success "Bun: $bun_version"
-    echo
+    log ""
 }
 
 # Save current git state
@@ -313,11 +318,10 @@ benchmark_install() {
 
     clean_env "$runtime install run $run_num"
 
-    echo -n "  [$run_num/$RUNS] Installing dependencies... " >&2
-
     local time=$(time_command $cmd)
-
-    printf "%.2fs\n" "$time" >&2
+    local time_fmt
+    time_fmt=$(printf "%.2fs" "$time")
+    log_info_dim "  [$run_num/$RUNS] Installing dependencies... ${time_fmt}"
     echo "$time"
 }
 
@@ -348,7 +352,7 @@ benchmark_server_start() {
 
     clean_env "$runtime server run $run_num"
 
-    echo -n "  [$run_num/$RUNS] Starting server... " >&2
+    log_info_dim "  [$run_num/$RUNS] Starting server..."
 
     # Install dependencies first (silently)
     $cmd > /dev/null 2>&1
@@ -378,7 +382,9 @@ benchmark_server_start() {
     local end=$(date +%s.%N 2>/dev/null || date +%s)
     local ready_time=$(echo "$end - $start" | bc -l 2>/dev/null || echo "$wait_result")
 
-    printf "%.2fs\n" "$ready_time" >&2
+    local ready_fmt
+    ready_fmt=$(printf "%.2fs" "$ready_time")
+    log_info_dim "  [$run_num/$RUNS] Server ready in ${ready_fmt}"
 
     # Kill server
     kill $server_pid 2>/dev/null || true
@@ -396,7 +402,7 @@ benchmark_build() {
 
     clean_env "$runtime build run $run_num"
 
-    echo -n "  [$run_num/$RUNS] Running Hugo build... " >&2
+    log_info_dim "  [$run_num/$RUNS] Running Hugo build..."
 
     # Install dependencies first (silently)
     $cmd > /dev/null 2>&1
@@ -409,7 +415,9 @@ benchmark_build() {
         time=$(time_command bun run build)
     fi
 
-    printf "%.2fs\n" "$time" >&2
+    local time_fmt
+    time_fmt=$(printf "%.2fs" "$time")
+    log_info_dim "  [$run_num/$RUNS] Build completed in ${time_fmt}"
     echo "$time"
 }
 
@@ -418,7 +426,7 @@ measure_server_memory() {
     local runtime=$1
     local install_cmd=$2
 
-    echo -n "  Measuring server memory usage... " >&2
+    log_info_dim "  Measuring server memory usage..."
 
     # Install dependencies first (silently)
     $install_cmd > /dev/null 2>&1
@@ -464,7 +472,7 @@ measure_server_memory() {
         memory_mb=$(echo "scale=0; $memory_kb / 1024" | bc -l 2>/dev/null || echo "0")
     fi
 
-    printf "%s MB\n" "$memory_mb" >&2
+    log_info_dim "  Server memory usage: ${memory_mb} MB"
 
     # Kill server
     kill $server_pid 2>/dev/null || true
@@ -486,7 +494,7 @@ benchmark_lint() {
         $cmd > /dev/null 2>&1
     fi
 
-    echo -n "  [$run_num/$RUNS] Running linters (scripts, styles, markdown)... " >&2
+    log_info_dim "  [$run_num/$RUNS] Running linters (scripts, styles, markdown)..."
 
     # Run linting (excluding link checker as it's slow)
     local time
@@ -496,7 +504,9 @@ benchmark_lint() {
         time=$(time_command bash -c "bun run lint:scripts && bun run lint:styles && bun run lint:markdown")
     fi
 
-    printf "%.2fs\n" "$time" >&2
+    local time_fmt
+    time_fmt=$(printf "%.2fs" "$time")
+    log_info_dim "  [$run_num/$RUNS] Linters completed in ${time_fmt}"
     echo "$time"
 }
 
@@ -545,7 +555,7 @@ verify_site() {
     local runtime=$1
     local install_cmd=$2
 
-    print_info "Verifying site functionality..." >&2
+    print_info "Verifying site functionality..."
 
     clean_env "$runtime site verification"
     $install_cmd > /dev/null 2>&1
@@ -563,7 +573,7 @@ verify_site() {
     local ready=$(wait_for_server 120)
 
     if [[ "$ready" == "-1" ]]; then
-        print_error "Server failed to start for verification" >&2
+        print_error "Server failed to start for verification"
         kill $server_pid 2>/dev/null || true
         echo "0/9"
         return 1
@@ -574,78 +584,78 @@ verify_site() {
 
     # 1. Check homepage loads
     if curl -s -o /dev/null -w "%{http_code}" http://localhost:1313/ | grep -q "200"; then
-        print_success "  Homepage loads (HTTP 200)" >&2
+        print_success "  Homepage loads (HTTP 200)"
         ((checks_passed++))
     else
-        print_error "  Homepage failed to load" >&2
+        print_error "  Homepage failed to load"
     fi
 
     # 2. Check homepage content
     if curl -s http://localhost:1313/ | grep -qi "sq"; then
-        print_success "  Homepage contains expected content" >&2
+        print_success "  Homepage contains expected content"
         ((checks_passed++))
     else
-        print_error "  Homepage content check failed" >&2
+        print_error "  Homepage content check failed"
     fi
 
     # 3. Check docs page
     if curl -s -o /dev/null -w "%{http_code}" http://localhost:1313/docs/ | grep -q "200"; then
-        print_success "  Docs page loads (HTTP 200)" >&2
+        print_success "  Docs page loads (HTTP 200)"
         ((checks_passed++))
     else
-        print_error "  Docs page failed to load" >&2
+        print_error "  Docs page failed to load"
     fi
 
     # 4. Check for CSS/JS assets
     if curl -s http://localhost:1313/ | grep -qE '\.(css|js)'; then
-        print_success "  CSS/JS assets referenced" >&2
+        print_success "  CSS/JS assets referenced"
         ((checks_passed++))
     else
-        print_error "  CSS/JS assets check failed" >&2
+        print_error "  CSS/JS assets check failed"
     fi
 
     # 5. Check install page loads (Hugo uses pretty URLs without .html)
     if curl -s -o /dev/null -w "%{http_code}" http://localhost:1313/docs/install/ | grep -q "200"; then
-        print_success "  Install page loads (HTTP 200)" >&2
+        print_success "  Install page loads (HTTP 200)"
         ((checks_passed++))
     else
-        print_error "  Install page failed to load" >&2
+        print_error "  Install page failed to load"
     fi
 
     # 6. Check overview page loads (Hugo uses pretty URLs without .html)
     if curl -s -o /dev/null -w "%{http_code}" http://localhost:1313/docs/overview/ | grep -q "200"; then
-        print_success "  Overview page loads (HTTP 200)" >&2
+        print_success "  Overview page loads (HTTP 200)"
         ((checks_passed++))
     else
-        print_error "  Overview page failed to load" >&2
+        print_error "  Overview page failed to load"
     fi
 
     # 7. Check search functionality is available (search input element or index.json)
     local search_input=$(curl -s http://localhost:1313/ | grep -qE 'search|Search' && echo "yes" || echo "no")
     local search_index=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:1313/index.json 2>/dev/null)
     if [[ "$search_input" == "yes" ]] || [[ "$search_index" == "200" ]]; then
-        print_success "  Search functionality available" >&2
+        print_success "  Search functionality available"
         ((checks_passed++))
     else
-        print_error "  Search functionality not found" >&2
+        print_error "  Search functionality not found"
     fi
 
     # 8. Check images load (favicon or any image)
     local favicon_status=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:1313/favicon.ico 2>/dev/null)
     local img_in_html=$(curl -s http://localhost:1313/ | grep -qE '<img' && echo "yes" || echo "no")
     if [[ "$favicon_status" == "200" ]] || [[ "$img_in_html" == "yes" ]]; then
-        print_success "  Images/favicon available" >&2
+        print_success "  Images/favicon available"
         ((checks_passed++))
     else
-        print_error "  Images check failed" >&2
+        print_error "  Images check failed"
     fi
 
     # 9. Check no major errors in page content (look for error indicators)
     local homepage_content=$(curl -s http://localhost:1313/)
     if echo "$homepage_content" | grep -qiE 'error|exception|failed to|cannot find'; then
-        print_error "  Page contains error messages" >&2
+        print_error "  Page contains error messages"
     else
-        print_success "  No error messages in content" >&2
+        print_success "  No error messages in content"
         ((checks_passed++))
     fi
 
@@ -714,9 +724,9 @@ test_branch() {
     local install_cmd=$3
 
     print_header "Testing $branch ($runtime)"
-    echo
+    log ""
 
-    # Clean before checkout to avoid conflicts with lockfiles
+    # Clean before checkout to avoid conflicts with lock files
     print_info "Cleaning environment before checkout..."
     rm -rf node_modules public resources .serve-lint > /dev/null 2>&1 || true
     rm -f package-lock.json bun.lockb bun.lock > /dev/null 2>&1 || true
@@ -728,7 +738,7 @@ test_branch() {
         print_error "Run 'git status' to check, or use 'git stash' to save changes."
         return 1
     fi
-    echo
+    log ""
 
     # Benchmark install
     print_info "Benchmarking dependency installation..."
@@ -738,7 +748,7 @@ test_branch() {
         t=$(benchmark_install "$runtime" "$i" "$install_cmd")
         install_times+=("$t")
     done
-    echo
+    log ""
 
     # Benchmark server startup
     print_info "Benchmarking server startup..."
@@ -747,7 +757,7 @@ test_branch() {
         t=$(benchmark_server_start "$runtime" "$i" "$install_cmd")
         server_times+=("$t")
     done
-    echo
+    log ""
 
     # Benchmark Hugo build
     print_info "Benchmarking Hugo build..."
@@ -756,7 +766,7 @@ test_branch() {
         t=$(benchmark_build "$runtime" "$i" "$install_cmd")
         build_times+=("$t")
     done
-    echo
+    log ""
 
     # Benchmark linting
     print_info "Benchmarking linting..."
@@ -765,7 +775,7 @@ test_branch() {
         t=$(benchmark_lint "$runtime" "$i" "$install_cmd")
         lint_times+=("$t")
     done
-    echo
+    log ""
 
     # Get metrics
     clean_env "$runtime metrics"
@@ -793,11 +803,11 @@ test_branch() {
 
     # Measure server memory usage
     local server_memory=$(measure_server_memory "$runtime" "$install_cmd")
-    echo
+    log ""
 
     # Verify site
     local site_check=$(verify_site "$runtime" "$install_cmd")
-    echo
+    log ""
 
     # Store results
     if [[ "$runtime" == "npm" ]]; then
@@ -834,7 +844,7 @@ test_branch() {
 # Generate results
 generate_results() {
     print_header "Performance Comparison"
-    echo
+    log ""
 
     # Debug: Show array contents
     if [[ "$VERBOSE" == true ]]; then
@@ -890,15 +900,15 @@ generate_results() {
     fi
 
     # Print table
-    echo "┌─────────────────────────┬──────────────┬──────────────┬──────────────────┐"
-    printf "│ %-23s │ %-12s │ %-12s │ %-16s │\n" "Metric" "npm" "Bun" "Improvement"
-    echo "├─────────────────────────┼──────────────┼──────────────┼──────────────────┤"
-    printf "│ %-23s │ %11.2fs │ %11.2fs │ %-16s │\n" "Install Time" "$npm_install_avg" "$bun_install_avg" "$install_improvement"
-    printf "│ %-23s │ %11.2fs │ %11.2fs │ %-16s │\n" "Server Start Time" "$npm_server_avg" "$bun_server_avg" "$server_improvement"
-    printf "│ %-23s │ %11.2fs │ %11.2fs │ %-16s │\n" "Hugo Build Time" "$npm_build_avg" "$bun_build_avg" "$build_improvement"
-    printf "│ %-23s │ %11.2fs │ %11.2fs │ %-16s │\n" "Linting Time" "$npm_lint_avg" "$bun_lint_avg" "$lint_improvement"
-    printf "│ %-23s │ %9s MB │ %9s MB │ %-16s │\n" "node_modules Size" "$NPM_NODE_MODULES_SIZE" "$BUN_NODE_MODULES_SIZE" "$size_improvement"
-    printf "│ %-23s │ %9s MB │ %9s MB │ %-16s │\n" "Lockfile Size" "$NPM_LOCKFILE_SIZE" "$BUN_LOCKFILE_SIZE" "$lockfile_improvement"
+    log "┌─────────────────────────┬──────────────┬──────────────┬──────────────────┐"
+    log "$(printf "│ %-23s │ %-12s │ %-12s │ %-16s │" "Metric" "npm" "Bun" "Improvement")"
+    log "├─────────────────────────┼──────────────┼──────────────┼──────────────────┤"
+    log "$(printf "│ %-23s │ %11.2fs │ %11.2fs │ %-16s │" "Install Time" "$npm_install_avg" "$bun_install_avg" "$install_improvement")"
+    log "$(printf "│ %-23s │ %11.2fs │ %11.2fs │ %-16s │" "Server Start Time" "$npm_server_avg" "$bun_server_avg" "$server_improvement")"
+    log "$(printf "│ %-23s │ %11.2fs │ %11.2fs │ %-16s │" "Hugo Build Time" "$npm_build_avg" "$bun_build_avg" "$build_improvement")"
+    log "$(printf "│ %-23s │ %11.2fs │ %11.2fs │ %-16s │" "Linting Time" "$npm_lint_avg" "$bun_lint_avg" "$lint_improvement")"
+    log "$(printf "│ %-23s │ %9s MB │ %9s MB │ %-16s │" "node_modules Size" "$NPM_NODE_MODULES_SIZE" "$BUN_NODE_MODULES_SIZE" "$size_improvement")"
+    log "$(printf "│ %-23s │ %9s MB │ %9s MB │ %-16s │" "Lockfile Size" "$NPM_LOCKFILE_SIZE" "$BUN_LOCKFILE_SIZE" "$lockfile_improvement")"
 
     # Calculate memory improvement
     local memory_improvement="Same"
@@ -911,7 +921,7 @@ generate_results() {
             memory_improvement="${mem_pct}% more"
         fi
     fi
-    printf "│ %-23s │ %9s MB │ %9s MB │ %-16s │\n" "Server Memory (RSS)" "$NPM_SERVER_MEMORY" "$BUN_SERVER_MEMORY" "$memory_improvement"
+    log "$(printf "│ %-23s │ %9s MB │ %9s MB │ %-16s │" "Server Memory (RSS)" "$NPM_SERVER_MEMORY" "$BUN_SERVER_MEMORY" "$memory_improvement")"
 
     # Determine site verification status
     local site_status="Both pass"
@@ -931,13 +941,13 @@ generate_results() {
     elif [[ "$bun_all_pass" != "yes" ]]; then
         site_status="Bun has issues"
     fi
-    printf "│ %-23s │ %12s │ %12s │ %-16s │\n" "Site Verification" "$NPM_SITE_CHECK" "$BUN_SITE_CHECK" "$site_status"
-    echo "└─────────────────────────┴──────────────┴──────────────┴──────────────────┘"
-    echo
+    log "$(printf "│ %-23s │ %12s │ %12s │ %-16s │" "Site Verification" "$NPM_SITE_CHECK" "$BUN_SITE_CHECK" "$site_status")"
+    log "└─────────────────────────┴──────────────┴──────────────┴──────────────────┘"
+    log ""
 
     # Summary
     print_header "Summary"
-    echo
+    log ""
 
     # Only show comparisons if we have valid numbers
     if [[ "$npm_install_avg" =~ ^[0-9.]+$ ]] && [[ "$bun_install_avg" =~ ^[0-9.]+$ ]] &&
@@ -984,7 +994,7 @@ generate_results() {
         print_warning "Bun version: $BUN_SITE_CHECK checks passed"
     fi
 
-    echo
+    log ""
     if [[ -n "$RESULTS_FILE" ]]; then
         print_info "Results saved to: $RESULTS_FILE"
     fi
@@ -993,10 +1003,10 @@ generate_results() {
 # Cleanup function
 do_cleanup() {
     print_header "Benchmark Cleanup"
-    echo
+    log ""
 
     print_info "Scanning for benchmark artifacts..."
-    echo
+    log ""
 
     # Find benchmark result files
     local result_files=(benchmark-results-*.txt)
@@ -1005,29 +1015,29 @@ do_cleanup() {
 
     # Check for result files
     if [[ -f "${result_files[0]}" ]]; then
-        echo "Benchmark result files found:"
+        log "Benchmark result files found:"
         for file in "${result_files[@]}"; do
             if [[ -f "$file" ]]; then
                 local size=$(ls -lh "$file" | awk '{print $5}')
                 local date=$(ls -l "$file" | awk '{print $6, $7, $8}')
-                echo "  - $file (${size}, ${date})"
+                log "  - $file (${size}, ${date})"
                 ((count++))
             fi
         done
-        echo
+        log ""
     fi
 
     # Check for log files
     if [[ -f "${run_logs[0]}" ]]; then
-        echo "Benchmark log files found:"
+        log "Benchmark log files found:"
         for file in "${run_logs[@]}"; do
             if [[ -f "$file" ]]; then
                 local size=$(ls -lh "$file" | awk '{print $5}')
-                echo "  - $file (${size})"
+                log "  - $file (${size})"
                 ((count++))
             fi
         done
-        echo
+        log ""
     fi
 
     # Check for leftover artifacts
@@ -1041,17 +1051,17 @@ do_cleanup() {
     [[ -f "bun.lock" ]] && artifacts+=("bun.lock")
 
     if [[ ${#artifacts[@]} -gt 0 ]]; then
-        echo "Build artifacts found:"
+        log "Build artifacts found:"
         for artifact in "${artifacts[@]}"; do
             if [[ -d "$artifact" ]]; then
                 local size=$(du -sh "$artifact" 2>/dev/null | awk '{print $1}')
-                echo "  - $artifact (${size})"
+                log "  - $artifact (${size})"
             else
-                echo "  - $artifact"
+                log "  - $artifact"
             fi
             ((count++))
         done
-        echo
+        log ""
     fi
 
     if [[ $count -eq 0 ]]; then
@@ -1061,7 +1071,7 @@ do_cleanup() {
 
     # Confirm cleanup
     if [[ "$NO_CONFIRM" == false ]]; then
-        echo -n "Remove all ${count} item(s)? [y/N] "
+        log "Remove all ${count} item(s)? [y/N] "
         read -r response
         if [[ ! "$response" =~ ^[Yy]$ ]]; then
             print_info "Cleanup cancelled"
@@ -1071,7 +1081,7 @@ do_cleanup() {
         print_warning "Running cleanup without confirmation (--no-confirm)"
     fi
 
-    echo
+    log ""
     print_info "Cleaning up..."
 
     # Remove result files
@@ -1103,16 +1113,16 @@ do_cleanup() {
         done
     fi
 
-    echo
+    log ""
     print_success "Cleanup complete!"
 }
 
 # Test output with sample data
 test_output() {
     print_header "Testing Output Formatting"
-    echo
+    log ""
     print_info "Using sample benchmark data..."
-    echo
+    log ""
 
     # Populate with sample data (realistic values based on actual runs)
     NPM_INSTALL_TIMES=("34.45" "19.33" "20.56")
@@ -1135,7 +1145,7 @@ test_output() {
     BUN_SERVER_MEMORY="142"
     BUN_SITE_CHECK="9/9"
 
-    echo "==========================================="
+    log_separator
     generate_results
 
     print_success "Test output complete!"
@@ -1205,9 +1215,9 @@ replay_results() {
     fi
 
     print_header "Replaying Benchmark Results"
-    echo
+    log ""
     print_info "Parsing results from: $file"
-    echo
+    log ""
 
     # Parse npm times
     read -ra NPM_INSTALL_TIMES <<< "$(parse_times_from_file "$file" "npm" "Installing dependencies")"
@@ -1243,17 +1253,17 @@ replay_results() {
         print_info "Parsed NPM lint times: ${NPM_LINT_TIMES[*]}"
         print_info "Parsed NPM node_modules: ${NPM_NODE_MODULES_SIZE} MB"
         print_info "Parsed NPM lockfile: ${NPM_LOCKFILE_SIZE} MB"
-        echo
+        log ""
         print_info "Parsed BUN install times: ${BUN_INSTALL_TIMES[*]}"
         print_info "Parsed BUN server times: ${BUN_SERVER_TIMES[*]}"
         print_info "Parsed BUN build times: ${BUN_BUILD_TIMES[*]}"
         print_info "Parsed BUN lint times: ${BUN_LINT_TIMES[*]}"
         print_info "Parsed BUN node_modules: ${BUN_NODE_MODULES_SIZE} MB"
         print_info "Parsed BUN lockfile: ${BUN_LOCKFILE_SIZE} MB"
-        echo
+        log ""
     fi
 
-    echo "==========================================="
+    log_separator
     generate_results
 
     print_success "Replay complete!"
@@ -1263,6 +1273,8 @@ replay_results() {
 main() {
     # Parse arguments
     parse_args "$@"
+
+    log_separator
 
     # Handle clean-only mode (cleanup and exit)
     if [[ "$CLEAN_ONLY_MODE" == true ]]; then
@@ -1291,36 +1303,36 @@ main() {
     # Handle dry-run mode
     if [[ "$DRY_RUN" == true ]]; then
         print_header "Dry Run - No benchmarks will be executed"
-        echo
+        log ""
         print_info "Configuration:"
-        echo "  - Runs per metric: $RUNS"
-        echo "  - Server timeout: ${TIMEOUT}s"
-        echo "  - npm branch: $NPM_BRANCH"
-        echo "  - Bun branch: $BUN_BRANCH"
-        echo
+        log "  - Runs per metric: $RUNS"
+        log "  - Server timeout: ${TIMEOUT}s"
+        log "  - npm branch: $NPM_BRANCH"
+        log "  - Bun branch: $BUN_BRANCH"
+        log ""
         print_info "The following steps would be performed:"
-        echo "  1. Stash any uncommitted changes"
-        echo "  2. Checkout '$NPM_BRANCH' branch"
-        echo "  3. Run $RUNS iterations of:"
-        echo "     - npm install (timed)"
-        echo "     - npm start (server startup timed)"
-        echo "     - npm run build (Hugo build timed)"
-        echo "     - npm run lint:scripts/styles/markdown (timed)"
-        echo "  4. Collect npm metrics (node_modules size, lockfile size)"
-        echo "  5. Measure server memory usage (RSS)"
-        echo "  6. Verify site functionality"
-        echo "  7. Checkout '$BUN_BRANCH' branch"
-        echo "  8. Run $RUNS iterations of:"
-        echo "     - bun install (timed)"
-        echo "     - bun start (server startup timed)"
-        echo "     - bun run build (Hugo build timed)"
-        echo "     - bun run lint:scripts/styles/markdown (timed)"
-        echo "  9. Collect bun metrics (node_modules size, lockfile size)"
-        echo " 10. Measure server memory usage (RSS)"
-        echo " 11. Verify site functionality"
-        echo " 12. Generate comparison report"
-        echo " 13. Restore original branch and unstash changes"
-        echo
+        log "  1. Stash any uncommitted changes"
+        log "  2. Checkout '$NPM_BRANCH' branch"
+        log "  3. Run $RUNS iterations of:"
+        log "     - npm install (timed)"
+        log "     - npm start (server startup timed)"
+        log "     - npm run build (Hugo build timed)"
+        log "     - npm run lint:scripts/styles/markdown (timed)"
+        log "  4. Collect npm metrics (node_modules size, lockfile size)"
+        log "  5. Measure server memory usage (RSS)"
+        log "  6. Verify site functionality"
+        log "  7. Checkout '$BUN_BRANCH' branch"
+        log "  8. Run $RUNS iterations of:"
+        log "     - bun install (timed)"
+        log "     - bun start (server startup timed)"
+        log "     - bun run build (Hugo build timed)"
+        log "     - bun run lint:scripts/styles/markdown (timed)"
+        log "  9. Collect bun metrics (node_modules size, lockfile size)"
+        log " 10. Measure server memory usage (RSS)"
+        log " 11. Verify site functionality"
+        log " 12. Generate comparison report"
+        log " 13. Restore original branch and unstash changes"
+        log ""
         print_success "Dry run complete - no changes made"
         SKIP_CLEANUP=true
         exit 0
@@ -1335,45 +1347,45 @@ main() {
     exec 2>&1
 
     # Print banner
-    echo "==========================================="
-    print_header " Node.js/npm vs Bun Performance Benchmark"
-    echo "==========================================="
-    echo
+    log_separator
+    print_header "Node.js/npm vs Bun Performance Benchmark"
+    log_separator
+    log ""
 
     # Print test configuration
     print_info "Test Configuration:"
-    echo "  - Runs per metric: $RUNS"
-    echo "  - Server timeout: ${TIMEOUT}s"
-    echo "  - Date: $(date '+%Y-%m-%d %H:%M:%S')"
-    echo
+    log "  - Runs per metric: $RUNS"
+    log "  - Server timeout: ${TIMEOUT}s"
+    log "  - Date: $(date '+%Y-%m-%d %H:%M:%S')"
+    log ""
 
     # Check prerequisites
     check_prerequisites
 
     # Confirm
     if [[ "$NO_CONFIRM" == false ]]; then
-        echo -n "This will switch branches and clean your workspace. Continue? [y/N] "
+        log "This will switch branches and clean your workspace. Continue? [y/N] "
         read -r response
         if [[ ! "$response" =~ ^[Yy]$ ]]; then
             print_info "Aborted by user"
             exit 0
         fi
-        echo
+        log ""
     fi
 
     # Save git state
     save_git_state
-    echo
+    log ""
 
     # Test npm branch
-    echo "==========================================="
+    log_separator
     if ! test_branch "$NPM_BRANCH" "$NPM_RUNTIME" "$NPM_RUNTIME install"; then
         print_error "Failed to test $NPM_BRANCH branch. Aborting benchmark."
         restore_git_state
         exit 1
     fi
 
-    echo "==========================================="
+    log_separator
     if ! test_branch "$BUN_BRANCH" "$BUN_RUNTIME" "$BUN_RUNTIME install"; then
         print_error "Failed to test $BUN_BRANCH branch. Aborting benchmark."
         restore_git_state
@@ -1381,7 +1393,7 @@ main() {
     fi
 
     # Generate comparison
-    echo "==========================================="
+    log_separator
     generate_results
 
     # Restore git state
