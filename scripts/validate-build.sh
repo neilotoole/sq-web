@@ -162,10 +162,15 @@ fi
 print_test "Relative links open in same tab (no target=_blank on internal relative)"
 if [[ "$HOMEPAGE_OK" != true ]]; then
     print_fail "Homepage did not respond; cannot check page content"
-elif echo "$BODY" | grep -qE 'target="_blank"[^>]*href="(\.\./|\./|[a-gi-zA-Z][a-zA-Z0-9]*/)|href="(\.\./|\./|[a-gi-zA-Z][a-zA-Z0-9]*/)[^>]*target="_blank"'; then
-    print_fail "Page has relative link(s) with target=_blank (should open in same tab)"
 else
-    print_pass "No relative links incorrectly set to open in new tab"
+    # Match lines with target="_blank" and relative-style href (../, ./, or word/). Use [a-zA-Z]
+    # so links like href="history/" are caught; exclude lines with href="http(s) (valid external).
+    REL_BAD=$(echo "$BODY" | grep -E 'target="_blank"[^>]*href="(\.\./|\./|[a-zA-Z][a-zA-Z0-9]*/)|href="(\.\./|\./|[a-zA-Z][a-zA-Z0-9]*/)[^>]*target="_blank"' | grep -v 'href="https\?://' || true)
+    if [[ -n "$REL_BAD" ]]; then
+        print_fail "Page has relative link(s) with target=_blank (should open in same tab)"
+    else
+        print_pass "No relative links incorrectly set to open in new tab"
+    fi
 fi
 
 # 7. No bad absolute links (localhost without port when we expect a port)
