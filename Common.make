@@ -36,9 +36,9 @@ PROJECT_NAME := sq-web
 DOCKER_IMAGE := $(PROJECT_NAME):latest
 DOCKER_CONTAINER := $(PROJECT_NAME)-local
 
-# Port mapping (host:container)
+# Port mapping (host:container) - Hugo listens on 8080 in container so links use :8080
 HOST_PORT := 8080
-CONTAINER_PORT := 80
+CONTAINER_PORT := 8080
 
 # Default shell to use
 SHELL := /bin/bash
@@ -66,7 +66,7 @@ help:
 	@$(LOGGER) log_info "Quick start"
 	@echo " make run-detached && make ping"
 	@echo ""
-	@$(LOGGER) log_dim "Site will be available at http://localhost:$(HOST_PORT)"
+	@$(LOGGER) log_dim "Site at http://localhost:$(HOST_PORT) (Hugo server with live reload)"
 
 
 # -----------------------------------------------------------------------------------------------------------
@@ -122,6 +122,8 @@ check: check_deps
 # Docker targets (using Dockerfile directly)
 # -----------------------------------------------------------------------------------------------------------
 
+export DOCKER_BUILDKIT := 1
+
 .PHONY: build ## Build the Docker image
 build: check
 	@$(LOGGER) log_separator
@@ -129,29 +131,39 @@ build: check
 	docker build -t $(DOCKER_IMAGE) .
 	@$(LOGGER) log_success "Docker image built successfully"
 
-.PHONY: run ## Build and run the site locally (foreground)
+.PHONY: run ## Build and run the site locally (foreground, live reload)
 run: check_docker
 	@$(LOGGER) log_separator
 	@$(LOGGER) log_info "Building and starting $(PROJECT_NAME) container"
-	@$(LOGGER) log_info "Site will be available at http://localhost:$(HOST_PORT)"
+	@$(LOGGER) log_info "Site will be available at http://localhost:$(HOST_PORT) (live reload on)"
 	@$(LOGGER) log_dim "Press Ctrl+C to stop"
-	@# Stop any existing container first
 	@docker stop $(DOCKER_CONTAINER) 2>/dev/null || true
 	@docker rm $(DOCKER_CONTAINER) 2>/dev/null || true
-	@# Build and run in foreground
 	docker build -t $(DOCKER_IMAGE) . && \
-	docker run --rm --name $(DOCKER_CONTAINER) -p $(HOST_PORT):$(CONTAINER_PORT) $(DOCKER_IMAGE)
+	docker run --rm --name $(DOCKER_CONTAINER) -p $(HOST_PORT):$(CONTAINER_PORT) \
+		-e HUGO_BASEURL=http://localhost:$(HOST_PORT)/ \
+		-v "$(PWD)/content:/app/content:ro" \
+		-v "$(PWD)/layouts:/app/layouts:ro" \
+		-v "$(PWD)/assets:/app/assets:ro" \
+		-v "$(PWD)/static:/app/static:ro" \
+		-v "$(PWD)/config:/app/config:ro" \
+		$(DOCKER_IMAGE)
 
-.PHONY: run-detached ## Build and run the site in background
+.PHONY: run-detached ## Build and run the site in background (live reload)
 run-detached: check_docker
 	@$(LOGGER) log_separator
 	@$(LOGGER) log_info "Building and starting $(PROJECT_NAME) container (detached)"
-	@# Stop any existing container first
 	@docker stop $(DOCKER_CONTAINER) 2>/dev/null || true
 	@docker rm $(DOCKER_CONTAINER) 2>/dev/null || true
-	@# Build and run in background
-	docker build -t $(DOCKER_IMAGE) .
-	docker run -d --name $(DOCKER_CONTAINER) -p $(HOST_PORT):$(CONTAINER_PORT) $(DOCKER_IMAGE)
+	docker build -t $(DOCKER_IMAGE) . && \
+	docker run -d --name $(DOCKER_CONTAINER) -p $(HOST_PORT):$(CONTAINER_PORT) \
+		-e HUGO_BASEURL=http://localhost:$(HOST_PORT)/ \
+		-v "$(PWD)/content:/app/content:ro" \
+		-v "$(PWD)/layouts:/app/layouts:ro" \
+		-v "$(PWD)/assets:/app/assets:ro" \
+		-v "$(PWD)/static:/app/static:ro" \
+		-v "$(PWD)/config:/app/config:ro" \
+		$(DOCKER_IMAGE)
 	@$(LOGGER) log_success "Container started in background"
 	@$(LOGGER) log_info "Site available at http://localhost:$(HOST_PORT)"
 	@$(LOGGER) log_dim "Use 'make logs' to view logs, 'make down' to stop"
@@ -192,15 +204,19 @@ clean:
 .PHONY: test ## Run linting tests via Bun
 test:
 	@$(LOGGER) log_separator
-	@$(LOGGER) log_info "Running tests (bun run test)"
+	@$(LOGGER) log_info "Running tests"
+	@./scripts/validate-build.sh --start
 	bun run test
+	@$(LOGGER) log
+	@$(LOGGER) log_success "Tests completed"
+
 
 .PHONY: ping ## Check if the site is running
 ping:
 	@$(LOGGER) log_separator
 	@$(LOGGER) log_info "Checking health of $(PROJECT_NAME)"
 	@echo ""
-	@echo -e "  • Hugo Site $(DIM)(nginx)$(RESET) $(BLUE)[http://localhost:$(HOST_PORT)]$(RESET)"
+	@echo -e "  • Hugo Site $(DIM)(Docker)$(RESET) $(BLUE)[http://localhost:$(HOST_PORT)]$(RESET)"
 	@if curl -s http://localhost:$(HOST_PORT) >/dev/null 2>&1; then \
 		$(LOGGER) log_indent log_success "Site is healthy"; \
 	else \
