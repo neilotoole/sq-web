@@ -1,0 +1,6 @@
+{{- $dest := .Destination -}}
+{{- $isInternal := hasPrefix $dest "/" -}}
+{{- if $isInternal -}}
+  {{- $dest = $dest | absURL -}}
+{{- end -}}
+<a href="{{ $dest | safeURL }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if not $isInternal }} target="_blank" rel="noopener"{{ end }}>{{ .Text | safeHTML }}</a>

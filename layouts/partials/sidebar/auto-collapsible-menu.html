@@ -95,14 +95,14 @@
                               <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                                 {{ range .Pages }}
                                   {{ $active := in $currentPage.RelPermalink .RelPermalink }}
-                                  <li><a class="docs-link rounded{{ if $active }} active{{ end }}" href="{{ .Permalink }}">{{ .Title }}</a></li>
+                                  <li><a class="docs-link rounded{{ if $active }} active{{ end }}" href="{{ .Permalink | absURL }}">{{ .Title }}</a></li>
                                 {{ end }}
                               </ul>
                             </div>
                           </li>
                         {{ else }}
                           {{ $active := in $currentPage.RelPermalink .RelPermalink }}
-                          <li><a class="docs-link rounded{{ if $active }} active{{ end }}" href="{{ .Permalink }}">{{ .Title }}</a></li>
+                          <li><a class="docs-link rounded{{ if $active }} active{{ end }}" href="{{ .Permalink | absURL }}">{{ .Title }}</a></li>
                         {{ end }}
                       {{ end }}
                     </ul>
@@ -110,7 +110,7 @@
                 </li>
               {{ else }}
                 {{ $active := in $currentPage.RelPermalink .RelPermalink }}
-                <li><a class="docs-link rounded{{ if $active }} active{{ end }}" href="{{ strings.TrimRight "/" .Permalink }}">{{ .Title }}</a></li>
+                <li><a class="docs-link rounded{{ if $active }} active{{ end }}" href="{{ (strings.TrimRight "/" .Permalink) | absURL }}">{{ .Title }}</a></li>
               {{ end }}
             {{ end }}
           </ul>

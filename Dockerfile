@@ -1,15 +1,15 @@
-# Build stage - install dependencies and build the site
-# Using Debian-based image because Hugo extended requires glibc (not musl/Alpine)
-FROM oven/bun:1-debian AS builder
+# Docker image for local testing only: runs Hugo server with live reload on port 8080.
+# The live site is built/served elsewhere (e.g. Netlify). This is for testing in Docker.
+#
+# Design:
+# - Hugo listens on 8080 inside the container so all generated links use port 8080 (no 1313).
+# - Hugo modules (e.g. asciinema shortcode) are downloaded at build time so they work at run.
+# - At run, mount only content/layouts/assets/static/config for hot reload; no need to mount go.mod/go.sum.
+FROM oven/bun:1-debian
 
-# Hugo version to install (should match package.json otherDependencies.hugo)
 ARG HUGO_VERSION=0.122.0
 
-# Base URL for the site (default for local Docker testing)
-ARG BASE_URL=http://localhost:8080/
-
-# Install Go (required for Hugo modules), C++ libs (required for Hugo extended),
-# and download Hugo directly to avoid exec-bin wrapper issues
+# Install Go (Hugo modules), C++ (Hugo extended), and Hugo binary
 RUN apt-get update && apt-get install -y --no-install-recommends \
     golang-go \
     git \
@@ -25,29 +25,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 WORKDIR /app
 
-# Copy package files first for better caching
 COPY package.json bun.lock* ./
-
-# Install dependencies (skip postinstall since we installed Hugo manually)
 RUN bun install --ignore-scripts
 
-# Copy the rest of the project
 COPY . .
 
-# Build the site using Hugo directly with the specified base URL
-RUN hugo --gc --minify --baseURL "${BASE_URL}" && \
-    cat static/_redirects >> public/_redirects
+# Fetch Hugo modules (e.g. gohugo-asciinema) so shortcodes work at run
+RUN hugo mod get
 
-# Production stage - serve static files with nginx
-FROM nginx:alpine AS runner
+# Serve on 8080 so generated links use :8080 (no port mismatch when mapping host 8080)
+ENV HUGO_BASEURL=http://localhost:8080/
+EXPOSE 8080
 
-# Copy the built static site
-COPY --from=builder /app/public /usr/share/nginx/html
-
-# Copy custom nginx config if needed
-# COPY nginx.conf /etc/nginx/nginx.conf
-
-EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
-
+# --appendPort=false so Hugo does not overwrite baseURL with the listen port
+CMD ["sh", "-c", "hugo server --bind=0.0.0.0 --port=8080 --appendPort=false --baseURL=\"${HUGO_BASEURL}\" --disableFastRender --logLevel info"]
