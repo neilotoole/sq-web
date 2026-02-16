@@ -35,7 +35,7 @@ Learn more in the [sources](/docs/source) section.
 ### Driver type
 
 This is the [driver](#driver) type used to connect to the source,
-e.g. `postgres`, `sqlserver`, `csv`, etc. You can specify the type explicitly
+e.g. `postgres`, `sqlserver`, `clickhouse`, `csv`, etc. You can specify the type explicitly
 when invoking [`sq add`](/docs/cmd/add), but usually `sq` can [detect](/docs/detect/#driver-type)
 the driver automatically.
 
@@ -176,6 +176,7 @@ but some drivers don't support the catalog mechanism. Here's a summary:
 | [SQLite](/docs/drivers/sqlite)        | `main`               | No                                                                                                            |
 | [MySQL](/docs/drivers/mysql)          | Connection-dependent | [No](https://dev.mysql.com/doc/connector-odbc/en/connector-odbc-usagenotes-functionality-catalog-schema.html) |
 | [SQL server](/docs/drivers/sqlserver) | `dbo`                | Yes                                                                                                           |
+| [ClickHouse](/docs/drivers/clickhouse) | `default`            | Yes                                                                                                           |
 
 The SLQ functions [`schema()`](/docs/query#schema) and [`catalog()`](/docs/query#catalog) return
 the schema and catalog of the active source. See the docs for details of how each driver implements
