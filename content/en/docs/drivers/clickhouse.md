@@ -92,41 +92,27 @@ Wrapper types such as `Nullable(T)` and `LowCardinality(T)` are unwrapped
 before mapping. For example, `LowCardinality(Nullable(String))` is treated
 as `String`, which maps to `kind.Text`.
 
-#### ClickHouse to sq (reading/querying)
-
-| ClickHouse Type                       | sq Kind         | Notes                              |
-|---------------------------------------|-----------------|------------------------------------|
-| `Int8`, `Int16`, `Int32`, `Int64`     | `kind.Int`      | All signed integers                |
-| `UInt8`, `UInt16`, `UInt32`, `UInt64` | `kind.Int`      | All unsigned integers              |
-| `Float32`, `Float64`                  | `kind.Float`    |                                    |
-| `Decimal(P,S)`, `Decimal128(S)`, etc. | `kind.Decimal`  | All Decimal variants               |
-| `Bool`                                | `kind.Bool`     |                                    |
-| `String`, `FixedString(N)`            | `kind.Text`     |                                    |
-| `UUID`                                | `kind.Text`     |                                    |
-| `Date`, `Date32`                      | `kind.Date`     |                                    |
-| `DateTime`, `DateTime64`              | `kind.Datetime` | Including parameterized variants   |
-| `Array(T)`                            | `kind.Text`     | Serialized as comma-separated text |
-| `Enum8(...)`, `Enum16(...)`           | `kind.Text`     |                                    |
-| `Map(K,V)`, `Tuple(...)`              | `kind.Text`     |                                    |
-
-#### sq to ClickHouse (writing/creating tables)
-
-| sq Kind         | ClickHouse Type | Notes                            |
-|-----------------|-----------------|----------------------------------|
-| `kind.Text`     | `String`        |                                  |
-| `kind.Int`      | `Int64`         |                                  |
-| `kind.Float`    | `Float64`       |                                  |
-| `kind.Decimal`  | `Decimal(18,4)` |                                  |
-| `kind.Bool`     | `Bool`          |                                  |
-| `kind.Date`     | `Date`          |                                  |
-| `kind.Datetime` | `DateTime`      |                                  |
-| `kind.Time`     | `DateTime`      | ClickHouse has no time-only type |
-| `kind.Bytes`    | `String`        | Binary data stored as String     |
+| ClickHouse Type (read)                | sq Kind         | ClickHouse Type (write) | Notes                              |
+|---------------------------------------|-----------------|-------------------------|------------------------------------|
+| `Int8`, `Int16`, `Int32`, `Int64`     | `kind.Int`      | `Int64`                 | All signed integers                |
+| `UInt8`, `UInt16`, `UInt32`, `UInt64` | `kind.Int`      | `Int64`                 | All unsigned integers              |
+| `Float32`, `Float64`                  | `kind.Float`    | `Float64`               |                                    |
+| `Decimal(P,S)`, `Decimal128(S)`, etc. | `kind.Decimal`  | `Decimal(18,4)`         | All Decimal variants               |
+| `Bool`                                | `kind.Bool`     | `Bool`                  |                                    |
+| `String`, `FixedString(N)`            | `kind.Text`     | `String`                |                                    |
+| `UUID`                                | `kind.Text`     | `String`                |                                    |
+| `Date`, `Date32`                      | `kind.Date`     | `Date`                  |                                    |
+| `DateTime`, `DateTime64`              | `kind.Datetime` | `DateTime`              | Including parameterized variants   |
+| `Array(T)`                            | `kind.Text`     | `String`                | Serialized as comma-separated text |
+| `Enum8(...)`, `Enum16(...)`           | `kind.Text`     | `String`                |                                    |
+| `Map(K,V)`, `Tuple(...)`              | `kind.Text`     | `String`                |                                    |
+| —                                     | `kind.Time`     | `DateTime`              | ClickHouse has no time-only type   |
+| —                                     | `kind.Bytes`    | `String`                | Binary data stored as String       |
 
 Nullable columns are wrapped with `Nullable(T)` (e.g., `Nullable(String)`,
 `Nullable(Int64)`). ClickHouse columns are non-nullable by default.
 
-Note that the mapping is not a perfect round-trip. For example, `Int8` and `Int64`
+The mapping is not a perfect round-trip. For example, `Int8` and `Int64`
 both become `kind.Int`, and `kind.Int` always maps back to `Int64`. Similarly,
 `kind.Time` maps to `DateTime`, which reads back as `kind.Datetime`, and
 `kind.Bytes` maps to `String`, which reads back as `kind.Text`.
