@@ -491,3 +491,20 @@ button#doks-versions {
     padding-left: 0.5rem;
   }
 }
+
+// GitHub stars: match navbar style (no badge bg), number + star icon
+.gh-stars-link {
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    color: inherit;
+    text-decoration: none;
+    opacity: 0.8;
+  }
+
+  .gh-stars-count {
+    font-size: 0.875rem;
+    font-variant-numeric: tabular-nums;
+  }
+}
