@@ -158,7 +158,17 @@ else
     print_fail "Docs overview returned ${DOC_CODE}"
 fi
 
-# 6. No bad absolute links (localhost without port when we expect a port)
+# 6. Relative links must not have target="_blank" (render-link regression)
+print_test "Relative links open in same tab (no target=_blank on internal relative)"
+if [[ "$HOMEPAGE_OK" != true ]]; then
+    print_fail "Homepage did not respond; cannot check page content"
+elif echo "$BODY" | grep -qE 'target="_blank"[^>]*href="(\.\./|\./|[a-gi-zA-Z][a-zA-Z0-9]*/)|href="(\.\./|\./|[a-gi-zA-Z][a-zA-Z0-9]*/)[^>]*target="_blank"'; then
+    print_fail "Page has relative link(s) with target=_blank (should open in same tab)"
+else
+    print_pass "No relative links incorrectly set to open in new tab"
+fi
+
+# 7. No bad absolute links (localhost without port when we expect a port)
 print_test "No links to localhost without port (would break when clicked)"
 if [[ "$HOMEPAGE_OK" != true ]]; then
     print_fail "Homepage did not respond; cannot check page content"
@@ -168,7 +178,7 @@ else
     print_pass "No port-stripped localhost links"
 fi
 
-# 7. Follow key nav links (simulate click: resolve href and fetch)
+# 8. Follow key nav links (simulate click: resolve href and fetch)
 print_test "Following key links from homepage (simulate click)"
 KEY_PATHS=("/docs/overview/" "/docs/install/")
 LINK_FAIL=0
@@ -184,7 +194,7 @@ if [[ $LINK_FAIL -eq 0 ]]; then
     print_pass "Key links /docs/overview, /docs/install return 200"
 fi
 
-# 8. Nav links absolute with expected port when BASE_URL has a port (so click works)
+# 9. Nav links absolute with expected port when BASE_URL has a port (so click works)
 print_test "Nav links are absolute with port (so click works)"
 if [[ "$HOMEPAGE_OK" != true ]]; then
     print_fail "Homepage did not respond; cannot check page content"
