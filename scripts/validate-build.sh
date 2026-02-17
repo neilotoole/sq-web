@@ -82,7 +82,19 @@ fi
 if [[ "$START_CONTAINER" == true ]]; then
     log_info "Starting container (make run-detached)..."
     make -C "${SCRIPT_DIR}/.." run-detached
-    sleep 5
+    log_info "Waiting for dev server and Hugo to be ready (can take 30+ s)..."
+    WAIT_DEADLINE=$(($(date +%s) + 90))
+    while [[ $(date +%s) -lt $WAIT_DEADLINE ]]; do
+        CODE=$(curl -sS -o /dev/null -w "%{http_code}" "${BASE_URL}/" 2>/dev/null || echo "000")
+        if [[ "$CODE" == "200" ]]; then
+            log_success "Site responded with 200"
+            break
+        fi
+        sleep 3
+    done
+    if [[ "$CODE" != "200" ]]; then
+        log_error "Site did not respond with 200 within 90 s"
+    fi
 fi
 
 log_separator
@@ -158,7 +170,24 @@ else
     print_fail "Docs overview returned ${DOC_CODE}"
 fi
 
-# 6. Relative links must not have target="_blank" (render-link regression)
+# 6. /version returns 200 and valid JSON with .latest-version
+print_test "GET /version returns 200 and valid JSON with .latest-version"
+if [[ "$HOMEPAGE_OK" != true ]]; then
+    print_fail "Homepage did not respond; cannot check /version"
+else
+    VERSION_RESP=$(curl -sS -w "\n%{http_code}" "${BASE_URL}/version" 2>/dev/null || echo -e "\n000")
+    VERSION_BODY=$(echo "$VERSION_RESP" | sed '$d')
+    VERSION_CODE=$(echo "$VERSION_RESP" | tail -n 1)
+    if [[ "$VERSION_CODE" != "200" ]]; then
+        print_fail "GET /version did not return 200 and valid JSON with .latest-version (got ${VERSION_CODE})"
+    elif ! echo "$VERSION_BODY" | jq -e '.["latest-version"]' >/dev/null 2>&1; then
+        print_fail "GET /version did not return 200 and valid JSON with .latest-version (response body missing .latest-version or invalid JSON)"
+    else
+        print_pass "GET /version returned 200 and valid JSON with .latest-version"
+    fi
+fi
+
+# 7. Relative links must not have target="_blank" (render-link regression)
 print_test "Relative links open in same tab (no target=_blank on internal relative)"
 if [[ "$HOMEPAGE_OK" != true ]]; then
     print_fail "Homepage did not respond; cannot check page content"
@@ -173,7 +202,7 @@ else
     fi
 fi
 
-# 7. No bad absolute links (localhost without port when we expect a port)
+# 8. No bad absolute links (localhost without port when we expect a port)
 print_test "No links to localhost without port (would break when clicked)"
 if [[ "$HOMEPAGE_OK" != true ]]; then
     print_fail "Homepage did not respond; cannot check page content"
@@ -183,7 +212,7 @@ else
     print_pass "No port-stripped localhost links"
 fi
 
-# 8. Follow key nav links (simulate click: resolve href and fetch)
+# 9. Follow key nav links (simulate click: resolve href and fetch)
 print_test "Following key links from homepage (simulate click)"
 KEY_PATHS=("/docs/overview/" "/docs/install/")
 LINK_FAIL=0
@@ -199,7 +228,7 @@ if [[ $LINK_FAIL -eq 0 ]]; then
     print_pass "Key links /docs/overview, /docs/install return 200"
 fi
 
-# 9. Nav links absolute with expected port when BASE_URL has a port (so click works)
+# 10. Nav links absolute with expected port when BASE_URL has a port (so click works)
 print_test "Nav links are absolute with port (so click works)"
 if [[ "$HOMEPAGE_OK" != true ]]; then
     print_fail "Homepage did not respond; cannot check page content"

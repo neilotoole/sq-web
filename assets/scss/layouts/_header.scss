@@ -148,6 +148,10 @@ button#doks-versions {
   margin-bottom: -4px;
 }
 
+#offcanvasDoks .offcanvas-header h2.offcanvas-title {
+  border-bottom: 0;
+}
+
 .home .navbar {
   border-bottom: 0;
 }
@@ -507,4 +511,27 @@ button#doks-versions {
     font-size: 0.875rem;
     font-variant-numeric: tabular-nums;
   }
+}
+
+// Current sq version tucked next to navbar brand (minimal gap, like React docs)
+.navbar-brand-version {
+  gap: 0.12em;
+  align-items: center;
+
+  .navbar-brand {
+    padding-right: 10px;
+  }
+}
+
+.navbar-version {
+  font-size: 0.75rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  color: inherit;
+  opacity: 0.85;
+  display: inline-flex;
+  align-items: center;
+  margin-top: 4px;
+  margin-right: 40px;
 }

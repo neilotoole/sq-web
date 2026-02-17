@@ -15,10 +15,10 @@
   "scripts": {
     "create": "exec-bin node_modules/.bin/hugo/hugo new",
     "prestart": "bun run clean",
-    "start": "exec-bin node_modules/.bin/hugo/hugo server --logLevel info --disableFastRender --bind=0.0.0.0",
+    "start": "bun scripts/dev-server.js",
     "prebuild": "bun run clean",
     "build": "exec-bin node_modules/.bin/hugo/hugo --gc --minify",
-    "postbuild": "shx cat static/_redirects >> public/_redirects",
+    "postbuild": "shx cp static/_redirects public/_redirects.tmp && (test -f public/_redirects && shx cat public/_redirects >> public/_redirects.tmp) || true && shx mv public/_redirects.tmp public/_redirects",
     "build:preview": "bun run build -D -F",
     "build:local": "exec-bin node_modules/.bin/hugo/hugo --gc --minify -b 'http://localhost:1313'",
     "prepreview": "bun run clean",

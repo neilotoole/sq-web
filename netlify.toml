@@ -2,6 +2,12 @@
   publish = "public"
   functions = "functions"
 
+[[redirects]]
+  from = "/version"
+  to = "/.netlify/functions/version"
+  status = 200
+  force = true
+
 [build.environment]
   NODE_VERSION = "22"
   BUN_VERSION = "latest"
