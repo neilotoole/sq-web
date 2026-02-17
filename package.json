@@ -15,7 +15,7 @@
   "scripts": {
     "create": "exec-bin node_modules/.bin/hugo/hugo new",
     "prestart": "bun run clean",
-    "start": "exec-bin node_modules/.bin/hugo/hugo server --logLevel info --disableFastRender --bind=0.0.0.0",
+    "start": "bun scripts/dev-server.js",
     "prebuild": "bun run clean",
     "build": "exec-bin node_modules/.bin/hugo/hugo --gc --minify",
     "postbuild": "shx cat static/_redirects >> public/_redirects",

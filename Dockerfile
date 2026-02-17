@@ -37,5 +37,6 @@ RUN hugo mod get
 ENV HUGO_BASEURL=http://localhost:8080/
 EXPOSE 8080
 
-# --appendPort=false so Hugo does not overwrite baseURL with the listen port
-CMD ["sh", "-c", "hugo server --bind=0.0.0.0 --port=8080 --appendPort=false --baseURL=\"${HUGO_BASEURL}\" --disableFastRender --logLevel info"]
+# Dev server proxies to Hugo and serves GET /version (fetches Homebrew; no Netlify).
+# SERVER_PORT=8080 so links use :8080; Hugo runs on 1314 inside the container.
+CMD ["sh", "-c", "SERVER_PORT=8080 HUGO_PORT=1314 bun scripts/dev-server.js"]
