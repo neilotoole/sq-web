@@ -1,4 +1,4 @@
-const { getVersion } = require("../scripts/version-fetch.js");
+const { getVersion } = require("./version-fetch.js");
 
 const CACHE_MAX_AGE = 300; // 5 minutes
 
