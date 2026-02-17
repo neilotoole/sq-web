@@ -18,7 +18,7 @@
     "start": "bun scripts/dev-server.js",
     "prebuild": "bun run clean",
     "build": "exec-bin node_modules/.bin/hugo/hugo --gc --minify",
-    "postbuild": "shx cat static/_redirects >> public/_redirects",
+    "postbuild": "shx cat static/_redirects public/_redirects > public/_redirects.tmp && shx mv public/_redirects.tmp public/_redirects",
     "build:preview": "bun run build -D -F",
     "build:local": "exec-bin node_modules/.bin/hugo/hugo --gc --minify -b 'http://localhost:1313'",
     "prepreview": "bun run clean",
