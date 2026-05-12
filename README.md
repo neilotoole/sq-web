@@ -1,8 +1,14 @@
 # sq.io website
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/7caea069-2a8d-4f0b-bafe-b053bbc5eb08/deploy-status)](https://app.netlify.com/sites/sq-web/deploys)
+> [!IMPORTANT]
+> **This repository is archived.** The [sq.io](https://sq.io) website is now built from the main
+> [`neilotoole/sq`](https://github.com/neilotoole/sq) repository. See
+> [neilotoole/sq#553](https://github.com/neilotoole/sq/pull/553) for the migration. To contribute
+> to the docs, open issues and pull requests against
+> [`neilotoole/sq`](https://github.com/neilotoole/sq) instead.
 
-This is the repo for the [sq.io](https://sq.io) website, which
+
+This ~~is~~ was the repo for the [sq.io](https://sq.io) website, which
 hosts documentations for [sq](https://github.com/neilotoole/sq).
 
 This site is built using:
